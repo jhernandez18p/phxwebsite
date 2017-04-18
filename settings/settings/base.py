@@ -35,6 +35,7 @@ LOCAL_APPS = [
     'local_apps.brands',
     'local_apps.blog',
     'local_apps.countries',
+    'local_apps.dashboard',
     'local_apps.frontend',
     'local_apps.profiles',
 ]

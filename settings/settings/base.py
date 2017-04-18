@@ -37,7 +37,7 @@ LOCAL_APPS = [
     'local_apps.countries',
     'local_apps.dashboard',
     'local_apps.frontend',
-    'local_apps.    ',
+    'local_apps.profiles',
 ]
 DJANGO_APPS = [
     'django.contrib.admin',

@@ -92,12 +92,19 @@
                                             {% else %}
                                             <a href="{% url 'en:our_brands' %}">
                                             {% endif %}
-                                                <img src="
+                                            {% if lang_code != 'English' %}
                                                 {% if banner.short_image %}
-                                                {{banner.short_image.url}}
+                                                    <img src="{{banner.short_image.url}}" alt="{{banner.es_name}}">
                                                 {% else %}
-                                                {% static 'base/images/wallpaper.jpg' %}
-                                                {% endif %}" alt="{% if lang_code != 'English' %}{{banner.es_name}}{% else %}{{banner.en_name}}{% endif %}">
+                                                    <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.es_name}}">
+                                                {% endif %}
+                                            {% else %}
+                                                {% if banner.short_image %}
+                                                    <img src="{{banner.short_image.url}}" alt="{{banner.es_name}}">
+                                                {% else %}
+                                                    <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.en_name}}">
+                                                {% endif %}
+                                            {% endif %}
                                             </a>
                                         </div>
                                     {% endfor %}

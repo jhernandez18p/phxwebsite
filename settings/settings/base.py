@@ -18,7 +18,7 @@ if str(DEBUG) == 'True':
     WSGI_APPLICATION = 'settings.wsgi_base.application'
     SITE_URL = '/'
 elif str(DEBUG) == 'False':
-    ALLOWED_HOSTS = ['phx.dev2tech.xyz','phoenixworldtrade.com','www.phoenixworldtrade.com']
+    ALLOWED_HOSTS = ['192.34.61.100','phx.dev2tech.xyz','phoenixworldtrade.com','www.phoenixworldtrade.com']
     WSGI_APPLICATION = 'settings.wsgi_prod.application'
     SITE_URL = 'http://www.phoenixworldtrade.com'
 
@@ -37,7 +37,7 @@ LOCAL_APPS = [
     'local_apps.countries',
     'local_apps.dashboard',
     'local_apps.frontend',
-    'local_apps.profiles',
+    'local_apps.    ',
 ]
 DJANGO_APPS = [
     'django.contrib.admin',

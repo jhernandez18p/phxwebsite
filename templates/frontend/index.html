@@ -88,16 +88,16 @@
                                         <div class="swiper-slide">
                                             {% if lang_code != 'English' %}
                                                 <a href="{% url 'es:marcas' %}">
-                                                    {% if banner.short_image %}
-                                                        <img src="{{banner.short_image.url}}" alt="{{banner.es_name}}">
+                                                    {% if banner.image %}
+                                                        <img src="{{banner.image.url}}" alt="{{banner.es_name}}">
                                                     {% else %}
                                                         <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.es_name}}">
                                                     {% endif %}
                                                 </a>
                                             {% else %}
                                                 <a href="{% url 'en:our_brands' %}">
-                                                    {% if banner.short_image %}
-                                                        <img src="{{banner.short_image.url}}" alt="{{banner.es_name}}">
+                                                    {% if banner.image %}
+                                                        <img src="{{banner.image.url}}" alt="{{banner.es_name}}">
                                                     {% else %}
                                                         <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.en_name}}">
                                                     {% endif %}

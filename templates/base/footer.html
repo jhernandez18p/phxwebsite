@@ -15,7 +15,7 @@
                         <input class="uk-hidden" type="text" name="url" value="{% if lang_code != 'English' %}{{es_url}}{% else %}{{url}}{% endif %}">
                     </div>
                     <button class="uk-button uk-button-default button-phx">
-                        {% if lang_code != 'English' %}Submit{% else %}Enviar{% endif %}
+                        {% if lang_code == 'English' %}Submit{% else %}Enviar{% endif %}
                     </button>
                 </div>
             </form>

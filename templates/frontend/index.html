@@ -1,0 +1,301 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'base/css/swiper.min.css' %}">
+<style>
+    #map { height: 105vh; }
+    .full-screen{max-height:100vh;}
+    .full-screen .swiper-slide{max-height:100vh;}
+    .top-logo{z-index: 99}
+</style>
+{% endblock %}
+
+{% block fullscreen %}
+    {% if banners %}
+        <div class="">
+            <div class="full-screen">
+                <div class="swiper-container">
+                   <div class="swiper-wrapper">
+                        {% for banner in banners %}
+                            <div class="swiper-slide">
+                                <img src="{{banner.large_banner.url}}" alt="
+                                {% if lang_code != 'English' %}
+                                {{banner.es_name}}
+                                {% else %}
+                                {{banner.en_name}}
+                                {% endif %}">
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="swiper-button-next swiper-button-white"></div>
+                    <div class="swiper-button-prev swiper-button-white"></div>
+                    <div class="top-logo uk-visible@m uk-position-center">
+                        <img class="logo-menu" src="{% if site.logo %}{{site.logo.url}}{% else %}{% static 'base/images/logo.png' %}{% endif %}" alt="{{site.name}}">
+                    </div>
+                    <div class="scroll uk-visible@m uk-position-bottom-center">
+                        <span id="scroll">
+                            <svg version="1.1" id="icn" fill="#fff" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                            width="40px" height="50px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+                            <polygon opacity="0" points="19.9,21 0,1.3 1.4,0 19.9,18.3 38.6,0 40,1.3 "><animate id="first" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite"  begin="0"/></polygon>
+                            <polygon id="arrow-two" opacity="0"  points="19.9,30.9 0,11.2 1.4,9.9 19.9,28.2 38.6,9.8 40,11.2 "><animate id="second" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite"  begin="1s" /></polygon>
+                            <polygon id="arrow-three"  opacity="0" points="19.9,40 0,20.3 1.4,19 19.9,37.3 38.6,19 40,20.3 "><animate id="third" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite"  begin="2s"  /></polygon>
+                          </svg>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    {% if site %}
+        <div class="uk-width-1-1">
+            <div class="uk-section uk-section-large uk-section-muted">
+                <div class="uk-container" uk-scrollspy="cls: uk-animation-slide-top-small; target: > .uk-card; delay: 1500; repeat: true">
+                    <div class="uk-card uk-card-default  uk-card-body">
+                        {% if lang_code == 'English' %}
+                            {{site.en_description|safe}}
+                        {% else %}
+                            {{site.es_description|safe}}
+                        {% endif %}
+                        <a href="{% if lang_code == 'English' %}{% url 'en:about' %}{% else %}{% url 'es:historia' %}{% endif %}"" class="uk-button uk-button-default uk-margin-medium-top">
+                            {% if lang_code == 'English' %}
+                            Learn more
+                            {% else %}
+                            Ver más
+                            {% endif %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div id="map">
+    </div>
+
+    {% if banners_biz %}
+        <div class="uk-width-1-1">
+            <div class="uk-section uk-section-large uk-section-muted">
+                <div class="uk-container">
+                    <div class="uk-card uk-card-default  uk-card-body">
+                        <div class="banners-biz">
+                            <div class="swiper-container">
+                               <div class="swiper-wrapper">
+                                    {% for banner in banners_biz %}
+                                        <div class="swiper-slide">
+                                            <a href="
+                                            {% if lang_code != 'English' %}
+                                            {% url 'es:marcas' %}
+                                            {% else %}
+                                            {% url 'en:our_brands' %}
+                                            {% endif %}">
+                                                <img src="
+                                                {% if banner.short_image %}
+                                                {{banner.short_image.url}}
+                                                {% else %}
+                                                {% static 'base/images/wallpaper.jpg' %}
+                                                {% endif %}" alt="{% if lang_code != 'English' %}{{banner.es_name}}{% else %}{{banner.en_name}}{% endif %}">
+                                            </a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="swiper-pagination"></div>
+                                <div class="swiper-button-next swiper-button-white"></div>
+                                <div class="swiper-button-prev swiper-button-white"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if news %}
+        <div class="uk-section uk-section-small uk-section-muted">
+            <div class="uk-container">
+                <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-slide-top-small; target: > div > .uk-card; delay: 1500; repeat: true">
+                    {% for obj in news %}
+                        <div>
+                            <div class="uk-card uk-card-default">
+                                <div class="uk-card-media-top">
+                                    <img src="{% if obj.short_image %}{{obj.short_image.url}}{% else %}https://images.pexels.com/photos/192505/pexels-photo-192505.jpeg?h=350&auto=compress&cs=tinysrgb{% endif %}" alt="{% if lang_code != 'English' %}{{obj.es_name}}{% else %}{{obj.en_name}}{% endif %}">
+                                </div>
+                                <div class="uk-card-body">
+                                    <h3 class="uk-card-title">
+                                        {% if lang_code != 'English' %}
+                                            {{obj.es_title}}
+                                        {% else %}
+                                            {{obj.en_title}}
+                                        {% endif %}
+                                    </h3>
+                                    {% if lang_code != 'English' %}
+                                        {{obj.es_short_description|safe}}
+                                    {% else %}
+                                        {{obj.en_short_description|safe}}
+                                    {% endif %}
+                                </div>
+                                <div class="uk-card-footer">
+                                    {% if lang_code == 'English' %}
+                                        <a href="{{obj.get_absolute_url_en}}" class="uk-button uk-button-text">Read more</a>
+                                    {% else %}
+                                        <a href="{{obj.get_absolute_url_es}}" class="uk-button uk-button-text">Ver más</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+
+    var map, styleArray,locations;
+
+    var marker, i;
+    styleArray = [{"elementType": "geometry","stylers": [{"color": "#F2F2F2"}]},{"elementType": "labels.icon","stylers": [{"visibility": "off"}]},{"elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},{"elementType": "labels.text.stroke","stylers": [{"color": "#f5f5f5"}]},{"featureType": "administrative.land_parcel","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "administrative.land_parcel","elementType": "labels.text.fill","stylers": [{"color": "#bdbdbd"}]},{"featureType": "administrative.locality","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "administrative.neighborhood","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "administrative.province","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.man_made","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.natural","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.natural.landcover","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.natural.terrain","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi","elementType": "geometry","stylers": [{"color": "#eeeeee"}]},{"featureType": "poi","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},{"featureType": "poi.attraction","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.business","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.medical","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.park","elementType": "geometry","stylers": [{"color": "#e5e5e5"}]},{"featureType": "poi.park","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.park","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]},{"featureType": "poi.place_of_worship","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.school","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.sports_complex","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "road","elementType": "geometry","stylers": [{"color": "#ffffff"}]},{"featureType": "road","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},{"featureType": "road","elementType": "geometry.stroke","stylers": [{"color": "#009688"}]},{"featureType": "road.arterial","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},{"featureType": "road.highway","elementType": "geometry","stylers": [{"color": "#dadada"}]},{"featureType": "road.highway","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},{"featureType": "road.highway","elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},{"featureType": "road.local","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]},{"featureType": "transit.line","elementType": "geometry","stylers": [{"color": "#e5e5e5"}]},{"featureType": "transit.station","elementType": "geometry","stylers": [{"color": "#eeeeee"}]},{"featureType": "water","elementType": "geometry","stylers": [{"color": "#c9c9c9"}]},{"featureType": "water","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},{"featureType": "water","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "water","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]}]
+
+    function initMap() {
+        var bounds = new google.maps.LatLngBounds();
+        map = new google.maps.Map(document.getElementById('map'), {
+            // center: {lat: 14.987239, lng: -84.528809}, 
+            // center: {lat: -6.9645954, lng: -76.3220646},
+            mapTypeId: google.maps.MapTypeId.ROADMAP,
+            center: {lat: 8.6571004, lng: -60.1603678}, 
+            zoom: 4,
+            styles: styleArray,
+            disableDefaultUI: true,
+            zoomControl: false,
+            scaleControl: false,
+            scrollwheel: false,
+            draggable: false,
+        });
+        // Multiple Markers
+        var markers = [
+            ['Grupo PHX, Venezuela', 10.412447, -66.714792],
+            ['Phoenix World Trade Inc., Panamá', 8.981022, -79.509901],
+            ['Phoenix World Trade Inc., Chile', -28.275386, -70.925212],
+            ['Phoenix World Trade Inc., USA', 26.649694, -80.471504],
+            ['Phoenix World Trade Inc., España', 39.309697, -3.596285],
+            ['Phoenix World Trade Inc., Brasil', -6.636931, -40.760628],
+        ];
+                            
+        // Info Window Content
+        var infoWindowContent = [
+            ['<div class="info_content">' +
+            '<h3>Grupo PHX, Venezuela</h3>' +
+            '<p></p>' + '</div>'],
+            ['<div class="info_content">' +
+            '<h3>Phoenix World Trade Inc, Panamá</h3>' +
+            '<p></p>' +
+            '</div>'],
+            ['<div class="info_content">' +
+            '<h3>Phoenix World Trade Inc., Chile</h3>' +
+            '<p></p>' +
+            '</div>'],
+            ['<div class="info_content">' +
+            '<h3>Phoenix World Trade Inc., USA</h3>' +
+            '<p></p>' +
+            '</div>'],
+            ['<div class="info_content">' +
+            '<h3>Phoenix World Trade Inc., España</h3>' +
+            '<p></p>' +
+            '</div>'],
+            ['<div class="info_content">' +
+            '<h3>Phoenix World Trade Inc., Brasil</h3>' +
+            '<p></p>' +
+            '</div>'],
+        ];
+            
+        // Display multiple markers on a map
+        var infoWindow = new google.maps.InfoWindow(), marker, i;
+        
+        // Loop through our array of markers & place each one on the map  
+        for( i = 0; i < markers.length; i++ ) {
+            var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+            bounds.extend(position);
+            marker = new google.maps.Marker({
+                position: position,
+                map: map,
+                title: markers[i][0]
+            });
+            
+            // Allow each marker to have an info window    
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                    infoWindow.setContent(infoWindowContent[i][0]);
+                    infoWindow.open(map, marker);
+                }
+            })(marker, i));
+
+            // Automatically center the map fitting all markers on the screen
+            map.fitBounds(bounds);
+        }   
+    }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_uf0M6P9N8ZUTm3vsKlm-li2auJ9-guU&callback=initMap">
+</script>
+<script type="text/javascript">
+    var swiper = new Swiper('.full-screen .swiper-container', {
+        pagination: '.full-screen .swiper-pagination',
+        paginationClickable: true,
+        nextButton: '.full-screen .swiper-button-next',
+        prevButton: '.full-screen .swiper-button-prev',
+        loop: true,
+        autoplay: 8000,
+    });
+    var swiperBiz = new Swiper('.banners-biz .swiper-container', {
+        pagination: '.banners-biz .swiper-pagination',
+        paginationClickable: true,
+        nextButton: '.banners-biz .swiper-button-next',
+        prevButton: '.banners-biz .swiper-button-prev',
+        loop: true,
+        autoplay: 8000,
+    });
+    var windowHeight;
+    windowHeight = $( window ).height();
+    $('#scroll').click(function () {
+        $('html, body').animate({
+            scrollTop: $( $(this) ).offset().top
+        }, windowHeight);
+        return false;
+    })
+</script>
+{% endblock %}
+<script>
+    // function initialize() {
+    //     var map;
+    //     var bounds = new google.maps.LatLngBounds();
+    //     var mapOptions = {
+    //         mapTypeId: 'roadmap',
+    //         center: {lat: 8.6571004, lng: -60.1603678}, 
+    //         zoom: 4,
+    //         styles: styleArray,
+    //         disableDefaultUI: true,
+    //         zoomControl: false,
+    //         scaleControl: false,
+    //         scrollwheel: false,
+    //         draggable: false,
+    //     };
+                        
+    //     // Display a map on the page
+    //     map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    //     map.setTilt(45);
+            
+        
+
+    //     // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
+    //     var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+    //         this.setZoom(14);
+    //         google.maps.event.removeListener(boundsListener);
+    //     });
+        
+    // }
+</script>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="{{lang_code}}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> {{title}} | Dashboard</title>
+    {% include 'base/header.html' %}
+    {% block css %}
+    {% endblock %}
+</head>
+<body>
+    {% include 'dashboard/header.html' %}
+    <section class="dashboard-section">
+        {% block content %}
+        {% endblock %}
+    </section>
+    {% include 'dashboard/footer.html' %}
+    <script src="{% static 'dashboard/js/vendor/jquery.js' %}" charset="utf-8"></script>
+    <script src="{% static 'base/js/bootstrap.min.js' %}" charset="utf-8"></script>
+    <script src="{% static 'dashboard/js/app.js' %}" charset="utf-8"></script>
+    {% block js %}
+    {% endblock %}
+</body>
+</html>

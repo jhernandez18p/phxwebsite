@@ -1,0 +1,304 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+<style media="screen">
+</style>
+{% endblock %}
+
+{% block content %}
+
+    <div class="uk-width-1-1">
+        <div class="uk-section uk-section-small uk-section-muted">
+            <div class="uk-container">
+                <ul uk-tab>
+                    {% if brands_cat %}
+                        {% for cat in brands_cat %}
+                            <li class="uk-active">
+                                <a href="#">
+                                    {% if lang_code == 'English' %}
+                                        {{cat.en_name}}
+                                    {% else %}
+                                        {{cat.es_name}}
+                                    {% endif %}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    {% endif %}
+                </ul>
+                <ul class="uk-switcher uk-margin">
+                    {% if retail_brands %}
+                    <li>
+                        {% for brand in retail_brands %}
+                            <div class="uk-child-width-1-3" uk-grid>
+                                <div>
+                                    <div class="uk-card uk-card-default">
+                                        <div class="uk-card-media-top ">
+                                            <img src="
+                                            {% if brand.large_logo %}
+                                            {{brand.large_logo.url}}
+                                            {% elif brand.short_logo %}
+                                            {{brand.short_logo.url}}
+                                            {% endif %}
+                                            " alt="">
+                                        </div>
+                                        <div class="uk-card-body">
+                                            <h3 class="uk-card-title">
+                                                {% if lang_code == 'English' %}
+                                                    <a href="#{{brand.id}}modal-full" uk-toggle>
+                                                        {{brand.en_name}}
+                                                    </a>
+                                                {% else %}
+                                                    <a href="{{get_absolute_url_es}}">
+                                                        {{brand.es_name}}
+                                                    </a>
+                                                {% endif %}
+                                            </h3>
+                                            {% if lang_code == 'English' %}
+                                                {{brand.en_short_description|safe}}
+                                            {% else %}
+                                                {{brand.es_short_description|safe}}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="{{brand.id}}modal-full" class="uk-modal-full" uk-modal>
+                                <div class="uk-modal-dialog">
+                                    <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+                                    <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+                                        <div class="uk-background-cover" style="background-image: url('https://images.pexels.com/photos/368893/pexels-photo-368893.jpeg?h=350&auto=compress&cs=tinysrgb');" uk-height-viewport></div>
+                                        <div class="uk-padding-large">
+                                            <h1>
+                                                {% if lang_code == 'English' %}
+                                                    {{brand.en_name}}
+                                                {% else %}
+                                                    {{brand.es_name}}
+                                                {% endif %}
+                                            </h1>
+                                            {% if lang_code == 'English' %}
+                                                {{brand.en_description}}
+                                            {% else %}
+                                                {{brand.es_description}}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        {% endfor %}
+                    </li>
+                    {% endif %}
+                    {% if wholesale_brands %}
+                    <li>
+                        {% for brand in wholesale_brands %}
+                            <div class="uk-child-width-1-3" uk-grid>
+                                <div>
+                                    <div class="uk-card uk-card-default">
+                                        <div class="uk-card-media-top ">
+                                            <img src="
+                                            {% if brand.large_logo %}
+                                            {{brand.large_logo.url}}
+                                            {% elif brand.short_logo %}
+                                            {{brand.short_logo.url}}
+                                            {% endif %}
+                                            " alt="">
+                                        </div>
+                                        <div class="uk-card-body">
+                                            <h3 class="uk-card-title">
+                                                {% if lang_code == 'English' %}
+                                                    <a href="#{{brand.id}}modal-full" uk-toggle>
+                                                        {{brand.en_name}}
+                                                    </a>
+                                                {% else %}
+                                                    <a href="{{get_absolute_url_es}}">
+                                                        {{brand.es_name}}
+                                                    </a>
+                                                {% endif %}
+                                            </h3>
+                                            {% if lang_code == 'English' %}
+                                                {{brand.en_short_description|safe}}
+                                            {% else %}
+                                                {{brand.es_short_description|safe}}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="{{brand.id}}modal-full" class="uk-modal-full" uk-modal>
+                                <div class="uk-modal-dialog">
+                                    <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+                                    <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+                                        <div class="uk-background-cover" style="background-image: url('https://images.pexels.com/photos/368893/pexels-photo-368893.jpeg?h=350&auto=compress&cs=tinysrgb');" uk-height-viewport></div>
+                                        <div class="uk-padding-large">
+                                            <h1>
+                                                {% if lang_code == 'English' %}
+                                                    {{brand.en_name}}
+                                                {% else %}
+                                                    {{brand.es_name}}
+                                                {% endif %}
+                                            </h1>
+                                            {% if lang_code == 'English' %}
+                                                {{brand.en_description}}
+                                            {% else %}
+                                                {{brand.es_description}}
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                        {% endfor %}
+                    </li>
+                    {% endif %}
+                    <li>
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, sed do eiusmod.
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        UIkit.toggle();
+    })
+</script>
+{% endblock %}
+
+
+{# if retail_brands #}
+    <div class="row">
+        <div class="container retail-container">
+            <div class="col-xs-12 col-sm-4">
+                <div class="col-xs-12">
+                    <div class="retail">
+                        <h2>
+                            {% if lang_code == 'English' %}Retail{% else %}Ventas al por menor{% endif %}
+                        </h2>
+                    </div>
+                </div>
+                {% if retail_types %}
+                <div class="col-xs-12">
+                    <div class="retail">
+                        {% for type in retail_types %}
+                        <p><a href="#">
+                            {% if lang_code == 'English' %}{{type.en_name}}{% else %}{{type.es_name}}{% endif %}
+                        </a></p>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-xs-12 col-sm-8">
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <a href="" data-toggle="modal" data-target="#myModal">
+                            <img src="http://s3.amazonaws.com/bigwords-com/stores/aldo-shoes_162_large.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <a href="" data-toggle="modal" data-target="#myModal">
+                            <img src="http://ferialplaza.es/wp-content/uploads/2016/04/zara-logo.jpg" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <a href="" data-toggle="modal" data-target="#myModal">
+                            <img src="http://ferialplaza.es/wp-content/uploads/2016/04/bershka-logo.jpg" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <a href="" data-toggle="modal" data-target="#myModal">
+                            <img src="http://ferialplaza.es/wp-content/uploads/2016/04/parfois-logo.jpg" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <a href="" data-toggle="modal" data-target="#myModal">
+                            <img src="http://www.parque-corredor.com/web/wp-content/uploads/2015/09/logo-women-secret.jpg" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <a href="" data-toggle="modal" data-target="#myModal">
+                            <img src="http://ferialplaza.es/wp-content/uploads/2016/04/oysho-logo.jpg" alt="">
+                        </a>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <a href="" >
+                            <img src="http://placehold.it/350x350?text={% if lang_code == 'English' %}Load more{% else %}Cargar más{% endif %}" alt="">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{# endif #}
+
+{# if wholesale_brands #}
+    <div class="row">
+        <div class="container-fluid">
+            <div class="col-xs-12 col-sm-8">
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/350x350" alt="">
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/350x350" alt="">
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/350x350" alt="">
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/350x350" alt="">
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/350x350" alt="">
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/350x350" alt="">
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/350x350" alt="">
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="thumbnail">
+                        <img src="http://placehold.it/350x350" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                <div class="wholesale">
+                    <h2>wholesale</h2>
+                    <h3>Ventas al por mayor</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+{# endif #}

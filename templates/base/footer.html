@@ -1,0 +1,56 @@
+{% load staticfiles %}
+<div class="uk-section uk-section-small uk-section-muted">
+    <div class="uk-container">
+        <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid>
+            <form action="{% url 'subscribe' %}" method="post">
+                {% csrf_token %}
+                <div class="uk-margin">
+                    <div class="uk-inline">
+                        <a class="uk-form-icon textTeal" href="#" uk-icon="icon: user"></a>
+                        <input class="uk-input uk-form-width-large" type="text" placeholder="{% if lang_code == 'English' %}Your name{% else %}Escriba su nombre{% endif %}" name="name">
+                    </div>
+                    <div class="uk-inline">
+                        <a class="uk-form-icon textTeal" href="#" uk-icon="icon: mail"></a>
+                        <input class="uk-input uk-form-width-large" type="text" placeholder="{% if lang_code == 'English' %}Subscribe for more{% else %}Suscribirse{% endif %}" name="email">
+                        <input class="uk-hidden" type="text" name="url" value="{% if lang_code != 'English' %}{{es_url}}{% else %}{{url}}{% endif %}">
+                    </div>
+                    <button class="uk-button uk-button-default button-phx">
+                        {% if lang_code != 'English' %}Submit{% else %}Enviar{% endif %}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="uk-background-secondary">
+    <div class="uk-container">
+        <div class="uk-align-center uk-text-center@s all-rights uk-padding-small">
+            {% if site.social_icons %}
+                <p class="uk-padding-small">
+                    {% for icon in site.social_icons.all %}
+                        <a class="uk-icon-button textTeal" href="{{icon.url}}" uk-icon="icon: {{icon.name|lower}}; ratio: .85 "></a>
+                    {% endfor %}
+                </p>
+            {% endif %}
+            {% if lang_code == 'English' %}
+                <p class="uk-padding-remove text-white">
+                    {% now "Y" %} {{site.en_name}} All rights reserved.
+                </p>
+                <p class="uk-padding-remove">
+                    <a href="http://dev2tech.xyz" target="_blank">
+                        powered by <span class="dev2tech-font">Dev2tech</span>
+                    </a>
+                </p>
+            {% else %}
+                <p class="uk-padding-remove text-white">
+                    {% now "Y" %} {{site.es_name}} Todos los derechos reservados.
+                </p>
+                <p class="uk-padding-remove">
+                    <a href="http://dev2tech.xyz" target="_blank">
+                        powered by <span class="dev2tech-font">Dev2tech</span>
+                    </a>
+                </p>
+            {% endif %}
+        </div>
+    </div>
+</div>

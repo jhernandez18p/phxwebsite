@@ -1,0 +1,244 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+<link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'base/css/swiper.min.css' %}">
+<style media="screen">
+    .timeline-container {
+        background-image: url("{% static 'base/images/timeline.jpg' %}");
+        height: 100vh;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        background-size: cover;
+    }
+    .timeline {
+        margin-top: 25px;
+        overflow: hidden;
+        height: 90vh;
+    }
+    .timeline .swiper-container {
+        padding-top: 30px;
+        padding-bottom: 30px;
+        width: 65%;
+        height: 100%;
+    }
+    .timeline .swiper-container:after {
+        content:"";
+        position: absolute;
+        z-index: -1;
+        top: 6px;
+        bottom: 5px;
+        left: 50%;
+        border-left: 2px solid #FFF;
+        transform: translate(-50%);
+    }
+    .timeline .swiper-slide:nth-child(odd) {
+        margin-left: 8%;
+    }
+    .right-line:after{
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: 100%;
+        border-top: 1px solid #FFF;
+        background: #FFF;
+        width: 5%;
+        transform: translateY(-50%);
+        z-index: -1;
+    }
+    .left-line:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        right: -5%;
+        border-top: 1px solid #FFF;
+        background: #FFF;
+        width: 5%;
+        transform: translateY(-50%);
+        z-index: -1;
+    }
+    .timeline .swiper-slide:nth-child(even) {
+        margin-left: 52%;
+
+    }
+    .timeline .swiper-slide {
+        width: 40%;
+        height: 30%;
+        text-align: center;
+        font-size: 18px;
+        background: rgba(255,255,255,.8);
+        
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    .timeline .swiper-button-next,
+    .timeline .swiper-button-prev{
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .timeline .swiper-button-next{
+        position: absolute;
+        top: 98%;
+        z-index: 999999;
+        -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+        z-index: 9
+    }
+    .timeline .swiper-button-prev{
+        top: 15px;
+        position: absolute;
+        -webkit-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+        z-index: 9;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    {% if banners %}
+        <div class="uk-cover-container">
+            <div class="full-screen">
+                <div class="swiper-container">
+                   <div class="swiper-wrapper">
+                        {% for banner in banners %}
+                            <div class="swiper-slide">
+                                <img src="{{banner.short_banner.url}}" alt="{% if lang_code != 'English' %}{{banner.es_name}}{% else %}{{banner.en_name}}{% endif %}">
+                                 <div class="uk-overlay-primary uk-position-cover"></div>
+                            </div>
+                        {% endfor %}
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if site %}
+        <div class="uk-width-1-1 uk-background-muted">
+            <div class="uk-container">
+                <div class="uk-section uk-section-large" uk-scrollspy="cls: uk-animation-fade; target: > .uk-card; delay: 2000; repeat: true">
+                    <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+                        <div class="uk-card-media-left uk-cover-container">
+                            {% if site.mision_img %}
+                                <img src="{{site.mision_img.url}}" alt="Mision" uk-cover>
+                            {% else %}
+                                <img src="https://images.pexels.com/photos/26092/pexels-photo-26092.jpg?h=350&auto=compress&cs=tinysrgb" alt="" uk-cover>
+                            {% endif %}
+                            <canvas width="600" height="400"></canvas>
+                        </div>
+                        <div>
+                            <div class="uk-card-body">
+                                <h3 class="uk-card-title">
+                                    {% if lang_code == 'English' %}
+                                        Mision
+                                    {% else %}
+                                        Misión
+                                    {% endif %}
+                                </h3>
+                                {% if lang_code == 'English' %}
+                                    {{site.en_mision|safe}}
+                                {% else %}
+                                    {{site.es_mision|safe}}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+                        <div class="uk-flex-last@s uk-card-media-right uk-cover-container">
+                            {% if site.vision_img %}
+                                <img src="{{site.vision_img.url}}" alt="Vision" uk-cover>
+                            {% else %}
+                                <img src="https://images.pexels.com/photos/7376/startup-photos.jpg?h=350&auto=compress&cs=tinysrgb" alt="Vision" uk-cover>
+                            {% endif %}
+                            <canvas width="600" height="400"></canvas>
+                        </div>
+                        <div>
+                            <div class="uk-card-body">
+                                <h3 class="uk-card-title">
+                                    {% if lang_code == 'English' %}
+                                        Vision
+                                    {% else %}
+                                        Visión
+                                    {% endif %}
+                                </h3>
+                                {% if lang_code == 'English' %}
+                                    {{site.en_vision|safe}}
+                                {% else %}
+                                    {{site.es_vision|safe}}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if history %}
+        <div class="container-fluid">
+            <div class="row">    
+                <div class="timeline-container">
+                    <div class="timeline">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide left-line">Slide 1</div>
+                                <div class="swiper-slide right-line">Slide 2</div>
+                                <div class="swiper-slide left-line">Slide 3</div>
+                                <div class="swiper-slide right-line">Slide 4</div>
+                                <div class="swiper-slide left-line">Slide 5</div>
+                                <div class="swiper-slide right-line">Slide 6</div>
+                                <div class="swiper-slide left-line">Slide 7</div>
+                                <div class="swiper-slide right-line">Slide 8</div>
+                                <div class="swiper-slide left-line">Slide 9</div>
+                                <div class="swiper-slide right-line">Slide 10</div>
+                            </div>
+                            <!-- Add Pagination -->
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-button-next swiper-button-white"></div>
+                            <div class="swiper-button-prev swiper-button-white"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}
+
+{% block js %}
+
+<!-- Swiper JS -->
+<script src="{% static 'base/js/swiper.min.js' %}"></script>
+
+<script type="text/javascript">
+    var swiper = new Swiper('.timeline .swiper-container', {
+        pagination: '.timeline .swiper-pagination',
+        nextButton: '.timeline .swiper-button-next',
+        prevButton: '.timeline .swiper-button-prev',
+        paginationClickable: true,
+        slidesPerView: 3,
+        spaceBetween: 30,
+        direction: 'vertical',
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+<!-- Detail -->
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+    <div class="uk-section uk-section-small uk-section-muted">
+        <div class="uk-container" uk-scrollspy="cls: uk-animation-slide-top-small; target: > .uk-breadcrumb; delay: 500; repeat: false">
+            <ul class="uk-breadcrumb">
+                <li>
+                    <a href="{% if lang_code == 'English' %}{% url 'en:en' %}{% else %}{% url 'es:es' %}{% endif %}">
+                        {% if lang_code == 'English' %}
+                        Home
+                        {% else %}
+                        Inicio
+                        {% endif %}        
+                    </a>
+                </li>
+                <li>
+                    <a href="{% if lang_code == 'English' %}
+                        {% url 'en:news' %}
+                        {% else %}
+                        {% url 'es:noticias' %}
+                        {% endif %}">
+                        {% if lang_code == 'English' %}
+                            News
+                        {% else %}
+                            Noticias
+                        {% endif %}
+                    </a>
+                </li>
+                <li>
+                    <span>
+                        {% if lang_code != 'English' %}
+                            {{obj.es_title}}
+                        {% else %}
+                            {{obj.en_title}}
+                        {% endif %}
+                    </span>
+                </li>
+            </ul>
+            <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid uk-height-match="target: > div > .uk-card">
+                <div>
+                    <div class="uk-card uk-card-default">
+                        <div class="uk-card-media-top">
+                            <img src="{% if obj.short_image %}{{obj.short_image.url}}{% else %}https://images.pexels.com/photos/192505/pexels-photo-192505.jpeg?h=350&auto=compress&cs=tinysrgb{% endif %}" alt="{% if lang_code != 'English' %}{{obj.es_name}}{% else %}{{obj.en_name}}{% endif %}">
+                        </div>
+                        <div class="uk-card-body">
+                            <h3 class="uk-card-title">
+                                {% if lang_code != 'English' %}
+                                    {{obj.es_title}}
+                                {% else %}
+                                    {{obj.en_title}}
+                                {% endif %}
+                            </h3>
+                            {% if lang_code != 'English' %}
+                                {{obj.es_description|safe}}
+                            {% else %}
+                                {{new.en_description|safe}}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<footer>
+	<div class="uk-background-secondary">
+	    <div class="uk-container">
+	        <div class="uk-align-center uk-text-center@s all-rights uk-padding-small">
+	            {% if lang_code == 'English' %}
+	                <p class="uk-padding-remove">
+	                    {% now "Y" %} All rights reserved {{site_name}}
+	                </p>
+	                <p class="uk-padding-remove">
+	                    <a href="http://dev2tech.xyz" target="_blank">
+	                        powered by <span class="dev2tech-font">Dev2tech</span>
+	                    </a>
+	                </p>
+	            {% else %}
+	                <p class="uk-padding-remove">
+	                    {% now "Y" %} Todos los derechos reservados {{site_name}}
+	                </p>
+	                <p class="uk-padding-remove">
+	                    <a href="http://dev2tech.xyz" target="_blank">
+	                        powered by <span class="dev2tech-font">Dev2tech</span>
+	                    </a>
+	                </p>
+	            {% endif %}
+	        </div>
+	    </div>
+	</div>
+</footer>

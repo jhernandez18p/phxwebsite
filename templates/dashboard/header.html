@@ -1,0 +1,20 @@
+<div class="uk-offcanvas-content">
+    <button uk-toggle="target: #my-id" type="button"></button>
+
+    <!-- This is an anchor toggling the off-canvas -->
+    <a href="#my-id" uk-toggle></a>
+
+    <!-- This is the off-canvas -->
+    <div id="my-id" uk-offcanvas>
+        <div class="uk-offcanvas-bar">
+
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+
+        </div>
+    </div>
+
+</div>
+
+<script>
+    UIkit.offcanvas('.uk-offcanvas-content', 'show');
+</script>

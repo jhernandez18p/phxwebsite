@@ -86,12 +86,12 @@
                                <div class="swiper-wrapper">
                                     {% for banner in banners_biz %}
                                         <div class="swiper-slide">
-                                            <a href="
+                                            
                                             {% if lang_code != 'English' %}
-                                            {% url 'es:marcas' %}
+                                            <a href="{% url 'es:marcas' %}">
                                             {% else %}
-                                            {% url 'en:our_brands' %}
-                                            {% endif %}">
+                                            <a href="{% url 'en:our_brands' %}">
+                                            {% endif %}
                                                 <img src="
                                                 {% if banner.short_image %}
                                                 {{banner.short_image.url}}

@@ -180,23 +180,23 @@ def our_brands(request):
     context['title'] = title
     context['title'] = title
     context['keywords'] = keywords
-    # try:
-    #     brands_cat = bc.objects.all()
-    #     for x in brands_cat:
-    #         if x.en_name == 'Retail':
-    #             retail_cat = x
-    #         elif x.en_name == 'Wholesale':
-    #             wholesale_cat = x
+    try:
+        brands_cat = bc.objects.all()
+        for x in brands_cat:
+            if x.en_name == 'Retail':
+                retail_cat = x
+            elif x.en_name == 'Wholesale':
+                wholesale_cat = x
         
-    #     retail_brands = Brand.objects.all().filter(category=retail_cat.id)
-    #     wholesale_brands = Brand.objects.all().filter(category=wholesale_cat.id)
-    #     context['brands_cat'] = brands_cat
-    #     context['retail_cat'] = retail_cat  
-    #     context['wholesale_cat'] = wholesale_cat    
-    #     context['retail_brands'] = retail_brands    
-    #     context['wholesale_brands'] = wholesale_brands  
-    # except Exception as e:
-    #     raise e
+        retail_brands = Brand.objects.all().filter(category=retail_cat.id)
+        wholesale_brands = Brand.objects.all().filter(category=wholesale_cat.id)
+        context['brands_cat'] = brands_cat
+        context['retail_cat'] = retail_cat  
+        context['wholesale_cat'] = wholesale_cat    
+        context['retail_brands'] = retail_brands    
+        context['wholesale_brands'] = wholesale_brands  
+    except Exception as e:
+        raise e
     
     return render(request, template, context)
 

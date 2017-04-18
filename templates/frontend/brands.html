@@ -11,7 +11,58 @@
     <div class="uk-width-1-1">
         <div class="uk-section uk-section-small uk-section-muted">
             <div class="uk-container">
-                <ul uk-tab>
+                <ul class="uk-breadcrumb spy">
+                    <li>
+                        <a href="{% if lang_code == 'English' %}{% url 'en:en' %}{% else %}{% url 'es:es' %}{% endif %}">
+                            {% if lang_code == 'English' %}
+                            Home
+                            {% else %}
+                            Inicio
+                            {% endif %}        
+                        </a>
+                    </li>
+                    <li>
+                        <span>
+                            {% if lang_code == 'English' %}
+                                Brands
+                            {% else %}
+                                Marcas
+                            {% endif %}
+                        </span>
+                    </li>
+                </ul>
+                <hr>
+                <p class="uk-text-lead">
+                    {% if lang_code == 'English' %}
+                        Our brands
+                    {% else %}
+                        Nuestras marcas
+                    {% endif %}
+                </p>
+                {{retail_brands}}
+                {% for brand in retail_brands %}
+                    <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+                        <div class="uk-card-media-left uk-cover-container">
+                            <img src="{{brand.image.url}}" alt="" uk-cover>
+                            <canvas width="600" height="400"></canvas>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block js %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        UIkit.toggle();
+    })
+</script>
+{% endblock %}
+
+ <ul uk-tab>
                     {% if brands_cat %}
                         {% for cat in brands_cat %}
                             <li class="uk-active">
@@ -155,21 +206,6 @@
                         Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur, sed do eiusmod.
                     </li>
                 </ul>
-            </div>
-        </div>
-    </div>
-
-{% endblock %}
-
-{% block js %}
-<script type="text/javascript">
-    $(document).ready(function () {
-        UIkit.toggle();
-    })
-</script>
-{% endblock %}
-
-
 {# if retail_brands #}
     <div class="row">
         <div class="container retail-container">

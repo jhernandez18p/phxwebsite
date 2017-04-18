@@ -31,7 +31,7 @@
                         </a>
                     </li>
                     
-                    <li class="{% if pg_title != 'about' %}uk-active{% endif %}">
+                    <li class="{% if pg_title == 'about' %}uk-active{% endif %}">
                         <a href="{% if lang_code == 'English' %}{% url 'en:about' %}{% else %}{% url 'es:historia' %}{% endif %}">
                             {% if lang_code == 'English' %}
                             About us
@@ -41,7 +41,7 @@
                         </a>
                     </li>
                     
-                    <li class="{% if pg_title != 'our_brands' %}uk-active{% endif %}">
+                    <li class="{% if pg_title == 'our_brands' %}uk-active{% endif %}">
                         <a href="{% if lang_code == 'English' %}{% url 'en:our_brands' %}{% else %}{% url 'es:marcas' %}{% endif %}">
                             {% if lang_code == 'English' %}
                             Brands
@@ -51,7 +51,7 @@
                         </a>
                     </li>
                     
-                    <li class="{% if pg_title != 'news' %}uk-active{% endif %}">
+                    <li class="{% if pg_title == 'news' %}uk-active{% endif %}">
                         <a href="
                         {% if lang_code == 'English' %}
                         {% url 'en:news' %}
@@ -66,7 +66,7 @@
                         </a>
                     </li>
                     
-                    <li class="{% if pg_title != 'contact' %}uk-active{% endif %}">
+                    <li class="{% if pg_title == 'contact' %}uk-active{% endif %}">
                         <a href="
                         {% if lang_code == 'English' %}
                         {% url 'en:contact' %}
@@ -113,6 +113,26 @@
     </div>
 </nav>
 <nav class="uk-navbar-container uk-hidden@m uk-position-top uk-position-fixed" uk-navbar uk-sticky="animation: uk-animation-slide-top; bottom: #offset">
+    <div class="uk-navbar-center">
+        <div class="uk-navbar-center">
+            <div>
+                <ul class="uk-navbar-nav">
+                    {% if site %}
+                        <li class="{% if pg_title == 'home' %}uk-active{% endif %}">
+                            <a href="
+                            {% if lang_code == 'English' %}
+                            {% url 'en:en' %}
+                            {% else %}
+                            {% url 'es:es' %}
+                            {% endif %}">
+                                <img class="logo-menu" src="{% if site.logo %}{{site.logo.url}}{% else %}{% static 'base/images/logo.png' %}{% endif %}" alt="{{site.name}}">
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
     <div class="uk-navbar-right">
         <a class="uk-navbar-toggle" uk-navbar-toggle-icon href="#offcanvas-slide" uk-toggle="target: #offcanvas-nav-primary"></a>
     </div>
@@ -147,8 +167,7 @@
                         {% endif %}
                     </a>
                 </li>
-                
-                <li class="{% if pg_title != 'about' %}uk-active{% endif %}">
+                <li class="{% if pg_title == 'about' %}uk-active{% endif %}">
                     <a href="{% if lang_code == 'English' %}{% url 'en:about' %}{% else %}{% url 'es:historia' %}{% endif %}">
                         {% if lang_code == 'English' %}
                         About us
@@ -157,8 +176,7 @@
                         {% endif %}
                     </a>
                 </li>
-                
-                <li class="{% if pg_title != 'our_brands' %}uk-active{% endif %}">
+                <li class="{% if pg_title == 'our_brands' %}uk-active{% endif %}">
                     <a href="{% if lang_code == 'English' %}{% url 'en:our_brands' %}{% else %}{% url 'es:marcas' %}{% endif %}">
                         {% if lang_code == 'English' %}
                         Corporate
@@ -167,8 +185,7 @@
                         {% endif %}
                     </a>
                 </li>
-                
-                <li class="{% if pg_title != 'news' %}uk-active{% endif %}">
+                <li class="{% if pg_title == 'news' %}uk-active{% endif %}">
                     <a href="
                     {% if lang_code == 'English' %}
                     {% url 'en:news' %}
@@ -182,8 +199,7 @@
                         {% endif %}
                     </a>
                 </li>
-                
-                <li class="{% if pg_title != 'contact' %}uk-active{% endif %}">
+                <li class="{% if pg_title == 'contact' %}uk-active{% endif %}">
                     <a href="
                     {% if lang_code == 'English' %}
                     {% url 'en:contact' %}
@@ -197,13 +213,10 @@
                         {% endif %}
                     </a>
                 </li>
-                
                 <li class="uk-parent">
                     <a href="">
-                        <span class="uk-margin-small-right" uk-icon="icon: world"></span>
-                    </a>
-                    <ul class="uk-nav-sub">
-                        {% if lang == 'English' %}
+                        <span class="uk-margin-small-right" uk-icon="icon: world">
+                            {% if lang == 'English' %}
                             <li>
                                 <form action="{% url 'lang' %}" method="post">
                                     {% csrf_token %}
@@ -223,7 +236,8 @@
                                 </form>
                             </li>
                         {% endif %}
-                    </ul>
+                        </span>
+                    </a>
                 </li>
             </ul>
         </div>

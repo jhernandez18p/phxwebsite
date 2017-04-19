@@ -4,6 +4,25 @@ from django.template import defaultfilters
 import datetime
 
 
+class Timeline(models.Model):
+    es_name = models.CharField(max_length=144)
+    en_name = models.CharField(max_length=144)
+    year = models.PositiveSmallIntegerField(blank=True)
+    es_place = models.CharField(max_length=144)
+    en_place = models.CharField(max_length=144)
+    es_description = RichTextField()
+    en_description = RichTextField()
+
+    def __str__(self):
+        return str(self.year)
+
+    class Meta:
+        """# Class Meta"""
+        verbose_name = ('Timeline')
+        verbose_name_plural = ('Timeline')
+        ordering = ["-year"]
+
+
 class Category(models.Model):
     name = models.CharField(max_length=144)
 
@@ -323,6 +342,10 @@ class Site_info(models.Model):
     height_field_vision_img = models.IntegerField(default=0)
     social_icons = models.ManyToManyField(Socialmedia, blank=True)
     values = models.ManyToManyField(Site_value, blank=True)
+    history = models.ManyToManyField(
+                                    Timeline,
+                                    blank=True,
+                                )
 
     def __str__(self):
         return self.en_name

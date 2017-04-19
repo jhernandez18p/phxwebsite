@@ -1,6 +1,7 @@
 from django.contrib import admin
 
 from local_apps.frontend.models import (
+        Timeline,
         Site_info,
         Category,
         Sub_category,
@@ -10,6 +11,16 @@ from local_apps.frontend.models import (
         Socialmedia,
         Site_value,
     )
+
+@admin.register(Timeline)
+class TimelineAdmin(admin.ModelAdmin):
+    search_fields = ['es_name',]
+    list_display = (
+                    'es_name',
+                )
+    class Meta:
+        model = Timeline
+
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):

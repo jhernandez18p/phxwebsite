@@ -181,7 +181,7 @@ def our_brands(request):
     context['title'] = title
     context['keywords'] = keywords
     try:
-        brands_cat = bc.objects.all()
+        brands_cat = bt.objects.all()
         for x in brands_cat:
             if x.en_name == 'Retail':
                 retail_cat = x

@@ -6,6 +6,15 @@
 {% endblock %}
 
 {% block content %}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&version=v2.9&appId=251445488634550";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
     <div class="uk-section uk-section-small uk-section-muted">
         <div class="uk-container" uk-scrollspy="cls: uk-animation-slide-top-small; target: > .uk-breadcrumb; delay: 500; repeat: false">
             <ul class="uk-breadcrumb">
@@ -58,8 +67,11 @@
                             {% if lang_code != 'English' %}
                                 {{obj.es_description|safe}}
                             {% else %}
-                                {{new.en_description|safe}}
+                                {{obj.en_description|safe}}
                             {% endif %}
+                        </div>
+                        <div class="uk-card-footer">
+                              <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-size="large" data-show-faces="true" data-share="true"></div>
                         </div>
                     </div>
                 </div>

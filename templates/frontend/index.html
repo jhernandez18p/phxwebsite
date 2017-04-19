@@ -128,16 +128,15 @@
                                     <img src="{% if obj.short_image %}{{obj.short_image.url}}{% else %}https://images.pexels.com/photos/192505/pexels-photo-192505.jpeg?h=350&auto=compress&cs=tinysrgb{% endif %}" alt="{% if lang_code != 'English' %}{{obj.es_name}}{% else %}{{obj.en_name}}{% endif %}">
                                 </div>
                                 <div class="uk-card-body">
-                                    <h3 class="uk-card-title">
-                                        {% if lang_code != 'English' %}
-                                            {{obj.es_title}}
-                                        {% else %}
-                                            {{obj.en_title}}
-                                        {% endif %}
-                                    </h3>
                                     {% if lang_code != 'English' %}
+                                        <h3 class="uk-card-title">
+                                            {{obj.es_title}}
+                                        </h3>
                                         {{obj.es_short_description|safe}}
                                     {% else %}
+                                        <h3 class="uk-card-title">
+                                            {{obj.en_title}}
+                                        </h3>
                                         {{obj.en_short_description|safe}}
                                     {% endif %}
                                 </div>

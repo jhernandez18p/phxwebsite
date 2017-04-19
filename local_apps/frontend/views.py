@@ -195,6 +195,7 @@ def our_brands(request):
         context['wholesale_cat'] = wholesale_cat    
         context['retail_brands'] = retail_brands    
         context['wholesale_brands'] = wholesale_brands  
+        context['banners'] = brands_cat  
     except Exception as e:
         raise e
     

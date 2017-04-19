@@ -7,10 +7,37 @@
 {% endblock %}
 
 {% block content %}
-
+    
     <div class="uk-width-1-1">
         <div class="uk-section uk-section-small uk-section-muted">
             <div class="uk-container">
+                <div class="uk-section-muted">
+                    <div class="full-screen">
+                        <div class="swiper-container">
+                           <div class="swiper-wrapper">
+                                {% for banner in banners %}
+                                    <div class="swiper-slide">
+                                        {% if lang_code != 'English' %}
+                                            {% if banner.large_image %}
+                                                <img src="{{banner.large_image.url}}" alt="{{banner.es_name}}">
+                                            {% else %}
+                                                <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.es_name}}">
+                                            {% endif %}
+                                        {% else %}
+                                            {% if banner.image %}
+                                                <img src="{{banner.large_image.url}}" alt="{{banner.es_name}}">
+                                            {% else %}
+                                                <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.en_name}}">
+                                            {% endif %}
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <div class="swiper-button-next swiper-button-white"></div>
+                            <div class="swiper-button-prev swiper-button-white"></div>
+                        </div>
+                    </div>
+                </div>
                 <ul class="uk-breadcrumb spy">
                     <li>
                         <a href="{% if lang_code == 'English' %}{% url 'en:en' %}{% else %}{% url 'es:es' %}{% endif %}">

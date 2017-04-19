@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% if pg_title != 'contact' %}
 <div class="uk-section uk-section-small uk-section-muted">
     <div class="uk-container">
         <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid>
@@ -22,6 +23,7 @@
         </div>
     </div>
 </div>
+{% endif %}
 <div class="uk-background-secondary">
     <div class="uk-container">
         <div class="uk-align-center uk-text-center@s all-rights uk-padding-small">

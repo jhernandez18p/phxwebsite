@@ -34,6 +34,7 @@
     <div class="uk-width-1-1">
         <div class="uk-section uk-section-small uk-section-muted">
             <div class="uk-container">
+                <!-- Carrusel -->
                 <div class="uk-section-muted">
                     <div class="full-screen">
                         <div class="swiper-container">
@@ -61,6 +62,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- Breadcrumb -->
                 <ul class="uk-breadcrumb spy">
                     <li>
                         <a href="{% if lang_code == 'English' %}{% url 'en:en' %}{% else %}{% url 'es:es' %}{% endif %}">
@@ -89,15 +91,6 @@
                         Nuestras marcas
                     {% endif %}
                 </p>
-                {{retail_brands}}
-                {% for brand in retail_brands %}
-                    <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
-                        <div class="uk-card-media-left uk-cover-container">
-                            <img src="{{brand.image.url}}" alt="" uk-cover>
-                            <canvas width="600" height="400"></canvas>
-                        </div>
-                    </div>
-                {% endfor %}
             </div>
         </div>
     </div>

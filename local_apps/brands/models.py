@@ -3,7 +3,7 @@ from django.db import models
 from ckeditor.fields import RichTextField
 
 from local_apps.countries.models import Country
-from local_apps.frontend.models import Sub_category
+from local_apps.frontend.models import Sub_category, Banner
 
 class Category(models.Model):
     en_name = models.CharField(max_length=140)
@@ -57,7 +57,7 @@ class Carousel(models.Model):
     en_name = models.CharField(max_length=140)
     es_name = models.CharField(max_length=140, blank=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='brands/carousel/')
+    image = models.ManyToManyField(Banner, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -92,7 +92,8 @@ class Brand(models.Model):
     carousel_images = models.ForeignKey(
         Carousel,
         on_delete=models.CASCADE,
-        blank=True
+        blank=True,
+        null=True,
     )
     url = models.CharField(max_length=140, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

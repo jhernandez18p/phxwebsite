@@ -1,5 +1,5 @@
 from django.contrib import admin
-
+from django.forms import SelectMultiple
 from local_apps.brands.models import *
 
 @admin.register(Type)
@@ -22,16 +22,14 @@ class TypeAdmin(admin.ModelAdmin):
 
 @admin.register(Carousel)
 class CarouselAdmin(admin.ModelAdmin):
-    fields = (
-            'en_name',
-            'es_name',
-            'image',
-            )
+    formfield_overrides = {
+        models.ManyToManyField: {'widget': SelectMultiple(attrs={'size':'5', 'style': 'color:blue;width:250px'})},
+
+    }
     search_fields = ['es_name',]
     list_display = (
                     'en_name',
                     'es_name',
-                    'image',
                 )
 
     class Meta:

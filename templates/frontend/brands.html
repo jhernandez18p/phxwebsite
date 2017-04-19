@@ -26,6 +26,7 @@
         -webkit-align-items: center;
         align-items: center;
     }
+    .brand-card img{position: absolute; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto;}
 </style>
 {% endblock %}
 
@@ -94,6 +95,45 @@
             </div>
         </div>
     </div>
+    {% if brands %}
+    <div class="uk-section uk-section-small uk-section-muted">
+        <div class="uk-container">
+            <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-slide-top-small; target: > div > a > .uk-card; delay: 800; repeat: true">
+                {% for brand in brands %}
+                    <div>
+                        <div class="uk-card uk-card-default">
+                            <div class="uk-card-media-center">
+                                <a href="#{{brand.id}}modal-full" uk-toggle>
+                                    <img src="{{brand.short_logo.url}}" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="{{brand.id}}modal-full" class="uk-modal-full" uk-modal>
+                        <div class="uk-modal-dialog">
+                            <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+                            <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
+                                <div class="uk-background-cover" style="background-image: url('{{brand.large_logo.url}}');" uk-height-viewport></div>
+                                <div class="uk-padding-large">
+                                {% if lang_code != 'English' %}
+                                    <h1>{{brand.es_name}}</h1>
+                                    {{brand.es_description|safe}}
+                                {% else %}
+                                    <h1>{{brand.en_name}}</h1>
+                                    {{brand.en_description|safe}}
+                                {% endif %}
+                                <p>
+                                    <a href="{{brand.url}}">{{brand.url}}</a>
+                                </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
 
 {% endblock %}
 

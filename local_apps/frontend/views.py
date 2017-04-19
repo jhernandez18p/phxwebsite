@@ -190,6 +190,8 @@ def our_brands(request):
         
         retail_brands = Brand.objects.all().filter(category=retail_cat.id)
         wholesale_brands = Brand.objects.all().filter(category=wholesale_cat.id)
+        brands = Brand.objects.all()
+        context['brands'] = brands
         context['brands_cat'] = brands_cat
         context['retail_cat'] = retail_cat  
         context['wholesale_cat'] = wholesale_cat    

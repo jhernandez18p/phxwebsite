@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from ckeditor.fields import RichTextField
+
 from local_apps.countries.models import Country
 from local_apps.frontend.models import Sub_category
 
@@ -79,15 +81,19 @@ class Brand(models.Model):
     #                                 on_delete=models.CASCADE,
     #                                 blank=True,
     #                             )
-    en_description = models.TextField()
-    es_description = models.TextField()
-    en_short_description = models.CharField(max_length=500, blank=True)
-    es_short_description = models.CharField(max_length=500, blank=True)
+    en_description = RichTextField()
+    es_description = RichTextField()
+    en_short_description = RichTextField()
+    es_short_description = RichTextField()
     sub_category = models.ForeignKey(
                                     Sub_category,
                                     on_delete=models.CASCADE,
                                 )
-    carousel_images = models.ManyToManyField(Carousel, blank=True)
+    carousel_images = models.ForeignKey(
+        Carousel,
+        on_delete=models.CASCADE,
+        blank=True
+    )
     url = models.CharField(max_length=140, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     brand_type = models.ManyToManyField(Type, blank=True)

@@ -104,10 +104,19 @@
                         <div class="uk-card uk-card-default">
                             <div class="uk-card-media-center">
                                 <a href="#{{brand.id}}modal-full" uk-toggle>
-                                    <img src="{{brand.short_logo.url}}" alt="">
+                                    <img src="{{brand.short_logo.url}}" alt=""  onmouseover="this.src='{{brand.large_logo.url}}'" onmouseout="this.src='{{brand.short_logo.url}}'">
                                 </a>
                             </div>
                         </div>
+                        <script>
+                            $('#{{brand.id}}modal-full img').hover(function() {
+                                console.log('Algo');
+                              $(this).attr('src', '');
+                            }, function() {
+                              $(this).attr('src', '');
+                                console.log('Algodon');
+                            });
+                        </script>
                     </div>
                     <div id="{{brand.id}}modal-full" class="uk-modal-full" uk-modal>
                         <div class="uk-modal-dialog">

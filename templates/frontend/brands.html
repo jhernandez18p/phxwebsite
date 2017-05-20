@@ -92,6 +92,21 @@
                         Nuestras marcas
                     {% endif %}
                 </p>
+                <div class="uk-margin">
+                    <div uk-form-custom="target: > * > span:first">
+                        <select>
+                            <option value="">Please select...</option>
+                            <option value="1">Option 01</option>
+                            <option value="2">Option 02</option>
+                            <option value="3">Option 03</option>
+                            <option value="4">Option 04</option>
+                        </select>
+                        <button class="uk-button uk-button-default" type="button" tabindex="-1">
+                            <span></span>
+                            <span uk-icon="icon: chevron-down"></span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -108,15 +123,6 @@
                                 </a>
                             </div>
                         </div>
-                        <script>
-                            $('#{{brand.id}}modal-full img').hover(function() {
-                                console.log('Algo');
-                              $(this).attr('src', '');
-                            }, function() {
-                              $(this).attr('src', '');
-                                console.log('Algodon');
-                            });
-                        </script>
                     </div>
                     <div id="{{brand.id}}modal-full" class="uk-modal-full" uk-modal>
                         <div class="uk-modal-dialog">

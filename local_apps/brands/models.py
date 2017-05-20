@@ -1,22 +1,19 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from django.core.urlresolvers import reverse
 from ckeditor.fields import RichTextField
 
 from local_apps.countries.models import Country
 from local_apps.frontend.models import Sub_category, Banner
 
 class Category(models.Model):
+    """# Category model class"""
     en_name = models.CharField(max_length=140)
     es_name = models.CharField(max_length=140, blank=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='brands/type/')
     short_image = models.ImageField(upload_to='brands/type/short/')
     large_image = models.ImageField(upload_to='brands/type/large/')
-    # background_color = models.ForeignKey(
-    #     Color,
-    #     on_delete=models.CASCADE,
-    #     blank=True,
-    # )
 
     def __str__(self):
         return self.en_name
@@ -28,24 +25,20 @@ class Category(models.Model):
 
 
 class Type(models.Model):
+    """# Type model class"""
     en_name = models.CharField(max_length=140)
     es_name = models.CharField(max_length=140, blank=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to='brands/type/')
     short_image = models.ImageField(upload_to='brands/type/short/')
     large_image = models.ImageField(upload_to='brands/type/large/')
-    # background_color = models.ForeignKey(
-    #                                 Color,
-    #                                 on_delete=models.CASCADE,
-    #                                 blank=True,
-    #                             )
     sub_category = models.ForeignKey(
-                                    Sub_category,
-                                    on_delete=models.CASCADE,
-                                )
+        Sub_category,
+        on_delete=models.CASCADE,
+    )
 
     def __str__(self):
-        return '%s %s'%(self.en_name,self.sub_category)
+        return '%s %s'%(self.en_name, self.sub_category)
 
     class Meta:
         """# Class Meta"""
@@ -54,6 +47,7 @@ class Type(models.Model):
 
 
 class Carousel(models.Model):
+    """# Carousel model class"""
     en_name = models.CharField(max_length=140)
     es_name = models.CharField(max_length=140, blank=True)
     uploaded_at = models.DateTimeField(auto_now_add=True)
@@ -70,25 +64,21 @@ class Carousel(models.Model):
 
 
 class Brand(models.Model):
+    """# Brand model class"""
     en_name = models.CharField(max_length=140)
     es_name = models.CharField(max_length=140)
     en_title = models.CharField(max_length=140)
     es_title = models.CharField(max_length=140)
     short_logo = models.ImageField(upload_to='brands/logos/short/')
     large_logo = models.ImageField(upload_to='brands/logos/large/')
-    # background_color = models.ForeignKey(
-    #                                 Color,
-    #                                 on_delete=models.CASCADE,
-    #                                 blank=True,
-    #                             )
     en_description = RichTextField()
     es_description = RichTextField()
     en_short_description = RichTextField()
     es_short_description = RichTextField()
     sub_category = models.ForeignKey(
-                                    Sub_category,
-                                    on_delete=models.CASCADE,
-                                )
+        Sub_category,
+        on_delete=models.CASCADE,
+    )
     carousel_images = models.ForeignKey(
         Carousel,
         on_delete=models.CASCADE,
@@ -104,9 +94,11 @@ class Brand(models.Model):
         return self.en_name
 
     def get_absolute_url_en(self):
+        """# Get absolute English URL """
         return reverse("en:brand_detail", kwargs={"id": self.id})
 
     def get_absolute_url_es(self):
+        """# Get absolute Spanish URL """
         return reverse("es:brand_detail", kwargs={"id": self.id})
 
 
@@ -117,6 +109,7 @@ class Brand(models.Model):
 
 
 class Location(models.Model):
+    """# Location model class"""
     en_name = models.CharField(max_length=140)
     es_name = models.CharField(max_length=140)
     es_description = models.TextField(blank=True)
@@ -127,18 +120,18 @@ class Location(models.Model):
     office_number = models.CharField(max_length=140, blank=True)
     phone_number = models.CharField(max_length=140, blank=True)
     brand = models.ForeignKey(
-                                    Brand,
-                                    on_delete=models.CASCADE,
-                                )
+        Brand,
+        on_delete=models.CASCADE,
+        blank=True
+    )
     country = models.ForeignKey(
-                                    Country,
-                                    on_delete=models.CASCADE,
-                                )
+        Country,
+        on_delete=models.CASCADE,
+        blank=True
+    )
     google_iframe = models.CharField(max_length=220, blank=True)
     google_lat = models.CharField(max_length=220, blank=True)
     google_long = models.CharField(max_length=220, blank=True)
-    short_map_image = models.ImageField(upload_to='brands/map/')
-    large_map_image = models.ImageField(upload_to='brands/map/')
     instagram = models.CharField(max_length=50, blank=True)
     facebook = models.CharField(max_length=50, blank=True)
     twitter = models.CharField(max_length=50, blank=True)

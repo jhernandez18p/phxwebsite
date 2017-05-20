@@ -1,10 +1,17 @@
 from django.contrib import admin
+from django.db import models
 from django.forms import SelectMultiple
-from local_apps.brands.models import *
+from local_apps.brands.models import (
+    Type,
+    Carousel,
+    Brand,
+    Location,
+    Category,
+)
 
 @admin.register(Type)
 class TypeAdmin(admin.ModelAdmin):
-    
+    """# Type admin class"""
     search_fields = ['es_name',]
     list_display = (
         'en_name',
@@ -12,32 +19,37 @@ class TypeAdmin(admin.ModelAdmin):
         'image',
         'short_image',
         'large_image',
-        # 'background_color',
         'sub_category',
     )
 
     class Meta:
+        """# Reference for model fields"""
         model = Type
 
 
 @admin.register(Carousel)
 class CarouselAdmin(admin.ModelAdmin):
+    """# Carousel admin class"""
     formfield_overrides = {
-        models.ManyToManyField: {'widget': SelectMultiple(attrs={'size':'5', 'style': 'color:blue;width:250px'})},
-
+        models.ManyToManyField:{
+            'widget': SelectMultiple(attrs={
+                'size':'5', 'style': 'color:blue;width:250px'
+                })
+            },
     }
     search_fields = ['es_name',]
     list_display = (
-                    'en_name',
-                    'es_name',
-                )
+        'en_name',
+        'es_name',
+    )
 
     class Meta:
+        """# Reference for model fields"""
         model = Type
 
 @admin.register(Brand)
 class BrandAdmin(admin.ModelAdmin):
-        
+    """# Brand admin class"""
     search_fields = ['es_name',]
     list_display = (
         'en_name',
@@ -46,7 +58,6 @@ class BrandAdmin(admin.ModelAdmin):
         'es_title',
         'short_logo',
         'large_logo',
-        # 'background_color',
         'en_description',
         'es_description',
         'en_short_description',
@@ -55,12 +66,13 @@ class BrandAdmin(admin.ModelAdmin):
         'url',
     )
     class Meta:
+        """# Reference for model fields"""
         model = Type
 
 
 @admin.register(Location)
 class LocationAdmin(admin.ModelAdmin):
-        
+    """# Location admin class"""
     search_fields = ['es_name',]
     list_display = (
         'en_name',
@@ -77,22 +89,23 @@ class LocationAdmin(admin.ModelAdmin):
         'google_iframe',
         'google_lat',
         'google_long',
-        'short_map_image',
-        'large_map_image',
         'instagram',
         'facebook',
         'twitter',
     )
     class Meta:
+        """# Reference for model fields"""
         model = Type
 
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
+    """# Category admin class"""
     search_fields = ['es_name',]
     list_display = (
-            'en_name',
-        )
+        'en_name',
+    )
 
     class Meta:
+        """# Reference for model fields"""
         model = Type

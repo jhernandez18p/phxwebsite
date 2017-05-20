@@ -151,6 +151,7 @@ def history(request):
     context['title'] = title
     context['keywords'] = keywords
     context['history'] = True
+    context['newsletter_form'] = False
     # sub_categories = Sub_category.objects.all()
     # for sub_cat in sub_categories:
     #     if sub_cat.name == 'ABOUT_HEADER_BANNER':
@@ -256,6 +257,7 @@ def contact(request):
     context['es_url'] = es_url
     context['title'] = title
     context['keywords'] = keywords
+    context['newsletter_form'] = False
     
     return render(request, template, context)
 

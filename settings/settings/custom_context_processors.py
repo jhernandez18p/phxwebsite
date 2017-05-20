@@ -12,6 +12,8 @@ def menu(request):
     context = {
         'time':now,
     }
+    newsletter_form = True
+    context['newsletter_form'] = newsletter_form
     return context
 
 

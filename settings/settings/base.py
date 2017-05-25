@@ -118,12 +118,12 @@ TEMPLATES = [
     },
 ]
 
-STATICFILES_DIRS = (
-    os.path.abspath(os.path.join(os.path.join(BASE_DIR,os.pardir),'staticfiles')),
-)
+# STATICFILES_DIRS = (
+#     os.path.abspath(os.path.join(os.path.join(BASE_DIR,os.pardir),'staticfiles')),
+# )
 
-# STATIC_ROOT = os.path.abspath(
-#     os.path.join(os.path.join(BASE_DIR,os.pardir),'staticfiles'))
+STATIC_ROOT = os.path.abspath(
+    os.path.join(os.path.join(BASE_DIR,os.pardir),'staticfiles'))
 
 MEDIA_ROOT = os.path.abspath(os.path.join(os.path.join(BASE_DIR,os.pardir),'media'))
 

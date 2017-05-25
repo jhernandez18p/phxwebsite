@@ -39,10 +39,13 @@ def lang(request):
             lang_code = 'English'
             lang_ = True
 
-        # print(url)
+        if 'blog' in request.POST:
+            url = request.POST['blog']
+        print(url)
         render = redirect(url)
         render.set_cookie('lang_code', lang_code)
         render.set_cookie('lang_', lang_)
+        print(render)
         return render
     
     else:    
@@ -121,7 +124,7 @@ def index(request):
     # banners_biz = Banner.objects.all().filter(sub_category=business_sub_cat.id)
     # print(banners)
     locations = Location.objects.all()
-    news = Post.objects.all().filter(sub_category=news_sub_cat)[0:3]
+    news = Post.objects.all().filter(sub_category=news_sub_cat)[0:2]
     banners_biz = bt.objects.all()
     context['news'] = news
     context['banners_biz'] = banners_biz
@@ -151,7 +154,7 @@ def history(request):
     context['title'] = title
     context['keywords'] = keywords
     context['history'] = True
-    context['newsletter_form'] = False
+    context['newsletter_form'] = True
     # sub_categories = Sub_category.objects.all()
     # for sub_cat in sub_categories:
     #     if sub_cat.name == 'ABOUT_HEADER_BANNER':
@@ -226,6 +229,26 @@ def news(request):
     context['es_url'] = es_url
     context['title'] = title
     context['keywords'] = keywords
+    try:
+        brands_cat = bt.objects.all()
+        for x in brands_cat:
+            if x.en_name == 'Retail':
+                retail_cat = x
+            elif x.en_name == 'Wholesale':
+                wholesale_cat = x
+        
+        retail_brands = Brand.objects.all().filter(category=retail_cat.id)
+        wholesale_brands = Brand.objects.all().filter(category=wholesale_cat.id)
+        brands = Brand.objects.all()
+        context['brands'] = brands
+        context['brands_cat'] = brands_cat
+        context['retail_cat'] = retail_cat  
+        context['wholesale_cat'] = wholesale_cat    
+        context['retail_brands'] = retail_brands    
+        context['wholesale_brands'] = wholesale_brands  
+        context['banners'] = brands_cat  
+    except Exception as e:
+        raise e
 
     try:
         news = Post.objects.all()
@@ -257,7 +280,7 @@ def contact(request):
     context['es_url'] = es_url
     context['title'] = title
     context['keywords'] = keywords
-    context['newsletter_form'] = False
+    context['newsletter_form'] = True
     
     return render(request, template, context)
 
@@ -268,6 +291,10 @@ def news_detail(request, slug):
         'pg_title':'news',
     }
     lang = get_lang(request)
+    url = 'en:news'
+    es_url = 'es:noticias'
+    context['url'] = url
+    context['es_url'] = es_url
 
     if lang == 'English':
         title = 'Our brands'
@@ -284,8 +311,16 @@ def news_detail(request, slug):
         title = 'Nuestras marcas'
         keywords = 'Nuestras marcas'
     
-    print(new)
+    # print(new)
     context['obj'] = new
+    if request.COOKIES['lang_code'] == 'English':
+        context['title'] = new.en_title
+        context['blog'] = '/es/noticias/%s/' % new.es_slug
+        print(context['blog'])
+    else:
+        context['title'] = new.es_title
+        context['blog'] = '/en/news/%s/' % new.en_slug
+        print(context['blog'])
 
     return render(request, template, context)
 

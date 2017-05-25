@@ -1,25 +1,39 @@
 {% load staticfiles %}
-{% if newsletter_form %}
-    <div class="uk-section uk-section-small uk-section-muted">
+{% if not newsletter_form %}
+    <div class="uk-section uk-section-xsmall uk-section-muted">
         <div class="uk-container">
-            <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid>
-                <form action="{% url 'subscribe' %}" method="post">
-                    {% csrf_token %}
-                    <div class="uk-margin">
-                        <div class="uk-inline">
-                            <a class="uk-form-icon textTeal" href="#" uk-icon="icon: user"></a>
-                            <input class="uk-input uk-form-width-large" type="text" placeholder="{% if lang_code == 'English' %}Your name{% else %}Escriba su nombre{% endif %}" name="name">
+            <div class="uk-card uk-card-default uk-card-body">
+                <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid>
+                    <form action="{% url 'subscribe' %}" method="post">
+                        {% csrf_token %}
+                        <div class="uk-margin">
+                            <div class="uk-inline uk-margin-xsmall-bottom">
+                                <a class="uk-form-icon textTeal" href="#" uk-icon="icon: user"></a>
+                                <input class="uk-input" type="text" placeholder="{% if lang_code == 'English' %}Your name{% else %}Escriba su nombre{% endif %}" name="name">
+                            </div>
+                            <div class="uk-inline uk-margin-xsmall-bottom">
+                                <a class="uk-form-icon textTeal" href="#" uk-icon="icon: mail"></a>
+                                <input class="uk-input" type="text" placeholder="{% if lang_code == 'English' %}Subscribe for more{% else %}Suscribirse{% endif %}" name="email">
+                                <input class="uk-hidden" type="text" name="url" value="{% if lang_code != 'English' %}{{es_url}}{% else %}{{url}}{% endif %}">
+                            </div>
+                            <div class="uk-inline uk-margin-xsmall-bottom">
+                                <a class="uk-form-icon textTeal" href="#" uk-icon="icon: mail"></a>
+                                <input class="uk-input" type="text" placeholder="{% if lang_code == 'English' %}Subscribe for more{% else %}Suscribirse{% endif %}" name="email">
+                                <input class="uk-hidden" type="text" name="url" value="{% if lang_code != 'English' %}{{es_url}}{% else %}{{url}}{% endif %}">
+                            </div>
+                            <div class="uk-inline uk-margin-xsmall-bottom">
+                                <a class="uk-form-icon textTeal" href="#" uk-icon="icon: mail"></a>
+                                <input class="uk-input" type="text" placeholder="{% if lang_code == 'English' %}Subscribe for more{% else %}Suscribirse{% endif %}" name="email">
+                                <input class="uk-hidden" type="text" name="url" value="{% if lang_code != 'English' %}{{es_url}}{% else %}{{url}}{% endif %}">
+                            </div>
                         </div>
-                        <div class="uk-inline">
-                            <a class="uk-form-icon textTeal" href="#" uk-icon="icon: mail"></a>
-                            <input class="uk-input uk-form-width-large" type="text" placeholder="{% if lang_code == 'English' %}Subscribe for more{% else %}Suscribirse{% endif %}" name="email">
-                            <input class="uk-hidden" type="text" name="url" value="{% if lang_code != 'English' %}{{es_url}}{% else %}{{url}}{% endif %}">
+                        <div class="uk-margin">
+                            <button class="uk-button uk-button-primary button-phx uk-width-1-2">
+                                {% if lang_code == 'English' %}Submit{% else %}Enviar{% endif %}
+                            </button>
                         </div>
-                        <button class="uk-button uk-button-default button-phx">
-                            {% if lang_code == 'English' %}Submit{% else %}Enviar{% endif %}
-                        </button>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

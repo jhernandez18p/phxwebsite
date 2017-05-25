@@ -1,14 +1,73 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block css %}
+<link rel="stylesheet" href="{% static 'base/css/swiper.min.css' %}">
 <style media="screen">
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    .brand-card img{position: absolute; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto;}
 </style>
 {% endblock %}
 
 {% block content %}
     {% if news %}
-        <div class="uk-section uk-section-small uk-section-muted">
+        <div class="uk-width-1-1">
+            <div class="uk-section uk-section-small uk-section-muted">
+                <div class="uk-container">
+                    <!-- Carrusel -->
+                    <div class="uk-section-muted">
+                        <div class="full-screen">
+                            <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                    {% for banner in banners %}
+                                        <div class="swiper-slide">
+                                            {% if lang_code != 'English' %}
+                                                {% if banner.large_image %}
+                                                    <img src="{{banner.large_image.url}}" alt="{{banner.es_name}}">
+                                                {% else %}
+                                                    <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.es_name}}">
+                                                {% endif %}
+                                            {% else %}
+                                                {% if banner.image %}
+                                                    <img src="{{banner.large_image.url}}" alt="{{banner.es_name}}">
+                                                {% else %}
+                                                    <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.en_name}}">
+                                                {% endif %}
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <div class="swiper-button-next swiper-button-white"></div>
+                                <div class="swiper-button-prev swiper-button-white"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="uk-section uk-section-xsmall uk-section-muted">
             <div class="uk-container" uk-scrollspy="cls: uk-animation-slide-top-small; target: > .spy; delay: 500; repeat: false">
+                
                 <ul class="uk-breadcrumb spy">
                     <li>
                         <a href="{% if lang_code == 'English' %}{% url 'en:en' %}{% else %}{% url 'es:es' %}{% endif %}">
@@ -29,8 +88,8 @@
                         </span>
                     </li>
                 </ul>
-                {% for new in news %}
-                    <div class="uk-grid-match uk-child-width-expand@s uk-text-center spy" uk-grid uk-height-match="target: > div > .uk-card">
+                <div class="uk-grid-match uk-child-width-1-2@m uk-text-center spy" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-fade; target: > div > .uk-card; delay: 800; repeat: true">
+                    {% for new in news %}
                         <div>
                             <div class="uk-card uk-card-default">
                                 <div class="uk-card-media-top">
@@ -65,12 +124,36 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                {% endfor %}
+                    {% endfor %}
+                </div>
+                {% if lang_code == 'English' %}
+                    <ul class="uk-pagination">
+                        <li><a href="#"><span class="uk-margin-small-right" uk-pagination-previous></span> Previous</a></li>
+                        <li class="uk-margin-auto-left"><a href="#">Next <span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+                    </ul>
+                {% else %}
+                    <ul class="uk-pagination">
+                        <li><a href="#"><span class="uk-margin-small-right" uk-pagination-previous></span> Anterior</a></li>
+                        <li class="uk-margin-auto-left"><a href="#">Siguiente <span class="uk-margin-small-left" uk-pagination-next></span></a></li>
+                    </ul>
+                {% endif %}
             </div>
         </div>
     {% endif %}
 {% endblock %}
 
 {% block js %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        UIkit.toggle();
+    })
+    var swiper = new Swiper('.full-screen .swiper-container', {
+        pagination: '.full-screen .swiper-pagination',
+        paginationClickable: true,
+        nextButton: '.full-screen .swiper-button-next',
+        prevButton: '.full-screen .swiper-button-prev',
+        loop: true,
+        autoplay: 8000,
+    });
+</script>
 {% endblock %}

@@ -33,7 +33,7 @@
 {% block content %}
     
     <div class="uk-width-1-1">
-        <div class="uk-section uk-section-small uk-section-muted">
+        <div class="uk-section uk-section-xsmall uk-section-muted">
             <div class="uk-container">
                 <!-- Carrusel -->
                 <div class="uk-section-muted">
@@ -85,35 +85,49 @@
                     </li>
                 </ul>
                 <hr>
-                <p class="uk-text-lead">
-                    {% if lang_code == 'English' %}
-                        Our brands
-                    {% else %}
-                        Nuestras marcas
-                    {% endif %}
-                </p>
-                <div class="uk-margin">
-                    <div uk-form-custom="target: > * > span:first">
-                        <select>
-                            <option value="">Please select...</option>
-                            <option value="1">Option 01</option>
-                            <option value="2">Option 02</option>
-                            <option value="3">Option 03</option>
-                            <option value="4">Option 04</option>
-                        </select>
-                        <button class="uk-button uk-button-default" type="button" tabindex="-1">
-                            <span></span>
-                            <span uk-icon="icon: chevron-down"></span>
-                        </button>
+                <div class="uk-margin uk-child-width-1-3@m">
+                    <div class="uk-button-group">
+                        <button class="uk-button button-phx uk-width-1-1 uk-margin-xsmall-bottom uk-button-default">All Categories</button>
+                        <div class="uk-inline">
+                            <button class="uk-button uk-button-default button-phx" type="button"><span uk-icon="icon:  triangle-down"></span></button>
+                            <div uk-dropdown="mode: click; boundary: ! .uk-button-group; boundary-align: true;">
+                                <ul class="uk-nav uk-dropdown-nav">
+                                    <li class="uk-active"><a href="#">Active</a></li>
+                                    <li><a href="#">Item</a></li>
+                                    <li class="uk-nav-header">Header</li>
+                                    <li><a href="#">Item</a></li>
+                                    <li><a href="#">Item</a></li>
+                                    <li class="uk-nav-divider"></li>
+                                    <li><a href="#">Item</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-button-group">
+                        <button class="uk-button button-phx uk-width-1-1 uk-margin-xsmall-bottom uk-button-default">All Countries</button>
+                        <div class="uk-inline">
+                            <button class="uk-button uk-button-default button-phx" type="button"><span uk-icon="icon:  triangle-down"></span></button>
+                            <div uk-dropdown="mode: click; boundary: ! .uk-button-group; boundary-align: true;">
+                                <ul class="uk-nav uk-dropdown-nav">
+                                    <li class="uk-active"><a href="#">Active</a></li>
+                                    <li><a href="#">Item</a></li>
+                                    <li class="uk-nav-header">Header</li>
+                                    <li><a href="#">Item</a></li>
+                                    <li><a href="#">Item</a></li>
+                                    <li class="uk-nav-divider"></li>
+                                    <li><a href="#">Item</a></li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     {% if brands %}
-    <div class="uk-section uk-section-small uk-section-muted">
+    <div class="uk-section uk-section-xsmall uk-section-muted">
         <div class="uk-container">
-            <div class="uk-grid-match uk-text-center uk-child-width-1-4@m" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-slide-top-small; target: > div > a > .uk-card; delay: 800; repeat: true">
+            <div class="uk-grid-match uk-text-center uk-child-width-1-4@m uk-child-width-2@s" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-slide-top-small; target: > div > .uk-card; delay: 900; repeat: true">
                 {% for brand in brands %}
                     <div>
                         <div class="uk-card uk-card-default">
@@ -128,7 +142,9 @@
                         <div class="uk-modal-dialog">
                             <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
                             <div class="uk-grid-collapse uk-child-width-1-2@s uk-flex-middle" uk-grid>
-                                <div class="uk-background-cover" style="background-image: url('{{brand.large_logo.url}}');" uk-height-viewport></div>
+                                <div class="uk-background-cover" style="background-image: url('{{brand.large_logo.url}}');" uk-height-viewport>
+                                    
+                                </div>
                                 <div class="uk-padding-large">
                                 {% if lang_code != 'English' %}
                                     <h1>{{brand.es_name}}</h1>

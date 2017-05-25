@@ -195,9 +195,13 @@
 				    </div>
 				    <br>
 				    <input type="text" class="uk-hidden" name="url" value="{{url}}">
-				    <div class="uk-margin uk-position-bottom-center" uk-margin>
-				        <button class="uk-button uk-button-default">Submit</button>
-				    </div>
+					<hr class="uk-margin-medium-bottom">
+				    
+						{% if lang_code == 'English' %}
+							<button class="uk-button uk-button-primary button-phx uk-width-1-1 uk-margin-small-bottom">Submit</button>
+						{% else %}
+							<button class="uk-button uk-button-primary button-phx uk-width-1-1 uk-margin-small-bottom">Enviar</button>
+						{% endif %}
 				</form>
             </div>
         </div>

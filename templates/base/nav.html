@@ -90,6 +90,7 @@
                                             {% csrf_token %}
                                             <input class="uk-hidden" type="text" name="lang_code" value="Spanish">
                                             <input class="uk-hidden" type="text" name="url" value="{{es_url}}">
+                                            <input class="uk-hidden" type="text" name="blog" value="{{blog}}">
                                             <input type="submit" value="ES" class="submit-input"/>
                                         </form>
                                     </li>
@@ -100,6 +101,7 @@
                                             {% csrf_token %}
                                             <input class="uk-hidden" type="text" name="lang_code" value="English">
                                             <input class="uk-hidden" type="text" name="url" value="{{url}}">
+                                            <input class="uk-hidden" type="text" name="blog" value="{{blog}}">
                                             <input type="submit" value="EN" class="submit-input"/>
                                         </form>
                                     </li>
@@ -110,6 +112,9 @@
                 </ul>
             </div>
         </div>
+    </div>
+    <div class="uk-navbar-right">
+        <a class="uk-navbar-toggle" href="{% if lang_code == 'English' %}#search{% else %}#buscar{% endif %}" uk-search-icon uk-toggle></a>
     </div>
 </nav>
 <nav class="uk-navbar-container uk-hidden@m uk-position-top uk-position-fixed" uk-navbar uk-sticky="animation: uk-animation-slide-top; bottom: #offset">
@@ -135,8 +140,10 @@
     </div>
     <div class="uk-navbar-right">
         <a class="uk-navbar-toggle" uk-navbar-toggle-icon href="#offcanvas-slide" uk-toggle="target: #offcanvas-nav-primary"></a>
+        <a class="uk-navbar-toggle" href="{% if lang_code == 'English' %}#search{% else %}#buscar{% endif %}" uk-search-icon uk-toggle></a>
     </div>
 </nav>
+
 <div class="uk-offcanvas-content">
     <div id="offcanvas-nav-primary" uk-offcanvas="overlay: true">
         <div class="uk-offcanvas-bar uk-flex uk-flex-column">
@@ -241,5 +248,18 @@
                 </li>
             </ul>
         </div>
+    </div>
+</div>
+
+<div id="{% if lang_code == 'English' %}search{% else %}buscar{% endif %}" class="uk-modal-full uk-modal" uk-modal>
+    <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
+        <button class="uk-modal-close-full" type="button" uk-close></button>
+        <form class="uk-search uk-search-large">
+            {% if lang_code == 'English' %}
+                <input class="uk-search-input uk-text-center" type="search" placeholder="Search..." autofocus>
+            {% else %}
+                <input class="uk-search-input uk-text-center" type="search" placeholder="Buscar..." autofocus>
+            {% endif %}
+        </form>
     </div>
 </div>

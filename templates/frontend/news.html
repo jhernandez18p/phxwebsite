@@ -73,9 +73,9 @@
                     <li>
                         <a href="{% if lang_code == 'English' %}{% url 'en:en' %}{% else %}{% url 'es:es' %}{% endif %}">
                             {% if lang_code == 'English' %}
-                            Home
+                                Home
                             {% else %}
-                            Inicio
+                                Inicio
                             {% endif %}        
                         </a>
                     </li>
@@ -160,7 +160,7 @@
                 {% endif %}
             </div>
         </div>
-    {% endif %}
+
 {% endblock %}
 
 {% block js %}

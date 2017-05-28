@@ -199,10 +199,14 @@
                                                             <div class="swiper-slide uk-grid-collapse uk-child-width-1-1@s uk-flex-middle" uk-grid>
                                                                 <div class="uk-background-cover" style="background-image: url('{{brand.large_logo.url}}');" uk-height-viewport></div>
                                                             </div>
-                                                        {% endif %}
                                                             <div class="swiper-slide uk-grid-collapse uk-child-width-1-1@s uk-flex-middle" uk-grid>
                                                                 <div class="uk-background-cover" style="background-image: url('{{brand_banner.large_banner.url}}');" uk-height-viewport></div>
                                                             </div>
+                                                        {% else %}
+                                                            <div class="swiper-slide uk-grid-collapse uk-child-width-1-1@s uk-flex-middle" uk-grid>
+                                                                <div class="uk-background-cover" style="background-image: url('{{brand_banner.large_banner.url}}');" uk-height-viewport></div>
+                                                            </div>
+                                                        {% endif %}
                                                     {% empty %}
                                                         <div class="swiper-slide uk-grid-collapse uk-child-width-1-1@s uk-flex-middle" uk-grid>
                                                             <div class="uk-background-cover" style="background-image: url('{{brand.large_logo.url}}');" uk-height-viewport></div>
@@ -232,16 +236,20 @@
                                 </div>
                             </div>
                             <script type="text/javascript">
-                                var swiper = new Swiper('.brandSlide{{brand.id}} .swiper-container', {
-                                    pagination: '.brandSlide{{brand.id}} .swiper-pagination',
-                                    paginationClickable: true,
-                                    nextButton: '.brandSlide{{brand.id}} .swiper-button-next',
-                                    prevButton: '.brandSlide{{brand.id}} .swiper-button-prev',
-                                    loop: true,
-                                    autoplay: 8000,
-                                });
+                                $(document).ready(function () {
+                                    var swiper = new Swiper('.brandSlide{{brand.id}} .swiper-container', {
+                                        pagination: '.brandSlide{{brand.id}} .swiper-pagination',
+                                        paginationClickable: true,
+                                        nextButton: '.brandSlide{{brand.id}} .swiper-button-next',
+                                        prevButton: '.brandSlide{{brand.id}} .swiper-button-prev',
+                                        loop: true,
+                                        autoplay: 8000,
+                                    });
+                                    
+                                })
                             </script>
                         </div>
+                        
                     {% endfor %}
                 </div>
             </div>
@@ -282,6 +290,9 @@
         autoplay: 8000,
     });
 </script>
+{% for brand in brands %}
+
+{% endfor %}
 
 {% endblock %}
 

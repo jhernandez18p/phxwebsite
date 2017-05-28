@@ -13,12 +13,16 @@
     {% include 'base/header.html' %}
     {% block css %}
     {% endblock %}
-    <script src="{% static 'base/js/jquery.js' %}" charset="utf-8">
+
+    <script src="{% static 'base/js/jquery.js' %}" charset="utf-8"></script>
+    <script charset="utf-8">
+        $(document).ready(function(){
+            $('#body').removeClass('uk-hidden');
+        });
     </script>
-        <script src="{% static 'base/js/swiper.min.js' %}" charset="utf-8">
-    </script>
+    <script src="{% static 'base/js/swiper.min.js' %}" charset="utf-8"></script>
 </head>
-<body>
+<body id="body" class="uk-hidden">
     <div class="full-screen-container">{% block fullscreen %}{% endblock %}</div>
     <header>{% include 'base/nav.html' %}</header>
     <section>{% block content %}{% endblock %}</section>
@@ -51,5 +55,15 @@
     {% endif %}
     {% block js %}
     {% endblock %}
+    <script>
+        var windowHeight;
+        windowHeight = $( window ).height();
+        $('#scroll').click(function () {
+            $('html, body').animate({
+                scrollTop: $( $(this) ).offset().top
+            }, windowHeight);
+            return false;
+        })
+    </script>
 </body>
 </html>

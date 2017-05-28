@@ -213,9 +213,19 @@
                                                         </div>
                                                     {% endfor %}
                                                 </div>
-                                                <div class="swiper-pagination swiper-button-white"></div>
+                                                <div class="swiper-pagination swiper-button-white uk-visible@m"></div>
                                                 <div class="swiper-button-next swiper-button-white"></div>
                                                 <div class="swiper-button-prev swiper-button-white"></div>
+                                                <div class="scroll uk-hidden@m uk-position-bottom-center">
+                                                    <span id="scroll">
+                                                        <svg version="1.1" id="icn" fill="#fff" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                        width="40px" height="50px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+                                                        <polygon opacity="0" points="19.9,21 0,1.3 1.4,0 19.9,18.3 38.6,0 40,1.3 "><animate id="first" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite"  begin="0"/></polygon>
+                                                        <polygon id="arrow-two" opacity="0"  points="19.9,30.9 0,11.2 1.4,9.9 19.9,28.2 38.6,9.8 40,11.2 "><animate id="second" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite"  begin="1s" /></polygon>
+                                                        <polygon id="arrow-three"  opacity="0" points="19.9,40 0,20.3 1.4,19 19.9,37.3 38.6,19 40,20.3 "><animate id="third" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite"  begin="2s"  /></polygon>
+                                                    </svg>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                     {% else %}
@@ -295,6 +305,7 @@
         loop: true,
         autoplay: 8000,
     });
+    
 </script>
 {% for brand in brands %}
 

@@ -250,13 +250,5 @@
         loop: true,
         autoplay: 8000,
     });
-    var windowHeight;
-    windowHeight = $( window ).height();
-    $('#scroll').click(function () {
-        $('html, body').animate({
-            scrollTop: $( $(this) ).offset().top
-        }, windowHeight);
-        return false;
-    })
 </script>
 {% endblock %}

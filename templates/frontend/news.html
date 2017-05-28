@@ -34,40 +34,41 @@
         <div class="uk-width-1-1">
             <div class="uk-section uk-section-small uk-section-muted">
                 <div class="uk-container">
-                    <!-- Carrusel -->
-                    <div class="uk-section-muted">
-                        <div class="full-screen">
-                            <div class="swiper-container">
-                            <div class="swiper-wrapper">
-                                    {% for banner in banners %}
-                                        <div class="swiper-slide">
-                                            {% if lang_code != 'English' %}
-                                                {% if banner.large_image %}
-                                                    <img src="{{banner.large_image.url}}" alt="{{banner.es_name}}">
+                    {% if banners %}
+                        <!-- Carrusel -->
+                        <div class="uk-section-muted">
+                            <div class="full-screen">
+                                <div class="swiper-container">
+                                    <div class="swiper-wrapper">
+                                        {% for banner in banners %}
+                                            <div class="swiper-slide">
+                                                {% if lang_code != 'English' %}
+                                                    {% if banner.large_image %}
+                                                        <img src="{{banner.large_image.url}}" alt="{{banner.es_name}}">
+                                                    {% else %}
+                                                        <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.es_name}}">
+                                                    {% endif %}
                                                 {% else %}
-                                                    <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.es_name}}">
+                                                    {% if banner.image %}
+                                                        <img src="{{banner.large_image.url}}" alt="{{banner.es_name}}">
+                                                    {% else %}
+                                                        <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.en_name}}">
+                                                    {% endif %}
                                                 {% endif %}
-                                            {% else %}
-                                                {% if banner.image %}
-                                                    <img src="{{banner.large_image.url}}" alt="{{banner.es_name}}">
-                                                {% else %}
-                                                    <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.en_name}}">
-                                                {% endif %}
-                                            {% endif %}
-                                        </div>
-                                    {% endfor %}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="swiper-button-next swiper-button-white"></div>
+                                    <div class="swiper-button-prev swiper-button-white"></div>
                                 </div>
-                                <div class="swiper-button-next swiper-button-white"></div>
-                                <div class="swiper-button-prev swiper-button-white"></div>
                             </div>
                         </div>
-                    </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
         <div class="uk-section uk-section-xsmall uk-section-muted">
             <div class="uk-container" uk-scrollspy="cls: uk-animation-slide-top-small; target: > .spy; delay: 500; repeat: false">
-                
                 <ul class="uk-breadcrumb spy">
                     <li>
                         <a href="{% if lang_code == 'English' %}{% url 'en:en' %}{% else %}{% url 'es:es' %}{% endif %}">
@@ -121,6 +122,24 @@
                                             <button class="uk-button uk-button-text">Ver más</button>
                                         </form>
                                     {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <div class="uk-section uk-section-xsmall uk-section-muted">
+                            <div class="uk-container">
+                                <div class="uk-grid-match uk-text-center uk-child-width-1-1@m uk-child-width-2@s" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-slide-top-small; target: > div > .uk-card; delay: 900; repeat: true">
+                                    <div>
+                                        <div class="uk-card uk-card-default">
+                                            <div class="uk-card-media-center uk-section-large">
+                                                {% if lang_code != 'English' %}
+                                                    <h1>Ups...! There still are not any result.</h1>
+                                                {% else %}
+                                                    <h1>Ups...! Todavía no hay ningún resultado.</h1>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

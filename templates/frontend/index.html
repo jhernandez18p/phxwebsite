@@ -19,7 +19,15 @@
                    <div class="swiper-wrapper" uk-height-match="target: > div > img">
                         {% for banner in banners %}
                             <div class="swiper-slide">
-                                <img src="{{banner.large_banner.url}}" alt="
+                                <div class="uk-child-width-1-1@m" >
+                                    <img class="uk-background-cover uk-visible@m" src="{{banner.large_banner.url}}" alt="
+                                    {% if lang_code != 'English' %}
+                                    {{banner.es_name}}
+                                    {% else %}
+                                    {{banner.en_name}}
+                                    {% endif %}" uk-height-viewport>
+                                </div>
+                                <img class="uk-hidden@m" src="{{banner.large_banner.url}}" alt="
                                 {% if lang_code != 'English' %}
                                 {{banner.es_name}}
                                 {% else %}

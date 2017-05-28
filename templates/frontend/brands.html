@@ -27,8 +27,8 @@
         align-items: center;
     }
     .brand-card img{position: absolute; top: 0; bottom: 0; margin-top: auto; margin-bottom: auto;}
-    .swiper-button-next,
-    .swiper-button-prev{
+    .full .swiper-button-next,
+    .full .swiper-button-prev{
         background-color: rgba(0,0,0,.5);
         width: 15%;
         height: 8%;
@@ -191,7 +191,7 @@
                                 <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
                                 <div class="uk-child-width-1-2@s uk-flex-middle" uk-grid>
                                     {% if brand.carousel_images %}
-                                        <div class="brandSlide{{brand.id}}">
+                                        <div class="brandSlide{{brand.id}} full">
                                             <div class="swiper-container">
                                                 <div class="swiper-wrapper">
                                                     {% for brand_banner in brand.carousel_images.all %}
@@ -237,15 +237,21 @@
                             </div>
                             <script type="text/javascript">
                                 $(document).ready(function () {
-                                    var swiper = new Swiper('.brandSlide{{brand.id}} .swiper-container', {
-                                        pagination: '.brandSlide{{brand.id}} .swiper-pagination',
-                                        paginationClickable: true,
-                                        nextButton: '.brandSlide{{brand.id}} .swiper-button-next',
-                                        prevButton: '.brandSlide{{brand.id}} .swiper-button-prev',
-                                        loop: true,
-                                        autoplay: 8000,
+                                    $('#{{brand.id}}modal-full').on({
+                                        'shown': function() {
+                                            // console.log('rrrr');
+                                            // location.reload();
+                                            var swiper;
+                                            swiper = new Swiper('.brandSlide{{brand.id}} .swiper-container', {
+                                                pagination: '.brandSlide{{brand.id}} .swiper-pagination',
+                                                paginationClickable: true,
+                                                nextButton: '.brandSlide{{brand.id}} .swiper-button-next',
+                                                prevButton: '.brandSlide{{brand.id}} .swiper-button-prev',
+                                                loop: true,
+                                                autoplay: 8000,
+                                            });
+                                        }
                                     });
-                                    
                                 })
                             </script>
                         </div>

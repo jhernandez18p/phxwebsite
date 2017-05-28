@@ -254,12 +254,16 @@
 <div id="{% if lang_code == 'English' %}search{% else %}buscar{% endif %}" class="uk-modal-full uk-modal" uk-modal>
     <div class="uk-modal-dialog uk-flex uk-flex-center uk-flex-middle" uk-height-viewport>
         <button class="uk-modal-close-full" type="button" uk-close></button>
-        <form class="uk-search uk-search-large">
-            {% if lang_code == 'English' %}
+        {% if lang_code == 'English' %}
+            <form class="uk-search uk-search-large" method="post" action="{% url 'en:search' %}">
+                {% csrf_token %}
                 <input class="uk-search-input uk-text-center" type="search" placeholder="Search..." autofocus>
-            {% else %}
+            </form>
+        {% else %}
+            <form class="uk-search uk-search-large" method="post" action="{% url 'es:buscar' %}">
+                {% csrf_token %}
                 <input class="uk-search-input uk-text-center" type="search" placeholder="Buscar..." autofocus>
-            {% endif %}
-        </form>
+            </form>
+        {% endif %}
     </div>
 </div>

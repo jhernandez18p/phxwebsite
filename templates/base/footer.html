@@ -2,39 +2,78 @@
 {% if not newsletter_form %}
     <div class="uk-section uk-section-xsmall uk-section-muted">
         <div class="uk-container">
-            <div class="uk-card uk-card-default uk-card-body">
-                <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid>
-                    <form action="{% url 'subscribe' %}" method="post">
-                        {% csrf_token %}
-                        <div class="uk-margin">
-                            <div class="uk-inline uk-margin-xsmall-bottom">
-                                <a class="uk-form-icon textTeal" href="#" uk-icon="icon: user"></a>
-                                <input class="uk-input" type="text" placeholder="{% if lang_code == 'English' %}Your name{% else %}Escriba su nombre{% endif %}" name="name">
+            {% if lang_code == 'English' %}
+                <div class="uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-title uk-text-center">Subscribe to our newsletter</h3> 
+                    <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid>
+                        <form action="{% url 'subscribe' %}" method="post">
+                            {% csrf_token %}
+                            <div class="uk-margin">
+                                <div class="uk-inline uk-margin-xsmall-bottom">
+                                    <a class="uk-form-icon textTeal" uk-icon="icon: user"></a>
+                                    <input class="uk-input" type="text" placeholder="Your name" name="name" required>
+                                </div>
+                                <div class="uk-inline uk-margin-xsmall-bottom">
+                                    <a class="uk-form-icon textTeal" uk-icon="icon: user"></a>
+                                    <input class="uk-input" type="text" placeholder="Your last name" name="last_name" required>
+                                    <input class="uk-hidden" type="text" name="url" value="{{es_url}}">
+                                </div>
+                                <div class="uk-inline uk-margin-xsmall-bottom">
+                                    <a class="uk-form-icon textTeal" uk-icon="icon: phone"></a>
+                                    <input class="uk-input" type="text" placeholder="Your phone number" name="phone" required>
+                                    <input class="uk-hidden" type="text" name="url" value="{{es_url}}">
+                                </div>
+                                <div class="uk-inline uk-margin-xsmall-bottom">
+                                    <a class="uk-form-icon textTeal" uk-icon="icon: mail"></a>
+                                    <input class="uk-input" type="text" placeholder="Your email" name="email" required>
+                                    <input class="uk-hidden" type="text" name="url" value="{{es_url}}">
+                                </div>
                             </div>
-                            <div class="uk-inline uk-margin-xsmall-bottom">
-                                <a class="uk-form-icon textTeal" href="#" uk-icon="icon: mail"></a>
-                                <input class="uk-input" type="text" placeholder="{% if lang_code == 'English' %}Subscribe for more{% else %}Suscribirse{% endif %}" name="email">
-                                <input class="uk-hidden" type="text" name="url" value="{% if lang_code != 'English' %}{{es_url}}{% else %}{{url}}{% endif %}">
+                            <div class="uk-margin">
+                                <button class="uk-button uk-button-primary button-phx uk-width-1-2">
+                                    Submit
+                                </button>
                             </div>
-                            <div class="uk-inline uk-margin-xsmall-bottom">
-                                <a class="uk-form-icon textTeal" href="#" uk-icon="icon: mail"></a>
-                                <input class="uk-input" type="text" placeholder="{% if lang_code == 'English' %}Subscribe for more{% else %}Suscribirse{% endif %}" name="email">
-                                <input class="uk-hidden" type="text" name="url" value="{% if lang_code != 'English' %}{{es_url}}{% else %}{{url}}{% endif %}">
-                            </div>
-                            <div class="uk-inline uk-margin-xsmall-bottom">
-                                <a class="uk-form-icon textTeal" href="#" uk-icon="icon: mail"></a>
-                                <input class="uk-input" type="text" placeholder="{% if lang_code == 'English' %}Subscribe for more{% else %}Suscribirse{% endif %}" name="email">
-                                <input class="uk-hidden" type="text" name="url" value="{% if lang_code != 'English' %}{{es_url}}{% else %}{{url}}{% endif %}">
-                            </div>
-                        </div>
-                        <div class="uk-margin">
-                            <button class="uk-button uk-button-primary button-phx uk-width-1-2">
-                                {% if lang_code == 'English' %}Submit{% else %}Enviar{% endif %}
-                            </button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
-            </div>
+            {% else %}
+            
+                <div class="uk-card uk-card-default uk-card-body">
+                    <h3 class="uk-card-title uk-text-center">Suscríbete a nuestro boletín</h3>
+                    <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid>
+                        <form action="{% url 'subscribe' %}" method="post">
+                            {% csrf_token %}
+                            <div class="uk-margin">
+                                <div class="uk-inline uk-margin-xsmall-bottom">
+                                    <a class="uk-form-icon textTeal" uk-icon="icon: user"></a>
+                                    <input class="uk-input" type="text" placeholder="Su nombre" name="name" required>
+                                </div>
+                                <div class="uk-inline uk-margin-xsmall-bottom">
+                                    <a class="uk-form-icon textTeal" uk-icon="icon: mail"></a>
+                                    <input class="uk-input" type="text" placeholder="Su apellido" name="last_name" required>
+                                    <input class="uk-hidden" type="text" name="url" value="{{url}}">
+                                </div>
+                                <div class="uk-inline uk-margin-xsmall-bottom">
+                                    <a class="uk-form-icon textTeal" uk-icon="icon: phone"></a>
+                                    <input class="uk-input" type="text" placeholder="Número de télefono" name="phone" required>
+                                    <input class="uk-hidden" type="text" name="url" value="{{url}}">
+                                </div>
+                                <div class="uk-inline uk-margin-xsmall-bottom">
+                                    <a class="uk-form-icon textTeal" uk-icon="icon: mail"></a>
+                                    <input class="uk-input" type="text" placeholder="Dirección de correo" name="email" required>
+                                    <input class="uk-hidden" type="text" name="url" value="{{url}}">
+                                </div>
+                            </div>
+                            <div class="uk-margin">
+                                <button class="uk-button uk-button-primary button-phx uk-width-1-2">
+                                    Enviar
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
         </div>
     </div>
 {% endif %}

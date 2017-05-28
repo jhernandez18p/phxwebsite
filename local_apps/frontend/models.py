@@ -23,6 +23,20 @@ class Timeline(models.Model):
         ordering = ["-year"]
 
 
+class Country(models.Model):
+    es_name = models.CharField(max_length=144)
+    en_name = models.CharField(max_length=144)
+    latitude = models.DecimalField(max_digits=19, decimal_places=8, default=8.6571004)
+    longitude = models.DecimalField(max_digits=19, decimal_places=8, default=-60.1603678)
+
+    def __str__(self):
+        return self.en_name
+
+    class Meta:
+        """# Class Meta"""
+        verbose_name = ('Country')
+        verbose_name_plural = ('Countries')
+
 class Category(models.Model):
     name = models.CharField(max_length=144)
 
@@ -342,10 +356,11 @@ class Site_info(models.Model):
     height_field_vision_img = models.IntegerField(default=0)
     social_icons = models.ManyToManyField(Socialmedia, blank=True)
     values = models.ManyToManyField(Site_value, blank=True)
+    country = models.ManyToManyField(Country, blank=True)
     history = models.ManyToManyField(
-                                    Timeline,
-                                    blank=True,
-                                )
+        Timeline,
+        blank=True,
+    )
 
     def __str__(self):
         return self.en_name

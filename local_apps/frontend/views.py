@@ -40,7 +40,10 @@ def lang(request):
             lang_ = True
 
         if 'blog' in request.POST:
-            url = request.POST['blog']
+            blog = request.POST['blog']
+            if blog != '':
+                url = blog
+
         print(url)
         render = redirect(url)
         render.set_cookie('lang_code', lang_code)
@@ -172,39 +175,49 @@ def our_brands(request):
     lang = get_lang(request)
     url = 'en:our_brands'
     es_url = 'es:marcas'
+    context['url'] = url
+    context['es_url'] = es_url
+
     if lang == 'English':
         title = 'Our brands'
         keywords = 'Our brands'
     else:
         title = 'Nuestras marcas'
         keywords = 'Nuestras marcas'
-
-    context['url'] = url
-    context['es_url'] = es_url
-    context['title'] = title
-    context['title'] = title
+    
+    context['title'] = title    
     context['keywords'] = keywords
+
     try:
-        brands_cat = bt.objects.all()
-        for x in brands_cat:
-            if x.en_name == 'Retail':
-                retail_cat = x
-            elif x.en_name == 'Wholesale':
-                wholesale_cat = x
-        
-        retail_brands = Brand.objects.all().filter(category=retail_cat.id)
-        wholesale_brands = Brand.objects.all().filter(category=wholesale_cat.id)
-        brands = Brand.objects.all()
-        context['brands'] = brands
+        brands_type = bt.objects.all()
+        context['brands_type'] = brands_type
+        brands_cat = bc.objects.all()
         context['brands_cat'] = brands_cat
-        context['retail_cat'] = retail_cat  
-        context['wholesale_cat'] = wholesale_cat    
-        context['retail_brands'] = retail_brands    
-        context['wholesale_brands'] = wholesale_brands  
-        context['banners'] = brands_cat  
+
+        context['banners'] = brands_type  
     except Exception as e:
         raise e
     
+    if request.method == "GET":
+        if 'cat' in request.GET and 'type' in request.GET:
+            brands = Brand.objects.all().filter(category=request.GET['cat'],brand_type=request.GET['type'])
+        elif 'cat' in request.GET:
+            try:
+                brands = Brand.objects.all().filter(category=request.GET['cat'])
+                context['brands'] = brands
+            except Exception as e:
+                print(e)
+        elif 'type' in request.GET:
+            try:
+                brands = Brand.objects.all().filter(brand_type=request.GET['type'])
+                context['brands'] = brands
+            except Exception as e:
+                print(e)
+        else:
+
+            brands = Brand.objects.all()
+            context['brands'] = brands
+        
     return render(request, template, context)
 
 
@@ -460,3 +473,13 @@ def contact_post(request):
             return redirect(url)
 
     return render(request, template, context)
+
+
+def search(request):
+    template = 'frontend/search.html'
+    context = {}
+    url = 'en:search'
+    es_url = 'es:buscar'
+    context['url'] = url
+    context['es_url'] = es_url
+    return render(request,template,context)

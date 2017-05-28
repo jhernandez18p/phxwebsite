@@ -79,11 +79,9 @@ class Brand(models.Model):
         Sub_category,
         on_delete=models.CASCADE,
     )
-    carousel_images = models.ForeignKey(
-        Carousel,
-        on_delete=models.CASCADE,
+    carousel_images = models.ManyToManyField(
+        Banner,
         blank=True,
-        null=True,
     )
     url = models.CharField(max_length=140, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

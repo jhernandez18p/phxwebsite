@@ -16,4 +16,5 @@ urlpatterns = [
     url(r'^noticias/$', fw.news, name='noticias'),
     url(r'^noticias/(?P<slug>[\w-]+)/$', fw.news_detail, name='detalle_noticias'),
     url(r'^contacto/$', fw.contact, name='contacto'),
+    url(r'^buscar/$', fw.search, name='buscar'),
 ]

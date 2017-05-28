@@ -7,208 +7,222 @@
 {% endblock %}
 
 {% block content %}
-<div class="uk-width-1-1">
-    <div class="uk-section uk-padding uk-section-muted">
-        <div class="uk-container">
-            <div class="uk-card uk-card-default  uk-card-body">   
+	<div class="uk-section uk-section-xsmall uk-section-muted">
+		<div class="uk-container" uk-scrollspy="cls: uk-animation-slide-top-small; target: > .spy1; delay: 500; repeat: false">
+			<div class="uk-card uk-card-default spy1 uk-card-body"> 
 				<form class="uk-form-horizontal" method="post" action="contact_post">
 					{% csrf_token %}
-				    <div class="uk-margin">
-				        <label class="uk-form-label" for="form-horizontal-text">
+					<div class="uk-margin">
+						<label class="uk-form-label" for="form-horizontal-text">
 							{% if lang_code == 'English' %}
-			            		Name
-			            	{% else %}
-			            		Nombre
-			            	{% endif %}
-				        </label>
-				        <div class="uk-form-controls">
-				            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="
-				            {% if lang_code == 'English' %}
-			            		Name
-			            	{% else %}
-			            		Nombre
-			            	{% endif %}"
-			            	name="name">
-				        </div>
-				    </div>
-				    <div class="uk-margin">
-				        <label class="uk-form-label" for="form-horizontal-text">
+								Name
+							{% else %}
+								Nombre
+							{% endif %}
+						</label>
+						<div class="uk-form-controls">
+							<input class="uk-input" id="form-horizontal-text" type="text" placeholder="
 							{% if lang_code == 'English' %}
-			            		Surname
-			            	{% else %}
-			            		Apellido
-			            	{% endif %}
-				        </label>
-				        <div class="uk-form-controls">
-				            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="
-				            {% if lang_code == 'English' %}
-			            		Surname
-			            	{% else %}
-			            		Apellido
-			            	{% endif %}"
-			            	name="surname">
-				        </div>
-				    </div>
-				    <div class="uk-margin">
-				        <label class="uk-form-label" for="form-horizontal-text">
+								Name
+							{% else %}
+								Nombre
+							{% endif %}"
+							name="name">
+						</div>
+					</div>
+					<div class="uk-margin">
+						<label class="uk-form-label" for="form-horizontal-text">
 							{% if lang_code == 'English' %}
-			            		Email
-			            	{% else %}
-			            		Email
-			            	{% endif %}
-				        </label>
-				        <div class="uk-form-controls">
-				            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="
-				            {% if lang_code == 'English' %}
-			            		Email
-			            	{% else %}
-			            		Email
-			            	{% endif %}"
-			            	name="email">
-				        </div>
-				    </div>
-				    <div class="uk-margin">
-				        <label class="uk-form-label" for="form-horizontal-text">
+								Surname
+							{% else %}
+								Apellido
+							{% endif %}
+						</label>
+						<div class="uk-form-controls">
+							<input class="uk-input" id="form-horizontal-text" type="text" placeholder="
 							{% if lang_code == 'English' %}
-			            		Phone number
-			            	{% else %}
-			            		Número de teléfono
-			            	{% endif %}
-				        </label>
-				        <div class="uk-form-controls">
-				            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="
-				            {% if lang_code == 'English' %}
-			            		Phone number
-			            	{% else %}
-			            		Número de teléfono
-			            	{% endif %}">
-				        </div>
-				    </div>
-				    <div class="uk-margin">
-				        <label class="uk-form-label" for="form-horizontal-select">
-				        	{% if lang_code == 'English' %}
-			            		Issue
-			            	{% else %}
-			            		Tema
-			            	{% endif %}
-				        </label>
-				        <div class="uk-form-controls">
-				            <select class="uk-select" id="form-horizontal-select" name="category">
-				                <option>
+								Surname
+							{% else %}
+								Apellido
+							{% endif %}"
+							name="surname">
+						</div>
+					</div>
+					<div class="uk-margin">
+						<label class="uk-form-label" for="form-horizontal-text">
+							{% if lang_code == 'English' %}
+								Email
+							{% else %}
+								Email
+							{% endif %}
+						</label>
+						<div class="uk-form-controls">
+							<input class="uk-input" id="form-horizontal-text" type="text" placeholder="
+							{% if lang_code == 'English' %}
+								Email
+							{% else %}
+								Email
+							{% endif %}"
+							name="email">
+						</div>
+					</div>
+					<div class="uk-margin">
+						<label class="uk-form-label" for="form-horizontal-text">
+							{% if lang_code == 'English' %}
+								Phone number
+							{% else %}
+								Número de teléfono
+							{% endif %}
+						</label>
+						<div class="uk-form-controls">
+							<input class="uk-input" id="form-horizontal-text" type="text" placeholder="
+							{% if lang_code == 'English' %}
+								Phone number
+							{% else %}
+								Número de teléfono
+							{% endif %}">
+						</div>
+					</div>
+					<div class="uk-margin">
+						<label class="uk-form-label" for="form-horizontal-select">
+							{% if lang_code == 'English' %}
+								Issue
+							{% else %}
+								Tema
+							{% endif %}
+						</label>
+						<div class="uk-form-controls">
+							<select class="uk-select" id="form-horizontal-select" name="category">
+								<option>
 									{% if lang_code == 'English' %}
-					            		Select a Category
-					            	{% else %}
-					            		Tema
-					            	{% endif %}
-				                </option>
-				                <option>
+										Select a Category
+									{% else %}
+										Tema
+									{% endif %}
+								</option>
+								<option>
 									{% if lang_code == 'English' %}
-					            		Work / RRHH
-					            	{% else %}
-					            		Empleo / Recursos humanos
-					            	{% endif %}
-				                </option>
-				                <option>
+										Work / RRHH
+									{% else %}
+										Empleo / Recursos humanos
+									{% endif %}
+								</option>
+								<option>
 									{% if lang_code == 'English' %}
-					            		Company Info
-					            	{% else %}
-					            		Información de la empresa 
-					            	{% endif %}
-				                </option>}
-				            </select>
-				        </div>
-				    </div>
-				    <div class="uk-margin">
-				        <label class="uk-form-label" for="form-horizontal-text">
+										Company Info
+									{% else %}
+										Información de la empresa 
+									{% endif %}
+								</option>}
+							</select>
+						</div>
+					</div>
+					<div class="uk-margin">
+						<label class="uk-form-label" for="form-horizontal-text">
 							{% if lang_code == 'English' %}
-			            		Subject
-			            	{% else %}
-			            		Asunto
-			            	{% endif %}
-				        </label>
-				        <div class="uk-form-controls">
-				            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="
-				            {% if lang_code == 'English' %}
-			            		Subject
-			            	{% else %}
-			            		Asunto
-			            	{% endif %}"
-			            	name="subject">
-				        </div>
-				    </div>
-				    <div class="uk-margin">
-				        <label class="uk-form-label" for="form-horizontal-text">
-				        	{% if lang_code == 'English' %}
-			            		Comments
-			            	{% else %}
-			            		Comentarios
-			            	{% endif %}
-				        </label>
-				        <div class="uk-form-controls">
-				            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="
-				            {% if lang_code == 'English' %}
-			            		Comments
-			            	{% else %}
-			            		Comentarios
-			            	{% endif %}"
-			            	name="comments">
-				        </div>
-				    </div>
-				    <div class="uk-margin">
-				        <label class="uk-form-label" for="form-horizontal-select">
-				        	{% if lang_code == 'English' %}
-			            		Issue
-			            	{% else %}
-			            		Tema
-			            	{% endif %}
-				        </label>
-				     </div>
-				    <div class="uk-margin">
-				        <div class="uk-form-controls uk-form-controls-text">
-				            <label>
-				            	<input class="uk-radio" type="radio" name="radio1" name="type">
-				            	{% if lang_code == 'English' %}
-				            		Customer services
-				            	{% else %}
-				            		Atención al cliente
-				            	{% endif %}
-			            	</label>
-			            	<br>
-				            <label>
-				            	<input class="uk-radio" type="radio" name="radio1">
+								Subject
+							{% else %}
+								Asunto
+							{% endif %}
+						</label>
+						<div class="uk-form-controls">
+							<input class="uk-input" id="form-horizontal-text" type="text" placeholder="
+							{% if lang_code == 'English' %}
+								Subject
+							{% else %}
+								Asunto
+							{% endif %}"
+							name="subject">
+						</div>
+					</div>
+					<div class="uk-margin">
+						<label class="uk-form-label" for="form-horizontal-text">
+							{% if lang_code == 'English' %}
+								Comments
+							{% else %}
+								Comentarios
+							{% endif %}
+						</label>
+						<div class="uk-form-controls">
+							<input class="uk-input" id="form-horizontal-text" type="text" placeholder="
+							{% if lang_code == 'English' %}
+								Comments
+							{% else %}
+								Comentarios
+							{% endif %}"
+							name="comments">
+						</div>
+					</div>
+					<div class="uk-margin">
+						<label class="uk-form-label" for="form-horizontal-select">
+							{% if lang_code == 'English' %}
+								Issue
+							{% else %}
+								Tema
+							{% endif %}
+						</label>
+					</div>
+					<div class="uk-margin">
+						<div class="uk-form-controls uk-form-controls-text">
+							<label>
+								<input class="uk-radio" type="radio" name="radio1" name="type">
 								{% if lang_code == 'English' %}
-				            		Corporate contacts
-				            	{% else %}
-				            		Contactos corporativos
-				            	{% endif %}
-			            	</label>
-			            	<br>
-				            <label>
-				            	<input class="uk-radio" type="radio" name="radio1">
-				            	{% if lang_code == 'English' %}
-				            		Contact for media
-				            	{% else %}
-				            		Contacto para públicidad
-				            	{% endif %}
-			            	</label>
-				        </div>
-				    </div>
-				    <br>
-				    <input type="text" class="uk-hidden" name="url" value="{{url}}">
+									Customer services
+								{% else %}
+									Atención al cliente
+								{% endif %}
+							</label>
+							<br>
+							<label>
+								<input class="uk-radio" type="radio" name="radio1">
+								{% if lang_code == 'English' %}
+									Corporate contacts
+								{% else %}
+									Contactos corporativos
+								{% endif %}
+							</label>
+							<br>
+							<label>
+								<input class="uk-radio" type="radio" name="radio1">
+								{% if lang_code == 'English' %}
+									Contact for media
+								{% else %}
+									Contacto para públicidad
+								{% endif %}
+							</label>
+						</div>
+					</div>
+					<br>
+					<input type="text" class="uk-hidden" name="url" value="{{url}}">
 					<hr class="uk-margin-medium-bottom">
-				    
+					
 						{% if lang_code == 'English' %}
 							<button class="uk-button uk-button-primary button-phx uk-width-1-1 uk-margin-small-bottom">Submit</button>
 						{% else %}
 							<button class="uk-button uk-button-primary button-phx uk-width-1-1 uk-margin-small-bottom">Enviar</button>
 						{% endif %}
 				</form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
+			</div>
+		</div>
+	</div>
+	<div class="uk-section uk-section-xsmall uk-section-muted">
+		<div class="uk-container" uk-scrollspy="cls: uk-animation-slide-top-small; target: > .spy; delay: 800; repeat: false">
+			<div class="uk-grid-match uk-child-width-1-2@m uk-text-center spy" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-fade; target: > div > .uk-card; delay: 800; repeat: true">
+				<div>
+					<div class="uk-card uk-card-primary uk-card-hover uk-card-body uk-light">
+						<h3 class="uk-card-title">Primary</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					</div>
+				</div>
+				<div>
+					<div class="uk-card uk-card-default uk-card-hover uk-card-body uk-dark">
+						<h3 class="uk-card-title">Primary</h3>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 {% endblock %}
 
 {% block js %}

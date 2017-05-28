@@ -4,6 +4,7 @@ from local_apps.frontend.models import (
         Timeline,
         Site_info,
         Category,
+        Country,
         Sub_category,
         Banner,
         # Color,
@@ -11,6 +12,16 @@ from local_apps.frontend.models import (
         Socialmedia,
         Site_value,
     )
+
+@admin.register(Country)
+class CountryAdmin(admin.ModelAdmin):
+    search_fields = ['es_name',]
+    list_display = (
+                    'es_name',
+                )
+    class Meta:
+        model = Country
+
 
 @admin.register(Timeline)
 class TimelineAdmin(admin.ModelAdmin):

@@ -15,7 +15,7 @@ handler500 = 'local_apps.frontend.views.my_custom_error_view'
 
 urlpatterns = [
     # Frontend
-    url(r'^$', fw.home, name='home'),
+    url(r'^', fw.home, name='home'),
     url(r'^es/', include('settings.es_urls', namespace='es')),
     url(r'^en/', include('settings.en_urls', namespace='en')),
     url(r'^lang/$', fw.lang, name='lang'),

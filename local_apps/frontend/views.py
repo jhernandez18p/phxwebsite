@@ -483,3 +483,42 @@ def search(request):
     context['url'] = url
     context['es_url'] = es_url
     return render(request,template,context)
+
+def my_custom_bad_request_view(request):
+    context = {
+        'pg_title':'',
+        'title':'',
+    }
+    n_error = '400'
+    template = 'errors/%s.html' % (n_error)
+    return render(request, template, context)
+
+
+def my_custom_permission_denied_view(request):
+    context = {
+        'pg_title':'',
+        'title':'',
+    }
+    n_error = '403'
+    template = 'errors/%s.html' % (n_error)
+    return render(request, template, context)
+
+
+def my_custom_page_not_found_view(request):
+    context = {
+        'pg_title':'',
+        'title':'',
+    }
+    n_error = '404'
+    template = 'errors/%s.html' % (n_error)
+    return render(request, template, context)
+
+
+def my_custom_error_view(request):
+    context = {
+        'pg_title':'',
+        'title':'',
+    }
+    n_error = '500'
+    template = 'errors/%s.html' % (n_error)
+    return render(request, template, context)

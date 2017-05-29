@@ -4,9 +4,27 @@
 {% endblock %}
 
 {% block content %}
-<p>hola mundo {{site.en_name}}</p>{{context.url}}
+{% if searches %}
+{% else %}
+     <div class="uk-section uk-section-xsmall uk-section-muted">
+            <div class="uk-container">
+                <div class="uk-grid-match uk-text-center uk-child-width-1-1@m uk-child-width-2@s" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-slide-top-small; target: > div > .uk-card; delay: 900; repeat: true">
+                    <div>
+                        <div class="uk-card uk-card-default">
+                            <div class="uk-card-media-center uk-section-large">
+                                {% if lang_code == 'English' %}
+                                    <h1>Ups...! There still are not any result.</h1>
+                                {% else %}
+                                    <h1>Ups...! Todavía no hay ningún resultado.</h1>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endif %}
 {% endblock %}
 
 {% block js %}
-
 {% endblock %}

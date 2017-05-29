@@ -43,10 +43,10 @@
                 </li>
                 <li>
                     <span>
-                        {% if lang_code != 'English' %}
-                            {{obj.es_title}}
-                        {% else %}
+                        {% if lang_code == 'English' %}
                             {{obj.en_title}}
+                        {% else %}
+                            {{obj.es_title}}
                         {% endif %}
                     </span>
                 </li>

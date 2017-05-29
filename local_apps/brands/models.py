@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from django.core.urlresolvers import reverse
-from ckeditor.fields import RichTextField
+from django.utils.text import slugify
+from django.core.urlresolvers import reverse
 
 from local_apps.countries.models import Country
 from local_apps.frontend.models import Sub_category, Banner
+
+from ckeditor.fields import RichTextField
 
 class Category(models.Model):
     """# Category model class"""
@@ -69,6 +72,8 @@ class Brand(models.Model):
     es_name = models.CharField(max_length=140)
     en_title = models.CharField(max_length=140)
     es_title = models.CharField(max_length=140)
+    en_slug = models.CharField(max_length=140, blank=True)
+    es_slug = models.CharField(max_length=140, blank=True)
     short_logo = models.ImageField(upload_to='brands/logos/short/')
     large_logo = models.ImageField(upload_to='brands/logos/large/')
     en_description = RichTextField()
@@ -98,7 +103,31 @@ class Brand(models.Model):
     def get_absolute_url_es(self):
         """# Get absolute Spanish URL """
         return reverse("es:brand_detail", kwargs={"id": self.id})
-
+    
+    def es_get_unique_slug(self):
+        slug = slugify(self.es_title)
+        unique_slug = slug
+        num = 1
+        while Brand.objects.filter(es_slug=unique_slug).exists():
+            unique_slug = '{}-{}'.format(slug, num)
+            num += 1
+        return unique_slug
+    
+    def en_get_unique_slug(self):
+        slug = slugify(self.en_title)
+        unique_slug = slug
+        num = 1
+        while Brand.objects.filter(en_slug=unique_slug).exists():
+            unique_slug = '{}-{}'.format(slug, num)
+            num += 1
+        return unique_slug
+    
+    def save(self, *args, **kwargs):
+        if not self.es_slug:
+            self.es_slug = self.es_get_unique_slug()
+        if not self.en_slug:
+            self.en_slug = self.en_get_unique_slug()
+        super().save()
 
     class Meta:
         """# Class Meta"""

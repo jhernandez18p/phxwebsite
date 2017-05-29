@@ -1,6 +1,7 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 from django.template import defaultfilters
+from django.utils.text import slugify
 import datetime
 
 

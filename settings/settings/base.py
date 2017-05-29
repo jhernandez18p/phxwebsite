@@ -18,6 +18,7 @@ if str(DEBUG) == 'True':
     WSGI_APPLICATION = 'settings.wsgi_base.application'
     SITE_URL = '/'
 elif str(DEBUG) == 'False':
+    # print(DEBUG)
     ALLOWED_HOSTS = ['45.55.189.77','174.138.116.15','phx.dev2tech.xyz','phoenixworldtrade.com','www.phoenixworldtrade.com']
     WSGI_APPLICATION = 'settings.wsgi_prod.application'
     SITE_URL = 'http://www.phoenixworldtrade.com'

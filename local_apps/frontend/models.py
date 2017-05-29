@@ -345,6 +345,13 @@ class Site_info(models.Model):
         width_field="width_field_vision_img", 
         height_field="height_field_vision_img"
     )
+    timeline_img = models.ImageField(
+        upload_to='site',
+        null=True, 
+        blank=True, 
+        width_field="width_field_timeline_img", 
+        height_field="height_field_timeline_img"
+    )
     width_field_logo = models.IntegerField(default=0)
     height_field_logo = models.IntegerField(default=0)
     width_field_logo_sm = models.IntegerField(default=0)
@@ -355,6 +362,8 @@ class Site_info(models.Model):
     height_field_mision_img = models.IntegerField(default=0)
     width_field_vision_img = models.IntegerField(default=0)
     height_field_vision_img = models.IntegerField(default=0)
+    width_field_timeline_img = models.IntegerField(default=0)
+    height_field_timeline_img = models.IntegerField(default=0)
     social_icons = models.ManyToManyField(Socialmedia, blank=True)
     values = models.ManyToManyField(Site_value, blank=True)
     country = models.ManyToManyField(Country, blank=True)

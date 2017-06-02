@@ -303,7 +303,8 @@
 <script src="{% static 'base/js/swiper.min.js' %}"></script>
 
 <script type="text/javascript">
-    var swiper = new Swiper('.timeline .swiper-container', {
+    var swiper;
+    swiper = new Swiper('.timeline .swiper-container', {
         pagination: '.timeline .swiper-pagination',
         nextButton: '.timeline .swiper-button-next',
         prevButton: '.timeline .swiper-button-prev',
@@ -312,7 +313,8 @@
         spaceBetween: 30,
         direction: 'vertical',
     });
-    var swiper = new Swiper('.mov .swiper-container', {
+    
+    swiper = new Swiper('.mov .swiper-container', {
         pagination: '.mov .swiper-pagination',
         nextButton: '.mov .swiper-button-next',
         prevButton: '.mov .swiper-button-prev',

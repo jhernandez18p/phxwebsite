@@ -7,22 +7,19 @@
     <meta name="description" content="{{site.es_description|safe}}">
     <meta name="keywords" content="phoenix world trade, grupo phoenix, phoenix, phx, retail, wholesale, {{keywords}}">
     <meta name="author" content="Dev2tech" >
-    <title>
-        {{title}} - {% if lang_code == 'English' %}{{site.en_name}}{% else %}{{site.es_name}}{% endif %}
-    </title>
+    {% if lang_code == 'English' %}
+        <title>{{title}} - {{site.en_name}}</title>
+    {% else %}
+        <title>{{title}} - {{site.es_name}}</title>
+    {% endif %}
     {% include 'base/header.html' %}
     {% block css %}
     {% endblock %}
 
     <script src="{% static 'base/js/jquery.js' %}" charset="utf-8"></script>
-    <script charset="utf-8">
-        $(document).ready(function(){
-            $('#body').removeClass('uk-hidden');
-        });
-    </script>
     <script src="{% static 'base/js/swiper.min.js' %}" charset="utf-8"></script>
 </head>
-<body id="body" class="uk-hidden">
+<body>
     <div class="full-screen-container">{% block fullscreen %}{% endblock %}</div>
     <header>{% include 'base/nav.html' %}</header>
     <section>{% block content %}{% endblock %}</section>
@@ -33,26 +30,6 @@
     </script>
     <script src="{% static 'base/js/app.js' %}" charset="utf-8">
     </script>
-
-    {% if cookie.message %}
-        <p id="message-position uk-hidden" uk-margin>
-            <buttom 
-            class="message" 
-            type="button" 
-            data-message="" 
-            data-pos="bottom-right"
-            data-status="">
-            </buttom>
-        </p>
-        <script>
-            $('#message-position buttom.message').ready(function() {
-
-                UIkit.notification("<span uk-icon='icon: check'></span> {{cookie.message_content}}", {
-                        status: '{{cookie.message_type}}'
-                });
-            });
-        </script>
-    {% endif %}
     {% block js %}
     {% endblock %}
     <script>

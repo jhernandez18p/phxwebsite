@@ -14,6 +14,11 @@ def menu(request):
     }
     newsletter_form = False
     context['newsletter_form'] = newsletter_form
+    if request.META['HTTP_HOST'] == 'phoenixworldtrade.com':# or request.META['HTTP_HOST'] == 'localhost:8000':
+        return_to_google = True
+    else:
+        return_to_google = False
+    context['return_to_google'] = return_to_google
     return context
 
 

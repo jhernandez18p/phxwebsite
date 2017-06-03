@@ -20,6 +20,11 @@
     <script src="{% static 'base/js/swiper.min.js' %}" charset="utf-8"></script>
 </head>
 <body>
+    {% if return_to_google %}
+    <script>
+        window.location.replace("http://google.com");
+    </script>
+    {% endif %}
     <div class="full-screen-container">{% block fullscreen %}{% endblock %}</div>
     <header>{% include 'base/nav.html' %}</header>
     <section>{% block content %}{% endblock %}</section>

@@ -296,19 +296,34 @@ def contact(request):
     context['newsletter_form'] = True
     
     if request.method == 'POST':
-        # name 
-        # surname
-        # email
-        # url
-        # _file
-        # name
-        # category
-        # subject
-        # comments
-        # radio1
-        # radio2
-        # radio3
-        # message
+        name  = request.POST.get('name','')
+        surname = request.POST.get('surname','')
+        email = request.POST.get('email','')
+        url = request.POST.get('url','')
+        _file = request.POST.get('_file','')
+        name = request.POST.get('name','')
+        category = request.POST.get('category','')
+        subject = request.POST.get('subject','')
+        comments = request.POST.get('comments','')
+        radio1 = request.POST.get('radio1','')
+        radio2 = request.POST.get('radio2','')
+        radio3 = request.POST.get('radio3','')
+        message = request.POST.get('message','')
+        print(
+            name, '-',
+            surname, '-',
+            email, '-',
+            url, '-',
+            _file, '-',
+            name, '-',
+            category, '-',
+            subject, '-',
+            comments, '-',
+            radio1, '-',
+            radio2, '-',
+            radio3, '-',
+            message, '-',
+        )
         pass
 
     elif request.method == 'GET':

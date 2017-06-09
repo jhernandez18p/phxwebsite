@@ -5,7 +5,7 @@
             Nombre
         </label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Nombre" name="name">
+            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Nombre" name="name" required>
         </div>
     </div>
     <div class="uk-margin">
@@ -13,7 +13,7 @@
             Apellido
         </label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Apellido" name="surname">
+            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Apellido" name="surname" required>
         </div>
     </div>
     <div class="uk-margin">
@@ -21,7 +21,7 @@
             Email
         </label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Email" name="email">
+            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Email" name="email" required>
         </div>
     </div>
     <div class="uk-margin">
@@ -29,17 +29,17 @@
             Número de teléfono
         </label>
         <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Número de teléfono">
+            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Número de teléfono" required>
         </div>
     </div>
     <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-select">
-            Asunto
+            Tema
         </label>
         <div class="uk-form-controls">
             <select class="uk-select" id="form-horizontal-select" name="category">
                 <option>
-                    Asunto
+                    Tema
                 </option>
                 <option>
                     Empleo / Recursos humanos
@@ -47,46 +47,16 @@
                 <option>
                     Información de la empresa
                 </option>
+                <option>
+                    Atención al cliente
+                </option>
+                <option>
+                    Contactos corporativos
+                </option>
+                <option>
+                    Contacto para públicidad
+                </option>
             </select>
-        </div>
-    </div>
-    <div class="uk-margin">
-        <label class="uk-form-label" for="form-horizontal-text">
-            Asunto
-        </label>
-        <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Asunto" name="subject">
-        </div>
-    </div>
-    <div class="uk-margin">
-        <label class="uk-form-label" for="form-horizontal-text">
-            Comentarios
-        </label>
-        <div class="uk-form-controls">
-            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Comentarios" name="comments">
-        </div>
-    </div>
-    <div class="uk-margin">
-        <label class="uk-form-label" for="form-horizontal-select">
-            Asunto
-        </label>
-    </div>
-    <div class="uk-margin">
-        <div class="uk-form-controls uk-form-controls-text">
-            <label>
-                <input class="uk-radio" type="radio" name="radio1" name="type">
-                Atención al cliente
-            </label>
-            <br>
-            <label>
-                <input class="uk-radio" type="radio" name="radio1">
-                Contactos corporativos
-            </label>
-            <br>
-            <label>
-                <input class="uk-radio" type="radio" name="radio1">
-                Contacto para públicidad
-            </label>
         </div>
     </div>
     <div class="uk-margin">
@@ -98,7 +68,7 @@
 		</div>
 	</div>
     <br>
-    <input type="text" class="uk-hidden" name="url" value="{{url}}">
+    <input type="text" class="uk-hidden" name="url" value="{{url}}" required>
     <hr class="uk-margin-medium-bottom">
     <button class="uk-button uk-button-primary button-phx uk-width-1-1 uk-margin-small-bottom">Enviar</button>
 </form>

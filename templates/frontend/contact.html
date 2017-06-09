@@ -10,198 +10,11 @@
 	<div class="uk-section uk-section-xsmall uk-section-muted">
 		<div class="uk-container" uk-scrollspy="cls: uk-animation-slide-top-small; target: > .spy1; delay: 500; repeat: false">
 			<div class="uk-card uk-card-default spy1 uk-card-body"> 
-				<form class="uk-form-horizontal" method="post" action="contact_post">
-					{% csrf_token %}
-					<div class="uk-margin">
-						<label class="uk-form-label" for="form-horizontal-text">
-							{% if lang_code == 'English' %}
-								Name
-							{% else %}
-								Nombre
-							{% endif %}
-						</label>
-						<div class="uk-form-controls">
-							<input class="uk-input" id="form-horizontal-text" type="text" placeholder="
-							{% if lang_code == 'English' %}
-								Name
-							{% else %}
-								Nombre
-							{% endif %}"
-							name="name">
-						</div>
-					</div>
-					<div class="uk-margin">
-						<label class="uk-form-label" for="form-horizontal-text">
-							{% if lang_code == 'English' %}
-								Surname
-							{% else %}
-								Apellido
-							{% endif %}
-						</label>
-						<div class="uk-form-controls">
-							<input class="uk-input" id="form-horizontal-text" type="text" placeholder="
-							{% if lang_code == 'English' %}
-								Surname
-							{% else %}
-								Apellido
-							{% endif %}"
-							name="surname">
-						</div>
-					</div>
-					<div class="uk-margin">
-						<label class="uk-form-label" for="form-horizontal-text">
-							{% if lang_code == 'English' %}
-								Email
-							{% else %}
-								Email
-							{% endif %}
-						</label>
-						<div class="uk-form-controls">
-							<input class="uk-input" id="form-horizontal-text" type="text" placeholder="
-							{% if lang_code == 'English' %}
-								Email
-							{% else %}
-								Email
-							{% endif %}"
-							name="email">
-						</div>
-					</div>
-					<div class="uk-margin">
-						<label class="uk-form-label" for="form-horizontal-text">
-							{% if lang_code == 'English' %}
-								Phone number
-							{% else %}
-								Número de teléfono
-							{% endif %}
-						</label>
-						<div class="uk-form-controls">
-							<input class="uk-input" id="form-horizontal-text" type="text" placeholder="
-							{% if lang_code == 'English' %}
-								Phone number
-							{% else %}
-								Número de teléfono
-							{% endif %}">
-						</div>
-					</div>
-					<div class="uk-margin">
-						<label class="uk-form-label" for="form-horizontal-select">
-							{% if lang_code == 'English' %}
-								Issue
-							{% else %}
-								Tema
-							{% endif %}
-						</label>
-						<div class="uk-form-controls">
-							<select class="uk-select" id="form-horizontal-select" name="category">
-								<option>
-									{% if lang_code == 'English' %}
-										Select a Category
-									{% else %}
-										Tema
-									{% endif %}
-								</option>
-								<option>
-									{% if lang_code == 'English' %}
-										Work / RRHH
-									{% else %}
-										Empleo / Recursos humanos
-									{% endif %}
-								</option>
-								<option>
-									{% if lang_code == 'English' %}
-										Company Info
-									{% else %}
-										Información de la empresa 
-									{% endif %}
-								</option>}
-							</select>
-						</div>
-					</div>
-					<div class="uk-margin">
-						<label class="uk-form-label" for="form-horizontal-text">
-							{% if lang_code == 'English' %}
-								Subject
-							{% else %}
-								Asunto
-							{% endif %}
-						</label>
-						<div class="uk-form-controls">
-							<input class="uk-input" id="form-horizontal-text" type="text" placeholder="
-							{% if lang_code == 'English' %}
-								Subject
-							{% else %}
-								Asunto
-							{% endif %}"
-							name="subject">
-						</div>
-					</div>
-					<div class="uk-margin">
-						<label class="uk-form-label" for="form-horizontal-text">
-							{% if lang_code == 'English' %}
-								Comments
-							{% else %}
-								Comentarios
-							{% endif %}
-						</label>
-						<div class="uk-form-controls">
-							<input class="uk-input" id="form-horizontal-text" type="text" placeholder="
-							{% if lang_code == 'English' %}
-								Comments
-							{% else %}
-								Comentarios
-							{% endif %}"
-							name="comments">
-						</div>
-					</div>
-					<div class="uk-margin">
-						<label class="uk-form-label" for="form-horizontal-select">
-							{% if lang_code == 'English' %}
-								Issue
-							{% else %}
-								Tema
-							{% endif %}
-						</label>
-					</div>
-					<div class="uk-margin">
-						<div class="uk-form-controls uk-form-controls-text">
-							<label>
-								<input class="uk-radio" type="radio" name="radio1" name="type">
-								{% if lang_code == 'English' %}
-									Customer services
-								{% else %}
-									Atención al cliente
-								{% endif %}
-							</label>
-							<br>
-							<label>
-								<input class="uk-radio" type="radio" name="radio1">
-								{% if lang_code == 'English' %}
-									Corporate contacts
-								{% else %}
-									Contactos corporativos
-								{% endif %}
-							</label>
-							<br>
-							<label>
-								<input class="uk-radio" type="radio" name="radio1">
-								{% if lang_code == 'English' %}
-									Contact for media
-								{% else %}
-									Contacto para públicidad
-								{% endif %}
-							</label>
-						</div>
-					</div>
-					<br>
-					<input type="text" class="uk-hidden" name="url" value="{{url}}">
-					<hr class="uk-margin-medium-bottom">
-					
-						{% if lang_code == 'English' %}
-							<button class="uk-button uk-button-primary button-phx uk-width-1-1 uk-margin-small-bottom">Submit</button>
-						{% else %}
-							<button class="uk-button uk-button-primary button-phx uk-width-1-1 uk-margin-small-bottom">Enviar</button>
-						{% endif %}
-				</form>
+				{% if lang_code == 'English' %}
+					{% include 'base/contact/en_form.html' %}
+				{% else %}{# End English #}
+					{% include 'base/contact/es_form.html' %}
+				{% endif %}
 			</div>
 		</div>
 	</div>
@@ -216,7 +29,6 @@
 							{% else %}
 								Postularse a un empleo
 							{% endif %}
-
 						</h3>
 						<p><a uk-icon="icon: mail; ratio: 2.5" href="#jobs-modal-center" uk-toggle></a></p>
 					</div>
@@ -225,22 +37,23 @@
 							<button class="uk-modal-close-outside" type="button" uk-close></button>
 							{% if lang_code == 'English' %}
 								<h2 class="uk-modal-title">Postulate for a job</h2>
-								<p>By the moment there are no any available open positions.</p>
-								<p class="uk-text-right">
-									<button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
-									<button class="uk-button uk-button-primary" type="button">Save</button>
-								</p>
+								<!--<p>By the moment there are no any available open positions.</p>-->
+								<form class="uk-form-horizontal" method="post" action="{% url 'en:contact'  %}">
+    								{% csrf_token %}
+									{% include 'base/contact/en_postulate_form.html' %}
+								</form>
 							{% else %}
 								<h2 class="uk-modal-title">Postularse a un empleo</h2>
-								<p>Por el momento no hay vacantes disponibles.</p>
-								<p class="uk-text-right">
-									<button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
-									<button class="uk-button uk-button-primary" type="button">Enviar</button>
-								</p>
+								<!--<p>Por el momento no hay vacantes disponibles.</p>-->
+								<form class="uk-form-horizontal" method="post" action="{% url 'es:contacto'  %}">
+									{% csrf_token %}
+									{% include 'base/contact/es_postulate_form.html' %}
+								</form>
 							{% endif %}
 						</div>
 					</div>
 				</div>
+				{# providers form #}
 				<div>
 					<div class="uk-card uk-card-default uk-card-hover uk-card-body uk-dark">
 						<h3 class="uk-card-title">
@@ -254,6 +67,7 @@
 					</div>
 					<div id="wholesale-modal-center" uk-modal="center: true">
 						<div class="uk-modal-dialog uk-modal-body">
+							<button class="uk-modal-close-outside" type="button" uk-close></button>
 							{% if lang_code == 'English' %}
 								<h2 class="uk-modal-title">Providers</h2>
 								<p>Please use contact form.</p>
@@ -278,4 +92,5 @@
 {% endblock %}
 
 {% block js %}
+
 {% endblock %}

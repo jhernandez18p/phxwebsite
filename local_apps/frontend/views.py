@@ -295,6 +295,27 @@ def contact(request):
     context['keywords'] = keywords
     context['newsletter_form'] = True
     
+    if request.method == 'POST':
+        # name 
+        # surname
+        # email
+        # url
+        # _file
+        # name
+        # category
+        # subject
+        # comments
+        # radio1
+        # radio2
+        # radio3
+        # message
+        pass
+
+    elif request.method == 'GET':
+        print('Get')
+    else:
+        print('None')
+
     return render(request, template, context)
 
 

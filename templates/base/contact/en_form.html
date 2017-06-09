@@ -1,0 +1,104 @@
+<form class="uk-form-horizontal" method="post" action="{% url 'en:contact'  %}">
+	{% csrf_token %}
+	<div class="uk-margin">
+		<label class="uk-form-label" for="form-horizontal-text0">
+			Name
+		</label>
+		<div class="uk-form-controls">
+			<input class="uk-input" id="form-horizontal-text" type="text" placeholder="Name" name="name">
+		</div>
+	</div>
+	<div class="uk-margin">
+		<label class="uk-form-label" for="form-horizontal-text0">
+			Surname
+		</label>
+		<div class="uk-form-controls">
+			<input class="uk-input" id="form-horizontal-text" type="text" placeholder="Surname" name="surname">
+		</div>
+	</div>
+	<div class="uk-margin">
+		<label class="uk-form-label" for="form-horizontal-text0">
+			Email
+		</label>
+		<div class="uk-form-controls">
+			<input class="uk-input" id="form-horizontal-text" type="text" placeholder="Email" name="email">
+		</div>
+	</div>
+	<div class="uk-margin">
+		<label class="uk-form-label" for="form-horizontal-text0">
+			Phone number
+		</label>
+		<div class="uk-form-controls">
+			<input class="uk-input" id="form-horizontal-text" type="text" placeholder="Phone number">
+		</div>
+	</div>
+	<div class="uk-margin">
+		<label class="uk-form-label" for="form-horizontal-select">
+			Issue
+		</label>
+		<div class="uk-form-controls">
+			<select class="uk-select" id="form-horizontal-select" name="category">
+				<option>
+					Select a Category
+				</option>
+				<option>
+					Work / RRHH
+				</option>
+				<option>
+					Company Info
+				</option>
+			</select>
+		</div>
+	</div>
+	<div class="uk-margin">
+		<label class="uk-form-label" for="form-horizontal-text0">
+			Subject
+		</label>
+		<div class="uk-form-controls">
+			<input class="uk-input" id="form-horizontal-text" type="text" placeholder="Subject" name="subject">
+		</div>
+	</div>
+	<div class="uk-margin">
+		<label class="uk-form-label" for="form-horizontal-text0">
+			Comments
+		</label>
+		<div class="uk-form-controls">
+			<input class="uk-input" id="form-horizontal-text" type="text" placeholder="Comments" name="comments">
+		</div>
+	</div>
+	<div class="uk-margin">
+		<label class="uk-form-label" for="form-horizontal-select">
+			Issue
+		</label>
+	</div>
+	<div class="uk-margin">
+		<div class="uk-form-controls uk-form-controls-text">
+			<label>
+				<input class="uk-radio" type="radio" name="radio1">
+				Customer services
+			</label>
+			<br>
+			<label>
+				<input class="uk-radio" type="radio" name="radio2">
+				Corporate contacts
+			</label>
+			<br>
+			<label>
+				<input class="uk-radio" type="radio" name="radio3">
+				Contact for media
+			</label>
+		</div>
+	</div>
+	<div class="uk-margin">
+		<label class="uk-form-label" for="form-horizontal-text0">
+			Message
+		</label>
+		<div class="uk-form-controls">
+			<textarea class="uk-textarea" rows="5" placeholder="Textarea" name="message"></textarea>
+		</div>
+	</div>
+	<br>
+	<input type="text" class="uk-hidden" name="url" value="{{url}}">
+	<hr class="uk-margin-medium-bottom">
+	<button class="uk-button uk-button-primary button-phx uk-width-1-1 uk-margin-small-bottom">Submit</button>
+</form>

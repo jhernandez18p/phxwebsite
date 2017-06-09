@@ -1,0 +1,104 @@
+<form class="uk-form-horizontal" method="post" action="{% url 'es:contacto'  %}">
+    {% csrf_token %}
+    <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">
+            Nombre
+        </label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Nombre" name="name">
+        </div>
+    </div>
+    <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">
+            Apellido
+        </label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Apellido" name="surname">
+        </div>
+    </div>
+    <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">
+            Email
+        </label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Email" name="email">
+        </div>
+    </div>
+    <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">
+            Número de teléfono
+        </label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Número de teléfono">
+        </div>
+    </div>
+    <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-select">
+            Asunto
+        </label>
+        <div class="uk-form-controls">
+            <select class="uk-select" id="form-horizontal-select" name="category">
+                <option>
+                    Asunto
+                </option>
+                <option>
+                    Empleo / Recursos humanos
+                </option>
+                <option>
+                    Información de la empresa
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">
+            Asunto
+        </label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Asunto" name="subject">
+        </div>
+    </div>
+    <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">
+            Comentarios
+        </label>
+        <div class="uk-form-controls">
+            <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Comentarios" name="comments">
+        </div>
+    </div>
+    <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-select">
+            Asunto
+        </label>
+    </div>
+    <div class="uk-margin">
+        <div class="uk-form-controls uk-form-controls-text">
+            <label>
+                <input class="uk-radio" type="radio" name="radio1" name="type">
+                Atención al cliente
+            </label>
+            <br>
+            <label>
+                <input class="uk-radio" type="radio" name="radio1">
+                Contactos corporativos
+            </label>
+            <br>
+            <label>
+                <input class="uk-radio" type="radio" name="radio1">
+                Contacto para públicidad
+            </label>
+        </div>
+    </div>
+    <div class="uk-margin">
+		<label class="uk-form-label" for="form-horizontal-text0">
+			Mensaje
+		</label>
+		<div class="uk-form-controls">
+			<textarea class="uk-textarea" rows="5" placeholder="Mensaje" name="message" required></textarea>
+		</div>
+	</div>
+    <br>
+    <input type="text" class="uk-hidden" name="url" value="{{url}}">
+    <hr class="uk-margin-medium-bottom">
+    <button class="uk-button uk-button-primary button-phx uk-width-1-1 uk-margin-small-bottom">Enviar</button>
+</form>

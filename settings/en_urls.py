@@ -21,5 +21,7 @@ urlpatterns = [
     url(r'^news/$', fw.news, name='news'),
     url(r'^news/(?P<slug>[\w-]+)/$', fw.news_detail, name='news_detail'),
     url(r'^contact/$', fw.contact, name='contact'),
+    url(r'^contact/thanks/', fw.contact, name='contact_success'),
+    url(r'^contact/error/', fw.contact, name='contact_error'),
     url(r'^search/$', fw.search, name='search'),
 ]

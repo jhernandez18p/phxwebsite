@@ -1,0 +1,100 @@
+<div class="uk-margin">
+    <label class="uk-form-label" for="form-horizontal-text0">
+        Nombre
+    </label>
+    <div class="uk-form-controls">
+        <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Nombre" name="name">
+    </div>
+</div>
+<div class="uk-margin">
+    <label class="uk-form-label" for="form-horizontal-text0">
+        Apellido
+    </label>
+    <div class="uk-form-controls">
+        <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Apellido" name="surname">
+    </div>
+</div>
+<div class="uk-margin">
+    <label class="uk-form-label" for="form-horizontal-text0">
+        Email
+    </label>
+    <div class="uk-form-controls">
+        <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Email" name="email">
+    </div>
+</div>
+<div class="uk-margin">
+    <label class="uk-form-label" for="form-horizontal-text0">
+        Número de teléfono
+    </label>
+    <div class="uk-form-controls">
+        <input class="uk-input" id="form-horizontal-text" type="text" placeholder="Número de teléfono">
+    </div>
+</div>
+<div class="test-upload uk-placeholder uk-text-center">
+    <span uk-icon="icon: cloud-upload"></span>
+    <span class="uk-text-middle">Arrastre su hoja de vida o</span>
+    <div uk-form-custom>
+        <input type="file" multiple>
+        <span class="uk-link">Seleccione</span>
+    </div>
+</div>
+
+<progress id="progressbar" class="uk-progress" value="0" max="100" hidden></progress>
+
+<br>
+<input type="text" class="uk-hidden" name="url" value="{{url}}">
+<hr class="uk-margin-medium-bottom">
+<button class="uk-button uk-button-default uk-modal-close" type="button">Cancelar</button>
+<button class="uk-button uk-button-primary" type="submit">Enviar</button>
+<!--<script>
+    (function ($) {
+
+        var bar = $("#progressbar")[0];
+
+        UIkit.upload('.test-upload', {
+
+            url: '',
+            multiple: true,
+
+            beforeSend: function() { console.log('beforeSend', arguments); },
+            beforeAll: function() { console.log('beforeAll', arguments); },
+            load: function() { console.log('load', arguments); },
+            error: function() { console.log('error', arguments); },
+            complete: function() { console.log('complete', arguments); },
+
+            loadStart: function (e) {
+                console.log('loadStart', arguments);
+
+                bar.removeAttribute('hidden');
+                bar.max =  e.total;
+                bar.value =  e.loaded;
+            },
+
+            progress: function (e) {
+                console.log('progress', arguments);
+
+                bar.max =  e.total;
+                bar.value =  e.loaded;
+
+            },
+
+            loadEnd: function (e) {
+                console.log('loadEnd', arguments);
+
+                bar.max =  e.total;
+                bar.value =  e.loaded;
+            },
+
+            completeAll: function () {
+                console.log('completeAll', arguments);
+
+                setTimeout(function () {
+                    // bar.setAttribute('hidden', 'hidden');
+                }, 1000);
+
+                // alert('Upload Completed');
+            }
+        });
+
+    })(jQuery);
+</script>-->

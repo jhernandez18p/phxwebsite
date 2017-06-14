@@ -5,24 +5,60 @@
 
 {% block content %}
 {% if searches %}
-{% else %}
-     <div class="uk-section uk-section-xsmall uk-section-muted">
-            <div class="uk-container">
-                <div class="uk-grid-match uk-text-center uk-child-width-1-1@m uk-child-width-2@s" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-slide-top-small; target: > div > .uk-card; delay: 900; repeat: true">
+    <div class="uk-section uk-section-xsmall uk-section-muted">
+        <div class="uk-container">
+            <div class="uk-grid-match uk-text-center uk-child-width-1-1@m uk-child-width-2@s" uk-grid >
+                <div>
+                    <div class="uk-card uk-card-default">
+                        <div class="uk-card-media-center uk-section-small">
+                            {% if lang_code == 'English' %}
+                                <h3 class="">We have found {{brands_len}} {% if brands_len > 1 %}brands{% else %}brand{% endif %}</h3>
+                            {% else %}
+                                <h3 class="">Hemos encontrado {{brands_len}} {% if brands_len > 1 %}marcas{% else %} marca{% endif %}</h3>
+                            {% endif %}
+                            </div>
+                    </div>
+                </div>
+            </div>
+            {% for brand in brands %}
+                <div class="uk-grid-match uk-text-center uk-child-width-1-4@m uk-child-width-2@s" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-slide-top-small; target: > div > .uk-card; delay: 900; repeat: true">
                     <div>
                         <div class="uk-card uk-card-default">
-                            <div class="uk-card-media-center uk-section-large">
+                            <div class="uk-card-media-center uk-section-small">
                                 {% if lang_code == 'English' %}
-                                    <h1>Ups...! There still are not any result.</h1>
+                                    
+                                    <h3 class="uk-heading-primary"><a href="{% url 'en:brands' %}">{{brand.en_name}}</a></h3>
+                                    
                                 {% else %}
-                                    <h1>Ups...! Todavía no hay ningún resultado.</h1>
+                                    
+                                    <h3 class="uk-heading-primary"><a href="{% url 'es:marcas' %}">{{brand.es_name}}</a></h3>
+                                    
                                 {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
+            {% endfor %}
+        </div>
+    </div>
+{% else %}
+    <div class="uk-section uk-section-xsmall uk-section-muted">
+        <div class="uk-container">
+            <div class="uk-grid-match uk-text-center uk-child-width-1-1@m uk-child-width-2@s" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-slide-top-small; target: > div > .uk-card; delay: 900; repeat: true">
+                <div>
+                    <div class="uk-card uk-card-default">
+                        <div class="uk-card-media-center uk-section-large">
+                            {% if lang_code == 'English' %}
+                                <h1>Ups...! There still are not any result.</h1>
+                            {% else %}
+                                <h1>Ups...! Todavía no hay ningún resultado.</h1>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+    </div>
 {% endif %}
 {% endblock %}
 

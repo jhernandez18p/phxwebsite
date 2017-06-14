@@ -513,11 +513,40 @@ def contact_post(request):
 
 def search(request):
     template = 'frontend/search.html'
-    context = {}
-    url = 'en:search'
-    es_url = 'es:buscar'
-    context['url'] = url
-    context['es_url'] = es_url
+    context = {
+        'pg_title':'search',
+        'url':'en:search',
+        'es_url':'es:buscar',
+    }
+    lang = get_lang(request)
+
+
+    if lang == 'English':
+        title = 'Search'
+        keywords = 'Search...'
+    else:
+        title = 'Buscar'
+        keywords = 'Buscar...'
+    
+    context['title'] = title
+
+    if request.method == 'POST':
+
+        if 'search' in request.POST:
+            keyword = request.POST['search']
+            brands = Brand.objects.all().filter(en_slug=keyword)
+            print(brands)
+
+        elif 'buscar' in request.POST:
+            keyword = request.POST['buscar']
+            brands = Brand.objects.all().filter(es_slug=keyword)
+            print(brands)
+
+        if len(brands)>=1:
+            context['brands'] = brands
+            context['brands_len'] = len(brands)
+            context['searches'] = True
+
     return render(request,template,context)
 
 def my_custom_bad_request_view(request):

@@ -109,13 +109,16 @@
                             </ul>
                         </div>
                     </li>
+                    <li>
+                        <div class="uk-navbar-right">
+                            <a class="uk-navbar-toggle" href="{% if lang_code == 'English' %}#search{% else %}#buscar{% endif %}" uk-search-icon uk-toggle></a>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>
     </div>
-    <div class="uk-navbar-right">
-        <a class="uk-navbar-toggle" href="{% if lang_code == 'English' %}#search{% else %}#buscar{% endif %}" uk-search-icon uk-toggle></a>
-    </div>
+
 </nav>
 <nav class="uk-navbar-container uk-hidden@m uk-position-top uk-position-fixed" uk-navbar uk-sticky="animation: uk-animation-slide-top; bottom: #offset">
     <div class="uk-navbar-center">
@@ -257,12 +260,12 @@
         {% if lang_code == 'English' %}
             <form class="uk-search uk-search-large" method="post" action="{% url 'en:search' %}">
                 {% csrf_token %}
-                <input class="uk-search-input uk-text-center" type="search" placeholder="Search..." autofocus>
+                <input class="uk-search-input uk-text-center" type="search" placeholder="Search..." name="search" autofocus>
             </form>
         {% else %}
             <form class="uk-search uk-search-large" method="post" action="{% url 'es:buscar' %}">
                 {% csrf_token %}
-                <input class="uk-search-input uk-text-center" type="search" placeholder="Buscar..." autofocus>
+                <input class="uk-search-input uk-text-center" type="search" placeholder="Buscar..." name="buscar" autofocus>
             </form>
         {% endif %}
     </div>

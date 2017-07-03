@@ -21,7 +21,7 @@ class Timeline(models.Model):
         """# Class Meta"""
         verbose_name = ('Timeline')
         verbose_name_plural = ('Timeline')
-        ordering = ["-year"]
+        ordering = ["year"]
 
 
 class Country(models.Model):

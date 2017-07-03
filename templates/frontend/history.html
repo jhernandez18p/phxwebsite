@@ -160,10 +160,26 @@
         </div>
     {% endif %}
 
+    <div class="uk-background-muted">
+        <div class="uk-container  uk-background-muted">
+            <div class="uk-section-small ">
+                <h3 class="uk-heading-line" style="left: 50%; top: 50%">
+                    <span>
+                        {% if lang_code != 'English' %}
+                            ¿Quienes somos?
+                        {% else %}
+                            About us
+                        {% endif %}
+                    </span>
+                </h3>
+            </div>
+        </div>
+    </div>
+
     {% if site %}
         <div class="uk-width-1-1 uk-background-muted">
             <div class="uk-container">
-                <div class="uk-section" uk-scrollspy="cls: uk-animation-fade; target: > .uk-card; delay: 2000; repeat: true">
+                <div class="" uk-scrollspy="cls: uk-animation-fade; target: > .uk-card; delay: 2000; repeat: true">
                     <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
                         <div class="uk-card-media-left uk-cover-container">
                             {% if site.mision_img %}
@@ -220,17 +236,25 @@
                 </div>
             </div>
         </div>
-        <div class="uk-section uk-section-xsmall">
-            <div class="uk-container">
-                <h3 class="uk-heading-line uk-text-center uk-heading-primary">
+        
+    {% endif %}
+
+    <div class="uk-background-muted">
+        <div class="uk-container  uk-background-muted">
+            <div class="uk-section-small ">
+                <h3 class="uk-heading-line uk-text-center" style="left: 50%; top: 50%">
                     <span>
-                        {% if lang_code == 'English' %}
-                            Our values
+                        {% if lang_code != 'English' %}
+                            Valores del grupo
                         {% else %}
-                            Nuestros valores
+                            Our values
                         {% endif %}
                     </span>
                 </h3>
+            </div>
+        </div>
+        <div class="">
+            <div class="uk-container">
                 <div class="uk-grid-match uk-text-center uk-child-width-1-4@m uk-child-width-2@s" uk-grid uk-height-match="target: > div > .uk-card" >
                     <div>
                         <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle">
@@ -287,75 +311,98 @@
                 </div>
             </div>
         </div>
-        
-    {% endif %}
+    </div>
+
+
+    <div class="uk-background-muted">
+        <div class="uk-container  uk-background-muted">
+            <div class="uk-section-small ">
+                <h3 class="uk-heading-line uk-text-right" style="left: 50%; top: 50%">
+                    <span>
+                        {% if lang_code != 'English' %}
+                            Nuestra historia
+                        {% else %}
+                            Our history
+                        {% endif %}
+                    </span>
+                </h3>
+            </div>
+        </div>
+    </div>
+
 
     {% if site.history %}
-        <div class="container-fluid">
-            <div class="row">    
-                <div class="timeline-container uk-visible@m">
-                    <div class="timeline">
-                        <div class="swiper-container">
-                            <div class="swiper-wrapper">
-                                {% for obj in site.history.all %}
-                                    {% if lang_code != 'English' %}
-                                        <div class="swiper-slide uk-padding">
-                                            <h3>
-                                                {{obj.es_name}}
-                                                <br>
-                                                {{obj.year}}
-                                            </h3>
-                                            {{obj.es_description|safe}}
-                                        </div>
-                                    {% else %}
-                                        <div class="swiper-slide uk-padding">
-                                            <h3>
-                                                {{obj.en_name}}
-                                                <br>
-                                                {{obj.year}}
-                                            </h3>
-                                            {{obj.en_description|safe}}
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
+        <div class="uk-background-muted">
+            <div class="uk-container">    
+                <div class="row">
+                    <div class="timeline-container uk-visible@m">
+                        <div class="timeline">
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    {% for obj in site.history.all %}
+                                        {% if lang_code != 'English' %}
+                                            <div class="swiper-slide uk-padding">
+                                                <h3>
+                                                    {{obj.es_name}}
+                                                    <br>
+                                                    {{obj.year}}
+                                                </h3>
+                                                {{obj.es_description|safe}}
+                                            </div>
+                                        {% else %}
+                                            <div class="swiper-slide">
+                                                <div class="uk-padding">
+                                                    <h3>
+                                                        {{obj.en_name}}
+                                                        <br>
+                                                        {{obj.year}}
+                                                    </h3>
+                                                </div>
+                                                <div class="uk-padding">
+                                                    {{obj.en_description|safe}}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <!-- Add Pagination -->
+                                <div class="swiper-pagination"></div>
+                                <div class="swiper-button-next swiper-button-white"></div>
+                                <div class="swiper-button-prev swiper-button-white"></div>
                             </div>
-                            <!-- Add Pagination -->
-                            <div class="swiper-pagination"></div>
-                            <div class="swiper-button-next swiper-button-white"></div>
-                            <div class="swiper-button-prev swiper-button-white"></div>
                         </div>
                     </div>
-                </div>
-                <div class="mov-container uk-hidden@m">
-                    <div class="mov">
-                        <div class="swiper-container">
-                            <div class="swiper-wrapper">
-                                {% for obj in site.history.all %}
-                                    {% if lang_code != 'English' %}
-                                        <div class="swiper-slide uk-padding">
-                                            <h3>
-                                                {{obj.es_name}}
-                                                <br>
-                                                {{obj.year}}
-                                            </h3>
-                                            {{obj.es_description|safe}}
-                                        </div>
-                                    {% else %}
-                                        <div class="swiper-slide uk-padding">
-                                            <h3>
-                                                {{obj.en_name}}
-                                                <br>
-                                                {{obj.year}}
-                                            </h3>
-                                            {{obj.en_description|safe}}
-                                        </div>
-                                    {% endif %}
-                                {% endfor %}
+                    <div class="mov-container uk-hidden@m">
+                        <div class="mov">
+                            <div class="swiper-container">
+                                <div class="swiper-wrapper">
+                                    {% for obj in site.history.all %}
+                                        {% if lang_code != 'English' %}
+                                            <div class="swiper-slide uk-padding">
+                                                <h3>
+                                                    {{obj.es_name}}
+                                                    <br>
+                                                    {{obj.year}}
+                                                </h3>
+                                                {{obj.es_description|safe}}
+                                            </div>
+                                        {% else %}
+                                            <div class="swiper-slide uk-padding">
+                                                <h3>
+                                                    {{obj.en_name}}
+                                                    <br>
+                                                    {{obj.year}}
+                                                </h3>
+                                                {{obj.en_description|safe}}
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                                <!-- Add Pagination -->
+                                <div class="swiper-pagination"></div>
+                                <div class="swiper-button-next swiper-button-white"></div>
+                                <div class="swiper-button-prev swiper-button-white"></div>
                             </div>
-                            <!-- Add Pagination -->
-                            <div class="swiper-pagination"></div>
-                            <div class="swiper-button-next swiper-button-white"></div>
-                            <div class="swiper-button-prev swiper-button-white"></div>
                         </div>
                     </div>
                 </div>

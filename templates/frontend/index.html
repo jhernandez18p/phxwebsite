@@ -9,6 +9,20 @@
     .full-screen .swiper-slide{max-height:100vh;}
     .top-logo{z-index: 99}
     .border-green{border: solid rgb(0, 150, 136) 5px;}
+    .My-box {
+        position: absolute;
+        z-index: 9;
+        top: 22%;
+        margin: 0 25%;
+    }
+    @media (max-width: 600px) {
+        .My-box {
+            position: absolute;
+            z-index: 9;
+            top: 5%;
+            margin: 0 15px;
+        }
+    }
 </style>
 {% endblock %}
 
@@ -20,7 +34,7 @@
                    <div class="swiper-wrapper" uk-height-match="target: > div > img">
                         {% for banner in banners %}
                             <div class="swiper-slide">
-                                <div class="uk-child-width-1-1@m" >
+                                <div class="uk-child-width-1-1@" >
                                     <img class="uk-background-cover uk-visible@m" src="{{banner.large_banner.url}}" alt="
                                     {% if lang_code != 'English' %}
                                     {{banner.es_name}}
@@ -28,12 +42,12 @@
                                     {{banner.en_name}}
                                     {% endif %}" uk-height-viewport>
                                 </div>
-                                <img class="uk-hidden@m" src="{{banner.large_banner.url}}" alt="
+                                <!--<img class="uk-hidden@m" src="{{banner.large_banner.url}}" alt="
                                 {% if lang_code != 'English' %}
                                 {{banner.es_name}}
                                 {% else %}
                                 {{banner.en_name}}
-                                {% endif %}">
+                                {% endif %}">-->
                             </div>
                         {% endfor %}
                     </div>
@@ -61,34 +75,50 @@
 {% block content %}
     {% if site %}
         <div class="uk-width-1-1">
-            <div class="uk-section uk-section-large uk-section-muted">
-                <div class="uk-container" uk-scrollspy="cls: uk-animation-slide-top-small; target: > .uk-card; delay: 900; repeat: true">
-                    <div class="uk-card uk-card-default  uk-card-body border-green">
-                        {% if lang_code == 'English' %}
-                            {{site.en_description|safe}}
-                            <a href="{% url 'en:about' %}" class="
-                            uk-button uk-button-default button-phx uk-width-1-6 uk-margin-small-bottom">
-                                Learn more
-                            </a>
-                        {% else %}
-                            {{site.es_description|safe}}
-                            <a href="{% url 'es:historia' %}" class="
-                            uk-button uk-button-default button-phx uk-width-1-6 uk-margin-small-bottom">
-                                Ver más
-                            </a>
-                        {% endif %}
+            <div class="uk-section-muted">
+                <div class="uk-cover-container">
+                    <canvas width="100%" height="800"></canvas>
+                    <img src="{% static 'base/images/chair.jpg' %}" alt="" uk-cover>
+                    <div class="uk-overlay-primary uk-position-cover"></div>
+                    <div class="My-box" uk-scrollspy="cls: uk-animation-slide-top-small; target: > .uk-card; delay: 900; repeat: true">
+                        <div class="uk-card uk-card-default  uk-card-body ">
+                            {% if lang_code == 'English' %}
+                                {{site.en_description|safe}}
+                                <a href="{% url 'en:about' %}" class="
+                                uk-button uk-button-default button-phx uk-child-width-auto uk-margin-small-bottom">
+                                    Learn more
+                                </a>
+                            {% else %}
+                                {{site.es_description|safe}}
+                                <a href="{% url 'es:historia' %}" class="
+                                uk-button uk-button-default button-phx uk-child-width-auto uk-margin-small-bottom">
+                                    Ver más
+                                </a>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     {% endif %}
-
-    <div id="map">
+    
+    <div class="uk-container">
+        <div class="uk-section-small uk-section-muted">
+            <h3 class="uk-heading-line" style="left: 50%; top: 50%">
+                <span>
+                    {% if lang_code != 'English' %}
+                        Nuestro negocio
+                    {% else %}
+                        Our business
+                    {% endif %}
+                </span>
+            </h3>
+        </div>
     </div>
 
-    {% if banners_biz %}
+    {% if  banners_biz  %}
         <div class="uk-width-1-1">
-            <div class="uk-section uk-section-small uk-section-muted">
+            <div class="uk-section-muted">
                 <div class="uk-container">
                     <div class="uk-card uk-card-default ">
                         <div class="banners-biz">
@@ -126,9 +156,41 @@
             </div>
         </div>
     {% endif %}
+    
+    <div class="uk-container">
+        <div class="uk-section-small uk-section-muted">
+            <h3 class="uk-heading-line uk-text-center" style="left: 50%; top: 50%">
+                <span>
+                    {% if lang_code != 'English' %}
+                        ¿En donde estamos?
+                    {% else %}
+                        Where we are?
+                    {% endif %}
+                </span>
+            </h3>
+        </div>
+    </div>
 
+    <div class="uk-container">
+        <div id="map"></div>
+    </div>
+
+
+    <div class="uk-container">
+        <div class="uk-section-small uk-section-muted">
+            <h3 class="uk-heading-line uk-text-right" style="left: 50%; top: 50%">
+                <span>
+                    {% if lang_code != 'English' %}
+                        Últimas Noticias
+                    {% else %}
+                        Latest News
+                    {% endif %}
+                </span>
+            </h3>
+        </div>
+    </div>
     {% if news %}
-        <div class="uk-section uk-section-small uk-section-muted">
+        <div class=" uk-section-muted">
             <div class="uk-container">
                 <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-slide-top-small; target: > div > .uk-card; delay: 700; repeat: true">
                     {% for obj in news %}
@@ -248,11 +310,11 @@
         var image = {
           url: "{% static 'base/images/phx-pinx.png' %}",
           // This marker is 20 pixels wide by 32 pixels high.
-          size: new google.maps.Size(32, 32),
+          size: new google.maps.Size(40, 40),
           // The origin for this image is (0, 0).
           origin: new google.maps.Point(0, 0),
           // The anchor for this image is the base of the flagpole at (0, 32).
-          anchor: new google.maps.Point(0, 32)
+          anchor: new google.maps.Point(0, 40)
         };
         // Loop through our array of markers & place each one on the map  
         for( i = 0; i < markers.length; i++ ) {

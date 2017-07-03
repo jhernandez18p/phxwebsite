@@ -51,3 +51,6 @@ li form .submit-input{
     text-decoration: none;
 }
 .swiper-slide {overflow: hidden}
+.uk-heading-line>:after, .uk-heading-line>:before{
+    border-bottom: 2.5px solid #009587 !important;
+}

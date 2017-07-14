@@ -17,7 +17,7 @@ if str(config('DEBUG')) == 'True':
     ALLOWED_HOSTS = ['*']
     WSGI_APPLICATION = 'settings.wsgi_base.application'
     SITE_URL = '/'
-elif str(DEBUG) == 'False':
+elif str(config('DEBUG')) == 'False':
     DEBUG = False
     # print(DEBUG)
     ALLOWED_HOSTS = ['174.138.116.15','test.phoenixworldtrade.com','phoenixworldtrade.com','www.phoenixworldtrade.com']

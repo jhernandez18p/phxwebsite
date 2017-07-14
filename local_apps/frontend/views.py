@@ -556,7 +556,7 @@ def my_custom_bad_request_view(request):
     }
     n_error = '400'
     template = 'errors/400.html'
-    return render(request, template, status=400)
+    return render(request, template, context)
 
 
 def my_custom_permission_denied_view(request):
@@ -566,7 +566,7 @@ def my_custom_permission_denied_view(request):
     }
     n_error = '403'
     template = 'errors/403.html'
-    return render(request, template, status=403)
+    return render(request, template, context)
 
 
 def my_custom_page_not_found_view(request):
@@ -576,7 +576,7 @@ def my_custom_page_not_found_view(request):
     }
     n_error = '404'
     template = 'errors/404.html'
-    return render(request, template, status=404)
+    return render(request, template, context)
 
 
 def my_custom_error_view(request):
@@ -586,4 +586,4 @@ def my_custom_error_view(request):
     }
     n_error = '500'
     template = 'errors/500.html'
-    return render(request, template, status=500)
+    return render(request, template, context)

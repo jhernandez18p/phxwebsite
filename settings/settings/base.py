@@ -23,6 +23,7 @@ elif str(config('DEBUG')) == 'False':
     ALLOWED_HOSTS = ['174.138.116.15','test.phoenixworldtrade.com','phoenixworldtrade.com','www.phoenixworldtrade.com']
     WSGI_APPLICATION = 'settings.wsgi_prod.application'
     SITE_URL = 'http://www.phoenixworldtrade.com'
+print(DEBUG)
 
 # DB CONF
 DATABASES = {

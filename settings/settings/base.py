@@ -12,7 +12,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-if str(DEBUG) == 'True':
+if str(config('DEBUG')) == 'True':
     DEBUG = True
     ALLOWED_HOSTS = ['*']
     WSGI_APPLICATION = 'settings.wsgi_base.application'

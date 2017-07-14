@@ -4,7 +4,6 @@ from decouple import config
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG')
 ROOT_URLCONF = 'settings.urls'
 LANGUAGE_CODE = 'es-PA'
 USE_I18N = True
@@ -14,10 +13,12 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
 if str(DEBUG) == 'True':
+    DEBUG = True
     ALLOWED_HOSTS = ['*']
     WSGI_APPLICATION = 'settings.wsgi_base.application'
     SITE_URL = '/'
 elif str(DEBUG) == 'False':
+    DEBUG = False
     # print(DEBUG)
     ALLOWED_HOSTS = ['174.138.116.15','test.phoenixworldtrade.com','phoenixworldtrade.com','www.phoenixworldtrade.com']
     WSGI_APPLICATION = 'settings.wsgi_prod.application'

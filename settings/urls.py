@@ -8,10 +8,10 @@ from django.views.static import serve
 from local_apps.frontend import views as fw
 from local_apps.profiles import auth as auth_views
 
-handler400 = fw.my_custom_bad_request_view
-handler403 = fw.my_custom_permission_denied_view
-handler404 = fw.my_custom_page_not_found_view
-handler500 = fw.my_custom_error_view
+handler400 = 'fw.my_custom_bad_request_view'
+handler403 = 'fw.my_custom_permission_denied_view'
+handler404 = 'fw.my_custom_page_not_found_view'
+handler500 = 'fw.my_custom_error_view'
 
 urlpatterns = [
     # Frontend

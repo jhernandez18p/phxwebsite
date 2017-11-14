@@ -1,9 +1,21 @@
 {% load staticfiles %}
 <nav class="uk-background-default uk-navbar-container  uk-visible@m" uk-navbar uk-navbar uk-sticky="animation: uk-animation-slide-top; bottom: #sticky-on-scroll-up">
     <div class="uk-navbar-center">
-        <div>
-            <ul class="uk-navbar-nav">
-                {% if site %}
+        <div class="uk-navbar-center">
+            <div>
+                <ul class="uk-navbar-nav">
+                    {% if site %}
+                        <li class="{% if pg_title == 'home' %}uk-active{% endif %}">
+                            <a href="
+                            {% if lang_code == 'English' %}
+                            {% url 'en:en' %}
+                            {% else %}
+                            {% url 'es:es' %}
+                            {% endif %}">
+                                <img class="logo-menu" src="{% if site.logo %}{{site.logo.url}}{% else %}{% static 'base/images/logo.png' %}{% endif %}" alt="{{site.name}}">
+                            </a>
+                        </li>
+                    {% endif %}
                     <li class="{% if pg_title == 'home' %}uk-active{% endif %}">
                         <a href="
                         {% if lang_code == 'English' %}
@@ -11,129 +23,122 @@
                         {% else %}
                         {% url 'es:es' %}
                         {% endif %}">
-                            <img class="logo-menu" src="{% if site.logo %}{{site.logo.url}}{% else %}{% static 'base/images/logo.png' %}{% endif %}" alt="{{site.name}}">
+                            {% if lang_code == 'English' %}
+                            Home
+                            {% else %}
+                            Inicio
+                            {% endif %}
                         </a>
                     </li>
-                {% endif %}
-                <li class="{% if pg_title == 'home' %}uk-active{% endif %}">
-                    <a href="
-                    {% if lang_code == 'English' %}
-                    {% url 'en:en' %}
-                    {% else %}
-                    {% url 'es:es' %}
-                    {% endif %}">
-                        {% if lang_code == 'English' %}
-                        Home
-                        {% else %}
-                        Inicio
-                        {% endif %}
-                    </a>
-                </li>
-                
-                <li class="{% if pg_title == 'about' %}uk-active{% endif %}">
-                    <a href="{% if lang_code == 'English' %}{% url 'en:about' %}{% else %}{% url 'es:historia' %}{% endif %}">
-                        {% if lang_code == 'English' %}
-                        About us
-                        {% else %}
-                        ¿Quienes Somos?
-                        {% endif %}
-                    </a>
-                </li>
-                
-                <li class="{% if pg_title == 'our_brands' %}uk-active{% endif %}">
-                    <a href="{% if lang_code == 'English' %}{% url 'en:our_brands' %}{% else %}{% url 'es:marcas' %}{% endif %}">
-                        {% if lang_code == 'English' %}
-                        Brands
-                        {% else %}
-                        Marcas
-                        {% endif %}
-                    </a>
-                </li>
-                
-                <li class="{% if pg_title == 'news' %}uk-active{% endif %}">
-                    <a href="
-                    {% if lang_code == 'English' %}
-                    {% url 'en:news' %}
-                    {% else %}
-                    {% url 'es:noticias' %}
-                    {% endif %}">
-                        {% if lang_code == 'English' %}
-                        News
-                        {% else %}
-                        Noticias
-                        {% endif %}
-                    </a>
-                </li>
-                
-                <li class="{% if pg_title == 'contact' %}uk-active{% endif %}">
-                    <a href="
-                    {% if lang_code == 'English' %}
-                    {% url 'en:contact' %}
-                    {% else %}
-                    {% url 'es:contacto' %}
-                    {% endif %}">
-                        {% if lang_code == 'English' %}
-                        Contact
-                        {% else %}
-                        Contacto
-                        {% endif %}
-                    </a>
-                </li>
-                <li class="uk-animation-toggle">
-                    <a href="" class="uk-animation-shake"><span uk-icon="icon: world"></span></a>
-                    <div class="uk-navbar-dropdown">
-                        <ul class="uk-nav uk-navbar-dropdown-nav">
-                            {% if lang == 'English' %}
-                                <li>
-                                    <form action="{% url 'lang' %}" method="post">
-                                        {% csrf_token %}
-                                        <input class="uk-hidden" type="text" name="lang_code" value="Spanish">
-                                        <input class="uk-hidden" type="text" name="url" value="{{es_url}}">
-                                        <input class="uk-hidden" type="text" name="blog" value="{{blog}}">
-                                        <input type="submit" value="ES" class="submit-input"/>
-                                    </form>
-                                </li>
+                    
+                    <li class="{% if pg_title == 'about' %}uk-active{% endif %}">
+                        <a href="{% if lang_code == 'English' %}{% url 'en:about' %}{% else %}{% url 'es:historia' %}{% endif %}">
+                            {% if lang_code == 'English' %}
+                            About us
+                            {% else %}
+                            ¿Quienes Somos?
                             {% endif %}
-                            {% if lang == 'Spanish' %}
-                                <li>
-                                    <form  action="{% url 'lang' %}" method="post">
-                                        {% csrf_token %}
-                                        <input class="uk-hidden" type="text" name="lang_code" value="English">
-                                        <input class="uk-hidden" type="text" name="url" value="{{url}}">
-                                        <input class="uk-hidden" type="text" name="blog" value="{{blog}}">
-                                        <input type="submit" value="EN" class="submit-input"/>
-                                    </form>
-                                </li>
+                        </a>
+                    </li>
+                    
+                    <li class="{% if pg_title == 'our_brands' %}uk-active{% endif %}">
+                        <a href="{% if lang_code == 'English' %}{% url 'en:our_brands' %}{% else %}{% url 'es:marcas' %}{% endif %}">
+                            {% if lang_code == 'English' %}
+                            Brands
+                            {% else %}
+                            Marcas
                             {% endif %}
-                        </ul>
-                    </div>
-                </li>
-                <li>
-                    <div class="uk-navbar-right">
-                        <a class="uk-navbar-toggle" href="{% if lang_code == 'English' %}#search{% else %}#buscar{% endif %}" uk-search-icon uk-toggle></a>
-                    </div>
-                </li>
-            </ul>
+                        </a>
+                    </li>
+                    
+                    <li class="{% if pg_title == 'news' %}uk-active{% endif %}">
+                        <a href="
+                        {% if lang_code == 'English' %}
+                        {% url 'en:news' %}
+                        {% else %}
+                        {% url 'es:noticias' %}
+                        {% endif %}">
+                            {% if lang_code == 'English' %}
+                            News
+                            {% else %}
+                            Noticias
+                            {% endif %}
+                        </a>
+                    </li>
+                    
+                    <li class="{% if pg_title == 'contact' %}uk-active{% endif %}">
+                        <a href="
+                        {% if lang_code == 'English' %}
+                        {% url 'en:contact' %}
+                        {% else %}
+                        {% url 'es:contacto' %}
+                        {% endif %}">
+                            {% if lang_code == 'English' %}
+                            Contact
+                            {% else %}
+                            Contacto
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="uk-animation-toggle">
+                        <a href="" class="uk-animation-shake"><span uk-icon="icon: world"></span></a>
+                        <div class="uk-navbar-dropdown">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                {% if lang == 'English' %}
+                                    <li>
+                                        <form action="{% url 'lang' %}" method="post">
+                                            {% csrf_token %}
+                                            <input class="uk-hidden" type="text" name="lang_code" value="Spanish">
+                                            <input class="uk-hidden" type="text" name="url" value="{{es_url}}">
+                                            <input class="uk-hidden" type="text" name="blog" value="{{blog}}">
+                                            <input type="submit" value="ES" class="submit-input"/>
+                                        </form>
+                                    </li>
+                                {% endif %}
+                                {% if lang == 'Spanish' %}
+                                    <li>
+                                        <form  action="{% url 'lang' %}" method="post">
+                                            {% csrf_token %}
+                                            <input class="uk-hidden" type="text" name="lang_code" value="English">
+                                            <input class="uk-hidden" type="text" name="url" value="{{url}}">
+                                            <input class="uk-hidden" type="text" name="blog" value="{{blog}}">
+                                            <input type="submit" value="EN" class="submit-input"/>
+                                        </form>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="uk-navbar-right">
+                            <a class="uk-navbar-toggle" href="{% if lang_code == 'English' %}#search{% else %}#buscar{% endif %}" uk-search-icon uk-toggle></a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
+
 </nav>
 <nav class="uk-navbar-container uk-hidden@m uk-position-top uk-position-fixed" uk-navbar uk-sticky="animation: uk-animation-slide-top; bottom: #offset">
     <div class="uk-navbar-center">
-        <div>
-            <ul class="uk-navbar-nav">
-                {% if site %}
-                    <li class="{% if pg_title == 'home' %}uk-active{% endif %}">
-                        <a href="
-                        {% if lang_code == 'English' %}
-                        {% url 'en:en' %}
-                        {% else %}
-                        {% url 'es:es' %}
-                        {% endif %}">
-                            <img class="logo-menu" src="{% if site.logo %}{{site.logo.url}}{% else %}{% static 'base/images/logo.png' %}{% endif %}" alt="{{site.name}}">
-                        </a>
-                    </li>
-                {% endif %}
-            </ul>
+        <div class="uk-navbar-center">
+            <div>
+                <ul class="uk-navbar-nav">
+                    {% if site %}
+                        <li class="{% if pg_title == 'home' %}uk-active{% endif %}">
+                            <a href="
+                            {% if lang_code == 'English' %}
+                            {% url 'en:en' %}
+                            {% else %}
+                            {% url 'es:es' %}
+                            {% endif %}">
+                                <img class="logo-menu" src="{% if site.logo %}{{site.logo.url}}{% else %}{% static 'base/images/logo.png' %}{% endif %}" alt="{{site.name}}">
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
     </div>
     <div class="uk-navbar-right">

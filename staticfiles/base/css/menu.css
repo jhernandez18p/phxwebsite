@@ -1,9 +1,9 @@
-body{background-color: #E1E1E1;}
+body{background-color: #f3f3f6;}
 .dev2tech-font{font-family: 'Sarina', serif, sans-serif;}
 *+.uk-margin{margin-top: 0 !important;}
 .uk-navbar-nav>li>a {color: #FFF !important;}
 .uk-navbar-nav>li>a:hover,.uk-navbar-nav>li>a:active {color: #009688 !important;}
-.uk-navbar-container:not(.uk-navbar-transparent) {background: rgba(0, 0, 0, 0.750) !important;}
+.uk-navbar-container:not(.uk-navbar-transparent) {background: linear-gradient(120deg,#535353 0,#111212 30%,#606060);}
 .logo-menu{width:300px;}
 li form .submit-input{
 	background-color: rgba(255,255,255,0);
@@ -51,6 +51,10 @@ li form .submit-input{
     text-decoration: none;
 }
 .swiper-slide {overflow: hidden}
+.uk-heading-line span {text-transform: uppercase;}
 .uk-heading-line>:after, .uk-heading-line>:before{
     border-bottom: 2.5px solid #009587 !important;
+}
+.green-phx-gradient {
+    background: linear-gradient(130deg,#b0d2cf 0,#b0d1d1 50%,#6abdb5) !important;
 }

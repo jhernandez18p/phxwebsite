@@ -183,6 +183,7 @@
             </h3>
         </div>
     </div>
+
     {% if news %}
         <div class=" uk-section-muted">
             <div class="uk-container">
@@ -225,12 +226,10 @@
 
 {% block js %}
 <script type="text/javascript">
-
     var map, styleArray,locations;
-
     var marker, i;
     styleArray = [{"elementType": "geometry","stylers": [{"color": "#F2F2F2"}]},{"elementType": "labels.icon","stylers": [{"visibility": "off"}]},{"elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},{"elementType": "labels.text.stroke","stylers": [{"color": "#f5f5f5"}]},{"featureType": "administrative.land_parcel","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "administrative.land_parcel","elementType": "labels.text.fill","stylers": [{"color": "#bdbdbd"}]},{"featureType": "administrative.locality","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "administrative.neighborhood","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "administrative.province","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.man_made","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.natural","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.natural.landcover","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.natural.terrain","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi","elementType": "geometry","stylers": [{"color": "#eeeeee"}]},{"featureType": "poi","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},{"featureType": "poi.attraction","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.business","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.medical","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.park","elementType": "geometry","stylers": [{"color": "#e5e5e5"}]},{"featureType": "poi.park","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.park","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]},{"featureType": "poi.place_of_worship","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.school","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.sports_complex","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "road","elementType": "geometry","stylers": [{"color": "#ffffff"}]},{"featureType": "road","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},{"featureType": "road","elementType": "geometry.stroke","stylers": [{"color": "#009688"}]},{"featureType": "road.arterial","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},{"featureType": "road.highway","elementType": "geometry","stylers": [{"color": "#dadada"}]},{"featureType": "road.highway","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},{"featureType": "road.highway","elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},{"featureType": "road.local","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]},{"featureType": "transit.line","elementType": "geometry","stylers": [{"color": "#e5e5e5"}]},{"featureType": "transit.station","elementType": "geometry","stylers": [{"color": "#eeeeee"}]},{"featureType": "water","elementType": "geometry","stylers": [{"color": "#c9c9c9"}]},{"featureType": "water","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},{"featureType": "water","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "water","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]}]
-    // Multiple Markers
+
     var markers = [
         ['Phoenix World Trade Inc., Panamá', 8.981022, -79.509901],
         ['Phoenix World Trade Inc., USA', 25.747603, -80.340254],
@@ -258,49 +257,46 @@
             scrollwheel: false,
             draggable: false,
         });
-                            
-        // Info Window Content
+
         var infoWindowContent = [
-            ['<div class="info_content uk-card">' +
-            '<h3>Phoenix World Trade Inc, Panamá</h3>' +
-            '<p>P.H. Oceanía Business Plaza Torre 2000</p>' +
-            '<p>Punta Pacifica, Ciudad de Panamá.</p>' +
-            '</div>'],
-            ['<div class="info_content uk-card">' +
-            '<h3>Phoenix World Trade Inc, USA</h3>' +
-            '<p></p>' +
-            '</div>'],
-            ['<div class="info_content uk-card">' +
-            '<h3>Phoenix World Trade Inc, Curcao</h3>' +
-            '<p></p>' +
-            '</div>'],
-            ['<div class="info_content uk-card">' +
-            '<h3>Phoenix World Trade Inc, Puerto Rico</h3>' +
-            '<p></p>' +
-            '</div>'],
-            ['<div class="info_content uk-card">' +
-            '<h3>Phoenix World Trade Inc, República Dominicana</h3>' +
-            '<p></p>' +
-            '</div>'],
-            ['<div class="info_content uk-card">' +
-            '<h3>Phoenix World Trade Inc., Chile</h3>' +
-            '<p></p>' +
-            '</div>'],
-            ['<div class="info_content uk-card">' +
-            '<h3>Phoenix World Trade Inc., Venezuela</h3>' +
-            '<p></p>' +
-            '</div>'],
-            ['<div class="info_content uk-card">' +
-            '<h3>Phoenix World Trade Inc., Ecuador</h3>' +
-            '<p></p>' +
-            '</div>'],
-            ['<div class="info_content uk-card">' +
-            '<h3>Phoenix World Trade Inc., Colombia</h3>' +
-            '<p></p>' +
-            '</div>'],
-        ];
-            
-        // Display multiple markers on a map
+            [`<div class="info_content uk-card"><h3>Phoenix World Trade Inc, Panamá</h3>
+                <p>P.H. Oceanía Business Plaza Torre 2000</p>
+                <p>Punta Pacifica, Ciudad de Panamá.</p>
+            </div>`],
+            [`<div class="info_content uk-card">
+                <h3>Phoenix World Trade Inc, USA</h3>
+                <p></p>
+            </div>`],
+            [`<div class="info_content uk-card">
+                <h3>Phoenix World Trade Inc, Curcao</h3>
+                <p></p>
+            </div>`],
+            [`<div class="info_content uk-card">
+                <h3>Phoenix World Trade Inc, Puerto Rico</h3>
+                <p></p>
+            </div>`],
+            [`<div class="info_content uk-card">
+                <h3>Phoenix World Trade Inc, República Dominicana</h3>
+                <p></p>
+            </div>`],
+            [`<div class="info_content uk-card">
+                <h3>Phoenix World Trade Inc., Chile</h3>
+                <p></p>
+            </div>`],
+            [`<div class="info_content uk-card">
+                <h3>Phoenix World Trade Inc., Venezuela</h3>
+                <p></p>
+            </div>`],
+            [`<div class="info_content uk-card">
+                <h3>Phoenix World Trade Inc., Ecuador</h3>
+                <p></p>
+            </div>`],
+            [`<div class="info_content uk-card">
+                <h3>Phoenix World Trade Inc., Colombia</h3>
+                <p></p>
+            </div>`],
+        ];  
+
         var infoWindow = new google.maps.InfoWindow(), marker, i;
         var image = {
           url: "{% static 'base/images/phx-pinx.png' %}",
@@ -311,7 +307,7 @@
           // The anchor for this image is the base of the flagpole at (0, 32).
           anchor: new google.maps.Point(20, 20)
         };
-        // Loop through our array of markers & place each one on the map  
+
         for( i = 0; i < markers.length; i++ ) {
             var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
             bounds.extend(position);
@@ -334,10 +330,7 @@
             map.fitBounds(bounds);
         }   
     }
-</script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_uf0M6P9N8ZUTm3vsKlm-li2auJ9-guU&callback=initMap">
-</script>
-<script type="text/javascript">
+
     var swiper = new Swiper('.full-screen .swiper-container', {
         pagination: '.full-screen .swiper-pagination',
         paginationClickable: true,
@@ -354,5 +347,8 @@
         loop: true,
         autoplay: 8000,
     });
+
 </script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_uf0M6P9N8ZUTm3vsKlm-li2auJ9-guU&callback=initMap"></script>
 {% endblock %}

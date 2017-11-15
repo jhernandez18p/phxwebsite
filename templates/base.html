@@ -1,21 +1,8 @@
 <!DOCTYPE html>{% load staticfiles %}
 <html lang="{{lang_code}}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="{{site.es_description|safe}}">
-    <meta name="keywords" content="phoenix world trade, grupo phoenix, phoenix, phx, retail, wholesale, {{keywords}}">
-    <meta name="author" content="Dev2tech" >
-    {% if lang_code == 'English' %}
-        <title>{{title}} - {{site.en_name}}</title>
-    {% else %}
-        <title>{{title}} - {{site.es_name}}</title>
-    {% endif %}
     {% include 'base/header.html' %}
-    {% block css %}
-    {% endblock %}
-
+    {% block css %}{% endblock %}
     <script src="{% static 'base/js/jquery.js' %}" charset="utf-8"></script>
     <script src="{% static 'base/js/swiper.min.js' %}" charset="utf-8"></script>
 </head>
@@ -25,27 +12,22 @@
         window.location.replace("http://google.com");
     </script>
     {% endif %}
-    <div class="full-screen-container">{% block fullscreen %}{% endblock %}</div>
-    <header>{% include 'base/nav.html' %}</header>
-    <section>{% block content %}{% endblock %}</section>
-    <footer>{% include 'base/footer.html' %}</footer>
-    <script src="{% static 'base/js/uikit.min.js' %}" charset="utf-8">
-    </script>
-    <script src="{% static 'base/js/uikit-icons.min.js' %}" charset="utf-8">
-    </script>
-    <script src="{% static 'base/js/app.js' %}" charset="utf-8">
-    </script>
-    {% block js %}
+    {% include 'base/loader.html' %}
+
+
+    {% block fullscreen %}
+        <div class="full-screen-container wrapper uk-hidden"></div>
     {% endblock %}
-    <script>
-        var windowHeight;
-        windowHeight = $( window ).height();
-        $('#scroll').click(function () {
-            $('html, body').animate({
-                scrollTop: $( $(this) ).offset().top
-            }, windowHeight);
-            return false;
-        })
-    </script>
+
+    <div id="body-wrapper" class="uk-invisible">
+        <header>{% include 'base/nav.html' %}</header>
+        <section>{% block content %}{% endblock %}</section>
+        <footer>{% include 'base/footer.html' %}</footer>
+    </div>
+    
+    <script src="{% static 'base/js/uikit.min.js' %}" charset="utf-8"></script>
+    <script src="{% static 'base/js/uikit-icons.min.js' %}" charset="utf-8"></script>
+    <script src="{% static 'base/js/app.js' %}" charset="utf-8"></script>
+    {% block js %}{% endblock %}
 </body>
 </html>

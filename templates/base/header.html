@@ -1,10 +1,12 @@
 {% load staticfiles %}
-<link href="https://fonts.googleapis.com/css?family=Sarina" rel="stylesheet">
-<link rel="stylesheet" href="{% static 'base/css/bootstrap.min.css' %}">
-<link rel="stylesheet" href="{% static 'base/css/uikit.min.css' %}">
-<link rel="stylesheet" href="{% static 'base/css/app.css' %}">
-<link rel="stylesheet" href="{% static 'base/css/colors.css' %}">
-<link rel="stylesheet" href="{% static 'base/css/menu.css' %}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta name="description" content="{{site.es_description|safe}}">
+<meta name="keywords" content="phoenix world trade, grupo phoenix, phoenix, phx, retail, wholesale, {{keywords}}">
+<meta name="author" content="Dev2tech" >
+<meta name="msapplication-TileColor" content="#f3f3f6">
+<meta name="theme-color" content="#f3f3f6">
 <link rel="apple-touch-icon" sizes="57x57" href="{% static 'favicon/apple-icon-57x57.png' %}">
 <link rel="apple-touch-icon" sizes="60x60" href="{% static 'favicon/apple-icon-60x60.png' %}">
 <link rel="apple-touch-icon" sizes="72x72" href="{% static 'favicon/apple-icon-72x72.png' %}">
@@ -18,5 +20,14 @@
 <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
 <link rel="icon" type="image/png" sizes="96x96" href="{% static 'favicon/favicon-96x96.png' %}">
 <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
-<meta name="msapplication-TileColor" content="#f3f3f6">
-<meta name="theme-color" content="#f3f3f6">
+
+<link rel="stylesheet" href="{% static 'base/css/uikit.min.css' %}">
+<link rel="stylesheet" href="{% static 'base/css/menu.css' %}">
+<title>
+    {% if lang_code == 'English' %}
+    {{title}} - {{site.en_name}}
+    {% else %}
+    {{title}} - {{site.es_name}}
+    {% endif %}
+</title>
+<link href="https://fonts.googleapis.com/css?family=Sarina" rel="stylesheet">

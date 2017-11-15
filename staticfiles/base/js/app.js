@@ -1,4 +1,4 @@
-// $(document).ready(function($){
+$(document).ready(function($){
 
 //     $('#langModal').modal({'show': true,'keyboard': false,'backdrop':'static',});
 
@@ -101,6 +101,42 @@
 //         placement: 'left'
 //     });
     
+    var windowHeight;
+    windowHeight = $( window ).height();
+    $('#scroll').click(function () {
+        $('html, body').animate({
+            scrollTop: $( $(this) ).offset().top
+        }, windowHeight);
+        return false;
+    });
 
-// }); // End Documen.Ready
+    function addHiddenClass(){
+        //console.log( "loader ready!" );
+        $(this).addClass( "uk-hidden" );
+    };
+    function removeHiddenClass(){
+        //console.log( "wrapper ready!" );
+        $(this).contents().unwrap();;
+        $(this).remove( "#body-wrapper" );
+    };
 
+    $( "#loader" ).delay(5000).fadeOut(addHiddenClass);
+    $( "#body-wrapper" ).delay(5000).fadeIn(removeHiddenClass);
+
+    UIkit.util.ready(function () {
+    
+        var bar = document.getElementById('js-progressbar');
+    
+        var animate = setInterval(function () {
+    
+            bar.value += 20;
+    
+            if (bar.value >= bar.max) {
+                clearInterval(animate);
+            }
+    
+        }, 1000);
+    
+    });
+
+}); // End Documen.Ready

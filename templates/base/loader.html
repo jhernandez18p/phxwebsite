@@ -1,0 +1,16 @@
+{% load staticfiles %}
+<div id="loader" class="">
+    <div class="uk-cover-container uk-overlay uk-overlay-primary" uk-height-viewport>
+        <div class="uk-position-center">
+            <img class="logo-menu" src="{% if site.logo %}{{site.logo.url}}{% else %}{% static 'base/images/logo.png' %}{% endif %}" alt="{{site.name}}">
+            <progress id="js-progressbar" class="uk-progress" value="10" max="100"></progress>
+            <p class="uk-text-meta uk-text-center uk-text-capitalize">
+                {% if lang_code == 'English' %}
+                Loading
+                {% else %}
+                Cargando
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</div>

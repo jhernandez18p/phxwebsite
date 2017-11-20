@@ -6,113 +6,31 @@
 <link rel="stylesheet" href="{% static 'base/css/swiper.min.css' %}">
 <style media="screen">
     .timeline-container, .mov {
-        background-image: url("{% static 'base/images/timeline.jpg' %}");
-        height: 100vh;
-        padding-top: 25px;
-        padding-bottom: 25px;
-        background-size: cover;
+        height: 80vh;
+        margin-bottom: 20px;
     }
     .timeline, .mov {
         /*margin-top: 25px;*/
+        height: 100%;
+        /*
         overflow: hidden;
-        height: 90vh;
+        */
     }
     .timeline .swiper-container ,
     .mov .swiper-container {
-        padding-top: 30px;
-        padding-bottom: 30px;
-        width: 85%;
-        height: 100%;
-    }
-    .timeline .swiper-container:after {
-        content:"";
-        position: absolute;
-        z-index: -1;
-        top: 6px;
-        bottom: 5px;
-        left: 50%;
-        border-left: 2px solid #FFF;
-        transform: translate(-50%);
-    }
-    .timeline .swiper-slide:nth-child(odd) {
-        margin-left: 8%;
-    }
-    .right-line:after{
-        content: '';
-        position: absolute;
-        top: 50%;
-        right: 100%;
-        border-top: 1px solid #FFF;
-        background: #FFF;
-        width: 5%;
-        transform: translateY(-50%);
-        z-index: -1;
-    }
-    .left-line:after {
-        content: '';
-        position: absolute;
-        top: 50%;
-        right: -5%;
-        border-top: 1px solid #FFF;
-        background: #FFF;
-        width: 5%;
-        transform: translateY(-50%);
-        z-index: -1;
-    }
-    .timeline .swiper-slide:nth-child(even) {
-        margin-left: 52%;
-
-    }
-    .timeline .swiper-slide {
-        width: 40%;
-        height: 30%;
-        overflow-x: hidden;
-        text-align: center;
-        font-size: 18px;
-        background: rgba(255,255,255,.8);
         
-        /* Center slide text vertically */
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        -webkit-justify-content: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        -webkit-align-items: center;
-        align-items: center;
+        width: 100%;
+        padding-top: 50px;
+        padding-bottom: 50px;
     }
-    .timeline .swiper-button-next,
-    .timeline .swiper-button-prev,
-    .mov .swiper-button-next,
-    .mov .swiper-button-prev{
-        left: 0;
-        right: 0;
-        margin-left: auto;
-        margin-right: auto;
+
+    .timeline .swiper-slide {
+        background-position: center;
+        background-size: cover;
+        width: 300px;
+        height: 300px;
     }
-    .timeline .swiper-button-next,
-    .mov .swiper-button-next{
-        position: absolute;
-        top: 98%;
-        z-index: 999999;
-        -webkit-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-        transform: rotate(90deg);
-        z-index: 9
-    }
-    .timeline .swiper-button-prev,
-    .mov .swiper-button-prev{
-        top: 15px;
-        position: absolute;
-        -webkit-transform: rotate(90deg);
-        -ms-transform: rotate(90deg);
-        transform: rotate(90deg);
-        z-index: 9;
-    }
+
     .mov .swiper-container {
         width: 70%;
         height: 100%;
@@ -332,9 +250,9 @@
 
 
     {% if site.history %}
-        <div class="uk-background-muted">
+        <div id="gradient" class="uk-background-muted">
             <div class="uk-container">    
-                <div class="row">
+                <div class="">
                     <div class="timeline-container uk-visible@m">
                         <div class="timeline">
                             <div class="swiper-container">
@@ -347,7 +265,9 @@
                                                     <br>
                                                     {{obj.year}}
                                                 </h3>
-                                                {{obj.es_description|safe}}
+                                                <div class="uk-padding">
+                                                    {{obj.ns_description|safe}}
+                                                </div>
                                             </div>
                                         {% else %}
                                             <div class="swiper-slide">
@@ -366,9 +286,9 @@
                                     {% endfor %}
                                 </div>
                                 <!-- Add Pagination -->
-                                <div class="swiper-pagination"></div>
-                                <div class="swiper-button-next swiper-button-white"></div>
-                                <div class="swiper-button-prev swiper-button-white"></div>
+                                <div class="swiper-pagination sw-pagination"></div>
+                                <div class="swiper-button-next swiper-button-white sw-next"></div>
+                                <div class="swiper-button-prev swiper-button-white sw-prev"></div>
                             </div>
                         </div>
                     </div>
@@ -409,9 +329,7 @@
             </div>
         </div>
     {% endif %}
-    <div class="uk-background-muted">
-        <div class="uk-section-small"></div>
-    </div>
+    
 
 {% endblock %}
 
@@ -423,26 +341,128 @@
 <script type="text/javascript">
     var swiper;
     swiper = new Swiper('.timeline .swiper-container', {
-        pagination: '.timeline .swiper-pagination',
-        nextButton: '.timeline .swiper-button-next',
-        prevButton: '.timeline .swiper-button-prev',
-        paginationClickable: true,
-        slidesPerView: 3,
-        spaceBetween: 30,
-        direction: 'vertical',
+        effect: 'coverflow',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        coverflowEffect: {
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows : true,
+        },
+        pagination: '.timeline .sw-pagination',
+        nextButton: '.timeline .sw-next',
+        prevButton: '.timeline .sw-prev',
     });
-    
-    swiper = new Swiper('.mov .swiper-container', {
-        pagination: '.mov .swiper-pagination',
-        nextButton: '.mov .swiper-button-next',
-        prevButton: '.mov .swiper-button-prev',
-        paginationClickable: true,
-        slidesPerView: 1,
-        spaceBetween: 30,
-        direction: 'vertical',
-    });
-    $('.timeline .swiper-slide:even ').addClass('left-line');
-    $('.timeline .swiper-slide:odd ').addClass('right-line');
 </script>
 
+<script>
+
+    // target to give background to
+    var $div = document.getElementById("gradient");
+    // rgb vals of the gradients
+    var gradients = [
+        { start: [128,179,171], stop: [30,41,58] },
+        { start: [255,207,160], stop: [234,92,68] },
+        { start: [212,121,121], stop: [130,105,151] }
+    ];
+    // how long for each transition
+    var transition_time = 4;
+
+    // internal type vars
+    var currentIndex = 0; // where we are in the gradients array
+    var nextIndex = 1; // what index of the gradients array is next
+    var steps_count = 0; // steps counter
+    var steps_total = Math.round(transition_time*60); // total amount of steps
+    var rgb_steps = {
+        start: [0,0,0],
+        stop: [0,0,0]
+    }; 
+    // how much to alter each rgb value
+    var rgb_values = {
+        start: [0,0,0],
+        stop: [0,0,0]
+    }; 
+    // the current rgb values, gets altered by rgb steps on each interval
+    var prefixes = ["-webkit-","-moz-","-o-","-ms-",""]; // for looping through adding styles
+    var div_style = $div.style; // short cut to actually adding styles
+    var color1, color2;
+
+    // sets next current and next index of gradients array
+    function set_next(num) {
+        return (num + 1 < gradients.length) ? num + 1 : 0;
+    }
+
+    // work out how big each rgb step is
+    function calc_step_size(a,b) {
+        return (a - b) / steps_total;
+    }
+
+    // populate the rgb_values and rgb_steps objects
+    function calc_steps() {
+        for (var key in rgb_values) {
+            if (rgb_values.hasOwnProperty(key)) {
+                for(var i = 0; i < 3; i++) {
+                    rgb_values[key][i] = gradients[currentIndex][key][i];
+                    rgb_steps[key][i] = calc_step_size(gradients[nextIndex][key][i],rgb_values[key][i]);
+                }
+            }
+        }
+    }
+
+    // update current rgb vals, update DOM element with new CSS background
+    function updateGradient(){
+        // update the current rgb vals
+        for (var key in rgb_values) {
+            if (rgb_values.hasOwnProperty(key)) {
+                for(var i = 0; i < 3; i++) {
+                    rgb_values[key][i] += rgb_steps[key][i];
+                }
+            }
+        }
+
+        // generate CSS rgb values
+        var t_color1 = "rgb("+(rgb_values.start[0] | 0)+","+(rgb_values.start[1] | 0)+","+(rgb_values.start[2] | 0)+")";
+        var t_color2 = "rgb("+(rgb_values.stop[0] | 0)+","+(rgb_values.stop[1] | 0)+","+(rgb_values.stop[2] | 0)+")";
+
+        // has anything changed on this interation
+        if (t_color1 != color1 || t_color2 != color2) {
+
+            // update cols strings
+            color1 = t_color1;
+            color2 = t_color2;
+
+            // update DOM element style attribute
+            div_style.backgroundImage = "-webkit-gradient(linear, left bottom, right top, from("+color1+"), to("+color2+"))";
+            for (var i = 0; i < 4; i++) {
+                div_style.backgroundImage = prefixes[i]+"linear-gradient(45deg, "+color1+", "+color2+")";
+            }
+        }
+
+        // we did another step
+        steps_count++;
+        // did we do too many steps?
+        if (steps_count > steps_total) {
+            // reset steps count
+            steps_count = 0;
+            // set new indexs
+            currentIndex = set_next(currentIndex);
+            nextIndex = set_next(nextIndex);
+            // calc steps
+            calc_steps();
+        }
+
+        if (div_style.backgroundImage.indexOf("gradient") != -1) {
+            window.requestAnimationFrame(updateGradient)
+        }
+    }
+
+    // initial step calc
+    calc_steps();
+
+    // go go go!
+    window.requestAnimationFrame(updateGradient);
+</script>
 {% endblock %}

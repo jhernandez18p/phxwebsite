@@ -139,11 +139,5 @@ $(document).ready(function($){
     
     });
 
-    function quarter() {
-        window.resizeTo(
-          window.screen.availWidth - 2,
-          window.screen.availHeight - 2
-        );
-    }
-    quarter();
+
 }); // End Documen.Ready

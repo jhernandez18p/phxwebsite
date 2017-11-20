@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="{% static 'base/css/swiper.min.css' %}">
 <style media="screen">
     .timeline-container, .mov {
-        height: 80vh;
+        height: 700px;
         margin-bottom: 20px;
     }
     .timeline, .mov {
@@ -339,11 +339,12 @@
         slidesPerView: 3,
         spaceBetween: 30,
         centeredSlides: true,
+        cssWidthAndHeight: true,
         pagination: '.timeline .sw-pagination',
         nextButton: '.timeline .sw-next',
         prevButton: '.timeline .sw-prev',
     });
-    
+
     // target to give background to
     var $div = document.getElementById("gradient");
     // rgb vals of the gradients
@@ -448,6 +449,5 @@
     
     // go go go!
     window.requestAnimationFrame(updateGradient);
-
 </script>
 {% endblock %}

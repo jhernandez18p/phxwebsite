@@ -1,33 +1,29 @@
 <!DOCTYPE html>{% load staticfiles %}
-<html lang="{{lang_code}}">
+<html lang="{% if lang == 'English' %}en{% else %}es{% endif %}">
 <head>
     {% include 'base/header.html' %}
     {% block css %}{% endblock %}
-    <script src="{% static 'base/js/jquery.js' %}" charset="utf-8"></script>
-    <script src="{% static 'base/js/swiper.min.js' %}" charset="utf-8"></script>
 </head>
 <body>
     {% if return_to_google %}
     <script>
         window.location.replace("http://google.com");
-    </script>
+        </script>
     {% endif %}
     {% include 'base/loader.html' %}
-
-
     {% block fullscreen %}
-        <div class="full-screen-container wrapper uk-hidden"></div>
+    <div class="full-screen-container wrapper uk-hidden"></div>
     {% endblock %}
-
     <div id="body-wrapper" class="uk-invisible">
         <header>{% include 'base/nav.html' %}</header>
         <section>{% block content %}{% endblock %}</section>
         <footer>{% include 'base/footer.html' %}</footer>
     </div>
-    
+    <script src="{% static 'base/js/jquery.js' %}" charset="utf-8"></script>
     <script src="{% static 'base/js/uikit.min.js' %}" charset="utf-8"></script>
     <script src="{% static 'base/js/uikit-icons.min.js' %}" charset="utf-8"></script>
     <script src="{% static 'base/js/app.js' %}" charset="utf-8"></script>
+    <script src="{% static 'base/js/swiper.min.js' %}" charset="utf-8"></script>
     {% block js %}{% endblock %}
 </body>
 </html>

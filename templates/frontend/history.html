@@ -18,7 +18,7 @@
     }
     .timeline .swiper-container ,
     .mov .swiper-container {
-        
+        height: 100%;
         width: 100%;
         padding-top: 50px;
         padding-bottom: 50px;
@@ -28,7 +28,8 @@
         background-position: center;
         background-size: cover;
         width: 300px;
-        height: 300px;
+        height: 400px;
+        background-color: #fff;
     }
 
     .mov .swiper-container {
@@ -248,81 +249,78 @@
         </div>
     </div>
 
-
     {% if site.history %}
         <div id="gradient" class="uk-background-muted">
             <div class="uk-container">    
-                <div class="">
-                    <div class="timeline-container uk-visible@m">
-                        <div class="timeline">
-                            <div class="swiper-container">
-                                <div class="swiper-wrapper">
-                                    {% for obj in site.history.all %}
-                                        {% if lang_code != 'English' %}
-                                            <div class="swiper-slide uk-padding">
-                                                <h3>
-                                                    {{obj.es_name}}
-                                                    <br>
-                                                    {{obj.year}}
-                                                </h3>
-                                                <div class="uk-padding">
-                                                    {{obj.ns_description|safe}}
-                                                </div>
+                <div class="timeline-container uk-visible@m">
+                    <div class="timeline">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper ">
+                                {% for obj in site.history.all %}
+                                    {% if lang_code != 'English' %}
+                                        <div class="swiper-slide uk-padding">
+                                            <h3>
+                                                {{obj.es_name}}
+                                                <br>
+                                                {{obj.year}}
+                                            </h3>
+                                            <div class="uk-padding">
+                                                {{obj.ns_description|safe}}
                                             </div>
-                                        {% else %}
-                                            <div class="swiper-slide">
-                                                <div class="uk-padding">
-                                                    <h3>
-                                                        {{obj.en_name}}
-                                                        <br>
-                                                        {{obj.year}}
-                                                    </h3>
-                                                </div>
-                                                <div class="uk-padding">
-                                                    {{obj.en_description|safe}}
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                                <!-- Add Pagination -->
-                                <div class="swiper-pagination sw-pagination"></div>
-                                <div class="swiper-button-next swiper-button-white sw-next"></div>
-                                <div class="swiper-button-prev swiper-button-white sw-prev"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mov-container uk-hidden@m">
-                        <div class="mov">
-                            <div class="swiper-container">
-                                <div class="swiper-wrapper">
-                                    {% for obj in site.history.all %}
-                                        {% if lang_code != 'English' %}
-                                            <div class="swiper-slide uk-padding">
-                                                <h3>
-                                                    {{obj.es_name}}
-                                                    <br>
-                                                    {{obj.year}}
-                                                </h3>
-                                                {{obj.es_description|safe}}
-                                            </div>
-                                        {% else %}
-                                            <div class="swiper-slide uk-padding">
+                                        </div>
+                                    {% else %}
+                                        <div class="swiper-slide">
+                                            <div class="uk-padding">
                                                 <h3>
                                                     {{obj.en_name}}
                                                     <br>
                                                     {{obj.year}}
                                                 </h3>
+                                            </div>
+                                            <div class="uk-padding">
                                                 {{obj.en_description|safe}}
                                             </div>
-                                        {% endif %}
-                                    {% endfor %}
-                                </div>
-                                <!-- Add Pagination -->
-                                <div class="swiper-pagination"></div>
-                                <div class="swiper-button-next swiper-button-white"></div>
-                                <div class="swiper-button-prev swiper-button-white"></div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
+                            <!-- Add Pagination -->
+                            <div class="swiper-pagination sw-pagination"></div>
+                            <div class="swiper-button-next swiper-button-white sw-next"></div>
+                            <div class="swiper-button-prev swiper-button-white sw-prev"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mov-container uk-hidden@m">
+                    <div class="mov">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                {% for obj in site.history.all %}
+                                    {% if lang_code != 'English' %}
+                                        <div class="swiper-slide uk-padding">
+                                            <h3>
+                                                {{obj.es_name}}
+                                                <br>
+                                                {{obj.year}}
+                                            </h3>
+                                            {{obj.es_description|safe}}
+                                        </div>
+                                    {% else %}
+                                        <div class="swiper-slide uk-padding">
+                                            <h3>
+                                                {{obj.en_name}}
+                                                <br>
+                                                {{obj.year}}
+                                            </h3>
+                                            {{obj.en_description|safe}}
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <!-- Add Pagination -->
+                            <div class="swiper-pagination"></div>
+                            <div class="swiper-button-next swiper-button-white"></div>
+                            <div class="swiper-button-prev swiper-button-white"></div>
                         </div>
                     </div>
                 </div>
@@ -335,31 +333,17 @@
 
 {% block js %}
 
-<!-- Swiper JS -->
-<script src="{% static 'base/js/swiper.min.js' %}"></script>
-
 <script type="text/javascript">
     var swiper;
     swiper = new Swiper('.timeline .swiper-container', {
-        effect: 'coverflow',
-        grabCursor: true,
+        slidesPerView: 3,
+        spaceBetween: 30,
         centeredSlides: true,
-        slidesPerView: 'auto',
-        coverflowEffect: {
-            rotate: 50,
-            stretch: 0,
-            depth: 100,
-            modifier: 1,
-            slideShadows : true,
-        },
         pagination: '.timeline .sw-pagination',
         nextButton: '.timeline .sw-next',
         prevButton: '.timeline .sw-prev',
     });
-</script>
-
-<script>
-
+    
     // target to give background to
     var $div = document.getElementById("gradient");
     // rgb vals of the gradients
@@ -370,7 +354,7 @@
     ];
     // how long for each transition
     var transition_time = 4;
-
+    
     // internal type vars
     var currentIndex = 0; // where we are in the gradients array
     var nextIndex = 1; // what index of the gradients array is next
@@ -389,17 +373,17 @@
     var prefixes = ["-webkit-","-moz-","-o-","-ms-",""]; // for looping through adding styles
     var div_style = $div.style; // short cut to actually adding styles
     var color1, color2;
-
+    
     // sets next current and next index of gradients array
     function set_next(num) {
         return (num + 1 < gradients.length) ? num + 1 : 0;
     }
-
+    
     // work out how big each rgb step is
     function calc_step_size(a,b) {
         return (a - b) / steps_total;
     }
-
+    
     // populate the rgb_values and rgb_steps objects
     function calc_steps() {
         for (var key in rgb_values) {
@@ -411,7 +395,7 @@
             }
         }
     }
-
+    
     // update current rgb vals, update DOM element with new CSS background
     function updateGradient(){
         // update the current rgb vals
@@ -422,25 +406,25 @@
                 }
             }
         }
-
+        
         // generate CSS rgb values
         var t_color1 = "rgb("+(rgb_values.start[0] | 0)+","+(rgb_values.start[1] | 0)+","+(rgb_values.start[2] | 0)+")";
         var t_color2 = "rgb("+(rgb_values.stop[0] | 0)+","+(rgb_values.stop[1] | 0)+","+(rgb_values.stop[2] | 0)+")";
-
+        
         // has anything changed on this interation
         if (t_color1 != color1 || t_color2 != color2) {
-
+            
             // update cols strings
             color1 = t_color1;
             color2 = t_color2;
-
+            
             // update DOM element style attribute
             div_style.backgroundImage = "-webkit-gradient(linear, left bottom, right top, from("+color1+"), to("+color2+"))";
             for (var i = 0; i < 4; i++) {
                 div_style.backgroundImage = prefixes[i]+"linear-gradient(45deg, "+color1+", "+color2+")";
             }
         }
-
+        
         // we did another step
         steps_count++;
         // did we do too many steps?
@@ -453,16 +437,17 @@
             // calc steps
             calc_steps();
         }
-
+        
         if (div_style.backgroundImage.indexOf("gradient") != -1) {
             window.requestAnimationFrame(updateGradient)
         }
     }
-
+    
     // initial step calc
     calc_steps();
-
+    
     // go go go!
     window.requestAnimationFrame(updateGradient);
+
 </script>
 {% endblock %}

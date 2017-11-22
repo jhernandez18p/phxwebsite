@@ -1,0 +1,166 @@
+<!doctype html>{% load staticfiles %}
+<html lang="en">
+<head>
+    <title>Hello, world!</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <style>
+            #map { height: 500px; width: 100%;}
+            .full-screen{max-height:100vh;}
+            .full-screen .swiper-slide{max-height:100vh;}
+            .top-logo{z-index: 99}
+            .border-green{border: solid rgb(0, 150, 136) 5px;}
+            .My-box {
+                position: absolute;
+                z-index: 9;
+                top: 22%;
+                margin: 0 25%;
+            }
+            @media (max-width: 600px) {
+                .My-box {
+                    position: absolute;
+                    z-index: 9;
+                    top: 5%;
+                    margin: 0 15px;
+                }
+                
+            }
+        </style>
+</head>
+<body>
+    <header>
+
+    </header>
+    <div id="map"></div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="{% static 'base/js/jquery.js' %}" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_uf0M6P9N8ZUTm3vsKlm-li2auJ9-guU" async defer></script>
+    <script type="text/javascript">
+    
+        var map, styleArray,locations;
+        var marker, i;
+        styleArray = [{"elementType": "geometry","stylers": [{"color": "#F2F2F2"}]},{"elementType": "labels.icon","stylers": [{"visibility": "off"}]},{"elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},{"elementType": "labels.text.stroke","stylers": [{"color": "#f5f5f5"}]},{"featureType": "administrative.land_parcel","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "administrative.land_parcel","elementType": "labels.text.fill","stylers": [{"color": "#bdbdbd"}]},{"featureType": "administrative.locality","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "administrative.neighborhood","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "administrative.province","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.man_made","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.natural","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.natural.landcover","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.natural.terrain","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi","elementType": "geometry","stylers": [{"color": "#eeeeee"}]},{"featureType": "poi","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},{"featureType": "poi.attraction","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.business","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.medical","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.park","elementType": "geometry","stylers": [{"color": "#e5e5e5"}]},{"featureType": "poi.park","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.park","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]},{"featureType": "poi.place_of_worship","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.school","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.sports_complex","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "road","elementType": "geometry","stylers": [{"color": "#ffffff"}]},{"featureType": "road","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},{"featureType": "road","elementType": "geometry.stroke","stylers": [{"color": "#009688"}]},{"featureType": "road.arterial","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},{"featureType": "road.highway","elementType": "geometry","stylers": [{"color": "#dadada"}]},{"featureType": "road.highway","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},{"featureType": "road.highway","elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},{"featureType": "road.local","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]},{"featureType": "transit.line","elementType": "geometry","stylers": [{"color": "#e5e5e5"}]},{"featureType": "transit.station","elementType": "geometry","stylers": [{"color": "#eeeeee"}]},{"featureType": "water","elementType": "geometry","stylers": [{"color": "#c9c9c9"}]},{"featureType": "water","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},{"featureType": "water","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "water","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]}]
+    
+        var markers = [
+            ['Phoenix World Trade Inc., Panamá', 8.981022, -79.509901],
+            ['Phoenix World Trade Inc., USA', 25.747603, -80.340254],
+            ['Phoenix World Trade Inc., Curacao', 12.1356696,-68.9569759],
+            ['Phoenix World Trade Inc., Puerto Rico', 18.4219004,-66.1092751],
+            ['Phoenix World Trade Inc., República Dominicana', 18.4828372,-69.9459407],
+            ['Phoenix World Trade Inc., Chile', -28.275386, -70.925212],
+            ['Phoenix World Trade Inc., Venezuela', 10.494779,-66.8413177],
+            ['Phoenix World Trade Inc., Ecuador', -2.186826, -79.916759],
+            ['Phoenix World Trade Inc., Colombia', 4.696900, -74.006311],
+        ];
+    
+        var infoWindowContent = [
+            ['<div class="info_content uk-card"><h3>Phoenix World Trade Inc, Panamá</h3>'+
+                '<p>P.H. Oceanía Business Plaza Torre 2000</p>'+
+                '<p>Punta Pacifica, Ciudad de Panamá.</p></div>'],
+            ['<div class="info_content uk-card">'+
+                '<h3>Phoenix World Trade Inc, USA</h3>'+
+                '<p></p></div>'],
+            ['<div class="info_content uk-card">'+
+                '<h3>Phoenix World Trade Inc, Curcao</h3>'+
+                '<p></p></div>'],
+            ['<div class="info_content uk-card">'+
+                '<h3>Phoenix World Trade Inc, Puerto Rico</h3>'+
+                '<p></p></div>'],
+            ['<div class="info_content uk-card">'+
+                '<h3>Phoenix World Trade Inc, República Dominicana</h3>'+
+                '<p></p></div>'],
+            ['<div class="info_content uk-card">'+
+                '<h3>Phoenix World Trade Inc., Chile</h3>'+
+                '<p></p></div>'],
+            ['<div class="info_content uk-card">'+
+                '<h3>Phoenix World Trade Inc., Venezuela</h3>'+
+                '<p></p></div>'],
+            ['<div class="info_content uk-card">'+
+                '<h3>Phoenix World Trade Inc., Ecuador</h3>'+
+                '<p></p></div>'],
+            ['<div class="info_content uk-card">'+
+                '<h3>Phoenix World Trade Inc., Colombia</h3>'+
+                '<p></p></div>'],
+        ];  
+    
+        function initMap() {
+    
+            var bounds = new google.maps.LatLngBounds();
+            var infoWindow = new google.maps.InfoWindow(), marker, i;
+            
+            map = new google.maps.Map(document.getElementById('map'), {
+                mapTypeId: 'satellite',
+                center: {lat: 14.987239, lng: -84.528809}, 
+                zoom: 8,
+                disableDefaultUI: true,
+                scrollwheel: false,
+            });
+            //center: {lat: -6.9645954, lng: -76.3220646},
+            //center: {lat: 8.6571004, lng: -60.1603678}, 
+            //styles: styleArray,
+            // zoomControl: true,
+            // scaleControl: true,
+            // draggable: false,
+    
+    
+            var image = {
+              url: "{% static 'base/images/phx-pinx.png' %}",
+              // This marker is 20 pixels wide by 32 pixels high.
+              size: new google.maps.Size(45, 45),
+              // The origin for this image is (0, 0).
+              origin: new google.maps.Point(0, 0),
+              // The anchor for this image is the base of the flagpole at (0, 32).
+              anchor: new google.maps.Point(20, 20)
+            };
+    
+            for( i = 0; i < markers.length; i++ ) {
+                var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+                bounds.extend(position);
+                marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    icon: image,
+                    title: markers[i][0]
+                });
+                
+                // Allow each marker to have an info window    
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                        infoWindow.setContent(infoWindowContent[i][0]);
+                        infoWindow.open(map, marker);
+                    }
+                })(marker, i));
+    
+                // Automatically center the map fitting all markers on the screen
+                map.fitBounds(bounds);
+            }   
+        }
+    
+        $( "#map" ).delay(5000).fadeIn(initMap);
+        // var swiper = new Swiper('.full-screen .swiper-container', {
+        //     pagination: '.full-screen .swiper-pagination',
+        //     paginationClickable: true,
+        //     nextButton: '.full-screen .swiper-button-next',
+        //     prevButton: '.full-screen .swiper-button-prev',
+        //     loop: true,
+        //     autoplay: 8000,
+        // });
+        // var swiperBiz = new Swiper('.banners-biz .swiper-container', {
+        //     pagination: '.banners-biz .swiper-pagination',
+        //     paginationClickable: true,
+        //     nextButton: '.banners-biz .swiper-button-next',
+        //     prevButton: '.banners-biz .swiper-button-prev',
+        //     loop: true,
+        //     autoplay: 8000,
+        // });
+    </script>
+</body>
+</html>

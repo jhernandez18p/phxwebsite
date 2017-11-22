@@ -1,4 +1,37 @@
 $(document).ready(function($){
+    
+    var windowHeight;
+    function addHiddenClass(){
+        //console.log( "loader ready!" );
+        $(this).addClass( "uk-hidden" );
+        $(this).remove( "#loader" );
+    };
+    
+    function removeHiddenClass(){
+        //console.log( "wrapper ready!" );
+        $(this).contents().unwrap();;
+        $(this).remove( "#body-wrapper" );
+    };
+
+    $( "#loader" ).delay(5000).fadeOut(addHiddenClass);
+    $( "#body-wrapper" ).delay(5000).fadeIn(removeHiddenClass);
+    $('#scroll').click(function(){$(window).animate().scrollTop(700);});
+    
+
+    windowHeight = $( window ).height();
+    
+    UIkit.util.ready(function () {
+        var bar = document.getElementById('js-progressbar');
+        var animate = setInterval(function () {
+            bar.value += 20;
+            if (bar.value >= bar.max) {
+                clearInterval(animate);
+            }
+        }, 1000);
+    });
+
+}); // End Documen.Ready
+
 
 //     $('#langModal').modal({'show': true,'keyboard': false,'backdrop':'static',});
 
@@ -95,49 +128,3 @@ $(document).ready(function($){
 //             setModalMaxHeight($('.modal.in'));
 //         }
 //     });
-
-//     $('#scroll').click(function(){$(window).animate().scrollTop(700);});
-//     $('.awesome-tooltip').tooltip({
-//         placement: 'left'
-//     });
-
-    var windowHeight;
-    windowHeight = $( window ).height();
-    $('#scroll').click(function () {
-        $('html, body').animate({
-            scrollTop: $( $(this) ).offset().top
-        }, windowHeight);
-        return false;
-    });
-
-    function addHiddenClass(){
-        //console.log( "loader ready!" );
-        $(this).addClass( "uk-hidden" );
-    };
-    function removeHiddenClass(){
-        //console.log( "wrapper ready!" );
-        $(this).contents().unwrap();;
-        $(this).remove( "#body-wrapper" );
-    };
-
-    $( "#loader" ).delay(5000).fadeOut(addHiddenClass);
-    $( "#body-wrapper" ).delay(5000).fadeIn(removeHiddenClass);
-
-    UIkit.util.ready(function () {
-    
-        var bar = document.getElementById('js-progressbar');
-    
-        var animate = setInterval(function () {
-    
-            bar.value += 20;
-    
-            if (bar.value >= bar.max) {
-                clearInterval(animate);
-            }
-    
-        }, 1000);
-    
-    });
-
-
-}); // End Documen.Ready

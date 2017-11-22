@@ -4,7 +4,7 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'base/css/swiper.min.css' %}">
 <style>
-    #map { height: 85vh; }
+    #map { height: 500px; width: 100%;}
     .full-screen{max-height:100vh;}
     .full-screen .swiper-slide{max-height:100vh;}
     .top-logo{z-index: 99}
@@ -22,49 +22,52 @@
             top: 5%;
             margin: 0 15px;
         }
+        
     }
 </style>
 {% endblock %}
 
 {% block fullscreen %}
     {% if banners %}
-        <div class="uk-section-muted">
-            <div class="full-screen">
-                <div class="swiper-container">
-                    <div class="scroll uk-visible@m uk-position-bottom-center">
-                        <span id="scroll">
-                            <svg version="1.1" id="icn" fill="#fff" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                            width="40px" height="50px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
-                                <polygon opacity="0" points="19.9,21 0,1.3 1.4,0 19.9,18.3 38.6,0 40,1.3 ">
-                                    <animate id="first" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite"  begin="0"/>
-                                </polygon>
-                                <polygon id="arrow-two" opacity="0"  points="19.9,30.9 0,11.2 1.4,9.9 19.9,28.2 38.6,9.8 40,11.2 ">
-                                    <animate id="second" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite"  begin="1s" />
-                                </polygon>
-                                <polygon id="arrow-three"  opacity="0" points="19.9,40 0,20.3 1.4,19 19.9,37.3 38.6,19 40,20.3 ">
-                                    <animate id="third" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite"  begin="2s"  />
-                                </polygon>
-                            </svg>
-                        </span>
-                    </div>
-                    <div class="swiper-wrapper" uk-height-match="target: > div > img">
-                        {% for banner in banners %}
-                            <div class="swiper-slide">
-                                <div class="uk-child-width-1-1@" >
-                                    <img class="uk-background-cover uk-visible@m" src="{{banner.large_banner.url}}" alt="
-                                    {% if lang_code != 'English' %}
-                                    {{banner.es_name}}
-                                    {% else %}
-                                    {{banner.en_name}}
-                                    {% endif %}" uk-height-viewport>
+        <div class="full-screen-container wrapper uk-hidden"></div>
+            <div class="uk-section-muted">
+                <div class="full-screen">
+                    <div class="swiper-container">
+                        <div class="scroll uk-visible@m uk-position-bottom-center">
+                            <span id="scroll">
+                                <svg version="1.1" id="icn" fill="#fff" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                width="40px" height="50px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+                                    <polygon opacity="0" points="19.9,21 0,1.3 1.4,0 19.9,18.3 38.6,0 40,1.3 ">
+                                        <animate id="first" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite"  begin="0"/>
+                                    </polygon>
+                                    <polygon id="arrow-two" opacity="0"  points="19.9,30.9 0,11.2 1.4,9.9 19.9,28.2 38.6,9.8 40,11.2 ">
+                                        <animate id="second" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite"  begin="1s" />
+                                    </polygon>
+                                    <polygon id="arrow-three"  opacity="0" points="19.9,40 0,20.3 1.4,19 19.9,37.3 38.6,19 40,20.3 ">
+                                        <animate id="third" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite"  begin="2s"  />
+                                    </polygon>
+                                </svg>
+                            </span>
+                        </div>
+                        <div class="swiper-wrapper" uk-height-match="target: > div > img">
+                            {% for banner in banners %}
+                                <div class="swiper-slide">
+                                    <div class="uk-child-width-1-1@" >
+                                        <img class="uk-background-cover uk-visible@m" src="{{banner.large_banner.url}}" alt="
+                                        {% if lang_code != 'English' %}
+                                        {{banner.es_name}}
+                                        {% else %}
+                                        {{banner.en_name}}
+                                        {% endif %}" uk-height-viewport>
+                                    </div>
                                 </div>
-                            </div>
-                        {% endfor %}
-                    </div>
-                    <div class="swiper-button-next swiper-button-white"></div>
-                    <div class="swiper-button-prev swiper-button-white"></div>
-                    <div class="top-logo uk-visible@m uk-position-center">
-                        <img class="logo-menu" src="{% if site.logo %}{{site.logo.url}}{% else %}{% static 'base/images/logo.png' %}{% endif %}" alt="{{site.name}}">
+                            {% endfor %}
+                        </div>
+                        <div class="swiper-button-next swiper-button-white"></div>
+                        <div class="swiper-button-prev swiper-button-white"></div>
+                        <div class="top-logo uk-visible@m uk-position-center">
+                            <img class="logo-menu" src="{% if site.logo %}{{site.logo.url}}{% else %}{% static 'base/images/logo.png' %}{% endif %}" alt="{{site.name}}">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -171,10 +174,7 @@
         </div>
     </div>
 
-    <div class="uk-container">
-        <div id="map"></div>
-    </div>
-
+    <div id="map"></div>
 
     <div class="uk-container">
         <div class="uk-section-small uk-section-muted">
@@ -227,11 +227,13 @@
             </div>
         </div>
     {% endif %}
-
-{% endblock %}
-
+    
+    {% endblock %}
+    
 {% block js %}
-<script type="text/javascript">
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_uf0M6P9N8ZUTm3vsKlm-li2auJ9-guU" async defer></script>
+<script>
+
     var map, styleArray,locations;
     var marker, i;
     styleArray = [{"elementType": "geometry","stylers": [{"color": "#F2F2F2"}]},{"elementType": "labels.icon","stylers": [{"visibility": "off"}]},{"elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},{"elementType": "labels.text.stroke","stylers": [{"color": "#f5f5f5"}]},{"featureType": "administrative.land_parcel","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "administrative.land_parcel","elementType": "labels.text.fill","stylers": [{"color": "#bdbdbd"}]},{"featureType": "administrative.locality","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "administrative.neighborhood","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "administrative.province","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.man_made","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.natural","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.natural.landcover","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.natural.terrain","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi","elementType": "geometry","stylers": [{"color": "#eeeeee"}]},{"featureType": "poi","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},{"featureType": "poi.attraction","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.business","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.medical","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.park","elementType": "geometry","stylers": [{"color": "#e5e5e5"}]},{"featureType": "poi.park","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.park","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]},{"featureType": "poi.place_of_worship","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.school","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.sports_complex","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "road","elementType": "geometry","stylers": [{"color": "#ffffff"}]},{"featureType": "road","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},{"featureType": "road","elementType": "geometry.stroke","stylers": [{"color": "#009688"}]},{"featureType": "road.arterial","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},{"featureType": "road.highway","elementType": "geometry","stylers": [{"color": "#dadada"}]},{"featureType": "road.highway","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},{"featureType": "road.highway","elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},{"featureType": "road.local","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]},{"featureType": "transit.line","elementType": "geometry","stylers": [{"color": "#e5e5e5"}]},{"featureType": "transit.station","elementType": "geometry","stylers": [{"color": "#eeeeee"}]},{"featureType": "water","elementType": "geometry","stylers": [{"color": "#c9c9c9"}]},{"featureType": "water","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},{"featureType": "water","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "water","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]}]
@@ -248,62 +250,56 @@
         ['Phoenix World Trade Inc., Colombia', 4.696900, -74.006311],
     ];
 
+    var infoWindowContent = [
+        ['<div class="info_content uk-card"><h3>Phoenix World Trade Inc, Panamá</h3>'+
+            '<p>P.H. Oceanía Business Plaza Torre 2000</p>'+
+            '<p>Punta Pacifica, Ciudad de Panamá.</p></div>'],
+        ['<div class="info_content uk-card">'+
+            '<h3>Phoenix World Trade Inc, USA</h3>'+
+            '<p></p></div>'],
+        ['<div class="info_content uk-card">'+
+            '<h3>Phoenix World Trade Inc, Curcao</h3>'+
+            '<p></p></div>'],
+        ['<div class="info_content uk-card">'+
+            '<h3>Phoenix World Trade Inc, Puerto Rico</h3>'+
+            '<p></p></div>'],
+        ['<div class="info_content uk-card">'+
+            '<h3>Phoenix World Trade Inc, República Dominicana</h3>'+
+            '<p></p></div>'],
+        ['<div class="info_content uk-card">'+
+            '<h3>Phoenix World Trade Inc., Chile</h3>'+
+            '<p></p></div>'],
+        ['<div class="info_content uk-card">'+
+            '<h3>Phoenix World Trade Inc., Venezuela</h3>'+
+            '<p></p></div>'],
+        ['<div class="info_content uk-card">'+
+            '<h3>Phoenix World Trade Inc., Ecuador</h3>'+
+            '<p></p></div>'],
+        ['<div class="info_content uk-card">'+
+            '<h3>Phoenix World Trade Inc., Colombia</h3>'+
+            '<p></p></div>'],
+    ];  
+
     function initMap() {
+
         var bounds = new google.maps.LatLngBounds();
-        map = new google.maps.Map(document.getElementById('map'), {
-            // center: {lat: 14.987239, lng: -84.528809}, 
-            // center: {lat: -6.9645954, lng: -76.3220646},
-            mapTypeId: 'satellite',
-            center: {lat: 8.6571004, lng: -60.1603678}, 
-            zoom: 5,
-            styles: styleArray,
-            disableDefaultUI: true,
-            zoomControl: true,
-            scaleControl: true,
-            scrollwheel: false,
-            draggable: false,
-        });
-
-        var infoWindowContent = [
-            [`<div class="info_content uk-card"><h3>Phoenix World Trade Inc, Panamá</h3>
-                <p>P.H. Oceanía Business Plaza Torre 2000</p>
-                <p>Punta Pacifica, Ciudad de Panamá.</p>
-            </div>`],
-            [`<div class="info_content uk-card">
-                <h3>Phoenix World Trade Inc, USA</h3>
-                <p></p>
-            </div>`],
-            [`<div class="info_content uk-card">
-                <h3>Phoenix World Trade Inc, Curcao</h3>
-                <p></p>
-            </div>`],
-            [`<div class="info_content uk-card">
-                <h3>Phoenix World Trade Inc, Puerto Rico</h3>
-                <p></p>
-            </div>`],
-            [`<div class="info_content uk-card">
-                <h3>Phoenix World Trade Inc, República Dominicana</h3>
-                <p></p>
-            </div>`],
-            [`<div class="info_content uk-card">
-                <h3>Phoenix World Trade Inc., Chile</h3>
-                <p></p>
-            </div>`],
-            [`<div class="info_content uk-card">
-                <h3>Phoenix World Trade Inc., Venezuela</h3>
-                <p></p>
-            </div>`],
-            [`<div class="info_content uk-card">
-                <h3>Phoenix World Trade Inc., Ecuador</h3>
-                <p></p>
-            </div>`],
-            [`<div class="info_content uk-card">
-                <h3>Phoenix World Trade Inc., Colombia</h3>
-                <p></p>
-            </div>`],
-        ];  
-
         var infoWindow = new google.maps.InfoWindow(), marker, i;
+        
+        map = new google.maps.Map(document.getElementById('map'), {
+            mapTypeId: 'satellite',
+            center: {lat: 14.987239, lng: -84.528809}, 
+            zoom: 8,
+            disableDefaultUI: true,
+            scrollwheel: false,
+        });
+        //center: {lat: -6.9645954, lng: -76.3220646},
+        //center: {lat: 8.6571004, lng: -60.1603678}, 
+        //styles: styleArray,
+        // zoomControl: true,
+        // scaleControl: true,
+        // draggable: false,
+
+
         var image = {
           url: "{% static 'base/images/phx-pinx.png' %}",
           // This marker is 20 pixels wide by 32 pixels high.
@@ -337,6 +333,12 @@
         }   
     }
 
+    $( "#map" ).delay(5000).fadeIn(initMap);
+
+</script>
+
+
+<script>
     var swiper = new Swiper('.full-screen .swiper-container', {
         pagination: '.full-screen .swiper-pagination',
         paginationClickable: true,
@@ -353,8 +355,6 @@
         loop: true,
         autoplay: 8000,
     });
-
 </script>
 
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_uf0M6P9N8ZUTm3vsKlm-li2auJ9-guU&callback=initMap"></script>
 {% endblock %}

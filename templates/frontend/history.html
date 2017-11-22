@@ -2,7 +2,6 @@
 {% load staticfiles %}
 
 {% block css %}
-<link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'base/css/swiper.min.css' %}">
 <style media="screen">
     .timeline-container, .mov {
@@ -30,8 +29,16 @@
         width: 300px;
         height: 400px;
         background-color: #fff;
+        margin-top: 70px
     }
 
+    .timeline .swiper-button-next, .swiper-button-prev{
+        top: 10%;
+    }
+
+    .timeline .sw-pagination{
+        bottom: 89%;
+    }
     .mov .swiper-container {
         width: 70%;
         height: 100%;
@@ -344,9 +351,12 @@
         nextButton: '.timeline .sw-next',
         prevButton: '.timeline .sw-prev',
     });
+</script>
+
+<script>
 
     // target to give background to
-    var $div = document.getElementById("gradient");
+    var gradientDiv = document.getElementById("gradient");
     // rgb vals of the gradients
     var gradients = [
         { start: [128,179,171], stop: [30,41,58] },
@@ -372,7 +382,7 @@
     }; 
     // the current rgb values, gets altered by rgb steps on each interval
     var prefixes = ["-webkit-","-moz-","-o-","-ms-",""]; // for looping through adding styles
-    var div_style = $div.style; // short cut to actually adding styles
+    var div_style = gradientDiv.style; // short cut to actually adding styles
     var color1, color2;
     
     // sets next current and next index of gradients array

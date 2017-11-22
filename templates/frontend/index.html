@@ -83,7 +83,7 @@
                     <canvas width="100%" height="800"></canvas>
                     <img src="{% static 'base/images/chair.jpg' %}" alt="" uk-cover>
                     <div class="uk-overlay-primary uk-position-cover"></div>
-                    <div class="My-box" uk-scrollspy="cls: uk-animation-slide-top-small; target: > .uk-card; delay: 900; repeat: true">
+                    <div class="My-box" uk-scrollspy="cls: uk-animation-slide-top-small; target: > .uk-card; delay: 200;">
                         <div class="uk-card uk-card-default  uk-card-body ">
                             {% if lang_code == 'English' %}
                                 {{site.en_description|safe}}
@@ -193,7 +193,7 @@
     {% if news %}
         <div class=" uk-section-muted">
             <div class="uk-container">
-                <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-slide-top-small; target: > div > .uk-card; delay: 700; repeat: true">
+                <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-slide-top-small; target: > div > .uk-card;">
                     {% for obj in news %}
                         <div>
                             <div class="uk-card uk-card-default">

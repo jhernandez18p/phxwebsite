@@ -139,7 +139,6 @@
     </div>
     <div class="uk-navbar-right">
         <a class="uk-navbar-toggle" uk-navbar-toggle-icon href="#offcanvas-slide" uk-toggle="target: #offcanvas-nav-primary"></a>
-        <a class="uk-navbar-toggle" href="{% if lang_code == 'English' %}#search{% else %}#buscar{% endif %}" uk-search-icon uk-toggle></a>
     </div>
 </nav>
 <!-- Overlay Movil, Tablet -->
@@ -222,28 +221,25 @@
                 <li class="uk-parent">
                     <a href="">
                         <span class="uk-margin-small-right" uk-icon="icon: world">
-                            {% if lang == 'English' %}
                             <li>
                                 <form action="{% url 'lang' %}" method="post">
                                     {% csrf_token %}
-                                    <input class="uk-hidden" type="text" name="lang_code" value="Spanish">
-                                    <input class="uk-hidden" type="text" name="url" value="{{es_url}}">
-                                    <input type="submit" value="Español" class="submit-input"/>
+                                    {% if lang == 'English' %}
+                                        <input class="uk-hidden" type="text" name="lang_code" value="Spanish">
+                                        <input class="uk-hidden" type="text" name="url" value="{{es_url}}">
+                                        <input type="submit" value="Español" class="submit-input"/>
+                                    {% else %}
+                                        <input class="uk-hidden" type="text" name="lang_code" value="English">
+                                        <input class="uk-hidden" type="text" name="url" value="{{url}}">
+                                        <input type="submit" value="English" class="submit-input"/>
+                                    {% endif %}
                                 </form>
                             </li>
-                        {% endif %}
-                        {% if lang == 'Spanish' %}
-                            <li>
-                                <form  action="{% url 'lang' %}" method="post">
-                                    {% csrf_token %}
-                                    <input class="uk-hidden" type="text" name="lang_code" value="English">
-                                    <input class="uk-hidden" type="text" name="url" value="{{url}}">
-                                    <input type="submit" value="English" class="submit-input"/>
-                                </form>
-                            </li>
-                        {% endif %}
                         </span>
                     </a>
+                </li>
+                <li class="uk-parent">
+                    <a class="uk-navbar-toggle" href="{% if lang_code == 'English' %}#search{% else %}#buscar{% endif %}" uk-search-icon uk-toggle></a>
                 </li>
             </ul>
         </div>

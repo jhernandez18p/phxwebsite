@@ -5,9 +5,9 @@ section{min-height: 49vh;}
 body{background-color: #f3f3f6;}
 
 .dev2tech-font{font-family: 'Sarina', serif, sans-serif;}
-*+.uk-margin{margin-top: 0 ;}
-.uk-navbar-nav>li>a {color: #FFF ;}
-.uk-navbar-nav>li>a:hover,.uk-navbar-nav>li>a:active {color: #009688 ;}
+*+.uk-margin{margin-top: 0 !important;}
+.uk-navbar-nav>li>a {color: #FFF !important;}
+.uk-navbar-nav>li>a:hover,.uk-navbar-nav>li>a:active {color: #009688 !important;}
 .uk-navbar-container:not(.uk-navbar-transparent) {background: linear-gradient(120deg,#535353 0,#111212 30%,#606060);}
 .logo-menu{width:300px;}
 li form .submit-input{
@@ -36,14 +36,14 @@ li form .submit-input{
 	margin-left: auto;
 }
 
-.all-rights p{margin: 0 ;}
+.all-rights p{margin: 0 !important;}
 
 .button-phx{
-	background-color: #009688 ;
+	background-color: #009688 !important;
     color: #FFF;
     border: 1px solid #e5e5e5;
 }
-.uk-navbar-toggle {color: #009688 ;}
+.uk-navbar-toggle {color: #009688 !important;}
 .scroll{
 	z-index: 99;
 	margin-bottom: 25px;
@@ -58,9 +58,8 @@ li form .submit-input{
 .swiper-slide {overflow: hidden}
 .uk-heading-line span {text-transform: uppercase;}
 .uk-heading-line>:after, .uk-heading-line>:before{
-    border-bottom: 2.5px solid #009587 ;
+    border-bottom: 2.5px solid #009587 !important;
 }
 .green-phx-gradient {
-    background: linear-gradient(130deg,#b0d2cf 0,#b0d1d1 50%,#6abdb5) ;
+    background: linear-gradient(130deg,#b0d2cf 0,#b0d1d1 50%,#6abdb5) !important;
 }
-#body-wrapper { display: none}

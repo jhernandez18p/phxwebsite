@@ -53,3 +53,4 @@ li form .submit-input{background-color: rgba(255,255,255,0);border: none;}
 .uk-heading-line span {text-transform: uppercase;}
 .uk-heading-line>:after, .uk-heading-line>:before{border-bottom: 2.5px solid #009587 !important;}
 .green-phx-gradient {background: linear-gradient(130deg,#b0d2cf 0,#b0d1d1 50%,#6abdb5) !important;}
+#newsletterInput{border-radius: 10px !important;border: rgba(0, 0, 0, 0)}

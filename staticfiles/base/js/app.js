@@ -16,6 +16,7 @@ $(document).ready(function($){
     $( "#loader" ).delay(5000).fadeOut(addHiddenClass);
     $( "#body-wrapper" ).delay(5000).fadeIn(removeHiddenClass);
     $('#scroll').click(function(){$(window).animate().scrollTop(700);});
+    // $('#newsletterSubmit').css().click(submitForm);
     
 
     windowHeight = $( window ).height();

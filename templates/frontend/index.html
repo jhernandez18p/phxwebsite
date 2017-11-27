@@ -193,7 +193,7 @@
     {% if news %}
         <div class=" uk-section-muted">
             <div class="uk-container">
-                <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-slide-top-small; target: > div > .uk-card;">
+                <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid uk-height-match="target: > div > .uk-card">
                     {% for obj in news %}
                         <div>
                             <div class="uk-card uk-card-default">
@@ -228,7 +228,7 @@
         </div>
     {% endif %}
     
-    {% endblock %}
+{% endblock %}
     
 {% block js %}
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_uf0M6P9N8ZUTm3vsKlm-li2auJ9-guU" async defer></script>
@@ -336,8 +336,6 @@
     $( "#map" ).delay(5000).fadeIn(initMap);
 
 </script>
-
-
 <script>
     var swiper = new Swiper('.full-screen .swiper-container', {
         pagination: '.full-screen .swiper-pagination',

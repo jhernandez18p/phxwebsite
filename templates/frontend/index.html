@@ -121,8 +121,9 @@
 
     {% if  banners_biz  %}
         <div class="uk-width-1-1">
-            <div class="uk-section-muted">
+            <div class="uk-section-muted uk-margin-large">
                 <div class="uk-container">
+                    <!-- 
                     <div class="uk-card uk-card-default ">
                         <div class="banners-biz">
                             <div class="swiper-container">
@@ -155,9 +156,28 @@
                             </div>
                         </div>
                     </div>
+                    -->
+                    
+                    {% for banner in banners_biz %}
+                        <div class="biz-cards uk-margin-xlarge">
+                            <div class="uk-child-width-1-2@s uk-margin" uk-grid>
+                                <div class="child card-shadow">
+                                    <img src="{{banner.image.url}}" alt="{% if lang_code != 'English' %}{{banner.es_name}}{% else %}{{banner.en_name}}{% endif %}" uk-cover>
+                                    <canvas width="600" height="400"></canvas>
+                                </div>
+                                <div>
+                                    <div class="">
+                                        <h3 class="uk-card-title">{% if lang_code != 'English' %}{{banner.es_name}}{% else %}{{banner.en_name}}{% endif %}</h3>
+                                        <p>{% if lang_code != 'English' %}{{banner.es_name}}{% else %}{{banner.en_name}}{% endif %}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             </div>
-        </div>
+        </div> 
+        
     {% endif %}
     
     <div class="uk-container">
@@ -353,6 +373,9 @@
         loop: true,
         autoplay: 8000,
     });
+    $('.biz-cards:odd').find('.child').addClass('uk-flex-last uk-card-media-right uk-cover-container');
+    $('.biz-cards:even').find('.child').addClass('uk-card-media-left uk-cover-container');
+
 </script>
 
 {% endblock %}

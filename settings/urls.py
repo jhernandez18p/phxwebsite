@@ -8,10 +8,10 @@ from django.views.static import serve
 from local_apps.frontend import views as fw
 from local_apps.profiles import auth as auth_views
 
-handler400 = 'local_apps.fw.my_custom_bad_request_view'
-handler403 = 'local_apps.fw.my_custom_permission_denied_view'
-handler404 = 'local_apps.fw.my_custom_page_not_found_view'
-handler500 = 'local_apps.fw.my_custom_error_view'
+handler400 = 'local_apps.frontend.my_custom_bad_request_view'
+handler403 = 'local_apps.frontend.my_custom_permission_denied_view'
+handler404 = 'local_apps.frontend.my_custom_page_not_found_view'
+handler500 = 'local_apps.frontend.my_custom_error_view'
 
 urlpatterns = [
     # Frontend
@@ -26,13 +26,7 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, name = 'Logout'),
     url(r'^register/$', auth_views.login, name = 'Register'),
     # Backend
-    url(
-        r'^dashboard/', 
-        include(
-            'local_apps.dashboard.urls', 
-            namespace='dashboard'
-        )
-    ),
+    url(r'^dashboard/', include('local_apps.dashboard.urls', namespace='dashboard')),
     url(r'^posts/',include('settings.backend_urls')),
     # Admin
     url(r'^adminsite/', admin.site.urls),

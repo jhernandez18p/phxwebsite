@@ -1,10 +1,43 @@
 # -*- coding: utf-8 -*-
 import random,datetime
+from django.contrib.sessions.backends.db import SessionStore
 from local_apps.blog.models import *
 from local_apps.brands.models import *
 from local_apps.countries.models import *
 from local_apps.frontend.models import *
 from local_apps.profiles.models import *
+
+
+class language_cookies:
+
+    def set_language(lang = True,lang_code = 'en'):
+        # Creamos el idioma que se va a utizar en el sitio en diccionario
+        # language_cookie = {
+        #    'lang' : True/False,
+        #    'lang_code' : en/es,
+        #    'language' : English/Español,
+        # }
+        language = 'English' if lower(str(lang_code)) == 'en' else 'Español'
+
+        language_cookie = {
+            'lang' : lang,
+            'lang_code' : lang_code,
+            'language' : language,
+        }
+
+        cookie = SessionStore()
+        cookie['lang'] = lang
+        cookie['lang_code'] = lang_code
+        cookie['language'] = language
+        cookie.create()
+
+        return language_cookie
+
+    def exist(request):
+        # Vamos a verificar si existe o no la cookie
+        exist = True if request.session['lang'] else False
+        return exist
+
 
 def menu(request):
 
@@ -21,9 +54,8 @@ def menu(request):
     context['return_to_google'] = return_to_google
     return context
 
-
-def lang(request):
-
+def cookies(request):
+    # 
     try:
         site = Site_info.objects.all().first()
         # if site.default_lang == 'en':
@@ -40,15 +72,24 @@ def lang(request):
         lang_ = True
         lang_code = 'English'
 
+    # language_cookie_exist = language_cookies.exist(request)
+    
+    # if language_cookie_exist == False:
+    #     cookie = language_cookies.set_language()
+    # else:
+    #     cookies = {}
+    #     cookie['lang'] = request.session['lang']
+    #     cookie['language'] = request.session['language']
+
     # if lang_code == 'English':
     #     site_name = site.en_name
     # else:
     #     site_name = site.es_name
 
     context = {
-        'lang_':lang_,
-        'lang_code': lang_code,
-        'lang':lang_code,
+        'lang_': lang_, #cookie['lang'],
+        'lang_code': lang_code, # cookie['language'],
+        'lang': lang_code, # cookie['language'],
         # 'site_name':site_name,
         'cookie':request.COOKIES,
         'site':site,

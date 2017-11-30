@@ -21,16 +21,6 @@ $(document).ready(function($){
 
     windowHeight = $( window ).height();
     
-    UIkit.util.ready(function () {
-        var bar = document.getElementById('js-progressbar');
-        var animate = setInterval(function () {
-            bar.value += 20;
-            if (bar.value >= bar.max) {
-                clearInterval(animate);
-            }
-        }, 1000);
-    });
-
 }); // End Documen.Ready
 
 

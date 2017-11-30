@@ -18,16 +18,11 @@ from local_apps.brands.models import *
 from local_apps.brands.models import Type as bt
 from local_apps.brands.models import Category as bc
 from local_apps.frontend.forms import *
+from local_apps.help.functions import (get_lang)
 
-
-def get_lang(request):
-    if 'lang_code' in request.COOKIES:
-        lang = request.COOKIES['lang_code']
-    else:
-        lang = 'English'
-    return lang
-
-
+"""
+Frontend Views
+"""
 def lang(request):
     if request.method == "POST":
         if 'url' in request.POST and 'lang_code' in request.POST:
@@ -44,26 +39,25 @@ def lang(request):
             if blog != '':
                 url = blog
 
-        print(url)
+        # print(url)
         render = redirect(url)
         render.set_cookie('lang_code', lang_code)
         render.set_cookie('lang_', lang_)
-        print(render)
+        # print(render)
         return render
     
     else:    
         print('La url del post es %s' % url)
         return redirect('en:en')
 
-
 def home(request):
-
+    # Esta vista solo se mostrara la primera vez que el usuario entre a la página.
     template = 'frontend/index.html'
     
     if 'lang_code' in request.COOKIES:
         lang = request.COOKIES['lang_code']
+        url = '{code}:{code}'.formart(code = str(lang_code))
         if lang == 'English':
-            url = 'en:en'
             return redirect(url)
         else:
             url = 'es:es'
@@ -72,13 +66,8 @@ def home(request):
         render = redirect('en:en')
         render.set_cookie('lang_code', 'English')
         render.set_cookie('lang_', False)
-    context = {
-        'pg_title':'home',
-        'url':'home',
-    }
-
+    
     return render
-
 
 def index(request):
     context = {
@@ -135,7 +124,6 @@ def index(request):
 
     return render(request, template, context)
 
-
 def history(request):
     context = {
         'pg_title':'about',
@@ -165,7 +153,6 @@ def history(request):
 
     # banners = Banner.objects.all().filter(sub_category=banners_sub_cat.id)[0]
     return render(request, template, context)
-
 
 def our_brands(request):
     template = 'frontend/brands.html'
@@ -220,7 +207,6 @@ def our_brands(request):
         
     return render(request, template, context)
 
-
 def news(request):
     template = 'frontend/news.html'
     context = {
@@ -270,7 +256,6 @@ def news(request):
         raise e
 
     return render(request, template, context)
-
 
 def contact(request):
 
@@ -333,7 +318,6 @@ def contact(request):
 
     return render(request, template, context)
 
-
 def news_detail(request, slug):
     template = 'detail/news.html'
     context = {
@@ -373,7 +357,6 @@ def news_detail(request, slug):
 
     return render(request, template, context)
 
-
 def brand_detail(request, id):
     template = 'detail/news.html'
     context = {}
@@ -386,7 +369,6 @@ def brand_detail(request, id):
         raise e
 
     return render(request, template, context)
-
 
 def subscribe(request):
     template = 'frontend/index.html'
@@ -439,7 +421,6 @@ def subscribe(request):
             return redirect(url)
 
     return render(request, template, context)
-
 
 def contact_post(request):
     template = 'frontend/index.html'
@@ -510,7 +491,6 @@ def contact_post(request):
 
     return render(request, template, context)
 
-
 def search(request):
     template = 'frontend/search.html'
     context = {
@@ -549,6 +529,9 @@ def search(request):
 
     return render(request,template,context)
 
+"""
+Custom error views
+"""
 def my_custom_bad_request_view(request):
     context = {
         'pg_title':'',
@@ -557,7 +540,6 @@ def my_custom_bad_request_view(request):
     n_error = '400'
     template = 'errors/400.html'
     return render(request, template, status=400)
-
 
 def my_custom_permission_denied_view(request):
     context = {
@@ -568,7 +550,6 @@ def my_custom_permission_denied_view(request):
     template = 'errors/403.html'
     return render(request, template, status=403)
 
-
 def my_custom_page_not_found_view(request):
     context = {
         'pg_title':'',
@@ -577,7 +558,6 @@ def my_custom_page_not_found_view(request):
     n_error = '404'
     template = 'errors/404.html'
     return render(request, template, status=404)
-
 
 def my_custom_error_view(request):
     context = {

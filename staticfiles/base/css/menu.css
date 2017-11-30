@@ -53,4 +53,6 @@ li form .submit-input{background-color: rgba(255,255,255,0);border: none;}
 .uk-heading-line span {text-transform: uppercase;}
 .uk-heading-line>:after, .uk-heading-line>:before{border-bottom: 2.5px solid #009587 !important;}
 .green-phx-gradient {background: linear-gradient(130deg,#b0d2cf 0,#b0d1d1 50%,#6abdb5) !important;}
-#newsletterInput{border-radius: 10px !important;border: rgba(0, 0, 0, 0)}
+#newsletterInput{border-radius: 10px !important;border: rgb(7, 141, 129) 1px solid; text-align: center}
+.card-shadow{box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);}
+.card-shadow:hover{box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);}

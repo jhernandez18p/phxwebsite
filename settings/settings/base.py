@@ -114,7 +114,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'settings.settings.custom_context_processors.menu',
-                'settings.settings.custom_context_processors.lang',
+                'settings.settings.custom_context_processors.cookies',
             ],
         },
     },

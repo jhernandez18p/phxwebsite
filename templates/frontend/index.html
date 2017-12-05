@@ -360,16 +360,20 @@
     var swiper = new Swiper('.full-screen .swiper-container', {
         pagination: '.full-screen .swiper-pagination',
         paginationClickable: true,
-        nextButton: '.full-screen .swiper-button-next',
-        prevButton: '.full-screen .swiper-button-prev',
+        navigation: {
+            nextEl: '.full-screen .swiper-button-next',
+            prevEl: '.full-screen .swiper-button-prev',
+        },
         loop: true,
         autoplay: 8000,
     });
     var swiperBiz = new Swiper('.banners-biz .swiper-container', {
         pagination: '.banners-biz .swiper-pagination',
         paginationClickable: true,
-        nextButton: '.banners-biz .swiper-button-next',
-        prevButton: '.banners-biz .swiper-button-prev',
+        navigation: {
+            nextEl: '.banners-biz .swiper-button-next',
+            prevEl: '.banners-biz .swiper-button-prev',
+        },
         loop: true,
         autoplay: 8000,
     });

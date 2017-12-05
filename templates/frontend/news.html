@@ -171,8 +171,10 @@
     var swiper = new Swiper('.full-screen .swiper-container', {
         pagination: '.full-screen .swiper-pagination',
         paginationClickable: true,
-        nextButton: '.full-screen .swiper-button-next',
-        prevButton: '.full-screen .swiper-button-prev',
+        navigation: {
+            nextEl: '.full-screen .swiper-button-next',
+            prevEl: '.full-screen .swiper-button-prev',
+        },
         loop: true,
         autoplay: 8000,
     });

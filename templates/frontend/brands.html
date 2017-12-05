@@ -255,8 +255,10 @@
                                             swiper = new Swiper('.brandSlide{{brand.id}} .swiper-container', {
                                                 pagination: '.brandSlide{{brand.id}} .swiper-pagination',
                                                 paginationClickable: true,
-                                                nextButton: '.brandSlide{{brand.id}} .swiper-button-next',
-                                                prevButton: '.brandSlide{{brand.id}} .swiper-button-prev',
+                                                navigation: {
+                                                    nextEl: '.brandSlide{{brand.id}} .swiper-button-next',
+                                                    prevEl: '.brandSlide{{brand.id}} .swiper-button-prev',
+                                                },
                                                 loop: true,
                                                 autoplay: 8000,
                                             });
@@ -300,8 +302,10 @@
     var swiper = new Swiper('.full-screen .swiper-container', {
         pagination: '.full-screen .swiper-pagination',
         paginationClickable: true,
-        nextButton: '.full-screen .swiper-button-next',
-        prevButton: '.full-screen .swiper-button-prev',
+        navigation: {
+            nextEl: '.full-screen .swiper-button-next',
+            prevEl: '.full-screen .swiper-button-prev',
+        },
         loop: true,
         autoplay: 8000,
     });

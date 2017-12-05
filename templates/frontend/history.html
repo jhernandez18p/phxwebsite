@@ -4,25 +4,10 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'base/css/swiper.min.css' %}">
 <style media="screen">
-    .timeline-container, .mov {
-        height: 600px;
-        margin-bottom: 20px;
-    }
-    .timeline, .mov {
-        /*margin-top: 25px;*/
-        height: 100%;
-        /*
-        overflow: hidden;
-        */
-    }
+    .timeline-container, .mov {height: 600px;margin-bottom: 20px;}
+    .timeline, .mov {height: 100%;}
     .timeline .swiper-container ,
-    .mov .swiper-container {
-        height: 100%;
-        width: 100%;
-        padding-top: 50px;
-        padding-bottom: 50px;
-    }
-
+    .mov .swiper-container {height: 100%;width: 100%;padding-top: 50px;padding-bottom: 50px;}
     .timeline .swiper-slide {
         background-position: center;
         background-size: cover;
@@ -31,22 +16,28 @@
         background-color: #fff;
         margin-top: 70px
     }
-
-    .timeline .swiper-button-next, .timeline .swiper-button-prev{
-        top: 10%;
-    }
-
-    .timeline .sw-pagination{
-        bottom: 89%;
-    }
-    .mov .swiper-container {
-        width: 100%;
-        height: 100%;
-    }
-    .mov .swiper-slide {
+    .timeline .swiper-button-next, .timeline .swiper-button-prev{top: 10%;}
+    .timeline-sw-pagination{bottom: 89% !important;}
+    .mov .swiper-container {width: 100%;height: 100%;}
+    .mov .swiper-slide {text-align: center;font-size: 18px;background: #fff;}
+    .values .swiper-slide {
+        height: 150px !important;
         text-align: center;
         font-size: 18px;
-        background: #fff;
+        background: #222;
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
     }
 </style>
 {% endblock %}
@@ -94,18 +85,18 @@
     {% if site %}
         <div class="uk-width-1-1 uk-background-muted">
             <div class="uk-container">
-                <div class="" uk-scrollspy="cls: uk-animation-fade-in; target: > .uk-card; delay: 800;">
-                    <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
-                        <div class="uk-card-media-left uk-cover-container">
+                <div class="">
+                    <div class=" uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+                        <div class="uk-card-media-left uk-cover-container card-shadow">
                             {% if site.mision_img %}
                                 <img src="{{site.mision_img.url}}" alt="Mision" uk-cover>
                             {% else %}
-                                <img src="https://images.pexels.com/photos/26092/pexels-photo-26092.jpg?h=350&auto=compress&cs=tinysrgb" alt="" uk-cover>
+                                <img src="{% static 'base/images/base.png' %}" alt="" uk-cover>
                             {% endif %}
                             <canvas width="600" height="400"></canvas>
                         </div>
                         <div>
-                            <div class="uk-card-body">
+                            <div class="uk-card-body uk-text-middle">
                                 <h3 class="uk-card-title">
                                     {% if lang_code == 'English' %}
                                         Mision
@@ -122,17 +113,17 @@
                         </div>
                     </div>
 
-                    <div class="uk-card uk-card-default uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
-                        <div class="uk-flex-last@s uk-card-media-right uk-cover-container">
+                    <div class=" uk-grid-collapse uk-child-width-1-2@s uk-margin" uk-grid>
+                        <div class="uk-flex-last@s uk-card-media-right uk-cover-container card-shadow">
                             {% if site.vision_img %}
                                 <img src="{{site.vision_img.url}}" alt="Vision" uk-cover>
                             {% else %}
-                                <img src="https://images.pexels.com/photos/7376/startup-photos.jpg?h=350&auto=compress&cs=tinysrgb" alt="Vision" uk-cover>
+                                <img src="{% static 'base/images/base.png' %}" alt="Vision" uk-cover>
                             {% endif %}
                             <canvas width="600" height="400"></canvas>
                         </div>
                         <div>
-                            <div class="uk-card-body">
+                            <div class="uk-card-body uk-text-middle">
                                 <h3 class="uk-card-title">
                                     {% if lang_code == 'English' %}
                                         Vision
@@ -160,7 +151,7 @@
                 <h3 class="uk-heading-line uk-text-center" style="left: 50%; top: 50%">
                     <span>
                         {% if lang_code != 'English' %}
-                            Valores del grupo
+                            Nuestros Valores
                         {% else %}
                             Our values
                         {% endif %}
@@ -168,62 +159,90 @@
                 </h3>
             </div>
         </div>
-        <div class="">
+        <div class="values">
             <div class="uk-container">
-                <div class="uk-grid-match uk-text-center uk-child-width-1-4@m uk-child-width-2@s" uk-grid uk-height-match="target: > div > .uk-card" >
-                    <div>
-                        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle">
-                            <div class="uk-text-center uk-padding-large">
-                                <h3 class="uk-card-title">
+                <!-- <div class="uk-grid-match uk-text-center uk-child-width-1-4@m uk-child-width-2@s" uk-grid uk-height-match="target: > div > .uk-card" > -->
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper ">
+                            <div class="swiper-slide uk-tile uk-tile-secondary">
+                                <p class="uk-h4 uk-text-middle">
                                     {% if lang_code == 'English' %}
-                                         Operational excellence
+                                        Operational excellence
                                     {% else %}
                                         Excelencia operacional
                                     {% endif %}
-                                </h3>
+                                </p>
                             </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle">
-                            <div class="uk-text-center uk-padding-large">
-                                <h3 class="uk-card-title">
+                            <div class="swiper-slide uk-tile uk-tile-secondary">
+                                <p class="uk-h4 uk-text-middle">
                                     {% if lang_code == 'English' %}
                                         Entrepreneurial spirit
                                     {% else %}
                                         Espíritu emprendedor
                                     {% endif %}
-                                </h3>
+                                </p>
                             </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle">
-                            <div class="uk-text-center uk-padding-large">
-                                <h3 class="uk-card-title">
+                            <div class="swiper-slide uk-tile uk-tile-secondary">
+                                <p class="uk-h4 uk-text-middle">
                                     {% if lang_code == 'English' %}
                                         Passion for our brands
                                     {% else %}
                                         Pasión por nuestras marcas
                                     {% endif %}
-                                </h3>
+                                </p>
                             </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="uk-card uk-card-default uk-flex uk-flex-center uk-flex-middle">
-                            <div class="uk-text-center uk-padding-large">
-                                <h3 class="uk-card-title">
+                            <div class="swiper-slide uk-tile uk-tile-secondary">
+                                <p class="uk-h4 uk-text-middle">
                                     {% if lang_code == 'English' %}
                                         Client focus
                                     {% else %}
                                         Enfoque en el cliente
                                     {% endif %}
-                                </h3>
+                                </p>
+                            </div>
+                            <div class="swiper-slide uk-tile uk-tile-secondary">
+                                <p class="uk-h4 uk-text-middle">
+                                    {% if lang_code == 'English' %}
+                                        Operational excellence
+                                    {% else %}
+                                        Excelencia operacional
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="swiper-slide uk-tile uk-tile-secondary">
+                                <p class="uk-h4 uk-text-middle">
+                                    {% if lang_code == 'English' %}
+                                        Entrepreneurial spirit
+                                    {% else %}
+                                        Espíritu emprendedor
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="swiper-slide uk-tile uk-tile-secondary">
+                                <p class="uk-h4 uk-text-middle">
+                                    {% if lang_code == 'English' %}
+                                        Passion for our brands
+                                    {% else %}
+                                        Pasión por nuestras marcas
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="swiper-slide uk-tile uk-tile-secondary">
+                                <p class="uk-h4 uk-text-middle">
+                                    {% if lang_code == 'English' %}
+                                        Client focus
+                                    {% else %}
+                                        Enfoque en el cliente
+                                    {% endif %}
+                                </p>
                             </div>
                         </div>
+                        <!-- Add Pagination -->
+                        <!-- <div class="swiper-pagination values-sw-pagination"></div> -->
+                        <div class="swiper-button-next swiper-button-white sw-next"></div>
+                        <div class="swiper-button-prev swiper-button-white sw-prev"></div>
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
         </div>
     </div>
@@ -281,7 +300,7 @@
                                 {% endfor %}
                             </div>
                             <!-- Add Pagination -->
-                            <div class="swiper-pagination sw-pagination"></div>
+                            <div class="swiper-pagination timeline-sw-pagination"></div>
                             <div class="swiper-button-next swiper-button-white sw-next"></div>
                             <div class="swiper-button-prev swiper-button-white sw-prev"></div>
                         </div>
@@ -314,7 +333,7 @@
                                 {% endfor %}
                             </div>
                             <!-- Add Pagination -->
-                            <div class="swiper-pagination .sw-pagination"></div>
+                            <div class="swiper-pagination mov-sw-pagination"></div>
                             <div class="swiper-button-next swiper-button-white .sw-next"></div>
                             <div class="swiper-button-prev swiper-button-white .sw-prev"></div>
                         </div>
@@ -330,16 +349,39 @@
 {% block js %}
 
 <script type="text/javascript">
-    var swiper;
-    var swiperMov;
+    var swiper,swiperMov,swiperVal;
+    swiperVal = new Swiper('.values .swiper-container', {
+        slidesPerView: 4,
+        spaceBetween: 30,
+        // centeredSlides: true,
+        cssWidthAndHeight: true,
+        navigation: {
+            // nextEl: '.swiper-button-next',
+            // prevEl: '.swiper-button-prev',
+            nextEl: '.values .sw-next',
+            prevEl: '.values .sw-prev',
+        },
+        // pagination: {
+        //     el: '.values-sw-pagination',
+        //     dynamicBullets: true,
+        // },
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+    });
     swiper = new Swiper('.timeline .swiper-container', {
         slidesPerView: 3,
         spaceBetween: 30,
         centeredSlides: true,
         cssWidthAndHeight: true,
-        pagination: '.timeline .sw-pagination',
-        nextButton: '.timeline .sw-next',
-        prevButton: '.timeline .sw-prev',
+        pagination: {
+            el : '.timeline-sw-pagination',
+        },
+        navigation: {
+            nextEl: '.timeline .sw-next',
+            prevEl: '.timeline .sw-prev',
+        },
     });
     swiperMov = new Swiper('.mov .swiper-container', {
         //slidesPerView: 1,
@@ -352,7 +394,7 @@
             shadowScale: 0.94,
         },
         pagination: {
-            el:  '.mov .swiper-pagination',
+            el:  '.mov-swiper-pagination',
         },
         navigation: {
             nextEl: '.mov .swiper-button-next',

@@ -95,7 +95,7 @@
                             <div>
                                 <div class="uk-card uk-card-default">
                                     <div class="uk-card-media-top">
-                                        <img src="{% if new.short_image %}{{new.short_image.url}}{% else %}https://images.pexels.com/photos/192505/pexels-photo-192505.jpeg?h=350&auto=compress&cs=tinysrgb{% endif %}" alt="{% if lang_code != 'English' %}{{new.es_name}}{% else %}{{new.en_name}}{% endif %}">
+                                        <img src="{% if new.short_image %}{{new.short_image.url}}{% else %}{% static 'base/images/base.png' %}{% endif %}" alt="{% if lang_code != 'English' %}{{new.es_name}}{% else %}{{new.en_name}}{% endif %}">
                                     </div>
                                     <div class="uk-card-body">
                                         <h3 class="uk-card-title">

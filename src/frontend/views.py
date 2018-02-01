@@ -89,9 +89,9 @@ def index(request):
     context['title'] = title
     context['keywords'] = keywords
 
-    pages = Pages.objects.all()
-    if pages.exists():
-        page = pages[0]#.filter(en_name="Home")
+    # pages = Pages.objects.all()
+    # if pages.exists():
+    #     page = pages[0]#.filter(en_name="Home")
         # print(page[0].id)
 
     companies = Company.objects.all()

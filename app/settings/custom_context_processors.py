@@ -75,10 +75,12 @@ def initial_data():
 
     brands = Brand.objects.all()
     if brands.exists():
-        for brand in brands:
-            print(brand)
+        pass
+        # for brand in brands:
+            # print(brand)
     else:
-        brands_json = json.loads(open('app/dbs/brands.json').read())
+        pass
+        # brands_json = json.loads(open('app/dbs/brands.json').read())
         # for key,value in brands_json:
             # for objects in value:
         # print('----------------')

@@ -91,7 +91,7 @@ def index(request):
 
     pages = Pages.objects.all()
     if pages.exists():
-        page = pages.filter(en_name="Home")
+        page = pages[0]#.filter(en_name="Home")
         # print(page[0].id)
 
     companies = Company.objects.all()

@@ -94,16 +94,16 @@ def index(request):
     #     page = pages[0]#.filter(en_name="Home")
         # print(page[0].id)
 
-    companies = Company.objects.all()
-    if companies.exists():
-        context['companies'] = companies
+    # companies = Company.objects.all()
+    # if companies.exists():
+    #     context['companies'] = companies
     
-    positions = Position.objects.all()
-    if positions.exists():
-        header = positions.filter(en_name='header')
-        footer = positions.filter(en_name='footer')
-        section = positions.filter(en_name='section')
-        full_screen = positions.filter(en_name='full_screen')
+    # positions = Position.objects.all()
+    # if positions.exists():
+    #     header = positions.filter(en_name='header')
+    #     footer = positions.filter(en_name='footer')
+    #     section = positions.filter(en_name='section')
+    #     full_screen = positions.filter(en_name='full_screen')
 
     header_carousel = [
         {'large_banner':'/static/base/images/banner-01.png','es_name':'banner 01','en_name':'banner 01'},

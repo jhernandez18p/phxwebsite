@@ -22,15 +22,15 @@
     {% block fullscreen %}{% endblock %}
     
     {% if user_fist_time %}
-    <div id="body-wrapper" class="uk-invisible">
+        <div id="body-wrapper" class="uk-invisible">
     {% endif %}
 
         <header>{% include 'base/nav.html' %}</header>
         <section>{% block content %}{% endblock %}</section>
         <footer>{% include 'base/footer.html' %}</footer>
-    
+
     {% if user_fist_time %}
-    </div>
+        </div>
     {% endif %}
 
     <script src="{% static 'base/js/swiper.min.js' %}" charset="utf-8"></script>
@@ -39,17 +39,17 @@
     <script src="{% static 'base/js/app.js' %}" charset="utf-8"></script>
     {% block js %}{% endblock %}
     {% if user_fist_time %}
-    <script>
-        UIkit.util.ready(function () {
-            var bar = document.getElementById('js-progressbar');
-            var animate = setInterval(function () {
-                bar.value += 20;
-                if (bar.value >= bar.max) {
-                    clearInterval(animate);
-                }
-            }, 1000);
-        });
-    </script>
+        <script>
+            UIkit.util.ready(function () {
+                var bar = document.getElementById('js-progressbar');
+                var animate = setInterval(function () {
+                    bar.value += 20;
+                    if (bar.value >= bar.max) {
+                        clearInterval(animate);
+                    }
+                }, 1000);
+            });
+        </script>
     {% endif %}
 </body>
 </html>

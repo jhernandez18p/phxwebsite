@@ -112,7 +112,7 @@
     
     
             var image = {
-              url: "{% static 'base/images/phx-pinx.png' %}",
+              url: "/static/base/images/phx-pinx.png",
               // This marker is 20 pixels wide by 32 pixels high.
               size: new google.maps.Size(45, 45),
               // The origin for this image is (0, 0).
@@ -164,3 +164,22 @@
     </script>
 </body>
 </html>
+
+
+{% for objects in companies %}
+{% for object_keys, object_values in objects.items%}
+    <p>{{object_keys}} - {{object_values}}</p>
+    {% if object_values.items %}
+        {% for object_key, object_value in object_values.items %}
+            <h1>{{object_key}}</h1>
+            {% if object_value.items %}
+                {% for key, value in object_value.items %}
+                    {{key}} - <a href="{{value}}">{{value}}</a>
+                    <br>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+{% endfor %}
+<hr>
+{% endfor %}

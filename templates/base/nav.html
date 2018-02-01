@@ -4,18 +4,16 @@
     <div class="uk-navbar-center">
         <div>
             <ul class="uk-navbar-nav">
-                {% if site %}
-                    <li class="{% if pg_title == 'home' %}uk-active{% endif %}">
-                        <a href="
-                        {% if lang_code == 'English' %}
-                        {% url 'en:en' %}
-                        {% else %}
-                        {% url 'es:es' %}
-                        {% endif %}">
-                            <img class="logo-menu" src="{% if site.logo %}{{site.logo.url}}{% else %}{% static 'base/images/logo.png' %}{% endif %}" alt="{{site.name}}">
-                        </a>
-                    </li>
-                {% endif %}
+                <li class="{% if pg_title == 'home' %}uk-active{% endif %}">
+                    <a href="
+                    {% if lang_code == 'English' %}
+                    {% url 'en:en' %}
+                    {% else %}
+                    {% url 'es:es' %}
+                    {% endif %}">
+                    <img class="logo-menu" src="{% if site.logo %}{{site.logo.url}}{% else %}{% static 'base/images/logo.png' %}{% endif %}" alt="{{site.name}}">
+                    </a>
+                </li>
                 <li class="{% if pg_title == 'home' %}uk-active{% endif %}">
                     <a href="
                     {% if lang_code == 'English' %}

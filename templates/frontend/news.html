@@ -5,8 +5,12 @@
 <style media="screen">
     .swiper-container {
         width: 100%;
-        height: 100%;
+        height: 40vh;
     }
+    .swiper-container img {
+        margin-left: 100px;
+    }
+
     .swiper-slide {
         text-align: center;
         font-size: 18px;
@@ -34,27 +38,28 @@
         <div class="uk-width-1-1">
             <div class="uk-section uk-section-small uk-section-muted">
                 <div class="uk-container">
-                    {% if banners %}
+                    {% if news_banners %}
                         <!-- Carrusel -->
                         <div class="uk-section-muted">
                             <div class="full-screen">
                                 <div class="swiper-container">
                                     <div class="swiper-wrapper">
-                                        {% for banner in banners %}
+                                        {% for banner in news_banners %}
                                             <div class="swiper-slide">
                                                 {% if lang_code != 'English' %}
                                                     {% if banner.large_image %}
-                                                        <img src="{{banner.large_image.url}}" alt="{{banner.es_name}}">
+                                                        <img src="{{banner.large_image}}" alt="{{banner.es_name}}">
                                                     {% else %}
                                                         <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.es_name}}">
                                                     {% endif %}
                                                 {% else %}
                                                     {% if banner.image %}
-                                                        <img src="{{banner.large_image.url}}" alt="{{banner.es_name}}">
+                                                        <img src="{{banner.large_image}}" alt="{{banner.es_name}}">
                                                     {% else %}
                                                         <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.en_name}}">
                                                     {% endif %}
                                                 {% endif %}
+                                                <canvas width="100%" height="400"></canvas>
                                             </div>
                                         {% endfor %}
                                     </div>
@@ -90,7 +95,7 @@
                     </li>
                 </ul>
                 {% if news %}
-                    <div class="uk-grid-match uk-child-width-1-2@m uk-text-center spy" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-fade; target: > div > .uk-card; delay: 800; repeat: true">
+                    <div class="uk-grid-match uk-child-width-1-2@m uk-text-center spy" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-fade; target: > div > .uk-card; delay: 800;">
                         {% for new in news %}
                             <div>
                                 <div class="uk-card uk-card-default">
@@ -113,12 +118,12 @@
                                     </div>
                                     <div class="uk-card-footer">
                                         {% if lang_code == 'English' %}
-                                            <form action="{% url 'en:news_detail' new.en_slug %}" method="post">
+                                            <form action="{% url 'en:news' %}" method="post">
                                                 {% csrf_token %}
                                                 <button class="uk-button uk-button-text">Read more</button>
                                             </form>
                                         {% else %}
-                                            <form action="{% url 'es:detalle_noticias' new.es_slug %}" method="post">
+                                            <form action="{% url 'es:noticias' %}" method="post">
                                                 {% csrf_token %}
                                                 <button class="uk-button uk-button-text">Ver más</button>
                                             </form>

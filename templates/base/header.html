@@ -1,5 +1,4 @@
-{% load staticfiles %}
-<meta name="description" content="{{site.es_description|safe}}">
+<meta name="description" content="{{site.es_description|safe}}">{% load staticfiles %}
 <meta name="keywords" content="phoenix world trade, grupo phoenix, phoenix, phx, retail, wholesale, {{keywords}}">
 <meta name="author" content="Dev2tech" >
 <meta name="msapplication-TileColor" content="#f3f3f6">
@@ -21,11 +20,5 @@
 <link rel="stylesheet" href="{% static 'base/css/bootstrap.min.css' %}">
 <link rel="stylesheet" href="{% static 'base/css/uikit.min.css' %}">
 <link rel="stylesheet" href="{% static 'base/css/menu.css' %}">
-<title>
-    {% if lang_code == 'English' %}
-    {{title}} - {{site.en_name}}
-    {% else %}
-    {{title}} - {{site.es_name}}
-    {% endif %}
-</title>
+<title>{{title}} - {{site_name}}</title>
 <link href="https://fonts.googleapis.com/css?family=Sarina" rel="stylesheet">

@@ -4,6 +4,9 @@
 {% block css %}
 <link rel="stylesheet" href="{% static 'base/css/swiper.min.css' %}">
 <style media="screen">
+    .values{
+        margin-bottom: 45px;
+    }
     .timeline-container, .mov {height: 600px;margin-bottom: 20px;}
     .timeline, .mov {height: 100%;}
     .timeline .swiper-container ,
@@ -85,13 +88,17 @@
                    <div class="swiper-wrapper">
                         {% for banner in banners %}
                             <div class="swiper-slide">
-                                <img src="{{banner.short_banner.url}}" alt="{% if lang_code != 'English' %}{{banner.es_name}}{% else %}{{banner.en_name}}{% endif %}">
-                                 <div class="uk-overlay-primary uk-position-cover"></div>
+                                <div class="uk-overlay-primary uk-position-cover"></div>
+                                {% if lang_code != 'English' %}
+                                    <img src="{{banner.short_banner}}" alt="{{banner.es_name}}">
+                                {% else %}
+                                    <img src="{{banner.short_banner}}" alt="{{banner.en_name}}">
+                                {% endif %}
                             </div>
                         {% endfor %}
                         <div class="swiper-pagination"></div>
-                        <div class="swiper-button-next"></div>
-                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next swiper-button-white"></div>
+                        <div class="swiper-button-prev swiper-button-white"></div>
                     </div>
                 </div>
             </div>
@@ -101,23 +108,23 @@
     <div class="uk-invisible@m">
         <br><br><br>
     </div>
-    <div class="uk-background-muted">
-        <div class="uk-container  uk-background-muted">
-            <div class="uk-section-small ">
-                <h3 class="uk-heading-line" style="left: 50%; top: 50%">
-                    <span>
-                        {% if lang_code != 'English' %}
-                            ¿Quienes somos?
-                        {% else %}
-                            About us
-                        {% endif %}
-                    </span>
-                </h3>
+    {% if site %}
+        <div class="uk-background-muted">
+            <div class="uk-container  uk-background-muted">
+                <div class="uk-section-small ">
+                    <h3 class="uk-heading-line" style="left: 50%; top: 50%">
+                        <span>
+                            {% if lang_code != 'English' %}
+                                ¿Quienes somos?
+                            {% else %}
+                                About us
+                            {% endif %}
+                        </span>
+                    </h3>
+                </div>
             </div>
         </div>
-    </div>
 
-    {% if site %}
         <div class="uk-width-1-1 uk-background-muted">
             <div class="uk-container">
                 <div class="">
@@ -196,7 +203,7 @@
         </div>
         <div class="values">
             <div class="uk-container">
-                <!-- <div class="uk-grid-match uk-text-center uk-child-width-1-4@m uk-child-width-2@s" uk-grid uk-height-match="target: > div > .uk-card" > -->
+                <div class="uk-visible@m">
                     <div class="swiper-container">
                         <div class="swiper-wrapper ">
                             <div class="swiper-slide uk-tile uk-tile-secondary">
@@ -277,36 +284,118 @@
                         <div class="swiper-button-next swiper-button-white sw-next"></div>
                         <div class="swiper-button-prev swiper-button-white sw-prev"></div>
                     </div>
-                <!-- </div> -->
+                </div>
+                <div class="values_mov uk-hidden@m">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper ">
+                            <div class="swiper-slide uk-tile uk-tile-secondary">
+                                <p class="uk-h4 uk-text-middle">
+                                    {% if lang_code == 'English' %}
+                                        Operational excellence
+                                    {% else %}
+                                        Excelencia operacional
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="swiper-slide uk-tile uk-tile-secondary">
+                                <p class="uk-h4 uk-text-middle">
+                                    {% if lang_code == 'English' %}
+                                        Entrepreneurial spirit
+                                    {% else %}
+                                        Espíritu emprendedor
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="swiper-slide uk-tile uk-tile-secondary">
+                                <p class="uk-h4 uk-text-middle">
+                                    {% if lang_code == 'English' %}
+                                        Passion for our brands
+                                    {% else %}
+                                        Pasión por nuestras marcas
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="swiper-slide uk-tile uk-tile-secondary">
+                                <p class="uk-h4 uk-text-middle">
+                                    {% if lang_code == 'English' %}
+                                        Client focus
+                                    {% else %}
+                                        Enfoque en el cliente
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="swiper-slide uk-tile uk-tile-secondary">
+                                <p class="uk-h4 uk-text-middle">
+                                    {% if lang_code == 'English' %}
+                                        Operational excellence
+                                    {% else %}
+                                        Excelencia operacional
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="swiper-slide uk-tile uk-tile-secondary">
+                                <p class="uk-h4 uk-text-middle">
+                                    {% if lang_code == 'English' %}
+                                        Entrepreneurial spirit
+                                    {% else %}
+                                        Espíritu emprendedor
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="swiper-slide uk-tile uk-tile-secondary">
+                                <p class="uk-h4 uk-text-middle">
+                                    {% if lang_code == 'English' %}
+                                        Passion for our brands
+                                    {% else %}
+                                        Pasión por nuestras marcas
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="swiper-slide uk-tile uk-tile-secondary">
+                                <p class="uk-h4 uk-text-middle">
+                                    {% if lang_code == 'English' %}
+                                        Client focus
+                                    {% else %}
+                                        Enfoque en el cliente
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <!-- Add Pagination -->
+                        <!-- <div class="swiper-pagination values-sw-pagination"></div> -->
+                        <div class="swiper-button-next swiper-button-white sw-next"></div>
+                        <div class="swiper-button-prev swiper-button-white sw-prev"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-
-    <div class="uk-background-muted">
-        <div class="uk-container  uk-background-muted">
-            <div class="uk-section-small ">
-                <h3 class="uk-heading-line uk-text-right" style="left: 50%; top: 50%">
-                    <span>
-                        {% if lang_code != 'English' %}
-                            Nuestra historia
-                        {% else %}
-                            Our history
-                        {% endif %}
-                    </span>
-                </h3>
+    {% if timeline %}
+    
+        <div class="uk-background-muted">
+            <div class="uk-container  uk-background-muted">
+                <div class="uk-section-small ">
+                    <h3 class="uk-heading-line uk-text-right" style="left: 50%; top: 50%">
+                        <span>
+                            {% if lang_code != 'English' %}
+                                Nuestra historia
+                            {% else %}
+                                Our history
+                            {% endif %}
+                        </span>
+                    </h3>
+                </div>
             </div>
         </div>
-    </div>
 
-    {% if site.history %}
         <div id="gradient" class="uk-background-muted">
             <div class="uk-container">    
                 <div class="timeline-container uk-visible@m">
                     <div class="timeline">
                         <div class="swiper-container">
                             <div class="swiper-wrapper ">
-                                {% for obj in site.history.all %}
+                                {% for obj in timeline %}
                                     {% if lang_code != 'English' %}
                                         <div class="swiper-slide uk-padding">
                                             <h3>
@@ -315,7 +404,7 @@
                                                 {{obj.year}}
                                             </h3>
                                             <div class="uk-padding">
-                                                {{obj.ns_description|safe}}
+                                                {{obj.es_description|safe}}
                                             </div>
                                         </div>
                                     {% else %}
@@ -345,7 +434,7 @@
                     <div class="mov">
                         <div class="swiper-container">
                             <div class="swiper-wrapper">
-                                {% for obj in site.history.all %}
+                                {% for obj in timeline %}
                                     {% if lang_code != 'English' %}
                                         <div class="swiper-slide uk-padding">
                                             <h3>
@@ -353,7 +442,7 @@
                                                 <br>
                                                 {{obj.year}}
                                             </h3>
-                                            {{obj.es_description|safe}}
+                                            "{{obj.es_description|safe}}""
                                         </div>
                                     {% else %}
                                         <div class="swiper-slide uk-padding">
@@ -384,9 +473,29 @@
 {% block js %}
 
 <script type="text/javascript">
-    var swiper,swiperMov,swiperVal;
+    var swiper,swiperMov,swiperValMov,swiperVal;
     swiperVal = new Swiper('.values .swiper-container', {
         slidesPerView: 4,
+        spaceBetween: 30,
+        // centeredSlides: true,
+        cssWidthAndHeight: true,
+        navigation: {
+            // nextEl: '.swiper-button-next',
+            // prevEl: '.swiper-button-prev',
+            nextEl: '.values .sw-next',
+            prevEl: '.values .sw-prev',
+        },
+        // pagination: {
+        //     el: '.values-sw-pagination',
+        //     dynamicBullets: true,
+        // },
+        autoplay: {
+            delay: 2500,
+            disableOnInteraction: false,
+        },
+    });
+    swiperValMov = new Swiper('.values_mov .swiper-container', {
+        slidesPerView: 1,
         spaceBetween: 30,
         // centeredSlides: true,
         cssWidthAndHeight: true,

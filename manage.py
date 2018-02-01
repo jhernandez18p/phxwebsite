@@ -6,10 +6,12 @@ from decouple import config
 DEBUG = config('DEBUG')
 
 if __name__ == "__main__":
+
     if str(DEBUG) == 'True':
-       os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.settings.base")
+       os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings.base")
     elif str(DEBUG) == 'False':
-       os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.settings.prod")
+       os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings.prod")
+    
     try:
         from django.core.management import execute_from_command_line
     except ImportError:

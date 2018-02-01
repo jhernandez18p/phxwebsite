@@ -24,11 +24,14 @@
         }
         
     }
+    .uk-grid {
+        margin-left: 0px;
+    }
 </style>
 {% endblock %}
 
 {% block fullscreen %}
-    {% if banners %}
+    {% if full_banners %}
         <div class="full-screen-container wrapper uk-hidden"></div>
             <div class="uk-section-muted">
                 <div class="full-screen">
@@ -50,15 +53,21 @@
                             </span>
                         </div>
                         <div class="swiper-wrapper" uk-height-match="target: > div > img">
-                            {% for banner in banners %}
+                            {% for banner in full_banners %}
                                 <div class="swiper-slide">
                                     <div class="uk-child-width-1-1@" >
-                                        <img class="uk-background-cover uk-visible@m" src="{{banner.large_banner.url}}" alt="
-                                        {% if lang_code != 'English' %}
-                                        {{banner.es_name}}
+                                        <img class="uk-background-cover uk-visible@m" 
+                                        {% if banner.large_banner %}
+                                            src="{{banner.large_banner}}"
                                         {% else %}
-                                        {{banner.en_name}}
-                                        {% endif %}" uk-height-viewport>
+                                            src="{% static 'base/images/base.png' %}"
+                                        {% endif %}
+                                            alt="
+                                            {% if lang_code != 'English' %}
+                                            {{banner.es_name}}
+                                            {% else %}
+                                            {{banner.en_name}}
+                                            {% endif %}" uk-height-viewport>
                                     </div>
                                 </div>
                             {% endfor %}
@@ -66,7 +75,7 @@
                         <div class="swiper-button-next swiper-button-white"></div>
                         <div class="swiper-button-prev swiper-button-white"></div>
                         <div class="top-logo uk-visible@m uk-position-center">
-                            <img class="logo-menu" src="{% if site.logo %}{{site.logo.url}}{% else %}{% static 'base/images/logo.png' %}{% endif %}" alt="{{site.name}}">
+                            <img class="logo-menu" src="{% static 'base/images/logo.png' %}" alt="{{site.name}}">
                         </div>
                     </div>
                 </div>
@@ -81,8 +90,7 @@
             <div class="uk-section-muted">
                 <div class="uk-cover-container">
                     <canvas width="100%" height="800"></canvas>
-                    <img src="{% static 'base/images/chair.jpg' %}" alt="" uk-cover>
-                    <div class="uk-overlay-primary uk-position-cover"></div>
+
                     <div class="My-box" uk-scrollspy="cls: uk-animation-slide-top-small; target: > .uk-card; delay: 200;">
                         <div class="uk-card uk-card-default  uk-card-body ">
                             {% if lang_code == 'English' %}
@@ -100,81 +108,59 @@
                             {% endif %}
                         </div>
                     </div>
+                    <img src="{% static 'base/images/chair.jpg' %}" alt="" uk-cover>
+                    <div class="uk-overlay-primary uk-position-cover"></div>
                 </div>
             </div>
         </div>
     {% endif %}
     
-    <div class="uk-container">
-        <div class="uk-section-small uk-section-muted">
-            <h3 class="uk-heading-line" style="left: 50%; top: 50%">
-                <span>
-                    {% if lang_code != 'English' %}
-                        Nuestro negocio
-                    {% else %}
-                        Our business
-                    {% endif %}
-                </span>
-            </h3>
+    {% if  business_banners  %}
+        <div class="uk-container">
+            <div class="uk-section-small uk-section-muted">
+                <h3 class="uk-heading-line" style="left: 50%; top: 50%">
+                    <span>
+                        {% if lang_code != 'English' %}
+                            Nuestro negocio
+                        {% else %}
+                            Our business
+                        {% endif %}
+                    </span>
+                </h3>
+            </div>
         </div>
-    </div>
 
-    {% if  banners_biz  %}
-        <div class="uk-width-1-1">
-            <div class="uk-section-muted uk-margin-large">
-                <div class="uk-container">
-                    <!-- 
-                    <div class="uk-card uk-card-default ">
-                        <div class="banners-biz">
-                            <div class="swiper-container">
-                               <div class="swiper-wrapper">
-                                    {% for banner in banners_biz %}
-                                        <div class="swiper-slide">
-                                            {% if lang_code != 'English' %}
-                                                <a href="{% url 'es:marcas' %}">
-                                                    {% if banner.image %}
-                                                        <img src="{{banner.image.url}}" alt="{{banner.es_name}}">
-                                                    {% else %}
-                                                        <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.es_name}}">
-                                                    {% endif %}
-                                                </a>
-                                            {% else %}
-                                                <a href="{% url 'en:our_brands' %}">
-                                                    {% if banner.image %}
-                                                        <img src="{{banner.image.url}}" alt="{{banner.es_name}}">
-                                                    {% else %}
-                                                        <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.en_name}}">
-                                                    {% endif %}
-                                                </a>
-                                            {% endif %}
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                                <div class="swiper-pagination uk-visible@m"></div>
-                                <div class="swiper-button-next swiper-button-white uk-visible@m"></div>
-                                <div class="swiper-button-prev swiper-button-white uk-visible@m"></div>
+        <div class="uk-width-1-1 uk-background-muted">
+            <div class="uk-container">
+                {% for banner in business_banners %}
+                    {% if lang_code != 'English' %}
+                        <div class="uk-child-width-1-2@s biz-cards uk-margin-xlarge" uk-grid>
+                            <div class="child card-shadow uk-card-media-left uk-cover-container">
+                                <img src="{{banner.image}}" alt="{{banner.es_name}}" uk-cover>
+                                <canvas width="600" height="400"></canvas>
                             </div>
-                        </div>
-                    </div>
-                    -->
-                    
-                    {% for banner in banners_biz %}
-                        <div class="biz-cards uk-margin-xlarge">
-                            <div class="uk-child-width-1-2@s uk-margin" uk-grid>
-                                <div class="child card-shadow">
-                                    <img src="{{banner.image.url}}" alt="{% if lang_code != 'English' %}{{banner.es_name}}{% else %}{{banner.en_name}}{% endif %}" uk-cover>
-                                    <canvas width="600" height="400"></canvas>
-                                </div>
-                                <div>
-                                    <div class="">
-                                        <h3 class="uk-card-title">{% if lang_code != 'English' %}{{banner.es_name}}{% else %}{{banner.en_name}}{% endif %}</h3>
-                                        <p>{% if lang_code != 'English' %}{{banner.es_name}}{% else %}{{banner.en_name}}{% endif %}</p>
-                                    </div>
+                            <div>
+                                <div class="">
+                                    <h3 class="uk-card-title">{{banner.es_name}}</h3>
+                                    <p>{{banner.es_description}}</p>
                                 </div>
                             </div>
                         </div>
-                    {% endfor %}
-                </div>
+                    {% else %}
+                        <div class="uk-child-width-1-2@s biz-cards uk-margin-xlarge" uk-grid>
+                            <div class="child card-shadow uk-card-media-left uk-cover-container">
+                                <img src="{{banner.image}}" alt="{{banner.en_name}}" uk-cover>
+                                <canvas width="600" height="400"></canvas>
+                            </div>
+                            <div>
+                                <div class="">
+                                    <h3 class="uk-card-title">{{banner.en_name}}</h3>
+                                    <p>{{banner.en_description}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div> 
         
@@ -196,50 +182,67 @@
 
     <div id="map"></div>
 
-    <div class="uk-container">
-        <div class="uk-section-small uk-section-muted">
-            <h3 class="uk-heading-line uk-text-right" style="left: 50%; top: 50%">
-                <span>
-                    {% if lang_code != 'English' %}
-                        Noticias
-                    {% else %}
-                        News
-                    {% endif %}
-                </span>
-            </h3>
-        </div>
-    </div>
-
     {% if news %}
+
+        <div class="uk-container">
+            <div class="uk-section-small uk-section-muted">
+                <h3 class="uk-heading-line uk-text-right" style="left: 50%; top: 50%">
+                    <span>
+                        {% if lang_code != 'English' %}
+                            Noticias
+                        {% else %}
+                            News
+                        {% endif %}
+                    </span>
+                </h3>
+            </div>
+        </div>
+
         <div class=" uk-section-muted">
             <div class="uk-container">
-                <div class="uk-grid-match uk-child-width-expand@s uk-text-center" uk-grid uk-height-match="target: > div > .uk-card">
+                <div class="uk-grid-match uk-child-width-1-3@m uk-child-width-2@s uk-text-center" uk-grid uk-height-match="target: > div > .uk-card">
                     {% for obj in news %}
                         <div>
                             <div class="uk-card uk-card-default">
-                                <div class="uk-card-media-top">
-                                    <img src="{% if obj.short_image %}{{obj.short_image.url}}{% else %}{% static 'base/images/base.png' %}{% endif %}" alt="{% if lang_code != 'English' %}{{obj.es_name}}{% else %}{{obj.en_name}}{% endif %}">
-                                </div>
-                                <div class="uk-card-body">
-                                    {% if lang_code != 'English' %}
+                                {% if lang_code != 'English' %}
+                                    <div class="uk-card-media-top">
+                                        {% if obj.short_image %}
+                                            <img src="{{obj.short_image.url}}" alt="{{obj.es_name}}">
+                                        {% else %}
+                                            <img src="{% static 'base/images/base.png' %}" alt="{{obj.es_name}}">
+                                        {% endif %}
+                                    </div>
+                                    <div class="uk-card-body">
                                         <h3 class="uk-card-title">
                                             {{obj.es_title}}
                                         </h3>
                                         {{obj.es_short_description|safe}}
-                                    {% else %}
+                                    </div>
+                                    <div class="uk-card-footer">
+                                        <a href="{{obj.get_absolute_url_es}}" class="uk-button uk-button-text">
+                                            Ver más
+                                        </a>
+                                    </div>
+                                {% else %}
+                                    <div class="uk-card-media-top">
+                                        {% if obj.short_image %}
+                                            <img src="{{obj.short_image.url}}" alt="{{obj.en_name}}">
+                                        {% else %}
+                                            <img src="{% static 'base/images/base.png' %}" alt="{{obj.en_name}}">
+                                        {% endif %}
+                                    </div>
+                                    <div class="uk-card-body">
                                         <h3 class="uk-card-title">
                                             {{obj.en_title}}
                                         </h3>
                                         {{obj.en_short_description|safe}}
-                                    {% endif %}
-                                </div>
-                                <div class="uk-card-footer">
-                                    {% if lang_code == 'English' %}
-                                        <a href="{{obj.get_absolute_url_en}}" class="uk-button uk-button-text">Read more</a>
-                                    {% else %}
-                                        <a href="{{obj.get_absolute_url_es}}" class="uk-button uk-button-text">Ver más</a>
-                                    {% endif %}
-                                </div>
+                                    </div>
+                                    <div class="uk-card-footer">
+                                        <a href="{{obj.get_absolute_url_en}}" class="uk-button uk-button-text">
+                                            Read more
+                                        </a>
+                                    </div>
+                                {% endif %}
                             </div>
                         </div>
                     {% endfor %}
@@ -256,23 +259,90 @@
 
     var map, styleArray,locations;
     var marker, i;
-    styleArray = [{"elementType": "geometry","stylers": [{"color": "#F2F2F2"}]},{"elementType": "labels.icon","stylers": [{"visibility": "off"}]},{"elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},{"elementType": "labels.text.stroke","stylers": [{"color": "#f5f5f5"}]},{"featureType": "administrative.land_parcel","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "administrative.land_parcel","elementType": "labels.text.fill","stylers": [{"color": "#bdbdbd"}]},{"featureType": "administrative.locality","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "administrative.neighborhood","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "administrative.province","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.man_made","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.natural","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.natural.landcover","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "landscape.natural.terrain","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi","elementType": "geometry","stylers": [{"color": "#eeeeee"}]},{"featureType": "poi","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},{"featureType": "poi.attraction","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.business","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.medical","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.park","elementType": "geometry","stylers": [{"color": "#e5e5e5"}]},{"featureType": "poi.park","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.park","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]},{"featureType": "poi.place_of_worship","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.school","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "poi.sports_complex","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "road","elementType": "geometry","stylers": [{"color": "#ffffff"}]},{"featureType": "road","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},{"featureType": "road","elementType": "geometry.stroke","stylers": [{"color": "#009688"}]},{"featureType": "road.arterial","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},{"featureType": "road.highway","elementType": "geometry","stylers": [{"color": "#dadada"}]},{"featureType": "road.highway","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},{"featureType": "road.highway","elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},{"featureType": "road.local","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]},{"featureType": "transit.line","elementType": "geometry","stylers": [{"color": "#e5e5e5"}]},{"featureType": "transit.station","elementType": "geometry","stylers": [{"color": "#eeeeee"}]},{"featureType": "water","elementType": "geometry","stylers": [{"color": "#c9c9c9"}]},{"featureType": "water","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},{"featureType": "water","elementType": "labels.text","stylers": [{"visibility": "off"}]},{"featureType": "water","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]}]
+    styleArray = [
+        {"elementType": "geometry","stylers": [{"color": "#F2F2F2"}]},
+        {"elementType": "labels.icon","stylers": [{"visibility": "off"}]},
+        {"elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},
+        {"elementType": "labels.text.stroke","stylers": [{"color": "#f5f5f5"}]},
+        {"featureType": "administrative.land_parcel","elementType": "labels.text","stylers": [{"visibility": "off"}]},
+        {"featureType": "administrative.land_parcel","elementType": "labels.text.fill","stylers": [{"color": "#bdbdbd"}]},
+        {"featureType": "administrative.locality","elementType": "labels.text","stylers": [{"visibility": "off"}]},
+        {"featureType": "administrative.neighborhood","elementType": "labels.text","stylers": [{"visibility": "off"}]},
+        {"featureType": "administrative.province","elementType": "labels.text","stylers": [{"visibility": "off"}]},
+        {"featureType": "landscape","elementType": "labels.text","stylers": [{"visibility": "off"}]},
+        {"featureType": "landscape.man_made","elementType": "labels.text","stylers": [{"visibility": "off"}]},
+        {"featureType": "landscape.natural","elementType": "labels.text","stylers": [{"visibility": "off"}]},
+        {"featureType": "landscape.natural.landcover","elementType": "labels.text","stylers": [{"visibility": "off"}]},
+        {"featureType": "landscape.natural.terrain","elementType": "labels.text","stylers": [{"visibility": "off"}]},
+        {"featureType": "poi","elementType": "geometry","stylers": [{"color": "#eeeeee"}]},
+        {"featureType": "poi","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},
+        {"featureType": "poi.attraction","elementType": "labels.text","stylers": [{"visibility": "off"}]},
+        {"featureType": "poi.business","elementType": "labels.text","stylers": [{"visibility": "off"}]},
+        {"featureType": "poi.medical","elementType": "labels.text","stylers": [{"visibility": "off"}]},
+        {"featureType": "poi.park","elementType": "geometry","stylers": [{"color": "#e5e5e5"}]},
+        {"featureType": "poi.park","elementType": "labels.text","stylers": [{"visibility": "off"}]},
+        {"featureType": "poi.park","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]},
+        {"featureType": "poi.place_of_worship","elementType": "labels.text","stylers": [{"visibility": "off"}]},
+        {"featureType": "poi.school","elementType": "labels.text","stylers": [{"visibility": "off"}]},
+        {"featureType": "poi.sports_complex","elementType": "labels.text","stylers": [{"visibility": "off"}]},
+        {"featureType": "road","elementType": "geometry","stylers": [{"color": "#ffffff"}]},
+        {"featureType": "road","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},
+        {"featureType": "road","elementType": "geometry.stroke","stylers": [{"color": "#009688"}]},
+        {"featureType": "road.arterial","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},
+        {"featureType": "road.highway","elementType": "geometry","stylers": [{"color": "#dadada"}]},
+        {"featureType": "road.highway","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},
+        {"featureType": "road.highway","elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},
+        {"featureType": "road.local","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]},
+        {"featureType": "transit.line","elementType": "geometry","stylers": [{"color": "#e5e5e5"}]},
+        {"featureType": "transit.station","elementType": "geometry","stylers": [{"color": "#eeeeee"}]},
+        {"featureType": "water","elementType": "geometry","stylers": [{"color": "#c9c9c9"}]},
+        {"featureType": "water","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},
+        {"featureType": "water","elementType": "labels.text","stylers": [{"visibility": "off"}]},
+        {"featureType": "water","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]}
+    ]
 
     var markers = [
-        ['Phoenix World Trade Inc., Panamá', 8.981022, -79.509901],
-        ['Phoenix World Trade Inc., USA', 25.747603, -80.340254],
-        ['Phoenix World Trade Inc., Curacao', 12.1356696,-68.9569759],
-        ['Phoenix World Trade Inc., Puerto Rico', 18.4219004,-66.1092751],
-        ['Phoenix World Trade Inc., República Dominicana', 18.4828372,-69.9459407],
-        ['Phoenix World Trade Inc., Chile', -28.275386, -70.925212],
-        ['Phoenix World Trade Inc., Venezuela', 10.494779,-66.8413177],
-        ['Phoenix World Trade Inc., Ecuador', -2.186826, -79.916759],
-        ['Phoenix World Trade Inc., Colombia', 4.696900, -74.006311],
+        [
+            'Phoenix World Trade Inc., Panamá',
+            8.981022, -79.509901
+        ],
+        [
+            'Phoenix World Trade Inc., USA',
+            25.747603, -80.340254
+        ],
+        [
+            'Phoenix World Trade Inc., Curacao',
+            12.1356696,-68.9569759
+        ],
+        [
+            'Phoenix World Trade Inc., Puerto Rico',
+            18.4219004,-66.1092751
+        ],
+        [
+            'Phoenix World Trade Inc., República Dominicana',
+            18.4828372,-69.9459407
+        ],
+        [
+            'Phoenix World Trade Inc., Chile',
+            -28.275386, -70.925212
+        ],
+        [
+            'Phoenix World Trade Inc., Venezuela',
+            10.494779,-66.8413177
+        ],
+        [
+            'Phoenix World Trade Inc., Ecuador',
+            -2.186826, -79.916759
+        ],
+        [
+            'Phoenix World Trade Inc., Colombia',
+            4.696900, -74.006311
+        ],
     ];
 
     var infoWindowContent = [
         ['<div class="info_content uk-card"><h3>Phoenix World Trade Inc, Panamá</h3>'+
-            '<p>P.H. Oceanía Business Plaza Torre 2000</p>'+
+            '<p>P.H. Oceanía Business Plaza Torre 1000</p>'+
             '<p>Punta Pacifica, Ciudad de Panamá.</p></div>'],
         ['<div class="info_content uk-card">'+
             '<h3>Phoenix World Trade Inc, USA</h3>'+
@@ -321,7 +391,7 @@
 
 
         var image = {
-          url: "{% static 'base/images/phx-pinx.png' %}",
+          url: "/static/base/images/phx-pinx.png",
           // This marker is 20 pixels wide by 32 pixels high.
           size: new google.maps.Size(45, 45),
           // The origin for this image is (0, 0).
@@ -355,8 +425,6 @@
 
     $( "#map" ).delay(5000).fadeIn(initMap);
 
-</script>
-<script>
     var swiper = new Swiper('.full-screen .swiper-container', {
         pagination: '.full-screen .swiper-pagination',
         paginationClickable: true,
@@ -378,8 +446,7 @@
         autoplay: 8000,
     });
     $('.biz-cards:odd').find('.child').addClass('uk-flex-last uk-card-media-right uk-cover-container');
-    $('.biz-cards:even').find('.child').addClass('uk-card-media-left uk-cover-container');
-
+    $('.biz-cards:even').find('.child').addClass('uk-card-media-left uk-cover-container card-shadow uk-first-column');
 </script>
 
 {% endblock %}

@@ -169,7 +169,15 @@
                     {% endif %}
                     <div class="uk-width-expand@s uk-first-column">
                         <div class="uk-margin uk-text-center">
-                            <img src="{{object.short_logo.url}}" class="el-image" alt="{{object.en_name}}">
+                            {% if lang_code == 'English' %}
+                                <a href="{{object.get_absolute_url_en}}">
+                                    <img src="{{object.short_logo.url}}" class="el-image" alt="{{object.en_name}}">
+                                </a>
+                                {% else %}
+                                <a href="{{object.get_absolute_url_es}}">
+                                    <img src="{{object.short_logo.url}}" class="el-image" alt="{{object.es_name}}">
+                                </a>
+                            {% endif %}
                         </div>
                     </div>
                     {% endfor %}

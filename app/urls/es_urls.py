@@ -20,13 +20,13 @@ from src.profiles import auth as auth_views
 app_name = 'es'
 urlpatterns = [
     path('', fw.index, name="es"),
-    path('quienes-somos/', fw.history, name='historia'),
-    path('marcas/<int:id>/', fw.brand_detail, name='brand_detail'),
-    path('marcas/', fw.our_brands, name='marcas'),
-    path('noticias/', fw.news, name='noticias'),
-    path('noticias/<slug:slug>/', fw.news_detail, name='detalle_noticias'),
-    path('contacto/', fw.contact, name='contacto'),
-    path('contacto/gracias/', fw.contact, name='contacto_satisfactorio'),
-    path('contacto/error/', fw.contact, name='contacto_error'),
-    path('buscar/', fw.search, name='buscar'),
+    path('quienes-somos', fw.history, name='historia'),
+    path('marcas/<int:id>', fw.brand_detail, name='brand_detail'),
+    path('marcas', fw.our_brands, name='marcas'),
+    path('noticias', fw.news, name='noticias'),
+    path('noticias/<slug:slug>', fw.news_detail, name='detalle_noticias'),
+    path('contacto', fw.contact, name='contacto'),
+    path('contacto/gracias', fw.contact, name='contacto_satisfactorio'),
+    path('contacto/error', fw.contact, name='contacto_error'),
+    path('buscar', fw.search, name='buscar'),
 ]

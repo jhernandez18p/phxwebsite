@@ -67,7 +67,7 @@ INSTALLED_APPS = DJANGO_APPS + LOCAL_APPS + THIRD_PARTY_APPS
 
 # SECURITY CONF
 LOGIN_URL = 'dashboard'
-LOGIN_REDIRECT_URL = '/dashboard/'
+LOGIN_REDIRECT_URL = '/dashboard'
 LOGOUT_REDIRECT_URL = SITE_URL
 SESSION_COOKIE_AGE = 43200
 SESSION_COOKIE_NAME = 'session'
@@ -138,7 +138,7 @@ STATICFILES_DIRS = (
 # STATIC_ROOT = os.path.abspath(
 #     os.path.join(os.path.join(BASE_DIR,os.pardir),'staticfiles'))
 
-MEDIA_ROOT = os.path.abspath(os.path.join(os.path.join(BASE_DIR,os.pardir),'media'))
+MEDIA_ROOT = os.path.join(os.path.join(BASE_DIR,os.pardir), 'media')
 
 # Django Rest Framework Setup
 REST_FRAMEWORK = {
@@ -150,3 +150,4 @@ REST_FRAMEWORK = {
 }
 
 GOOGLE_MAPS_API_KEY = 'AIzaSyA_uf0M6P9N8ZUTm3vsKlm-li2auJ9-guU'
+APPEND_SLASH = True

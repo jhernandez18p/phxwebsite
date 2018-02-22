@@ -1,35 +1,7 @@
-/*
-	{% load staticfiles %}
-*/
-/*
-	Colores
-*/
-.red{background:#f44336;}
-.purple{background:#673ab7;}
-.indigo{background:#3f51b5;}
-.blue{background:#2196f3;}
-.cyan{background:#00bcd4;}
-.teal{background:#009688;}
-.turquesa{background:#45b4ab;}
-.green{background:#4caf50;}
-.lightGreen{background:#8bc34a;}
-.lime{background:#c0ca33;}
-.yellow{background:#fdd835;}
-.amber{background:#ffc107;}
-.orange{background:#ff9800}
-.deepOrange{background:#ff5722;}
-.brown{background:#B29772;}
-.gray{background-color:rgba(3,3,3,0.18);}
-.lightGray{background-color:rgba(3,3,3,0.0358);}
-.darkGray{background-color:rgba(76,76,76,1);}
-.darkenGray{background-color:rgba(0,0,0,0.68);color: #FFF}
-.newBlue{background-color:#7db4bb;}
-.text-plomo{color:#333;}
-.text-white{color:#fff;}
-.textTeal{color: #009688;}
-/*
-	Ayudas
-*/
+/* {% load staticfiles %} */
+/*	Colores */
+.red{background:#f44336;}.purple{background:#673ab7;}.indigo{background:#3f51b5;}.blue{background:#2196f3;}.cyan{background:#00bcd4;}.teal{background:#009688;}.turquesa{background:#45b4ab;}.green{background:#4caf50;}.lightGreen{background:#8bc34a;}.lime{background:#c0ca33;}.yellow{background:#fdd835;}.amber{background:#ffc107;}.orange{background:#ff9800}.deepOrange{background:#ff5722;}.brown{background:#B29772;}.gray{background-color:rgba(3,3,3,0.18);}.lightGray{background-color:rgba(3,3,3,0.0358);}.darkGray{background-color:rgba(76,76,76,1);}.darkenGray{background-color:rgba(0,0,0,0.68);color: #FFF}.newBlue{background-color:#7db4bb;}.text-plomo{color:#333;}.text-white{color:#fff;}.textTeal{color: #009688;}
+/*	Ayudas */
 nav{z-index: 9999}
 section{min-height: 49vh;}
 body{background-color: #f3f3f6;}
@@ -56,3 +28,5 @@ li form .submit-input{background-color: rgba(255,255,255,0);border: none;}
 #newsletterInput{border-radius: 10px !important;border: rgb(7, 141, 129) 1px solid; text-align: center}
 .card-shadow{box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);}
 .card-shadow:hover{box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);}
+.uk-background-muted, .uk-section-muted {background-color: #f3f3f6 !important; }
+.uk-grid>* {padding-left: 0px;}

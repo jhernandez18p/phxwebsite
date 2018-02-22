@@ -72,9 +72,9 @@ class CarouselAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Company,CompanyAdmin)
-admin.site.register(Pages, PagesAdmin)
 admin.site.register(Carousel, CarouselAdmin)
-admin.site.register(Position)
+# admin.site.register(Pages, PagesAdmin)
+# admin.site.register(Position)
 # admin.site.register(Timeline)
 # admin.site.register(Country)
 # admin.site.register(Value)

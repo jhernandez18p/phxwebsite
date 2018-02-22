@@ -6,4 +6,4 @@ from django.utils.translation import gettext_lazy as _
 
 class FrontendConfig(AppConfig):
     name = 'src.frontend'
-    verbose_name = _('Detalles de la página web')
+    verbose_name = _('Módulo Frontend')

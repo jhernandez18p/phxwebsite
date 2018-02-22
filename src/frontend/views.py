@@ -94,6 +94,11 @@ def index(request):
         page = pages.filter(en_name="Home")
         # print(page[0].id)
 
+    home_brands = Brand.objects.all().filter(featured=True)
+    if home_brands.exists():
+        context['home_brands'] = home_brands[:8]
+
+    
     companies = Company.objects.all()
     if companies.exists():
         context['companies'] = companies
@@ -495,15 +500,14 @@ def news_detail(request, slug):
     return render(request, template, context)
 
 def brand_detail(request, id):
-    template = 'detail/news.html'
+    template = 'detail/brand-detail.html'
     context = {}
 
-    try:
-        new = get_object_or_404(Post, id=id)
-        context['new'] = new
-        print(context)
-    except Exception as e:
-        raise e
+    brand = get_object_or_404(Brand, id=id)
+    context['brand'] = brand
+    context['title'] = brand.es_name
+    context['en_parent_url'] = reverse('en:our_brands') 
+    context['es_parent_url'] = reverse('es:marcas')
 
     return render(request, template, context)
 

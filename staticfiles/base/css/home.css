@@ -1,0 +1,8 @@
+#map { height: 500px; width: 100%;}
+.full-screen{max-height:100vh;}
+.full-screen .swiper-slide{max-height:100vh;}
+.top-logo{z-index: 99}
+.border-green{border: solid rgb(0, 150, 136) 5px;}
+.My-box {position: absolute;z-index: 9;top: 10%;margin: 0 25%;}
+.uk-grid {margin-left: 0px;}
+@media (max-width: 600px) {.My-box {position: absolute;z-index: 9;top: 5%;margin: 0 15px;}}

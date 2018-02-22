@@ -3,81 +3,49 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'base/css/swiper.min.css' %}">
+<link rel="stylesheet" href="{% static 'base/css/home.css' %}">
 <style>
-    #map { height: 500px; width: 100%;}
-    .full-screen{max-height:100vh;}
-    .full-screen .swiper-slide{max-height:100vh;}
-    .top-logo{z-index: 99}
-    .border-green{border: solid rgb(0, 150, 136) 5px;}
-    .My-box {
-        position: absolute;
-        z-index: 9;
-        top: 22%;
-        margin: 0 25%;
-    }
-    @media (max-width: 600px) {
-        .My-box {
-            position: absolute;
-            z-index: 9;
-            top: 5%;
-            margin: 0 15px;
-        }
-        
-    }
-    .uk-grid {
-        margin-left: 0px;
-    }
+    #newsCard .uk-card {margin-left: 5px;margin-right: 5px;}
 </style>
 {% endblock %}
 
 {% block fullscreen %}
     {% if full_banners %}
-        <div class="full-screen-container wrapper uk-hidden"></div>
-            <div class="uk-section-muted">
-                <div class="full-screen">
-                    <div class="swiper-container">
-                        <div class="scroll uk-visible@m uk-position-bottom-center">
-                            <span id="scroll">
-                                <svg version="1.1" id="icn" fill="#fff" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                width="40px" height="50px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
-                                    <polygon opacity="0" points="19.9,21 0,1.3 1.4,0 19.9,18.3 38.6,0 40,1.3 ">
-                                        <animate id="first" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite"  begin="0"/>
-                                    </polygon>
-                                    <polygon id="arrow-two" opacity="0"  points="19.9,30.9 0,11.2 1.4,9.9 19.9,28.2 38.6,9.8 40,11.2 ">
-                                        <animate id="second" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite"  begin="1s" />
-                                    </polygon>
-                                    <polygon id="arrow-three"  opacity="0" points="19.9,40 0,20.3 1.4,19 19.9,37.3 38.6,19 40,20.3 ">
-                                        <animate id="third" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite"  begin="2s"  />
-                                    </polygon>
-                                </svg>
-                            </span>
+        <div class="full-screen">
+            <div class="swiper-container">
+                <div class="scroll uk-visible@m uk-position-bottom-center">
+                    <span id="scroll">
+                        <svg version="1.1" id="icn" fill="#fff" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                            y="0px" width="40px" height="50px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+                            <polygon opacity="0" points="19.9,21 0,1.3 1.4,0 19.9,18.3 38.6,0 40,1.3 ">
+                                <animate id="first" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite" begin="0"
+                                />
+                            </polygon>
+                            <polygon id="arrow-two" opacity="0" points="19.9,30.9 0,11.2 1.4,9.9 19.9,28.2 38.6,9.8 40,11.2 ">
+                                <animate id="second" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite" begin="1s"
+                                />
+                            </polygon>
+                            <polygon id="arrow-three" opacity="0" points="19.9,40 0,20.3 1.4,19 19.9,37.3 38.6,19 40,20.3 ">
+                                <animate id="third" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite" begin="2s"
+                                />
+                            </polygon>
+                        </svg>
+                    </span>
+                </div>
+                <div class="swiper-wrapper" uk-height-match="target: > div > img">
+                    {% for banner in full_banners %}
+                        <div class="swiper-slide">
+                            <div class="uk-child-width-1-1@">
+                                <img class="uk-background-cover uk-visible@m" {% if banner.large_banner %} src="{{banner.large_banner}}" {% else %} src="{% static 'base/images/base.png' %}"
+                                    {% endif %} alt="{% if lang_code != 'English' %}{{banner.es_name}}{% else %}{{banner.en_name}}{% endif %}" uk-height-viewport uk-scrollspy="cls: uk-animation-kenburns; repeat: true">
+                            </div>
                         </div>
-                        <div class="swiper-wrapper" uk-height-match="target: > div > img">
-                            {% for banner in full_banners %}
-                                <div class="swiper-slide">
-                                    <div class="uk-child-width-1-1@" >
-                                        <img class="uk-background-cover uk-visible@m" 
-                                        {% if banner.large_banner %}
-                                            src="{{banner.large_banner}}"
-                                        {% else %}
-                                            src="{% static 'base/images/base.png' %}"
-                                        {% endif %}
-                                            alt="
-                                            {% if lang_code != 'English' %}
-                                            {{banner.es_name}}
-                                            {% else %}
-                                            {{banner.en_name}}
-                                            {% endif %}" uk-height-viewport>
-                                    </div>
-                                </div>
-                            {% endfor %}
-                        </div>
-                        <div class="swiper-button-next swiper-button-white"></div>
-                        <div class="swiper-button-prev swiper-button-white"></div>
-                        <div class="top-logo uk-visible@m uk-position-center">
-                            <img class="logo-menu" src="{% static 'base/images/logo.png' %}" alt="{{site.name}}">
-                        </div>
-                    </div>
+                    {% endfor %}
+                </div>
+                <div class="swiper-button-next swiper-button-white"></div>
+                <div class="swiper-button-prev swiper-button-white"></div>
+                <div class="top-logo uk-visible@m uk-position-center">
+                    <img class="logo-menu" src="{% static 'base/images/logo.png' %}" alt="{{site.name}}" uk-parallax="target: #test-easing; y: 200; easing: 1">
                 </div>
             </div>
         </div>
@@ -85,40 +53,38 @@
 {% endblock %}
 
 {% block content %}
+    {# Informacion del sitio #}
     {% if site %}
-        <div class="uk-width-1-1">
-            <div class="uk-section-muted">
-                <div class="uk-cover-container">
-                    <canvas width="100%" height="800"></canvas>
-
-                    <div class="My-box" uk-scrollspy="cls: uk-animation-slide-top-small; target: > .uk-card; delay: 200;">
-                        <div class="uk-card uk-card-default  uk-card-body ">
-                            {% if lang_code == 'English' %}
-                                {{site.en_description|safe}}
-                                <a href="{% url 'en:about' %}" class="
-                                uk-button uk-button-default button-phx uk-child-width-auto uk-margin-small-bottom">
-                                    Learn more
-                                </a>
-                            {% else %}
-                                {{site.es_description|safe}}
-                                <a href="{% url 'es:historia' %}" class="
-                                uk-button uk-button-default button-phx uk-child-width-auto uk-margin-small-bottom">
-                                    Ver más
-                                </a>
-                            {% endif %}
-                        </div>
+        <div class="uk-section-muted">
+            <div class="uk-cover-container">
+                <canvas width="100%" height="800"></canvas>
+                <div class="My-box" uk-scrollspy="cls: uk-animation-slide-top-small; target: > .uk-card; delay: 200;">
+                    <div class="uk-card uk-card-default  uk-card-body ">
+                        {% if lang_code == 'English' %}
+                            <h2>{{site.en_name}}</h2>
+                            {{site.en_description|safe}}
+                            <a href="{% url 'en:about' %}" class="uk-button uk-button-default button-phx uk-child-width-auto uk-margin-small-bottom">
+                                Learn more
+                            </a>
+                        {% else %} 
+                            {{site.es_description|safe}}
+                            <h2>{{site.es_name}}</h2>
+                            <a href="{% url 'es:historia' %}" class="uk-button uk-button-default button-phx uk-child-width-auto uk-margin-small-bottom">
+                                Ver más
+                            </a>
+                        {% endif %}
                     </div>
-                    <img src="{% static 'base/images/chair.jpg' %}" alt="" uk-cover>
-                    <div class="uk-overlay-primary uk-position-cover"></div>
                 </div>
+                <img src="{% static 'base/images/chair.jpg' %}" alt="{{site.en_name}}" class="uk-background-center-center uk-background-fixed" uk-cover>
+                <!-- <div class="uk-overlay-primary uk-position-cover"></div> -->
             </div>
         </div>
     {% endif %}
-    
+    {# Segmentos de negocio #}
     {% if  business_banners  %}
         <div class="uk-container">
             <div class="uk-section-small uk-section-muted">
-                <h3 class="uk-heading-line" style="left: 50%; top: 50%">
+                <h3 class="uk-heading-line uk-text-center" style="left: 50%; top: 50%">
                     <span>
                         {% if lang_code != 'English' %}
                             Nuestro negocio
@@ -135,27 +101,35 @@
                 {% for banner in business_banners %}
                     {% if lang_code != 'English' %}
                         <div class="uk-child-width-1-2@s biz-cards uk-margin-xlarge" uk-grid>
-                            <div class="child card-shadow uk-card-media-left uk-cover-container">
+                            <div class="child card-shadow uk-card-media-left uk-cover-container uk-animation-scale-up">
                                 <img src="{{banner.image}}" alt="{{banner.es_name}}" uk-cover>
                                 <canvas width="600" height="400"></canvas>
                             </div>
                             <div>
-                                <div class="">
-                                    <h3 class="uk-card-title">{{banner.es_name}}</h3>
-                                    <p>{{banner.es_description}}</p>
+                                <div class="uk-padding-large">
+                                    <h3 class="uk-text-center uk-h2 uk-scrollspy-inview uk-animation-scale-up" uk-scrollspy-class="" style="">
+                                        {{banner.es_name}}
+                                    </h3>
+                                    <div class="uk-margin uk-width-large uk-margin-auto uk-text-center uk-scrollspy-inview uk-animation-scale-up" uk-scrollspy-class="" style="">
+                                        {{banner.es_description | safe}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     {% else %}
                         <div class="uk-child-width-1-2@s biz-cards uk-margin-xlarge" uk-grid>
-                            <div class="child card-shadow uk-card-media-left uk-cover-container">
+                            <div class="child card-shadow uk-card-media-left uk-cover-container uk-animation-scale-up">
                                 <img src="{{banner.image}}" alt="{{banner.en_name}}" uk-cover>
                                 <canvas width="600" height="400"></canvas>
                             </div>
                             <div>
-                                <div class="">
-                                    <h3 class="uk-card-title">{{banner.en_name}}</h3>
-                                    <p>{{banner.en_description}}</p>
+                                <div class="uk-padding-large">
+                                    <h3 class="uk-text-center uk-h2 uk-scrollspy-inview uk-animation-scale-up" uk-scrollspy-class="" style="">
+                                        {{banner.en_name}}
+                                    </h3>
+                                    <div class="uk-margin uk-width-large uk-margin-auto uk-text-center uk-scrollspy-inview uk-animation-scale-up" uk-scrollspy-class="" style="">
+                                        {{banner.en_description | safe}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -163,30 +137,93 @@
                 {% endfor %}
             </div>
         </div> 
-        
     {% endif %}
-    
-    <div class="uk-container">
-        <div class="uk-section-small uk-section-muted">
-            <h3 class="uk-heading-line uk-text-center" style="left: 50%; top: 50%">
-                <span>
-                    {% if lang_code != 'English' %}
-                        ¿En donde estamos?
-                    {% else %}
-                        Where are we?
-                    {% endif %}
-                </span>
-            </h3>
+    {# Nuestras marcas #}
+    {% if home_brands %}
+        <div class="uk-container uk-margin-large-top">
+            <div class="uk-section-small uk-section-muted">
+                <h3 class="uk-heading-line uk-text-center" style="left: 50%; top: 50%">
+                    <span>
+                        {% if lang_code != 'English' %}
+                            Nuestras marcas
+                        {% else %}
+                            Our brands
+                        {% endif %}
+                    </span>
+                </h3>
+            </div>
         </div>
-    </div>
-
-    <div id="map"></div>
-
-    {% if news %}
-
+        <div class="uk-section-default uk-section uk-section-large">
+            <div class="uk-container">
+                <div class="uk-grid-divider uk-margin-remove-vertical uk-grid" uk-grid="">
+                    {% for object in home_brands %}
+                    {% if forloop.counter0 == 4 %}
+                    </div>
+                        <div class="uk-grid-collapse uk-margin-remove-vertical uk-grid uk-grid-stack" uk-grid="">
+                            <div class="uk-width-1-1@s uk-first-column">
+                                <div class="uk-hr"></div>
+                            </div>
+                        </div>
+                    <div class="uk-grid-divider uk-margin-remove-vertical uk-grid" uk-grid="">
+                    {% endif %}
+                    <div class="uk-width-expand@s uk-first-column">
+                        <div class="uk-margin uk-text-center">
+                            <img src="{{object.short_logo.url}}" class="el-image" alt="{{object.en_name}}">
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>     
+        </div>
+    {% endif %}
+    {# Mapa #}
         <div class="uk-container">
             <div class="uk-section-small uk-section-muted">
-                <h3 class="uk-heading-line uk-text-right" style="left: 50%; top: 50%">
+                <h3 class="uk-heading-line uk-text-center" style="left: 50%; top: 50%">
+                    <span>
+                        {% if lang_code != 'English' %}
+                        ¿En donde estamos?
+                        {% else %}
+                        Where are we?
+                        {% endif %}
+                    </span>
+                </h3>
+            </div>
+        </div>
+        <div id="map"></div>
+    {# Mapa #}
+    {# Numbers #}
+    {% if not number %}
+        <div class="uk-container">
+            <div class="uk-section-small uk-section-muted">
+                <h3 class="uk-heading-line uk-text-center" style="left: 50%; top: 50%">
+                    <span>
+                        {% if lang_code != 'English' %}
+                            {{site.en_title}}
+                        {% else %}
+                            {{site.es_title}}
+                        {% endif %}
+                    </span>
+                </h3>
+            </div>
+        </div>
+        <div class="uk-section-default">
+            <div style="height:55vh;background-image: url('/static/base/images/parallax.jpg');"
+                class="uk-background-norepeat uk-background-cover uk-background-center-center uk-background-fixed uk-section">
+                <div class="uk-container">
+                    <div class="uk-grid-margin uk-grid uk-grid-stack" uk-grid="">
+                        <div class="uk-width-1-1@m">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    {# Noticias #}
+    {% if news %}
+        <div class="uk-container">
+            <div class="uk-section-small uk-section-muted">
+                <h3 class="uk-heading-line uk-text-center" style="left: 50%; top: 50%">
                     <span>
                         {% if lang_code != 'English' %}
                             Noticias
@@ -197,10 +234,9 @@
                 </h3>
             </div>
         </div>
-
         <div class=" uk-section-muted">
             <div class="uk-container">
-                <div class="uk-grid-match uk-child-width-1-3@m uk-child-width-2@s uk-text-center" uk-grid uk-height-match="target: > div > .uk-card">
+                <div class="uk-grid-match uk-child-width-1-3@m uk-child-width-2@s uk-text-center" uk-grid uk-height-match="target: > div > .uk-card" id="newsCard">
                     {% for obj in news %}
                         <div>
                             <div class="uk-card uk-card-default">
@@ -250,180 +286,14 @@
             </div>
         </div>
     {% endif %}
-    
 {% endblock %}
     
 {% block js %}
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_uf0M6P9N8ZUTm3vsKlm-li2auJ9-guU" async defer></script>
+<script src="{% static 'base/js/map.js' %}"></script>
 <script>
-
-    var map, styleArray,locations;
-    var marker, i;
-    styleArray = [
-        {"elementType": "geometry","stylers": [{"color": "#F2F2F2"}]},
-        {"elementType": "labels.icon","stylers": [{"visibility": "off"}]},
-        {"elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},
-        {"elementType": "labels.text.stroke","stylers": [{"color": "#f5f5f5"}]},
-        {"featureType": "administrative.land_parcel","elementType": "labels.text","stylers": [{"visibility": "off"}]},
-        {"featureType": "administrative.land_parcel","elementType": "labels.text.fill","stylers": [{"color": "#bdbdbd"}]},
-        {"featureType": "administrative.locality","elementType": "labels.text","stylers": [{"visibility": "off"}]},
-        {"featureType": "administrative.neighborhood","elementType": "labels.text","stylers": [{"visibility": "off"}]},
-        {"featureType": "administrative.province","elementType": "labels.text","stylers": [{"visibility": "off"}]},
-        {"featureType": "landscape","elementType": "labels.text","stylers": [{"visibility": "off"}]},
-        {"featureType": "landscape.man_made","elementType": "labels.text","stylers": [{"visibility": "off"}]},
-        {"featureType": "landscape.natural","elementType": "labels.text","stylers": [{"visibility": "off"}]},
-        {"featureType": "landscape.natural.landcover","elementType": "labels.text","stylers": [{"visibility": "off"}]},
-        {"featureType": "landscape.natural.terrain","elementType": "labels.text","stylers": [{"visibility": "off"}]},
-        {"featureType": "poi","elementType": "geometry","stylers": [{"color": "#eeeeee"}]},
-        {"featureType": "poi","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},
-        {"featureType": "poi.attraction","elementType": "labels.text","stylers": [{"visibility": "off"}]},
-        {"featureType": "poi.business","elementType": "labels.text","stylers": [{"visibility": "off"}]},
-        {"featureType": "poi.medical","elementType": "labels.text","stylers": [{"visibility": "off"}]},
-        {"featureType": "poi.park","elementType": "geometry","stylers": [{"color": "#e5e5e5"}]},
-        {"featureType": "poi.park","elementType": "labels.text","stylers": [{"visibility": "off"}]},
-        {"featureType": "poi.park","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]},
-        {"featureType": "poi.place_of_worship","elementType": "labels.text","stylers": [{"visibility": "off"}]},
-        {"featureType": "poi.school","elementType": "labels.text","stylers": [{"visibility": "off"}]},
-        {"featureType": "poi.sports_complex","elementType": "labels.text","stylers": [{"visibility": "off"}]},
-        {"featureType": "road","elementType": "geometry","stylers": [{"color": "#ffffff"}]},
-        {"featureType": "road","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},
-        {"featureType": "road","elementType": "geometry.stroke","stylers": [{"color": "#009688"}]},
-        {"featureType": "road.arterial","elementType": "labels.text.fill","stylers": [{"color": "#757575"}]},
-        {"featureType": "road.highway","elementType": "geometry","stylers": [{"color": "#dadada"}]},
-        {"featureType": "road.highway","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},
-        {"featureType": "road.highway","elementType": "labels.text.fill","stylers": [{"color": "#616161"}]},
-        {"featureType": "road.local","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]},
-        {"featureType": "transit.line","elementType": "geometry","stylers": [{"color": "#e5e5e5"}]},
-        {"featureType": "transit.station","elementType": "geometry","stylers": [{"color": "#eeeeee"}]},
-        {"featureType": "water","elementType": "geometry","stylers": [{"color": "#c9c9c9"}]},
-        {"featureType": "water","elementType": "geometry.fill","stylers": [{"color": "#009688"}]},
-        {"featureType": "water","elementType": "labels.text","stylers": [{"visibility": "off"}]},
-        {"featureType": "water","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]}
-    ]
-
-    var markers = [
-        [
-            'Phoenix World Trade Inc., Panamá',
-            8.981022, -79.509901
-        ],
-        [
-            'Phoenix World Trade Inc., USA',
-            25.747603, -80.340254
-        ],
-        [
-            'Phoenix World Trade Inc., Curacao',
-            12.1356696,-68.9569759
-        ],
-        [
-            'Phoenix World Trade Inc., Puerto Rico',
-            18.4219004,-66.1092751
-        ],
-        [
-            'Phoenix World Trade Inc., República Dominicana',
-            18.4828372,-69.9459407
-        ],
-        [
-            'Phoenix World Trade Inc., Chile',
-            -28.275386, -70.925212
-        ],
-        [
-            'Phoenix World Trade Inc., Venezuela',
-            10.494779,-66.8413177
-        ],
-        [
-            'Phoenix World Trade Inc., Ecuador',
-            -2.186826, -79.916759
-        ],
-        [
-            'Phoenix World Trade Inc., Colombia',
-            4.696900, -74.006311
-        ],
-    ];
-
-    var infoWindowContent = [
-        ['<div class="info_content uk-card"><h3>Phoenix World Trade Inc, Panamá</h3>'+
-            '<p>P.H. Oceanía Business Plaza Torre 1000</p>'+
-            '<p>Punta Pacifica, Ciudad de Panamá.</p></div>'],
-        ['<div class="info_content uk-card">'+
-            '<h3>Phoenix World Trade Inc, USA</h3>'+
-            '<p></p></div>'],
-        ['<div class="info_content uk-card">'+
-            '<h3>Phoenix World Trade Inc, Curcao</h3>'+
-            '<p></p></div>'],
-        ['<div class="info_content uk-card">'+
-            '<h3>Phoenix World Trade Inc, Puerto Rico</h3>'+
-            '<p></p></div>'],
-        ['<div class="info_content uk-card">'+
-            '<h3>Phoenix World Trade Inc, República Dominicana</h3>'+
-            '<p></p></div>'],
-        ['<div class="info_content uk-card">'+
-            '<h3>Phoenix World Trade Inc., Chile</h3>'+
-            '<p></p></div>'],
-        ['<div class="info_content uk-card">'+
-            '<h3>Phoenix World Trade Inc., Venezuela</h3>'+
-            '<p></p></div>'],
-        ['<div class="info_content uk-card">'+
-            '<h3>Phoenix World Trade Inc., Ecuador</h3>'+
-            '<p></p></div>'],
-        ['<div class="info_content uk-card">'+
-            '<h3>Phoenix World Trade Inc., Colombia</h3>'+
-            '<p></p></div>'],
-    ];  
-
-    function initMap() {
-
-        var bounds = new google.maps.LatLngBounds();
-        var infoWindow = new google.maps.InfoWindow(), marker, i;
-        
-        map = new google.maps.Map(document.getElementById('map'), {
-            mapTypeId: 'satellite',
-            center: {lat: 14.987239, lng: -84.528809}, 
-            zoom: 8,
-            disableDefaultUI: true,
-            scrollwheel: false,
-        });
-        //center: {lat: -6.9645954, lng: -76.3220646},
-        //center: {lat: 8.6571004, lng: -60.1603678}, 
-        //styles: styleArray,
-        // zoomControl: true,
-        // scaleControl: true,
-        // draggable: false,
-
-
-        var image = {
-          url: "/static/base/images/phx-pinx.png",
-          // This marker is 20 pixels wide by 32 pixels high.
-          size: new google.maps.Size(45, 45),
-          // The origin for this image is (0, 0).
-          origin: new google.maps.Point(0, 0),
-          // The anchor for this image is the base of the flagpole at (0, 32).
-          anchor: new google.maps.Point(20, 20)
-        };
-
-        for( i = 0; i < markers.length; i++ ) {
-            var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
-            bounds.extend(position);
-            marker = new google.maps.Marker({
-                position: position,
-                map: map,
-                icon: image,
-                title: markers[i][0]
-            });
-            
-            // Allow each marker to have an info window    
-            google.maps.event.addListener(marker, 'click', (function(marker, i) {
-                return function() {
-                    infoWindow.setContent(infoWindowContent[i][0]);
-                    infoWindow.open(map, marker);
-                }
-            })(marker, i));
-
-            // Automatically center the map fitting all markers on the screen
-            map.fitBounds(bounds);
-        }   
-    }
-
-    $( "#map" ).delay(5000).fadeIn(initMap);
+$(document).ready(function(){
+    $( "#map" ).delay(2500).fadeIn(initMap);
 
     var swiper = new Swiper('.full-screen .swiper-container', {
         pagination: '.full-screen .swiper-pagination',
@@ -433,7 +303,10 @@
             prevEl: '.full-screen .swiper-button-prev',
         },
         loop: true,
-        autoplay: 8000,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
     });
     var swiperBiz = new Swiper('.banners-biz .swiper-container', {
         pagination: '.banners-biz .swiper-pagination',
@@ -447,6 +320,8 @@
     });
     $('.biz-cards:odd').find('.child').addClass('uk-flex-last uk-card-media-right uk-cover-container');
     $('.biz-cards:even').find('.child').addClass('uk-card-media-left uk-cover-container card-shadow uk-first-column');
+    
+});
 </script>
 
 {% endblock %}

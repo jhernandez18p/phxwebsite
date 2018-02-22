@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<div id="{{brand.id}}modal-full" class="uk-modal-full" uk-modal>
+    <div class="uk-modal-dialog">
+        <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+        <div class="uk-child-width-1-2@s uk-flex-middle" uk-grid>
+            {% if brand.carousel_images %}
+            <div class="brandSlide{{brand.id}} full">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        {% for brand_banner in brand.carousel_images.all %} {% if forloop.first %}
+                        <div class="swiper-slide uk-grid-collapse uk-child-width-1-1@s uk-flex-middle" uk-grid>
+                            <div class="uk-background-cover" style="background-image: url('{{brand.large_logo.url}}');" uk-height-viewport></div>
+                        </div>
+                        <div class="swiper-slide uk-grid-collapse uk-child-width-1-1@s uk-flex-middle" uk-grid>
+                            <div class="uk-background-cover" style="background-image: url('{{brand_banner.large_banner.url}}');" uk-height-viewport></div>
+                        </div>
+                        {% else %}
+                        <div class="swiper-slide uk-grid-collapse uk-child-width-1-1@s uk-flex-middle" uk-grid>
+                            <div class="uk-background-cover" style="background-image: url('{{brand_banner.large_banner.url}}');" uk-height-viewport></div>
+                        </div>
+                        {% endif %} {% empty %}
+                        <div class="swiper-slide uk-grid-collapse uk-child-width-1-1@s uk-flex-middle" uk-grid>
+                            <div class="uk-background-cover" style="background-image: url('{{brand.large_logo.url}}');" uk-height-viewport></div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="swiper-pagination swiper-button-white uk-visible@m"></div>
+                    <div class="swiper-button-next swiper-button-white"></div>
+                    <div class="swiper-button-prev swiper-button-white"></div>
+                    <div class="scroll uk-hidden@m uk-position-bottom-center">
+                        <span id="scroll">
+                            <svg version="1.1" id="icn" fill="#fff" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                                y="0px" width="40px" height="50px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+                                <polygon opacity="0" points="19.9,21 0,1.3 1.4,0 19.9,18.3 38.6,0 40,1.3 ">
+                                    <animate id="first" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0"
+                                        repeatCount="indefinite" begin="0" />
+                                </polygon>
+                                <polygon id="arrow-two" opacity="0" points="19.9,30.9 0,11.2 1.4,9.9 19.9,28.2 38.6,9.8 40,11.2 ">
+                                    <animate id="second" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0"
+                                        repeatCount="indefinite" begin="1s" />
+                                </polygon>
+                                <polygon id="arrow-three" opacity="0" points="19.9,40 0,20.3 1.4,19 19.9,37.3 38.6,19 40,20.3 ">
+                                    <animate id="third" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0"
+                                        repeatCount="indefinite" begin="2s" />
+                                </polygon>
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="uk-background-cover" style="background-image: url('{{brand.large_logo.url}}');" uk-height-viewport></div>
+            {% endif %}
+            <div class="uk-padding-large">
+                {% if lang_code != 'English' %}
+                <h1>{{brand.es_name}}</h1>
+                {{brand.es_description|safe}} {% else %}
+                <h1>{{brand.en_name}}</h1>
+                {{brand.en_description|safe}} {% endif %}
+                <p>
+                    <a href="{{brand.url}}">{{brand.url}}</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block js %}
+{% if lang_code == 'English' %}
+    <script>
+        var parentURL = '{{ en_parent_url }}'
+    </script>
+{% else %}
+    <script>
+        var parentURL = '{{ es_parent_url }}'
+    </script>
+{% endif %}
+<script type="text/javascript">
+    $(document).ready(function () {
+
+
+        UIkit.modal('#{{brand.id}}modal-full').show();
+        $('#{{brand.id}}modal-full').on({
+            'shown': function() {
+                // console.log('rrrr');
+                // location.reload();
+                var swiper;
+                swiper = new Swiper('.brandSlide{{brand.id}} .swiper-container', {
+                    pagination: '.brandSlide{{brand.id}} .swiper-pagination',
+                    paginationClickable: true,
+                    navigation: {
+                        nextEl: '.brandSlide{{brand.id}} .swiper-button-next',
+                        prevEl: '.brandSlide{{brand.id}} .swiper-button-prev',
+                    },
+                    loop: true,
+                    autoplay: 8000,
+                });
+            },
+            'hide.uk.modal': function(){
+                window.location.href = parentURL;
+            }
+        });
+
+    })
+</script>
+
+{% endblock %}

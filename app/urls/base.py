@@ -1,15 +1,12 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from django.urls import (
-    path,
-    re_path,
-    include
-)
 from django.conf.urls.static import static
 from django.contrib import admin
+from django.contrib.flatpages import views
 from django.contrib.flatpages import views as flats
 from django.contrib.flatpages.sitemaps import FlatPageSitemap
 from django.contrib.sitemaps.views import sitemap
+from django.urls import include, path, re_path
 from django.views.static import serve
 
 from src.frontend import views as fw
@@ -36,29 +33,27 @@ urlpatterns = [
     path('', fw.home, name='home'),
     path('es/', include('app.urls.es_urls', namespace='es')),
     path('en/', include('app.urls.en_urls', namespace='en')),
-    path('lang/', fw.lang, name='lang'),
-    path('subscribe/', fw.subscribe, name='subscribe'),
-    path('contact/', fw.contact_post, name='contact_post'),
+    path('lang', fw.lang, name='lang'),
+    path('subscribe', fw.subscribe, name='subscribe'),
+    path('contact', fw.contact_post, name='contact_post'),
     # Auth
-    path('login/', auth_views.login, name = 'Login'),
-    path('logout/', auth_views.logout, name = 'Logout'),
-    path('register/', auth_views.register, name = 'Register'),
+    path('login', auth_views.login, name = 'Login'),
+    path('logout', auth_views.logout, name = 'Logout'),
+    path('register', auth_views.register, name = 'Register'),
     # Backend
-    path('dashboard/', include('src.dashboard.urls', namespace='dashboard')),
+    path('dashboard', include('src.dashboard.urls', namespace='dashboard')),
     # Admin
     path('adminsite/', admin.site.urls),
-    path('api/', include(router.urls)),
-    path('api/auth/', include('rest_framework.urls', 
+    path('api', include(router.urls)),
+    path('api/auth', include('rest_framework.urls', 
         namespace='rest_framework')),
-    path('sitemap.xml', sitemap,
-        {'sitemaps': sitemaps},
-        name='django.contrib.sitemaps.views.sitemap'),
-    path('<path:url>', flats.flatpage),
-]
+    path('sitemap.xml', sitemap,{'sitemaps': sitemaps},name='django.contrib.sitemaps.views.sitemap'),
+    path('<path:url>/', views.flatpage),
+] 
 
 if settings.DEBUG:
     urlpatterns += [
-        re_path(r'^media/(?P<path>.*)', serve, {
+        re_path('^media/(?P<path>.*)$', serve, {
             'document_root': settings.MEDIA_ROOT,
         }),
     ]

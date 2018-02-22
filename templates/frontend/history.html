@@ -138,19 +138,21 @@
                             <canvas width="600" height="400"></canvas>
                         </div>
                         <div>
-                            <div class="uk-card-body uk-text-middle">
-                                <h3 class="uk-card-title">
+                            <div class="uk-padding-large">
+                                <h3 class="uk-text-center uk-h2 uk-scrollspy-inview uk-animation-scale-up" uk-scrollspy-class="" style="">
                                     {% if lang_code == 'English' %}
                                         Mision
                                     {% else %}
                                         Misión
                                     {% endif %}
                                 </h3>
-                                {% if lang_code == 'English' %}
-                                    {{site.en_mision|safe}}
-                                {% else %}
-                                    {{site.es_mision|safe}}
-                                {% endif %}
+                                <div class="uk-margin uk-width-large uk-margin-auto uk-text-center uk-scrollspy-inview uk-animation-scale-up" uk-scrollspy-class="" style="">
+                                    {% if lang_code == 'English' %}
+                                        {{site.en_mision|safe}}
+                                    {% else %}
+                                        {{site.es_mision|safe}}
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -165,19 +167,21 @@
                             <canvas width="600" height="400"></canvas>
                         </div>
                         <div>
-                            <div class="uk-card-body uk-text-middle">
-                                <h3 class="uk-card-title">
+                            <div class="uk-padding-large">
+                                <h3 class="uk-text-center uk-h2 uk-scrollspy-inview uk-animation-scale-up" uk-scrollspy-class="" style="">
                                     {% if lang_code == 'English' %}
                                         Vision
                                     {% else %}
                                         Visión
                                     {% endif %}
                                 </h3>
-                                {% if lang_code == 'English' %}
-                                    {{site.en_vision|safe}}
-                                {% else %}
-                                    {{site.es_vision|safe}}
-                                {% endif %}
+                                <div class="uk-margin uk-width-large uk-margin-auto uk-text-center uk-scrollspy-inview uk-animation-scale-up" uk-scrollspy-class="" style="">
+                                        {% if lang_code == 'English' %}
+                                        {{site.en_vision|safe}}
+                                    {% else %}
+                                        {{site.es_vision|safe}}
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -398,11 +402,13 @@
                                 {% for obj in timeline %}
                                     {% if lang_code != 'English' %}
                                         <div class="swiper-slide uk-padding">
-                                            <h3>
-                                                {{obj.es_name}}
-                                                <br>
-                                                {{obj.year}}
-                                            </h3>
+                                            <div class="uk">
+                                                <h3>
+                                                    {{obj.es_name}}
+                                                    <br>
+                                                    {{obj.year}}
+                                                </h3>
+                                            </div>
                                             <div class="uk-padding">
                                                 {{obj.es_description|safe}}
                                             </div>

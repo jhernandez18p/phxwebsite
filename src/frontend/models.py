@@ -96,14 +96,14 @@ class Company(models.Model):
     # values = models.ManyToManyField(Site_value, blank=True)
     # country = models.ManyToManyField(Country, blank=True)
     is_default = models.BooleanField(default=False)
-    
+
 
     def __str__(self):
         return self.es_name
 
     class Meta:
-        verbose_name = _('Company')
-        verbose_name_plural = _('Companies')
+        verbose_name = _('Empresa')
+        verbose_name_plural = _('Empresas')
 
 
 class Pages(models.Model):
@@ -121,8 +121,8 @@ class Pages(models.Model):
         return self.es_name
 
     class Meta:
-        verbose_name = _('Page')
-        verbose_name_plural = _('Pages')
+        verbose_name = _('Página')
+        verbose_name_plural = _('Páginas')
 
 
 class Position(models.Model):
@@ -133,6 +133,10 @@ class Position(models.Model):
 
     def __str__(self):
         return self.es_name
+
+    class Meta:
+        verbose_name = _('Posición')
+        verbose_name_plural = _('Posiciones')
 
 
 class Menu(models.Model):
@@ -147,6 +151,10 @@ class Menu(models.Model):
     def __str__(self):
         return self.es_name
 
+    class Meta:
+        verbose_name = _('Menú')
+        verbose_name_plural = _('Menú')
+
 
 class Carousel(models.Model):
     name = models.CharField(max_length=144, blank=True)
@@ -159,8 +167,8 @@ class Carousel(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = _("Carousel")
-        verbose_name_plural = _("Carouseles")
+        verbose_name = _("Carrusel")
+        verbose_name_plural = _("Carrusel")
 
 
 class CarouselImage(models.Model):
@@ -223,8 +231,8 @@ class Country(models.Model):
 
     class Meta:
         """# Class Meta"""
-        verbose_name = _('Country')
-        verbose_name_plural = _('Countries')
+        verbose_name = _('País')
+        verbose_name_plural = _('Países')
 
 
 
@@ -248,8 +256,8 @@ class Value(models.Model):
 
     class Meta:
         """# Class Meta"""
-        verbose_name = _('Site values')
-        verbose_name_plural = _('Site values')
+        verbose_name = _('Valores de la empresa')
+        verbose_name_plural = _('Valores de la empresa')
 
 
 class Timeline(models.Model):
@@ -272,3 +280,12 @@ class Timeline(models.Model):
     )
     place = models.CharField(max_length=144,blank=True)
     Company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True)
+
+
+    def __str__(self):
+        return self.es_name
+
+    class Meta:
+        """# Class Meta"""
+        verbose_name = _('Imágen del carrusel')
+        verbose_name_plural = _('Imagenes del carrusel')

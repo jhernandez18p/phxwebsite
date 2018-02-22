@@ -483,27 +483,25 @@ def news_detail(request, slug):
     if lang == 'English':
         title = 'Our brands'
         keywords = 'Our brands'
-        try:
-            new = get_object_or_404(Post, en_slug=slug)
-        except Exception as e:
-            raise e
+        new = get_object_or_404(Post, es_slug=slug)
+           
     else:
-        try:
-            new = get_object_or_404(Post, es_slug=slug)
-        except Exception as e:
-            raise e
+        new = get_object_or_404(Post, es_slug=slug)
         title = 'Nuestras marcas'
         keywords = 'Nuestras marcas'
     
     # print(new)
-    context['obj'] = new
     if request.COOKIES['lang_code'] == 'English':
         context['title'] = new.en_title
         context['blog'] = '/es/noticias/%s/' % new.es_slug
+        new = get_object_or_404(Post, en_slug=slug)
+        context['obj'] = new
         print(context['blog'])
     else:
         context['title'] = new.es_title
         context['blog'] = '/en/news/%s/' % new.en_slug
+        new = get_object_or_404(Post, es_slug=slug)
+        context['obj'] = new
         print(context['blog'])
 
     return render(request, template, context)

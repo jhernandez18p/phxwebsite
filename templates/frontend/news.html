@@ -119,15 +119,13 @@
                                     </div>
                                     <div class="uk-card-footer">
                                         {% if lang_code == 'English' %}
-                                            <form action="{% url 'en:news' %}" method="post">
-                                                {% csrf_token %}
-                                                <button class="uk-button uk-button-text">Read more</button>
-                                            </form>
+                                            <a href="{{new.get_absolute_url_en}}" class="uk-button uk-button-text">
+                                                Read more
+                                            </a>
                                         {% else %}
-                                            <form action="{% url 'es:noticias' %}" method="post">
-                                                {% csrf_token %}
-                                                <button class="uk-button uk-button-text">Ver más</button>
-                                            </form>
+                                            <a href="{{new.get_absolute_url_es}}" class="uk-button uk-button-text">
+                                                Ver más
+                                            </a>
                                         {% endif %}
                                     </div>
                                 </div>

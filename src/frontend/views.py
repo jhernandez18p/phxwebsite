@@ -147,43 +147,47 @@ def index(request):
         },
     ]
 
-    news = [
-        {
-            'short_image':'',
-            'en_name':'New blog post 01',
-            'en_title':'New blog post 01',
-            'en_short_description':'This is the news blog post number 01',
-            'get_absolute_url_en':'#',
-            'es_name':'Nueva publicacion 01',
-            'es_title':'Nueva publicacion 01',
-            'es_short_description':'este es el post numero 01',
-            'get_absolute_url_es':'#',
-        },
-        {
-            'short_image':'',
-            'en_name':'New blog post 02',
-            'en_title':'New blog post 02',
-            'en_short_description':'This is the news blog post number 02',
-            'get_absolute_url_en':'#',
-            'es_name':'Nueva publicacion 02',
-            'es_title':'Nueva publicacion 02',
-            'es_short_description':'este es el post numero 02',
-            'get_absolute_url_es':'#',
-        },
-        {
-            'short_image':'',
-            'en_name':'New blog post 03',
-            'en_title':'New blog post 03',
-            'en_short_description':'This is the news blog post number 03',
-            'get_absolute_url_en':'#',
-            'es_name':'Nueva publicacion 03',
-            'es_title':'Nueva publicacion 03',
-            'es_short_description':'este es el post numero 03',
-            'get_absolute_url_es':'#',
-        },
-    ]
+    news = Post.objects.all()[:3]
+    if news.exists():
+        context['news'] = news
+    else:
+        news = [
+            {
+                'short_image':'',
+                'en_name':'New blog post 01',
+                'en_title':'New blog post 01',
+                'en_short_description':'This is the news blog post number 01',
+                'get_absolute_url_en':'#',
+                'es_name':'Nueva publicacion 01',
+                'es_title':'Nueva publicacion 01',
+                'es_short_description':'este es el post numero 01',
+                'get_absolute_url_es':'#',
+            },
+            {
+                'short_image':'',
+                'en_name':'New blog post 02',
+                'en_title':'New blog post 02',
+                'en_short_description':'This is the news blog post number 02',
+                'get_absolute_url_en':'#',
+                'es_name':'Nueva publicacion 02',
+                'es_title':'Nueva publicacion 02',
+                'es_short_description':'este es el post numero 02',
+                'get_absolute_url_es':'#',
+            },
+            {
+                'short_image':'',
+                'en_name':'New blog post 03',
+                'en_title':'New blog post 03',
+                'en_short_description':'This is the news blog post number 03',
+                'get_absolute_url_en':'#',
+                'es_name':'Nueva publicacion 03',
+                'es_title':'Nueva publicacion 03',
+                'es_short_description':'este es el post numero 03',
+                'get_absolute_url_es':'#',
+            },
+        ]
+        context['news'] = news
 
-    context['news'] = news
     context['business_banners'] = business_banners
     context['full_banners'] = header_carousel
 
@@ -326,41 +330,46 @@ def news(request):
     #     raise e
 
     # try:
-    news = [
-        {
-            'short_image':'',
-            'en_name':'New blog post 01',
-            'en_title':'New blog post 01',
-            'en_short_description':'This is the news blog post number 01',
-            'get_absolute_url_en':'#',
-            'es_name':'Nueva publicacion 01',
-            'es_title':'Nueva publicacion 01',
-            'es_short_description':'este es el post numero 01',
-            'get_absolute_url_es':'#',
-        },
-        {
-            'short_image':'',
-            'en_name':'New blog post 02',
-            'en_title':'New blog post 02',
-            'en_short_description':'This is the news blog post number 02',
-            'get_absolute_url_en':'#',
-            'es_name':'Nueva publicacion 02',
-            'es_title':'Nueva publicacion 02',
-            'es_short_description':'este es el post numero 02',
-            'get_absolute_url_es':'#',
-        },
-        {
-            'short_image':'',
-            'en_name':'New blog post 03',
-            'en_title':'New blog post 03',
-            'en_short_description':'This is the news blog post number 03',
-            'get_absolute_url_en':'#',
-            'es_name':'Nueva publicacion 03',
-            'es_title':'Nueva publicacion 03',
-            'es_short_description':'este es el post numero 03',
-            'get_absolute_url_es':'#',
-        },
-    ]
+    news = Post.objects.all()
+    if news.exists():
+        context['news'] = news
+    else:
+        news = [
+            {
+                'short_image':'',
+                'en_name':'New blog post 01',
+                'en_title':'New blog post 01',
+                'en_short_description':'This is the news blog post number 01',
+                'get_absolute_url_en':'#',
+                'es_name':'Nueva publicacion 01',
+                'es_title':'Nueva publicacion 01',
+                'es_short_description':'este es el post numero 01',
+                'get_absolute_url_es':'#',
+            },
+            {
+                'short_image':'',
+                'en_name':'New blog post 02',
+                'en_title':'New blog post 02',
+                'en_short_description':'This is the news blog post number 02',
+                'get_absolute_url_en':'#',
+                'es_name':'Nueva publicacion 02',
+                'es_title':'Nueva publicacion 02',
+                'es_short_description':'este es el post numero 02',
+                'get_absolute_url_es':'#',
+            },
+            {
+                'short_image':'',
+                'en_name':'New blog post 03',
+                'en_title':'New blog post 03',
+                'en_short_description':'This is the news blog post number 03',
+                'get_absolute_url_en':'#',
+                'es_name':'Nueva publicacion 03',
+                'es_title':'Nueva publicacion 03',
+                'es_short_description':'este es el post numero 03',
+                'get_absolute_url_es':'#',
+            },
+        ]
+        context['news'] = news
     news_banners = [
         {
             'large_image':'/static/base/images/retail.png',

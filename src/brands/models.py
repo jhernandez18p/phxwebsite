@@ -71,11 +71,11 @@ class Category(models.Model):
 class Brand(models.Model):
     """# Brand model class"""
 
-    upload_to = 'brands/%s/%s'
 
     def _get_upload_to(self, filename):
-        return self.upload_to % (self.es_name,filename)
-
+        upload_to = 'brands/%s/%s' % (self.es_name,filename)
+        return upload_to
+        
     en_name = models.CharField(max_length=140, verbose_name=_('Nombre español'))
     es_name = models.CharField(max_length=140, verbose_name=_('Nombre inglés'))
     en_title = models.CharField(max_length=140, verbose_name=_('Titulo'))

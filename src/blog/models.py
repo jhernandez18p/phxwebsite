@@ -95,22 +95,22 @@ class Post(models.Model):
 def create_slug_en(instance, new_slug=None):
     en_slug = slugify(instance.en_title)
     if new_slug is not None:
-        slug = new_slug
+        en_slug = new_slug
     qs = Post.objects.filter(en_slug=en_slug).order_by("-id")
     exists = qs.exists()
     if exists:
-        new_slug = "%s-%s" %(slug, qs.first().id)
+        new_slug = "%s-%s" %(en_slug, qs.first().id)
         return create_slug_en(instance, new_slug=new_slug)
     return en_slug
 
 def create_slug_es(instance, new_slug=None):
     es_slug = slugify(instance.es_title)
     if new_slug is not None:
-        slug = new_slug
+        es_slug = new_slug
     qs = Post.objects.filter(es_slug=es_slug).order_by("-id")
     exists = qs.exists()
     if exists:
-        new_slug = "%s-%s" %(slug, qs.first().id)
+        new_slug = "%s-%s" %(es_slug, qs.first().id)
         return create_slug_es(instance, new_slug=new_slug)
     return es_slug
 

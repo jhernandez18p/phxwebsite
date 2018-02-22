@@ -279,7 +279,7 @@ def our_brands(request):
     #             print(e)
     #     else:
 
-    brands = Brand.objects.all()
+    brands = Brand.objects.all().order_by('en_name')
     if brands.exists():
         context['brands'] = brands
         

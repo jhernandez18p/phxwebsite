@@ -73,7 +73,7 @@ class Brand(models.Model):
 
 
     def _get_upload_to(self, filename):
-        upload_to = 'brands/%s/%s' % (self.es_name,filename)
+        upload_to = 'brands/%s/%s' % (self.es_slug,filename)
         return upload_to
         
     en_name = models.CharField(max_length=140, verbose_name=_('Nombre español'))

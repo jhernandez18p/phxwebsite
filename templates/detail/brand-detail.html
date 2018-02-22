@@ -79,45 +79,45 @@
 {% endblock %}
 
 {% block js %}
-{% if lang_code == 'English' %}
-    <script>
-        var parentURL = '{{ en_parent_url }}'
-    </script>
-{% else %}
-    <script>
-        var parentURL = '{{ es_parent_url }}'
-    </script>
-{% endif %}
-<script type="text/javascript">
-    $(document).ready(function () {
+    {% if lang_code == 'English' %}
+        <script>
+            var parentURL = '{{ en_parent_url }}'
+        </script>
+    {% else %}
+        <script>
+            var parentURL = '{{ es_parent_url }}'
+        </script>
+    {% endif %}
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-        $('#close').click(function(){
-            window.location.href = parentURL;
-        });
-
-        UIkit.modal('#{{brand.id}}modal-full').show();
-        $('#{{brand.id}}modal-full').on({
-            'shown': function() {
-                // console.log('rrrr');
-                // location.reload();
-                var swiper;
-                swiper = new Swiper('.brandSlide{{brand.id}} .swiper-container', {
-                    pagination: '.brandSlide{{brand.id}} .swiper-pagination',
-                    paginationClickable: true,
-                    navigation: {
-                        nextEl: '.brandSlide{{brand.id}} .swiper-button-next',
-                        prevEl: '.brandSlide{{brand.id}} .swiper-button-prev',
-                    },
-                    loop: true,
-                    autoplay: 8000,
-                });
-            },
-            'hide.uk.modal': function(){
+            $('#close').click(function(){
                 window.location.href = parentURL;
-            }
-        });
+            });
 
-    })
-</script>
+            UIkit.modal('#{{brand.id}}modal-full').show();
+            $('#{{brand.id}}modal-full').on({
+                'shown': function() {
+                    // console.log('rrrr');
+                    // location.reload();
+                    var swiper;
+                    swiper = new Swiper('.brandSlide{{brand.id}} .swiper-container', {
+                        pagination: '.brandSlide{{brand.id}} .swiper-pagination',
+                        paginationClickable: true,
+                        navigation: {
+                            nextEl: '.brandSlide{{brand.id}} .swiper-button-next',
+                            prevEl: '.brandSlide{{brand.id}} .swiper-button-prev',
+                        },
+                        loop: true,
+                        autoplay: 8000,
+                    });
+                },
+                'hide.uk.modal': function(){
+                    window.location.href = parentURL;
+                }
+            });
+
+        })
+    </script>
 
 {% endblock %}

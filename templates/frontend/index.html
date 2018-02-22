@@ -38,7 +38,7 @@
                         <div class="swiper-slide">
                             <div class="uk-child-width-1-1@">
                                 <img class="uk-background-cover uk-visible@m" {% if banner.large_banner %} src="{{banner.large_banner}}" {% else %} src="{% static 'base/images/base.png' %}"
-                                    {% endif %} alt="{% if lang_code != 'English' %}{{banner.es_name}}{% else %}{{banner.en_name}}{% endif %}" uk-height-viewport uk-scrollspy="cls: uk-animation-kenburns; repeat: true">
+                                    {% endif %} alt="{% if lang_code != 'English' %}{{banner.es_name}}{% else %}{{banner.en_name}}{% endif %}" uk-height-viewport uk-scrollspy="cls: uk-animation-kenburns; repeat: true;">
                             </div>
                         </div>
                     {% endfor %}

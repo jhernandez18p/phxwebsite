@@ -170,13 +170,17 @@
                     <div class="uk-width-expand@s uk-first-column">
                         <div class="uk-margin uk-text-center">
                             {% if lang_code == 'English' %}
-                                <a href="{{object.get_absolute_url_en}}">
+                            <div class="uk-inline">
+                                <a href="{{object.get_absolute_url_en}}" class="uk-position-center-bottom ">
                                     <img src="{{object.short_logo.url}}" class="el-image" alt="{{object.en_name}}">
                                 </a>
-                                {% else %}
-                                <a href="{{object.get_absolute_url_es}}">
+                            </div>
+                            {% else %}
+                            <div class="uk-inline">
+                                <a href="{{object.get_absolute_url_es}}" class="uk-position-center-bottom ">
                                     <img src="{{object.short_logo.url}}" class="el-image" alt="{{object.es_name}}">
                                 </a>
+                            </div>
                             {% endif %}
                         </div>
                     </div>

@@ -6,7 +6,8 @@
 <link rel="stylesheet" href="{% static 'base/css/home.css' %}">
 <style>
     #newsCard .uk-card {margin-left: 5px;margin-right: 5px;}
-    .el-image {height: 100px;width: 100px;padding-bottom: 5px; padding-top: 5px;}
+    .el-image {height: 100px;width: 100px;padding-bottom: 5px; padding-top: 5px; padding-top: 5px;
+margin: 3% 45%;}
 </style>
 {% endblock %}
 
@@ -161,26 +162,22 @@
                     {% if forloop.counter0 == 4 %}
                     </div>
                         <div class="uk-grid-collapse uk-margin-remove-vertical uk-grid uk-grid-stack" uk-grid="">
-                            <div class="uk-width-1-1@s uk-first-column">
+                            <div class="uk-width-1-1@s">
                                 <div class="uk-hr"></div>
                             </div>
                         </div>
                     <div class="uk-grid-divider uk-margin-remove-vertical uk-grid" uk-grid="">
                     {% endif %}
-                    <div class="uk-width-expand@s uk-first-column">
-                        <div class="uk-margin uk-text-center">
+                    <div class="uk-width-expand@s uk-text-center">
+                        <div class="uk-margin ">
                             {% if lang_code == 'English' %}
-                            <div class="uk-inline">
-                                <a href="{{object.get_absolute_url_en}}" class="uk-position-center-bottom ">
-                                    <img src="{{object.short_logo.url}}" class="el-image" alt="{{object.en_name}}">
+                                <a href="{{object.get_absolute_url_en}}">
+                                    <img src="{{object.short_logo.url}}" class="el-image uk-align-center" alt="{{object.en_name}}">
                                 </a>
-                            </div>
                             {% else %}
-                            <div class="uk-inline">
-                                <a href="{{object.get_absolute_url_es}}" class="uk-position-center-bottom ">
-                                    <img src="{{object.short_logo.url}}" class="el-image" alt="{{object.es_name}}">
+                                <a href="{{object.get_absolute_url_es}}" >
+                                    <img src="{{object.short_logo.url}}" class="el-image uk-align-center" alt="{{object.es_name}}">
                                 </a>
-                            </div>
                             {% endif %}
                         </div>
                     </div>

@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
-from django.core.mail import (send_mail, BadHeaderError)
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.mail import (send_mail, BadHeaderError)
+from django.db.models import Q
 from django.http import (Http404, HttpResponse, HttpResponseRedirect)
 from django.shortcuts import (get_object_or_404, render, redirect)
 from django.urls import reverse
@@ -506,11 +507,11 @@ def news_detail(request, slug):
 
     return render(request, template, context)
 
-def brand_detail(request, id):
+def brand_detail(request, slug):
     template = 'detail/brand-detail.html'
     context = {}
 
-    brand = get_object_or_404(Brand, id=id)
+    brand = get_object_or_404(Brand, Q(en_slug=slug) | Q(es_slug=slug) )
     context['brand'] = brand
     context['title'] = brand.es_name
     context['en_parent_url'] = reverse('en:our_brands') 

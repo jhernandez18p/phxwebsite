@@ -106,11 +106,11 @@ class Brand(models.Model):
 
     def get_absolute_url_en(self):
         """# Get absolute English URL """
-        return reverse("en:brand_detail", kwargs={"id": self.id})
+        return reverse("en:brand_detail", kwargs={"slug": self.en_slug})
 
     def get_absolute_url_es(self):
         """# Get absolute Spanish URL """
-        return reverse("es:brand_detail", kwargs={"id": self.id})
+        return reverse("es:brand_detail", kwargs={"slug": self.es_slug})
     
     def es_get_unique_slug(self):
         slug = slugify(self.es_title)

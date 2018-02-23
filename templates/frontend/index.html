@@ -172,11 +172,11 @@ margin: 3% 45%;}
                         <div class="uk-margin ">
                             {% if lang_code == 'English' %}
                                 <a href="{{object.get_absolute_url_en}}">
-                                    <img src="{{object.short_logo.url}}" class="el-image uk-align-center" alt="{{object.en_name}}">
+                                    <img src="{{object.short_logo.url}}" class="el-image uk-align-center" alt="{{object.en_name}}" onmouseover="this.src='{{object.large_logo.url}}'" onmouseout="this.src='{{object.short_logo.url}}'">
                                 </a>
                             {% else %}
                                 <a href="{{object.get_absolute_url_es}}" >
-                                    <img src="{{object.short_logo.url}}" class="el-image uk-align-center" alt="{{object.es_name}}">
+                                    <img src="{{object.short_logo.url}}" class="el-image uk-align-center" alt="{{object.es_name}}" onmouseover="this.src='{{object.large_logo.url}}'" onmouseout="this.src='{{object.short_logo.url}}'">
                                 </a>
                             {% endif %}
                         </div>

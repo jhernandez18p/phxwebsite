@@ -1,4 +1,4 @@
-#map { height: 500px; width: 100%;}
+#map { height: 800px; width: 100%;}
 .full-screen{max-height:100vh;}
 .full-screen .swiper-slide{max-height:100vh;}
 .top-logo{z-index: 99}

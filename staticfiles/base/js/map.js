@@ -114,7 +114,7 @@ function initMap() {
     var bounds = new google.maps.LatLngBounds();
     var infoWindow = new google.maps.InfoWindow(), marker, i;
     map = new google.maps.Map(document.getElementById('map'), {
-        mapTypeId: 'satellite',
+        // mapTypeId: 'satellite',
         center: {lat: 14.987239, lng: -84.528809}, 
         //center: {lat: -6.9645954, lng: -76.3220646},
         //center: {lat: 8.6571004, lng: -60.1603678}, 
@@ -124,7 +124,7 @@ function initMap() {
         zoom: 8,
         disableDefaultUI: true,
         scrollwheel: false,
-        //styles: styleArray,
+        styles: styleArray,
     });
 
     var image = {
@@ -134,7 +134,7 @@ function initMap() {
         // The origin for this image is (0, 0).
         origin: new google.maps.Point(0, 0),
         // The anchor for this image is the base of the flagpole at (0, 32).
-        anchor: new google.maps.Point(5, 20)
+        anchor: new google.maps.Point(5, 10)
     };
 
     for( i = 0; i < markers.length; i++ ) {

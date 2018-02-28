@@ -7,17 +7,15 @@
     .values{
         margin-bottom: 45px;
     }
-    .timeline-container, .mov {height: 600px;margin-bottom: 20px;}
+    .timeline-container, .mov {height: 700px;margin-bottom: 20px;}
     .timeline, .mov {height: 100%;}
     .timeline .swiper-container ,
     .mov .swiper-container {height: 100%;width: 100%;padding-top: 50px;padding-bottom: 50px;}
     .timeline .swiper-slide {
         background-position: center;
         background-size: cover;
-        width: 300px;
-        height: 400px;
-        background-color: #fff;
-        margin-top: 70px
+        width: 700px !important;
+        height: 300px !important;
     }
     .timeline .swiper-button-next, .timeline .swiper-button-prev{top: 10%;}
     .timeline-sw-pagination{bottom: 89% !important;}
@@ -44,17 +42,70 @@
     }
     .timeline .swiper-button-next, .timeline .swiper-button-prev{
         width: 39px !important;
-    }
-    .timeline .sw-next::before{
-        content: "";
         position: absolute;
-        height: 15px;
-        border-top: 4px solid white;
-        top: 45%;
-        width: 29vw;
-        right: inherit;
-        left: inherit;
+        transform: rotate(90deg);
+        left: 332.5px;
     }
+    .timeline .swiper-button-prev{
+        top:13px;
+        z-index: 1999;
+        
+    }
+    .timeline .swiper-button-next{
+        top:98.5%;
+        z-index: 1999;
+    }
+    /* .swiper-container-vertical>.swiper-wrapper{
+        margin-left: 40px;
+        margin-top: 20px;
+        z-index: 999;
+    } */
+    .timeline .verticalline::after{
+        content: '';
+        width: 0;
+        height: 684px;
+        position: absolute;
+        border: 3px solid #1b88ff;
+        top: 4px;
+        left: 398px;
+        transform: rotate(0deg);
+        z-index: 0;
+    }
+    .left-timeline img, .right-timeline img{
+        border: #222 1px;
+        border-radius: 50%
+    }
+    .left-timeline{
+        padding: 15px;
+        margin-right: 350px;
+        border-right: 2px solid #fff;
+        padding-right: 35px;
+    }
+    .left-timeline .timelineYear,.left-timeline p{
+        color: #fff;
+        text-align: right
+    }
+    
+    .right-timeline{
+        padding: 15px;
+        margin-left: 350px;
+        border-left: 2px solid #fff;
+        padding-left: 35px;
+    }
+    .right-timeline .timelineYear,.right-timeline p{
+        color: #fff
+    }
+    /* .right-timeline::before{
+        content:"";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 0.5em;
+    border-top: 1px solid black;
+    z-index: -1;
+    } */
+    /*
     .timeline .sw-prev::after{
         content: "";
         position: absolute;
@@ -64,9 +115,9 @@
         width: 29vw;
         right: inherit;
         left: inherit;
-    }
+    } */
 
-    .timeline-sw-pagination .swiper-pagination-bullet{background: #fff;}
+    /* .timeline-sw-pagination .swiper-pagination-bullet{background: #fff;}
     .timeline-sw-pagination .swiper-pagination-bullet-active{background: #fff;}
     .timeline-sw-pagination::before{
         content: "";
@@ -76,6 +127,13 @@
         top: 35px;
         right: 50%;
         left: 50%;
+    }
+    .swiper-wrapper:nth-child(even) h2{
+        margin-left: 400px;
+        margin-top: 130px;
+    } */
+    .timelinetitle{
+        margin-top: -25px;
     }
 </style>
 {% endblock %}
@@ -112,7 +170,7 @@
         <div class="uk-background-muted">
             <div class="uk-container  uk-background-muted">
                 <div class="uk-section-small ">
-                    <h3 class="uk-heading-line" style="left: 50%; top: 50%">
+                    <h3 class="uk-heading-line uk-text-center" style="left: 50%; top: 50%">
                         <span>
                             {% if lang_code != 'English' %}
                                 ¿Quienes somos?
@@ -375,7 +433,7 @@
         </div>
     </div>
 
-    {% if timeline %}
+    {% if timelines %}
     
         <div class="uk-background-muted">
             <div class="uk-container  uk-background-muted">
@@ -430,10 +488,10 @@
                                 {% endfor %}
                             </div>
                             <!-- Add Pagination -->
-                            <div class="swiper-pagination timeline-sw-pagination"></div>
-                            <div class="swiper-button-next swiper-button-white sw-next"></div>
                             <div class="swiper-button-prev swiper-button-white sw-prev"></div>
                         </div>
+                        <div class="swiper-pagination timeline-sw-pagination"></div>
+                        <div class="swiper-button-next swiper-button-white sw-next"></div>
                     </div>
                 </div>
                 <div class="mov-container uk-hidden@m">
@@ -473,6 +531,72 @@
         </div>
     {% endif %}
     
+    <div class="uk-background-muted">
+        <div class="uk-container  uk-background-muted">
+            <div class="uk-section-small ">
+                <h3 class="uk-heading-line uk-text-center" style="left: 50%; top: 50%">
+                    <span>
+                        {% if lang_code != 'English' %}
+                            Nuestra historia
+                        {% else %}
+                            Our history
+                        {% endif %}
+                    </span>
+                </h3>
+            </div>
+        </div>
+    </div>
+
+    <div id="timeline" class="uk-section-muted uk-grid uk-flex-center uk-padding-small uk-cover-container">
+        <img src="/static/base/images/timeline.jpg" uk-cover>
+        <div class="uk-container">    
+            <div class="timeline-container">
+                <div class="timeline uk-visible@m uk-position-center">
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper ">
+                            
+                            {% for obj in timeline %}
+                                {% if lang_code != 'English' %}
+                                    <div class="swiper-slide">
+                                        <div class="timelineBody">
+                                            <h3 class="timelineYear" >{{obj.year}}</h3>
+                                            <p class="timelinetitle" >{{obj.es_name}}</p>
+                                            <div class="uk-text-lead">
+                                                {{obj.es_description|safe}}
+                                            </div>
+                                        </div>
+                                        <div class="icon">
+                                            <span class="uk-icon-button  uk-margin-small-right uk-position-top-center" uk-icon="icon: check; ratio: 2.5"></span>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="swiper-slide">
+                                        <div class="timelineBody">
+                                            <h3 class="timelineYear" >{{obj.year}}</h3>
+                                            <p class="timelinetitle" >{{obj.en_name}}</p>
+                                            <div class="uk-text-lead">
+                                                {{obj.en_description|safe}}
+                                            </div>
+                                        </div>
+                                        <div class="icon">
+                                            <span class="uk-icon-button  uk-margin-small-right uk-position-top-center" uk-icon="icon: check; ratio: 2.5"></span>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+
+                        </div>
+                        <div class="swiper-button-next swiper-button-white uk-position-top-center .sw-next"></div>
+                        <div class="swiper-button-prev swiper-button-white uk-position-bottom-center .sw-prev"></div>
+                        <!-- <div class="verticalline">
+
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 {% endblock %}
 
@@ -521,16 +645,16 @@
         },
     });
     swiper = new Swiper('.timeline .swiper-container', {
-        slidesPerView: 3,
-        spaceBetween: 30,
+        slidesPerView: 2,
         centeredSlides: true,
-        cssWidthAndHeight: true,
+        // spaceBetween: 30,
+        direction: 'vertical',
         pagination: {
             el : '.timeline-sw-pagination',
         },
         navigation: {
-            nextEl: '.timeline .sw-next',
-            prevEl: '.timeline .sw-prev',
+            nextEl: '#timeline .swiper-button-next',
+            prevEl: '#timeline .swiper-button-prev',
         },
     });
     swiperMov = new Swiper('.mov .swiper-container', {
@@ -551,8 +675,13 @@
             prevEl: '.mov .swiper-button-prev',
         },
     });
+    // $('#timeline').find('h2').addClass('uk-align-right@m')
+    $('.timeline .swiper-wrapper .swiper-slide:odd').find('.timelineBody').addClass('right-timeline');
+    $('.timeline .swiper-wrapper .swiper-slide:even').find('.timelineBody').addClass('left-timeline');
 </script>
 
+
+{% endblock %}
 <script>
 
     // target to give background to
@@ -660,4 +789,3 @@
     // go go go!
     window.requestAnimationFrame(updateGradient);
 </script>
-{% endblock %}

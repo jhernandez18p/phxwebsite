@@ -81,15 +81,44 @@
                             {% endif %}        
                         </a>
                     </li>
-                    <li>
-                        <span>
+                    {% if brands_cat_detail %}
+                        <li>
                             {% if lang_code == 'English' %}
-                                Brands
+                            <a href="{% url 'en:our_brands' %}">
+                                <span>
+                                    Brands
+                                </span>
+                            </a>
                             {% else %}
-                                Marcas
+                            <a href="{% url 'es:marcas' %}">
+                                <span>
+                                    Marcas
+                                </span>
+                            </a>
                             {% endif %}
-                        </span>
-                    </li>
+                        </li>
+                        <li>
+                            {% if lang_code == 'English' %}
+                                <span>
+                                    {{brands_cat_detail.en_name}}
+                                </span>
+                            {% else %}
+                                <span>
+                                    {{brands_cat_detail.es_name}}
+                                </span>
+                            {% endif %}
+                        </li>
+                    {% else %}
+                        <li>
+                            <span>
+                                {% if lang_code == 'English' %}
+                                Brands
+                                {% else %}
+                                Marcas
+                                {% endif %}
+                            </span>
+                        </li>
+                    {% endif %}
                 </ul>
                 <hr>
                 {# Filter #}
@@ -106,7 +135,7 @@
                                                 {% if brands_cat %}
                                                     <li class="uk-nav-header uk-active">Categories</li>
                                                     {% for cat in brands_cat %}
-                                                        <li><a href="{% url 'en:our_brands'%}?cat={{cat.id}}">{{cat.en_name | lower }}</a></li>
+                                                        <li><a href="{{cat.get_absolute_url_en}}">{{cat.en_name | lower }}</a></li>
                                                     {% endfor %}
                                                     <li class="uk-nav-divider"></li>
                                                 {% endif %}
@@ -128,7 +157,7 @@
                                                 {% if brands_cat %}
                                                     <li class="uk-nav-header uk-active">Categorías</li>
                                                     {% for cat in brands_cat %}
-                                                        <li><a href="{% url 'es:marcas'%}?cat={{cat.id }}">{{cat.es_name | lower }}</a></li>
+                                                        <li><a href="{{cat.get_absolute_url_es}}">{{cat.es_name | lower }}</a></li>
                                                     {% endfor %}
                                                     <li class="uk-nav-divider"></li>
                                                 {% endif %}
@@ -176,20 +205,24 @@
     {% if brands %}
         <div class="uk-section uk-section-xsmall uk-section-muted">
             <div class="uk-container">
-                <div class="uk-grid-match uk-text-center uk-child-width-1-4@m uk-child-width-2@s" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-slide-top-small; target: > div > .uk-card; delay: 300;">
+                <div class="uk-grid-match uk-text-center uk-child-width-1-4@m uk-child-width-2@s" uk-grid uk-height-match="target: > div > .uk-card" uk-scrollspy="cls: uk-animation-slide-top-small; target: > div ; delay: 300;">
                     {% for brand in brands %}
                         <div id="brandCard">
                             <div class="uk-card uk-card-default">
                                 <div class="uk-card-media-center">
+                                    <div class="uk-inline-clip uk-transition-toggle uk-cover-container" tabindex="0">
                                         {% if lang_code == 'English' %}
                                             <a href="{{brand.get_absolute_url_en}}" uk-toggle>
-                                                <img src="{{brand.short_logo.url}}" alt="{{brand.en_title}}"  onmouseover="this.src='{{brand.large_logo.url}}'" onmouseout="this.src='{{brand.short_logo.url}}'">
+                                                <img src="{{brand.short_logo.url}}" alt="{{brand.en_title}}">
+                                                <img class="uk-transition-scale-up uk-position-cover" src="{{brand.large_logo.url}}" alt="{{brand.en_title}}" uk-cover>
                                             </a>
                                         {% else %}
                                             <a href="{{brand.get_absolute_url_es}}" uk-toggle>
-                                                <img src="{{brand.short_logo.url}}" alt="{{brand.es_title}}"  onmouseover="this.src='{{brand.large_logo.url}}'" onmouseout="this.src='{{brand.short_logo.url}}'">
+                                                <img src="{{brand.short_logo.url}}" alt="{{brand.es_title}}" >
+                                                <img class="uk-transition-scale-up uk-position-cover" src="{{brand.large_logo.url}}" alt="{{brand.es_title}}" uk-cover>
                                             </a>
                                         {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>                       

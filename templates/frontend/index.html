@@ -160,35 +160,54 @@ margin: 3% 45%;}
                 </h3>
             </div>
         </div>
-        <div class="uk-section-default uk-section uk-section-large">
-            <div class="uk-container">
-                <div class="uk-grid-divider uk-margin-remove-vertical uk-grid" uk-grid>
-                    {% for object in home_brands %}
-                    {% if forloop.counter0 == 4 %}
-                    </div>
-                        <div class="uk-grid-collapse uk-margin-remove-vertical uk-grid uk-grid-stack">
-                            <div class="uk-width-1-1@s">
-                                <div class="uk-hr"></div>
+        <div id="brandsSlide">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="uk-section-default uk-section uk-section-large">
+                            <div class="uk-container">
+                                <div class=" uk-margin-remove-vertical uk-grid" uk-grid>
+                                    {% for object in home_brands %}
+                                        <div class="uk-width-expand@s uk-text-center">
+                                            <div class="uk-margin ">
+                                                {% if lang_code == 'English' %}
+                                                <a href="{{object.get_absolute_url_en}}">
+                                                    <img src="{{object.short_logo.url}}" class="el-image uk-align-center" alt="{{object.en_name}}" onmouseover="this.src='{{object.large_logo.url}}'" onmouseout="this.src='{{object.short_logo.url}}'">
+                                                </a>
+                                                {% else %}
+                                                <a href="{{object.get_absolute_url_es}}" >
+                                                    <img src="{{object.short_logo.url}}" class="el-image uk-align-center" alt="{{object.es_name}}" onmouseover="this.src='{{object.large_logo.url}}'" onmouseout="this.src='{{object.short_logo.url}}'">
+                                                </a>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        {% if forloop.revcounter0 == 4 or forloop.revcounter0 == 12 or forloop.revcounter0 == 20 or forloop.revcounter0 == 28 or forloop.revcounter0 == 36 or forloop.revcounter0 == 44 or forloop.revcounter0 == 52 %}
+                                            </div>
+                                                <div class="uk-grid-collapse uk-margin-remove-vertical uk-grid uk-grid-stack">
+                                                    <div class="uk-width-1-1@s">
+                                                        <div class="uk-hr"></div>
+                                                    </div>
+                                                </div>
+                                            <div class=" uk-margin-remove-vertical uk-grid" uk-grid atr="loop-4">
+                                        {% elif forloop.revcounter0 == 8 or forloop.revcounter0 == 16 or forloop.revcounter0 == 24 or forloop.revcounter0 == 32 or forloop.revcounter0 == 40 or forloop.revcounter0 == 48 %}
+                                                </div alt="close1">
+                                            </div alt="close2">
+                                        </div alt="close2">
+                                    </div alt="close3">
+                                    <div class="swiper-slide">
+                                        <div class="uk-section-default uk-section uk-section-large">
+                                            <div class="uk-container">
+                                                <div class=" uk-margin-remove-vertical uk-grid" uk-grid atr="loop-8">
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
                             </div>
                         </div>
-                    <div class="uk-grid-divider uk-margin-remove-vertical uk-grid" uk-grid >
-                    {% endif %}
-                    <div class="uk-width-expand@s uk-text-center">
-                        <div class="uk-margin ">
-                            {% if lang_code == 'English' %}
-                                <a href="{{object.get_absolute_url_en}}">
-                                    <img src="{{object.short_logo.url}}" class="el-image uk-align-center" alt="{{object.en_name}}" onmouseover="this.src='{{object.large_logo.url}}'" onmouseout="this.src='{{object.short_logo.url}}'">
-                                </a>
-                            {% else %}
-                                <a href="{{object.get_absolute_url_es}}" >
-                                    <img src="{{object.short_logo.url}}" class="el-image uk-align-center" alt="{{object.es_name}}" onmouseover="this.src='{{object.large_logo.url}}'" onmouseout="this.src='{{object.short_logo.url}}'">
-                                </a>
-                            {% endif %}
-                        </div>
-                    </div>
-                    {% endfor %}
+                    </div>     
                 </div>
-            </div>     
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+            </div>
         </div>
     {% endif %}
     {# Mapa #}
@@ -303,36 +322,50 @@ margin: 3% 45%;}
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_uf0M6P9N8ZUTm3vsKlm-li2auJ9-guU" async defer></script>
 <script src="{% static 'base/js/map.js' %}"></script>
 <script>
-$(document).ready(function(){
-    $( "#map" ).delay(5000).fadeIn(initMap);
+    $(document).ready(function(){
+        // UIkit.slider('#brandSlider').startAutoplay();
+        $( "#map" ).delay(5000).fadeIn(initMap);
 
-    var swiper = new Swiper('.full-screen .swiper-container', {
-        pagination: '.full-screen .swiper-pagination',
-        paginationClickable: true,
-        navigation: {
-            nextEl: '.full-screen .swiper-button-next',
-            prevEl: '.full-screen .swiper-button-prev',
-        },
-        loop: true,
-        autoplay: {
-            delay: 5000,
-            disableOnInteraction: false,
-        },
+        var swiper = new Swiper('.full-screen .swiper-container', {
+            pagination: '.full-screen .swiper-pagination',
+            paginationClickable: true,
+            navigation: {
+                nextEl: '.full-screen .swiper-button-next',
+                prevEl: '.full-screen .swiper-button-prev',
+            },
+            loop: true,
+            autoplay: {
+                delay: 5000,
+                disableOnInteraction: false,
+            },
+        });
+        var swiperBiz = new Swiper('.banners-biz .swiper-container', {
+            pagination: '.banners-biz .swiper-pagination',
+            paginationClickable: true,
+            navigation: {
+                nextEl: '.banners-biz .swiper-button-next',
+                prevEl: '.banners-biz .swiper-button-prev',
+            },
+            loop: true,
+            autoplay: 8000,
+        });
+        var swiperBrands = new Swiper('#brandsSlide .swiper-container', {
+            pagination: '#brandsSlide .swiper-pagination',
+            paginationClickable: true,
+            navigation: {
+                nextEl: '#brandsSlide .swiper-button-next',
+                prevEl: '#brandsSlide .swiper-button-prev',
+            },
+            loop: true,
+            autoplay: {
+                delay: 6000,
+                disableOnInteraction: false,
+            },
+        });
+        $('.biz-cards:odd').find('.child').addClass('uk-flex-last@m uk-card-media-right@m uk-cover-container');
+        $('.biz-cards:even').find('.child').addClass('uk-card-media-left@m uk-cover-container card-shadow uk-first-column@m');
+        
     });
-    var swiperBiz = new Swiper('.banners-biz .swiper-container', {
-        pagination: '.banners-biz .swiper-pagination',
-        paginationClickable: true,
-        navigation: {
-            nextEl: '.banners-biz .swiper-button-next',
-            prevEl: '.banners-biz .swiper-button-prev',
-        },
-        loop: true,
-        autoplay: 8000,
-    });
-    $('.biz-cards:odd').find('.child').addClass('uk-flex-last uk-card-media-right uk-cover-container');
-    $('.biz-cards:even').find('.child').addClass('uk-card-media-left uk-cover-container card-shadow uk-first-column');
-    
-});
 </script>
 
 {% endblock %}

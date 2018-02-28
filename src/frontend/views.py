@@ -95,9 +95,9 @@ def index(request):
         page = pages.filter(en_name="Home")
         # print(page[0].id)
 
-    home_brands = Brand.objects.all().filter(featured=True)
+    home_brands = Brand.objects.all()
     if home_brands.exists():
-        context['home_brands'] = home_brands[:8]
+        context['home_brands'] = home_brands[:52]
 
     
     companies = Company.objects.all()
@@ -253,6 +253,10 @@ def our_brands(request):
     else:
         title = 'Nuestras marcas'
         keywords = 'Nuestras marcas'
+
+    department = Department.objects.all()
+    if department.exists():
+        context['brands_cat'] = department
     
     context['title'] = title    
     context['keywords'] = keywords
@@ -288,6 +292,24 @@ def our_brands(request):
     if brands.exists():
         context['brands'] = brands
         
+    return render(request, template, context)
+
+def department_detail(request, slug):
+    template = 'frontend/brands.html'
+    context = {
+        'pg_title':'our_brands',
+    }
+    current_department = get_object_or_404(Department,Q(en_slug=slug)|Q(es_slug=slug))
+
+    brands = Brand.objects.filter(department__id=current_department.id).order_by('en_name')
+    if brands.exists():
+        context['brands_cat_detail'] = current_department
+        context['brands'] = brands
+
+    department = Department.objects.all()
+    if department.exists():
+        context['brands_cat'] = department
+
     return render(request, template, context)
 
 def news(request):

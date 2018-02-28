@@ -21,6 +21,7 @@ app_name = 'en'
 urlpatterns = [
     path('', fw.index, name="en" ),
     path('about', fw.history, name='about'),
+    path('brands/department/<slug>',fw.department_detail,name='brand_department'),
     path('brands/<slug>',fw.brand_detail,name='brand_detail'),
     path('brands', fw.our_brands, name='our_brands'),
     path('news', fw.news, name='news'),

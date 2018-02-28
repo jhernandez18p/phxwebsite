@@ -33,16 +33,51 @@ class BusinessModel(models.Model):
 
 class Department(models.Model):
     """# Category model class"""
-    en_name = models.CharField(max_length=140, verbose_name=_('Nombre español'), blank=True)
-    es_name = models.CharField(max_length=140, blank=True, verbose_name=_('Nombre inglés'))
+    en_name = models.CharField(max_length=140, verbose_name=_('Nombre inglés'), blank=True)
+    es_name = models.CharField(max_length=140, blank=True, verbose_name=_('Nombre español'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Creado'))
     image = models.ImageField(upload_to='brands/cat/', verbose_name=_('Imágem principal'), blank=True)
     short_image = models.ImageField(upload_to='brands/dep/short/', blank=True, verbose_name=_('Imágen pequeña'))
     large_image = models.ImageField(upload_to='brands/dep/large/', blank=True, verbose_name=_('Imágen grande'))
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
+    en_slug = models.CharField(max_length=140, blank=True, verbose_name=_('URL Slug español'))
+    es_slug = models.CharField(max_length=140, blank=True, verbose_name=_('URL Slug inglés'))
+
+    def get_absolute_url_en(self):
+        """# Get absolute English URL """
+        return reverse("en:brand_department", kwargs={"slug": self.en_slug})
+
+    def get_absolute_url_es(self):
+        """# Get absolute Spanish URL """
+        return reverse("es:brand_department", kwargs={"slug": self.es_slug})
+
+    def es_get_unique_slug(self):
+        slug = slugify(self.es_name)
+        unique_slug = slug
+        num = int(self.id)
+        while Brand.objects.filter(es_slug=unique_slug).exists():
+            unique_slug = '{}-{}'.format(slug, int(num))
+            num += 1
+        return unique_slug
+    
+    def en_get_unique_slug(self):
+        slug = slugify(self.en_name)
+        unique_slug = slug
+        num = int(self.id)
+        while Brand.objects.filter(en_slug=unique_slug).exists():
+            unique_slug = '{}-{}'.format(slug, int(num))
+            num += 1
+        return unique_slug
 
     def __str__(self):
         return self.es_name
+
+    def save(self, *args, **kwargs):
+        if self.es_slug == '':
+            self.es_slug = self.es_get_unique_slug()
+        if self.en_slug == '':
+            self.en_slug = self.en_get_unique_slug()
+        super().save()
 
     class Meta:
         """# Class Meta"""
@@ -98,7 +133,7 @@ class Brand(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('Creado'))
     brand_type = models.ManyToManyField(BusinessModel, blank=True,verbose_name=_('Modelo de negocio'))
     category = models.ManyToManyField(Category, blank=True,verbose_name=_('Categoría'))
-    department = models.ForeignKey(Department, blank=True,verbose_name=_('Departamento'), on_delete=models.CASCADE, null=True)
+    department = models.ManyToManyField(Department, blank=True,verbose_name=_('Departamentos'))
     featured = models.BooleanField(default=False, verbose_name=_('Marca destacada'))
 
     def __str__(self):

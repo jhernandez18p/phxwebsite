@@ -1,5 +1,5 @@
 #map { height: 800px; width: 100%;}
-.full-screen{max-height:100vh;}
+.full-screen{max-height:100vh;background-color: #010101;}
 .full-screen .swiper-slide{max-height:100vh;}
 .top-logo{z-index: 99}
 .border-green{border: solid rgb(0, 150, 136) 5px;}

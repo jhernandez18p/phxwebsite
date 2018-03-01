@@ -19,12 +19,12 @@
         <div class="uk-section uk-section-xsmall uk-section-muted">
             <div class="uk-container">
                 <!-- Carrusel -->
-                {% if banners %}
+                {% if brands_cat.large_image %}
                     <div class="uk-section-muted">
                         <div class="full-screen">
                             <div class="swiper-container">
                             <div class="swiper-wrapper">
-                                    {% for banner in banners %}
+                                    {% for banner in brands_cat %}
                                         <div class="swiper-slide">
                                             {% if lang_code != 'English' %}
                                                 {% if banner.large_image %}

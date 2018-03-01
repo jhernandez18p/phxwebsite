@@ -48,14 +48,14 @@
                                         {% for banner in news_banners %}
                                             <div class="swiper-slide">
                                                 {% if lang_code != 'English' %}
-                                                    {% if banner.large_image %}
-                                                        <img src="{{banner.large_image}}" alt="{{banner.es_name}}">
+                                                    {% if banner.image %}
+                                                        <img src="{{banner.image.url}}" alt="{{banner.es_name}}">
                                                     {% else %}
                                                         <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.es_name}}">
                                                     {% endif %}
                                                 {% else %}
                                                     {% if banner.image %}
-                                                        <img src="{{banner.large_image}}" alt="{{banner.es_name}}">
+                                                        <img src="{{banner.image.url}}" alt="{{banner.es_name}}">
                                                     {% else %}
                                                         <img src="{% static 'base/images/wallpaper.jpg' %}" alt="{{banner.en_name}}">
                                                     {% endif %}

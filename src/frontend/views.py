@@ -235,9 +235,7 @@ def history(request):
 
 def our_brands(request):
     template = 'frontend/brands.html'
-    context = {
-        'pg_title':'our_brands',
-    }
+    context = {'pg_title':'our_brands',}
     lang = get_lang(request)
     url = 'en:our_brands'
     es_url = 'es:marcas'
@@ -258,36 +256,52 @@ def our_brands(request):
     context['title'] = title    
     context['keywords'] = keywords
 
-    # try:
-    #     brands_type = Business.objects.all()
-    #     context['brands_type'] = brands_type
-    #     brands_cat = Category.objects.all()
-    #     context['brands_cat'] = brands_cat
-
-    #     context['banners'] = brands_type  
-    # except Exception as e:
-    #     raise e
-    
-    # if request.method == "GET":
-    #     if 'cat' in request.GET and 'type' in request.GET:
-    #         brands = Brand.objects.all().filter(category=request.GET['cat'],brand_type=request.GET['type'])
-    #     elif 'cat' in request.GET:
-    #         try:
-    #             brands = Brand.objects.all().filter(category=request.GET['cat'])
-    #             context['brands'] = brands
-    #         except Exception as e:
-    #             print(e)
-    #     elif 'type' in request.GET:
-    #         try:
-    #             brands = Brand.objects.all().filter(brand_type=request.GET['type'])
-    #             context['brands'] = brands
-    #         except Exception as e:
-    #             print(e)
-    #     else:
-
     brands = Brand.objects.all().order_by('en_name')
     if brands.exists():
         context['brands'] = brands
+    
+    # pages = Pages.objects.get(en_name='Brands')
+    # if pages:
+    #     position = Position.objects.get(en_name='header')
+    #     carrusel = Carousel.objects.filter(Q(page=pages.id) & Q(Position=position.id))
+    #     # print(carrusel)
+    #     if carrusel.exists():
+    #         banners = CarouselImage.objects.filter(Carousel=carrusel[0].id)
+    #         if banners.exists():
+    #             # context['banners'] = banners
+    #             context['banners'] = banners
+    #         else:
+    #             news_banners = [
+    #                 {
+    #                     'large_image':'/static/base/images/retail.png',
+    #                     'es_name':'Ventas al por menor',
+    #                     'en_name':'Retail',
+    #                     'es_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
+    #                     'en_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
+    #                 },
+    #                 {
+    #                     'large_image':'/static/base/images/wholesale.png',
+    #                     'es_name':'Ventas al por mayor',
+    #                     'en_name':'WHolesale',
+    #                     'es_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
+    #                     'en_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
+    #                 },
+    #                 {
+    #                     'large_image':'/static/base/images/marketing.jpg',
+    #                     'es_name':'Publicidad y Mercadeo',
+    #                     'en_name':'Marketing & Advertising',
+    #                     'es_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
+    #                     'en_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
+    #                 },
+    #                 {
+    #                     'large_image':'/static/base/images/travel.jpg',
+    #                     'es_name':'Travel Retail',
+    #                     'en_name':'Travel Retail',
+    #                     'es_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
+    #                     'en_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
+    #                 },
+    #             ]
+    #             context['banners'] = news_banners
         
     return render(request, template, context)
 
@@ -328,28 +342,7 @@ def news(request):
     context['es_url'] = es_url
     context['title'] = title
     context['keywords'] = keywords
-    # try:
-    #     brands_cat = Business.objects.all()
-    #     for x in brands_cat:
-    #         if x.en_name == 'Retail':
-    #             retail_cat = x
-    #         elif x.en_name == 'Wholesale':
-    #             wholesale_cat = x
-        
-    #     retail_brands = Brand.objects.all().filter(category=retail_cat.id)
-    #     wholesale_brands = Brand.objects.all().filter(category=wholesale_cat.id)
-    #     brands = Brand.objects.all()
-    #     context['brands'] = brands
-    #     context['brands_cat'] = brands_cat
-    #     context['retail_cat'] = retail_cat  
-    #     context['wholesale_cat'] = wholesale_cat    
-    #     context['retail_brands'] = retail_brands    
-    #     context['wholesale_brands'] = wholesale_brands  
-    #     context['banners'] = brands_cat  
-    # except Exception as e:
-    #     raise e
 
-    # try:
     news = Post.objects.all()
     if news.exists():
         context['news'] = news
@@ -390,41 +383,49 @@ def news(request):
             },
         ]
         context['news'] = news
-    news_banners = [
-        {
-            'large_image':'/static/base/images/retail.png',
-            'es_name':'Ventas al por menor',
-            'en_name':'Retail',
-            'es_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
-            'en_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
-        },
-        {
-            'large_image':'/static/base/images/wholesale.png',
-            'es_name':'Ventas al por mayor',
-            'en_name':'WHolesale',
-            'es_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
-            'en_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
-        },
-        {
-            'large_image':'/static/base/images/marketing.jpg',
-            'es_name':'Publicidad y Mercadeo',
-            'en_name':'Marketing & Advertising',
-            'es_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
-            'en_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
-        },
-        {
-            'large_image':'/static/base/images/travel.jpg',
-            'es_name':'Travel Retail',
-            'en_name':'Travel Retail',
-            'es_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
-            'en_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
-        },
-    ]
 
-    context['news_banners'] = news_banners
-    context['news'] = news
-    # except Exception as e:
-    #     raise e
+    pages = Pages.objects.get(en_name='News')
+    if pages:
+        position = Position.objects.get(en_name='header')
+        carrusel = Carousel.objects.filter(Q(page=pages.id) & Q(Position=position.id))
+        # print(carrusel)
+        if carrusel.exists():
+            banners = CarouselImage.objects.filter(Carousel=carrusel[0].id)
+            if banners.exists():
+                # context['banners'] = banners
+                context['news_banners'] = banners
+            else:
+                news_banners = [
+                    {
+                        'large_image':'/static/base/images/retail.png',
+                        'es_name':'Ventas al por menor',
+                        'en_name':'Retail',
+                        'es_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
+                        'en_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
+                    },
+                    {
+                        'large_image':'/static/base/images/wholesale.png',
+                        'es_name':'Ventas al por mayor',
+                        'en_name':'WHolesale',
+                        'es_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
+                        'en_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
+                    },
+                    {
+                        'large_image':'/static/base/images/marketing.jpg',
+                        'es_name':'Publicidad y Mercadeo',
+                        'en_name':'Marketing & Advertising',
+                        'es_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
+                        'en_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
+                    },
+                    {
+                        'large_image':'/static/base/images/travel.jpg',
+                        'es_name':'Travel Retail',
+                        'en_name':'Travel Retail',
+                        'es_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
+                        'en_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
+                    },
+                ]
+                context['news_banners'] = news_banners
 
     return render(request, template, context)
 

@@ -324,8 +324,8 @@
                                                 <div class="uk-card uk-card-default">
                                                     {% if lang_code != 'English' %}
                                                         <div class="uk-card-media-top">
-                                                            {% if obj.short_image %}
-                                                                <img src="{{obj.short_image.url}}" alt="{{obj.es_name}}">
+                                                            {% if obj.img %}
+                                                                <img src="{{obj.img.url}}" alt="{{obj.es_name}}">
                                                             {% else %}
                                                                 <img src="{% static 'base/images/base.png' %}" alt="{{obj.es_name}}">
                                                             {% endif %}
@@ -343,8 +343,8 @@
                                                         </div>
                                                     {% else %}
                                                         <div class="uk-card-media-top">
-                                                            {% if obj.short_image %}
-                                                                <img src="{{obj.short_image.url}}" alt="{{obj.en_name}}">
+                                                            {% if obj.img %}
+                                                                <img src="{{obj.img.url}}" alt="{{obj.en_name}}">
                                                             {% else %}
                                                                 <img src="{% static 'base/images/base.png' %}" alt="{{obj.en_name}}">
                                                             {% endif %}
@@ -368,8 +368,8 @@
                                             <div class="uk-card uk-card-default">
                                                 {% if lang_code != 'English' %}
                                                     <div class="uk-card-media-top">
-                                                        {% if obj.short_image %}
-                                                            <img src="{{obj.short_image.url}}" alt="{{obj.es_name}}">
+                                                        {% if obj.img %}
+                                                            <img src="{{obj.img.url}}" alt="{{obj.es_name}}">
                                                         {% else %}
                                                             <img src="{% static 'base/images/base.png' %}" alt="{{obj.es_name}}">
                                                         {% endif %}
@@ -387,8 +387,8 @@
                                                     </div>
                                                 {% else %}
                                                     <div class="uk-card-media-top">
-                                                        {% if obj.short_image %}
-                                                            <img src="{{obj.short_image.url}}" alt="{{obj.en_name}}">
+                                                        {% if obj.img %}
+                                                            <img src="{{obj.img.url}}" alt="{{obj.en_name}}">
                                                         {% else %}
                                                             <img src="{% static 'base/images/base.png' %}" alt="{{obj.en_name}}">
                                                         {% endif %}

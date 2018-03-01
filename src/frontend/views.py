@@ -256,7 +256,7 @@ def our_brands(request):
     context['title'] = title    
     context['keywords'] = keywords
 
-    brands = Brand.objects.all().order_by('en_name')
+    brands = Brand.objects.filter(draft=False).order_by('en_name')
     if brands.exists():
         context['brands'] = brands
     

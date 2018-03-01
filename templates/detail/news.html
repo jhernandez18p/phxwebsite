@@ -58,7 +58,7 @@
                 <div>
                     <div class="uk-card uk-card-default">
                         <div class="uk-card-media-top">
-                            <img src="{% if obj.short_image %}{{obj.short_image.url}}{% else %}{% static 'base/images/base.png' %}{% endif %}" alt="{% if lang_code != 'English' %}{{obj.es_name}}{% else %}{{obj.en_name}}{% endif %}">
+                            <img src="{% if obj.img %}{{obj.img.url}}{% else %}{% static 'base/images/base.png' %}{% endif %}" alt="{% if lang_code != 'English' %}{{obj.es_name}}{% else %}{{obj.en_name}}{% endif %}">
                         </div>
                         <div class="uk-card-body">
                             <h3 class="uk-card-title">

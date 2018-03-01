@@ -3,16 +3,19 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'base/css/swiper.min.css' %}">
+<link rel="stylesheet" href="{% static 'base/css/odometer.css' %}">
 <link rel="stylesheet" href="{% static 'base/css/home.css' %}">
 <style>
     #newsCard .uk-card {margin-left: 5px;margin-right: 5px;}
-    .el-image {height: 100px;width: 100px;padding-bottom: 5px; padding-top: 5px; padding-top: 5px;
-margin: 3% 45%;}
+    .el-image {height: 100px;width: 100px;padding-bottom: 5px; padding-top: 5px; padding-top: 5px;margin: 3% 45%;}
     @media screen (max-width:639){
-        .uk-grid {
-            margin-left: unset!;
-        }
+        .uk-grid {margin-left: unset!;}
     }
+    #collumns .uk-icon{color: #fff;}
+    #collumns h2{color: #FFF;font-size: 7em;}
+    #collumns p{color: #fff;font-size: 2.5em;margin-top: -40px;}
+    #collumns .center{margin-top: calc(1% + 17%)}
+    .uk-grid-divider>:not(.uk-first-column)::before{left: unset !important}
 </style>
 {% endblock %}
 
@@ -43,7 +46,7 @@ margin: 3% 45%;}
                     {% for banner in full_banners %}
                         <div class="swiper-slide">
                             <div class="uk-child-width-1-1@">
-                                <img class="uk-background-cover uk-visible@m" {% if banner.large_banner %} src="{{banner.large_banner}}" {% else %} src="{% static 'base/images/base.png' %}"
+                                <img class="uk-background-cover uk-visible@m" {% if banner.image %} src="{{banner.image.url}}" {% else %} src="{% static 'base/images/base.png' %}"
                                     {% endif %} alt="{% if lang_code != 'English' %}{{banner.es_name}}{% else %}{{banner.en_name}}{% endif %}" uk-height-viewport uk-scrollspy="cls: uk-animation-kenburns; repeat: true;">
                             </div>
                         </div>
@@ -109,15 +112,18 @@ margin: 3% 45%;}
                     {% if lang_code != 'English' %}
                         <div class="uk-child-width-1-2@s biz-cards uk-margin-xlarge" uk-grid>
                             <div class="child card-shadow uk-card-media-left uk-cover-container uk-animation-scale-up">
-                                <img src="{{banner.image}}" alt="{{banner.es_name}}" uk-cover>
+                                {% if banner.image %}
+                                <img src="{{banner.image.url}}" alt="{{banner.es_name}}" uk-cover>
+                                {% else %}
+                                {% endif %}
                                 <canvas width="600" height="400"></canvas>
                             </div>
                             <div>
                                 <div class="uk-padding-large">
-                                    <h3 class="uk-text-center uk-h2 uk-scrollspy-inview uk-animation-scale-up" uk-scrollspy-class="" style="">
+                                    <h3 class="uk-text-center uk-h2 uk-scrollspy-inview uk-animation-scale-up" uk-scrollspy-class="">
                                         {{banner.es_name}}
                                     </h3>
-                                    <div class="uk-margin uk-width-large uk-margin-auto uk-text-center uk-scrollspy-inview uk-animation-scale-up" uk-scrollspy-class="" style="">
+                                    <div class="uk-margin uk-width-large uk-margin-auto uk-text-center uk-scrollspy-inview uk-animation-scale-up" uk-scrollspy-class="">
                                         {{banner.es_description | safe}}
                                     </div>
                                 </div>
@@ -126,15 +132,18 @@ margin: 3% 45%;}
                     {% else %}
                         <div class="uk-child-width-1-2@s biz-cards uk-margin-xlarge" uk-grid>
                             <div class="child card-shadow uk-card-media-left uk-cover-container uk-animation-scale-up">
-                                <img src="{{banner.image}}" alt="{{banner.en_name}}" uk-cover>
+                                    {% if banner.image %}
+                                    <img src="{{banner.image.url}}" alt="{{banner.en_name}}" uk-cover>
+                                    {% else %}
+                                    {% endif %}
                                 <canvas width="600" height="400"></canvas>
                             </div>
                             <div>
                                 <div class="uk-padding-large">
-                                    <h3 class="uk-text-center uk-h2 uk-scrollspy-inview uk-animation-scale-up" uk-scrollspy-class="" style="">
+                                    <h3 class="uk-text-center uk-h2 uk-scrollspy-inview uk-animation-scale-up" uk-scrollspy-class="">
                                         {{banner.en_name}}
                                     </h3>
-                                    <div class="uk-margin uk-width-large uk-margin-auto uk-text-center uk-scrollspy-inview uk-animation-scale-up" uk-scrollspy-class="" style="">
+                                    <div class="uk-margin uk-width-large uk-margin-auto uk-text-center uk-scrollspy-inview uk-animation-scale-up" uk-scrollspy-class="">
                                         {{banner.en_description | safe}}
                                     </div>
                                 </div>
@@ -168,7 +177,7 @@ margin: 3% 45%;}
                             <div class="uk-container">
                                 <div class=" uk-margin-remove-vertical uk-grid" uk-grid>
                                     {% for object in home_brands %}
-                                        <div class="uk-width-expand@s uk-text-center">
+                                        <div class="uk-width-expand@s uk-text-center" id="collumns">
                                             <div class="uk-margin ">
                                                 {% if lang_code == 'English' %}
                                                 <a href="{{object.get_absolute_url_en}}">
@@ -241,10 +250,45 @@ margin: 3% 45%;}
                 </h3>
             </div>
         </div>
-        <div class="uk-section-default">
-            <div style="height:55vh;background-image: url('/static/base/images/parallax.png');"
-                class="uk-background-cover uk-background-center-center uk-background-fixed uk-section">
+        <div class="uk-section-default uk-section uk-section-xlarge uk-background-cover uk-background-center-center uk-background-fixed uk-section" style="background-image: url('/static/base/images/parallax.png');">
+            <div class="">
                 <div class="uk-container">
+                    <div class="uk-grid-divider uk-margin-remove-vertical uk-grid" uk-grid uk-height-match="target: > div > #collumns"> 
+                        <div class="uk-width-expand@s uk-first-column uk-text-middle" id="collumns">
+                            <div class="uk-margin uk-text-center center">
+                                <span>+</span>
+                                <h2 class="odometer" id="odoBrand">0</h2>
+                                <p class="uk-text-uppercase">Internationals brands</p>
+                            </div>
+                        </div>
+                        <div class="uk-width-expand@s uk-text-middle" id="collumns">
+                            <div class="uk-margin-large uk-text-center center">
+                                <span>+</span>
+                                <h2 class="odometer" id="odoExp">
+                                    0
+                                </h2>
+                                <p class="uk-text-uppercase">YEARS OF RETAIL Experience.</p>
+                            </div>
+                        </div>
+                        <div class="uk-width-expand@s uk-text-middle" id="collumns">
+                            <div class="uk-margin uk-text-center">
+                                <span uk-icon="icon: users; ratio: 4"></span>
+                                <span>+</span>
+                                <h2 class="odometer" id="odoStaff">
+                                    0
+                                </h2>
+                                <p class="uk-text-uppercase">Members</p>
+                            </div>
+                            <div class="uk-margin uk-text-center">
+                                <span uk-icon="icon: home; ratio: 4"></span>
+                                <span>+</span>
+                                <h2 class="odometer" id="odoStores">
+                                    0
+                                </h2>
+                                <p class="uk-text-uppercase">stores</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -264,54 +308,110 @@ margin: 3% 45%;}
                 </h3>
             </div>
         </div>
-        <div class=" uk-section-muted">
-            <div class="uk-container">
-                <div class="uk-grid-match uk-child-width-1-3@m uk-child-width-2@s uk-text-center" uk-grid uk-height-match="target: > div > .uk-card" id="newsCard">
-                    {% for obj in news %}
-                        <div>
-                            <div class="uk-card uk-card-default">
-                                {% if lang_code != 'English' %}
-                                    <div class="uk-card-media-top">
-                                        {% if obj.short_image %}
-                                            <img src="{{obj.short_image.url}}" alt="{{obj.es_name}}">
-                                        {% else %}
-                                            <img src="{% static 'base/images/base.png' %}" alt="{{obj.es_name}}">
-                                        {% endif %}
+        <div class="uk-section-muted">
+            <div class="uk-container" id="slideNews">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="uk-grid-match uk-child-width-1-3@m uk-child-width-2@s uk-text-center" uk-grid uk-height-match="target: > div > .uk-card" id="newsCard">
+                                {% for obj in news %}
+                                    {% if forloop.counter0 == 3 %}
+                                        </div>
                                     </div>
-                                    <div class="uk-card-body">
-                                        <h3 class="uk-card-title">
-                                            {{obj.es_title}}
-                                        </h3>
-                                        {{obj.es_short_description|safe}}
-                                    </div>
-                                    <div class="uk-card-footer">
-                                        <a href="{{obj.get_absolute_url_es}}" class="uk-button uk-button-text">
-                                            Ver más
-                                        </a>
-                                    </div>
-                                {% else %}
-                                    <div class="uk-card-media-top">
-                                        {% if obj.short_image %}
-                                            <img src="{{obj.short_image.url}}" alt="{{obj.en_name}}">
-                                        {% else %}
-                                            <img src="{% static 'base/images/base.png' %}" alt="{{obj.en_name}}">
-                                        {% endif %}
-                                    </div>
-                                    <div class="uk-card-body">
-                                        <h3 class="uk-card-title">
-                                            {{obj.en_title}}
-                                        </h3>
-                                        {{obj.en_short_description|safe}}
-                                    </div>
-                                    <div class="uk-card-footer">
-                                        <a href="{{obj.get_absolute_url_en}}" class="uk-button uk-button-text">
-                                            Read more
-                                        </a>
-                                    </div>
-                                {% endif %}
+                                    <div class="swiper-slide">
+                                        <div class="uk-grid-match uk-child-width-1-3@m uk-child-width-2@s uk-text-center" uk-grid uk-height-match="target: > div > .uk-card" id="newsCard">
+                                            <div>
+                                                <div class="uk-card uk-card-default">
+                                                    {% if lang_code != 'English' %}
+                                                        <div class="uk-card-media-top">
+                                                            {% if obj.short_image %}
+                                                                <img src="{{obj.short_image.url}}" alt="{{obj.es_name}}">
+                                                            {% else %}
+                                                                <img src="{% static 'base/images/base.png' %}" alt="{{obj.es_name}}">
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="uk-card-body">
+                                                            <h3 class="uk-card-title">
+                                                                {{obj.es_title}}
+                                                            </h3>
+                                                            {{obj.es_short_description|safe}}
+                                                        </div>
+                                                        <div class="uk-card-footer">
+                                                            <a href="{{obj.get_absolute_url_es}}" class="uk-button uk-button-text">
+                                                                Ver más
+                                                            </a>
+                                                        </div>
+                                                    {% else %}
+                                                        <div class="uk-card-media-top">
+                                                            {% if obj.short_image %}
+                                                                <img src="{{obj.short_image.url}}" alt="{{obj.en_name}}">
+                                                            {% else %}
+                                                                <img src="{% static 'base/images/base.png' %}" alt="{{obj.en_name}}">
+                                                            {% endif %}
+                                                        </div>
+                                                        <div class="uk-card-body">
+                                                            <h3 class="uk-card-title">
+                                                                {{obj.en_title}}
+                                                            </h3>
+                                                            {{obj.en_short_description|safe}}
+                                                        </div>
+                                                        <div class="uk-card-footer">
+                                                            <a href="{{obj.get_absolute_url_en}}" class="uk-button uk-button-text">
+                                                                Read more
+                                                            </a>
+                                                        </div>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                    {% else %}
+                                        <div>
+                                            <div class="uk-card uk-card-default">
+                                                {% if lang_code != 'English' %}
+                                                    <div class="uk-card-media-top">
+                                                        {% if obj.short_image %}
+                                                            <img src="{{obj.short_image.url}}" alt="{{obj.es_name}}">
+                                                        {% else %}
+                                                            <img src="{% static 'base/images/base.png' %}" alt="{{obj.es_name}}">
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="uk-card-body">
+                                                        <h3 class="uk-card-title">
+                                                            {{obj.es_title}}
+                                                        </h3>
+                                                        {{obj.es_short_description|safe}}
+                                                    </div>
+                                                    <div class="uk-card-footer">
+                                                        <a href="{{obj.get_absolute_url_es}}" class="uk-button uk-button-text">
+                                                            Ver más
+                                                        </a>
+                                                    </div>
+                                                {% else %}
+                                                    <div class="uk-card-media-top">
+                                                        {% if obj.short_image %}
+                                                            <img src="{{obj.short_image.url}}" alt="{{obj.en_name}}">
+                                                        {% else %}
+                                                            <img src="{% static 'base/images/base.png' %}" alt="{{obj.en_name}}">
+                                                        {% endif %}
+                                                    </div>
+                                                    <div class="uk-card-body">
+                                                        <h3 class="uk-card-title">
+                                                            {{obj.en_title}}
+                                                        </h3>
+                                                        {{obj.en_short_description|safe}}
+                                                    </div>
+                                                    <div class="uk-card-footer">
+                                                        <a href="{{obj.get_absolute_url_en}}" class="uk-button uk-button-text">
+                                                            Read more
+                                                        </a>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
                             </div>
                         </div>
-                    {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -320,8 +420,10 @@ margin: 3% 45%;}
     
 {% block js %}
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_uf0M6P9N8ZUTm3vsKlm-li2auJ9-guU" async defer></script>
+<script src="{% static 'base/js/odometer.min.js' %}"></script>
 <script src="{% static 'base/js/map.js' %}"></script>
 <script>
+
     $(document).ready(function(){
         // UIkit.slider('#brandSlider').startAutoplay();
         $( "#map" ).delay(5000).fadeIn(initMap);
@@ -362,10 +464,36 @@ margin: 3% 45%;}
                 disableOnInteraction: false,
             },
         });
+        var swiperNews = new Swiper('#slideNews .swiper-container', {
+            pagination: '#slideNews .swiper-pagination',
+            paginationClickable: true,
+            navigation: {
+                nextEl: '#slideNews .swiper-button-next',
+                prevEl: '#slideNews .swiper-button-prev',
+            },
+            loop: true,
+            autoplay: {
+                delay: 6000,
+                disableOnInteraction: false,
+            },
+        });
         $('.biz-cards:odd').find('.child').addClass('uk-flex-last@m uk-card-media-right@m uk-cover-container');
         $('.biz-cards:even').find('.child').addClass('uk-card-media-left@m uk-cover-container card-shadow uk-first-column@m');
-        
+        setTimeout(function(){
+            $('#odoStores').html(700);
+        }, 7000);
+        setTimeout(function(){
+            $('#odoStaff').html(7000);
+        }, 7000);
+        setTimeout(function(){
+            $('#odoBrand').html(50);
+        }, 7000);
+        setTimeout(function(){
+            $('#odoExp').html(40);
+        }, 7000);
+
     });
+
 </script>
 
 {% endblock %}

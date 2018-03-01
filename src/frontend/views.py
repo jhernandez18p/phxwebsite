@@ -90,65 +90,36 @@ def index(request):
     context['title'] = title
     context['keywords'] = keywords
 
-    pages = Pages.objects.all()
-    if pages.exists():
-        page = pages.filter(en_name="Home")
-        # print(page[0].id)
+    pages = Pages.objects.get(en_name="Home")
+    if pages:
+        position = Position.objects.get(en_name='full_screen')
+        carrusel = Carousel.objects.filter(Q(page=pages.id) & Q(Position=position.id))
+        # print(carrusel)
+        if carrusel.exists():
+            banners = CarouselImage.objects.filter(Carousel=carrusel[0].id)
+            if banners.exists():
+                context['full_banners'] = banners
+            else:
+                header_carousel = [
+                    {'large_banner':'/static/base/images/banner-01.png','es_name':'banner 01','en_name':'banner 01'},
+                    {'large_banner':'/static/base/images/banner-02.png','es_name':'banner 02','en_name':'banner 02'},
+                    {'large_banner':'/static/base/images/banner-03.png','es_name':'banner 03','en_name':'banner 03'},
+                ]
+                context['full_banners'] = header_carousel
 
     home_brands = Brand.objects.all()
     if home_brands.exists():
         context['home_brands'] = home_brands[:52]
-
     
     companies = Company.objects.all()
     if companies.exists():
         context['companies'] = companies
-    
-    positions = Position.objects.all()
-    if positions.exists():
-        header = positions.filter(en_name='header')
-        footer = positions.filter(en_name='footer')
-        section = positions.filter(en_name='section')
-        full_screen = positions.filter(en_name='full_screen')
 
-    header_carousel = [
-        {'large_banner':'/static/base/images/banner-01.png','es_name':'banner 01','en_name':'banner 01'},
-        {'large_banner':'/static/base/images/banner-02.png','es_name':'banner 02','en_name':'banner 02'},
-        {'large_banner':'/static/base/images/banner-03.png','es_name':'banner 03','en_name':'banner 03'},
-    ]
+    business_banners = BusinessModel.objects.all()
+    if business_banners.exists():
+        context['business_banners'] = business_banners
 
-    business_banners = [
-        {
-            'image':'/static/base/images/retail.png',
-            'es_name':'Ventas al por menor',
-            'en_name':'Retail',
-            'es_description':'El retail (también venta al detalle en español) es un sector económico que engloba a las empresas especializadas en la comercialización masiva de productos o servicios uniformes a grandes cantidades de clientes. Es el sector industrial que entrega productos al consumidor final.',
-            'en_description':'Retail (also retail in Spanish) is an economic sector that includes companies specialized in mass marketing of products or services to large numbers of customers. It is the industrial sector that delivers products to the final consumer.',
-        },
-        {
-            'image':'/static/base/images/wholesale.png',
-            'es_name':'Ventas al por mayor',
-            'en_name':'WHolesale',
-            'es_description':'El mayor, venta de mayoreo, o distribuidor mayorista es un componente de la cadena de distribución, en que la empresa o el empresario no se pone en contacto directo con los consumidores o usuarios finales de sus productos, sino que entrega esta tarea a un especialista',
-            'en_description':'The wholesale, wholesale, or wholesale distributor is a component of the distribution chain, in which the company or the employer does not get in direct contact with consumers or end users of their products, but delivers this task to a specialist',
-        },
-        {
-            'image':'/static/base/images/marketing.jpg',
-            'es_name':'Publicidad y Mercadeo',
-            'en_name':'Marketing & Advertising',
-            'es_description':'Una agencia de publicidad es una organización comercial independiente, compuesta de personas creativas y de negocios, que desarrolla, prepara y coloca la publicidad, por cuenta de un anunciante que busca encontrar consumidores para sus bienes y servicios o difundir sus ideas. Estas agencias están especializadas en la comunicación y ofrecen a sus clientes, de forma directa o subcontratada.',
-            'en_description':'An advertising agency is an independent commercial organization, composed of creative and business people, that develops, prepares and places advertising, on behalf of an advertiser that seeks to find consumers for their goods and services or disseminate their ideas. These agencies are specialized in communication and offer their clients, directly or subcontracted.',
-        },
-        {
-            'image':'/static/base/images/travel.jpg',
-            'es_name':'Travel Retail',
-            'en_name':'Travel Retail',
-            'es_description':'Las tiendas libres de impuestos o, en inglés, duty-free shops son comercios al por menor que no aplican impuestos ni tasas locales o nacionales. Se encuentran a menudo en la zona internacional de los aeropuertos internacionales, puertos de mar o a bordo de las naves de pasajeros. No suele haber para viajeros por carretera o por tren, aunque varios pasos de frontera entre los Estados Unidos y Canadá tienen tiendas libres de impuestos para los viajeros por carretera.',
-            'en_description':'Duty-free shops or, in English, duty-free shops are retail stores that do not charge taxes or local or national taxes. They are often found in the international zone of international airports, seaports or aboard passenger ships. It is not usually for travelers by road or train, although several border crossings between the United States and Canada have duty-free shops for road travelers.',
-        },
-    ]
-
-    news = Post.objects.all()[:3]
+    news = Post.objects.all()[:6]
     if news.exists():
         context['news'] = news
     else:
@@ -186,11 +157,41 @@ def index(request):
                 'es_short_description':'este es el post numero 03',
                 'get_absolute_url_es':'#',
             },
+            {
+                'short_image':'',
+                'en_name':'New blog post 04',
+                'en_title':'New blog post 04',
+                'en_short_description':'This is the news blog post number 01',
+                'get_absolute_url_en':'#',
+                'es_name':'Nueva publicacion 04',
+                'es_title':'Nueva publicacion 04',
+                'es_short_description':'este es el post numero 01',
+                'get_absolute_url_es':'#',
+            },
+            {
+                'short_image':'',
+                'en_name':'New blog post 05',
+                'en_title':'New blog post 05',
+                'en_short_description':'This is the news blog post number 05',
+                'get_absolute_url_en':'#',
+                'es_name':'Nueva publicacion 05',
+                'es_title':'Nueva publicacion 05',
+                'es_short_description':'este es el post numero 02',
+                'get_absolute_url_es':'#',
+            },
+            {
+                'short_image':'',
+                'en_name':'New blog post 06',
+                'en_title':'New blog post 06',
+                'en_short_description':'This is the news blog post number 06',
+                'get_absolute_url_en':'#',
+                'es_name':'Nueva publicacion 06',
+                'es_title':'Nueva publicacion 06',
+                'es_short_description':'este es el post numero 06',
+                'get_absolute_url_es':'#',
+            },
         ]
         context['news'] = news
-
-    context['business_banners'] = business_banners
-    context['full_banners'] = header_carousel
 
     return render(request, template, context)
 
@@ -199,6 +200,16 @@ def history(request):
         'pg_title':'about',
     }
     template = 'frontend/history.html'
+
+    pages = Pages.objects.get(en_name='About us')
+    if pages:
+        position = Position.objects.get(en_name='header')
+        carrusel = Carousel.objects.filter(Q(page=pages.id) & Q(Position=position.id))
+        # print(carrusel)
+        if carrusel.exists():
+            banners = CarouselImage.objects.filter(Carousel=carrusel[0].id)
+            if banners.exists():
+                context['banners'] = banners
 
     lang = get_lang(request)
     url = 'en:about'
@@ -210,30 +221,16 @@ def history(request):
         title = '¿Quienes somos?'
         keywords = '¿Quienes somos?'
 
-    banners = [
-        {
-            'short_banner':'/static/base/images/base.png',
-            'es_name':'Banner 01',
-            'en_name':'Banner 01',
-        },
-    ]
-
     timeline = Timeline.objects.all()
     if timeline.exists():
         context['timeline'] = timeline
-    context['banners'] = banners
     context['url'] = url
     context['es_url'] = es_url
     context['title'] = title
     context['keywords'] = keywords
     context['history'] = True
     context['newsletter_form'] = True
-    # sub_categories = Sub_category.objects.all()
-    # for sub_cat in sub_categories:
-    #     if sub_cat.name == 'ABOUT_HEADER_BANNER':
-    #         banners_sub_cat = sub_cat
 
-    # banners = Banner.objects.all().filter(sub_category=banners_sub_cat.id)[0]
     return render(request, template, context)
 
 def our_brands(request):

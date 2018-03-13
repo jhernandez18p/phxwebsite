@@ -256,52 +256,9 @@ def our_brands(request):
     context['title'] = title    
     context['keywords'] = keywords
 
-    brands = Brand.objects.filter(draft=False).order_by('en_name')
+    brands = Brand.objects.order_by('en_name')
     if brands.exists():
         context['brands'] = brands
-    
-    # pages = Pages.objects.get(en_name='Brands')
-    # if pages:
-    #     position = Position.objects.get(en_name='header')
-    #     carrusel = Carousel.objects.filter(Q(page=pages.id) & Q(Position=position.id))
-    #     # print(carrusel)
-    #     if carrusel.exists():
-    #         banners = CarouselImage.objects.filter(Carousel=carrusel[0].id)
-    #         if banners.exists():
-    #             # context['banners'] = banners
-    #             context['banners'] = banners
-    #         else:
-    #             news_banners = [
-    #                 {
-    #                     'large_image':'/static/base/images/retail.png',
-    #                     'es_name':'Ventas al por menor',
-    #                     'en_name':'Retail',
-    #                     'es_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
-    #                     'en_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
-    #                 },
-    #                 {
-    #                     'large_image':'/static/base/images/wholesale.png',
-    #                     'es_name':'Ventas al por mayor',
-    #                     'en_name':'WHolesale',
-    #                     'es_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
-    #                     'en_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
-    #                 },
-    #                 {
-    #                     'large_image':'/static/base/images/marketing.jpg',
-    #                     'es_name':'Publicidad y Mercadeo',
-    #                     'en_name':'Marketing & Advertising',
-    #                     'es_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
-    #                     'en_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
-    #                 },
-    #                 {
-    #                     'large_image':'/static/base/images/travel.jpg',
-    #                     'es_name':'Travel Retail',
-    #                     'en_name':'Travel Retail',
-    #                     'es_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
-    #                     'en_description':'banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 banner 02 ',
-    #                 },
-    #             ]
-    #             context['banners'] = news_banners
         
     return render(request, template, context)
 

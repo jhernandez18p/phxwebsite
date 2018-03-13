@@ -27,7 +27,7 @@
 
 {% block fullscreen %}
     {% if full_banners %}
-        <div class="full-screen">
+        <div class="full-screen uk-visible@m">
             <div class="swiper-container">
                 <div class="scroll uk-visible@m uk-position-bottom-center">
                     <span id="scroll">
@@ -52,7 +52,7 @@
                     {% for banner in full_banners %}
                         <div class="swiper-slide">
                             <div class="uk-child-width-1-1@">
-                                <img class="uk-background-cover uk-visible@m" {% if banner.image %} src="{{banner.image.url}}" {% else %} src="{% static 'base/images/base.png' %}"
+                                <img class="uk-background-cover" {% if banner.image %} src="{{banner.image.url}}" {% else %} src="{% static 'base/images/base.png' %}"
                                     {% endif %} alt="{% if lang_code != 'English' %}{{banner.es_name}}{% else %}{{banner.en_name}}{% endif %}" uk-height-viewport uk-scrollspy="cls: uk-animation-kenburns; repeat: true;">
                             </div>
                         </div>

@@ -1,8 +1,57 @@
-#map { height: 800px; width: 100%;}
+#map { height: 700px; width: 100%;}
 .full-screen{max-height:100vh;background-color: #010101;}
 .full-screen .swiper-slide{max-height:100vh;}
 .top-logo{z-index: 99}
 .border-green{border: solid rgb(0, 150, 136) 5px;}
-.My-box {position: absolute;z-index: 9;top: 10%;margin: 0 25%;}
+
+.My-box {
+    z-index: 9;
+    background-color: rgba(0, 0, 0, 0.45);
+    color: #fff !important;
+    text-align: center;
+}
+.My-box h2{color: #FFF !important}
+.My-box div{margin: 10px calc(1% + 25.33%);}
 .uk-grid {margin-left: 0px;}
-@media (max-width: 600px) {.My-box {position: absolute;z-index: 9;top: 5%;margin: 0 15px;}}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+#bradslidermov .swiper-slide {padding: 50px;}
+@media (max-width: 425px) { .My-box div{margin: 10px calc(1% + 3%);} #map{height: 400px;;}}
+@media (max-width: 325px) {#map{height: 200px;;}}

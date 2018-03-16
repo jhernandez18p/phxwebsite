@@ -38,53 +38,95 @@ styleArray = [
     {"featureType": "transit.line","elementType": "geometry","stylers": [{"color": "#e5e5e5"}]},
     {"featureType": "transit.station","elementType": "geometry","stylers": [{"color": "#eeeeee"}]},
     {"featureType": "water","elementType": "geometry","stylers": [{"color": "#c9c9c9"}]},
-    {"featureType": "water","elementType": "geometry.fill","stylers": [{"color": "#010101"}]},
+    {"featureType": "water","elementType": "geometry.fill","stylers": [{"color": "#596d6a"}]},
     {"featureType": "water","elementType": "labels.text","stylers": [{"visibility": "off"}]},
     {"featureType": "water","elementType": "labels.text.fill","stylers": [{"color": "#9e9e9e"}]}
 ]
 
 var markers = [
     [
-        'Phoenix World Trade Inc., Panamá',
-        '8.981022', '-79.509901',
-    ],
-    [
-        'Phoenix World Trade Inc., USA',
-        '25.747603', '-80.340254',
-    ],
-    [
-        'Phoenix World Trade Inc., Curacao',
-        '12.1356696','-68.9569759',
-    ],
-    [
-        'Phoenix World Trade Inc., Puerto Rico',
-        '18.4219004',
-        '-66.1092751',
-    ],
-    [
-        'Phoenix World Trade Inc., República Dominicana',
-        '18.4828372',
-        '-69.9459407',
-    ],
-    [
-        'Phoenix World Trade Inc., Chile',
-        '-28.275386',
-        '-70.925212',
-    ],
-    [
         'Phoenix World Trade Inc., Venezuela',
-        '10.494779',
-        '-66.8413177',
+        10.494779,
+        -66.8413177,
+        'Venezuela'
     ],
     [
         'Phoenix World Trade Inc., Ecuador',
-        '-2.186826',
-        '-79.916759',
+        -2.186826,
+        -79.916759,
+        'Ecuador'
     ],
     [
         'Phoenix World Trade Inc., Colombia',
-        '4.696900',
-        '-74.006311',
+        4.696900,
+        -74.006311,
+        'Colombia'
+    ],
+    [
+        'Phoenix World Trade Inc., Surinam',
+        4.696900,
+        -74.006311,
+        'Suriname'
+    ],
+    [
+        'Phoenix World Trade Inc., Canada',
+        4.696900,
+        -74.006311,
+        'Canada'
+    ],
+    [
+        'Phoenix World Trade Inc., China',
+        4.696900,
+        -74.006311,
+        'China'
+    ],
+    [
+        'Phoenix World Trade Inc., Brasil',
+        4.696900,
+        -74.006311,
+        'Brasil'
+    ],
+    [
+        'Phoenix World Trade Inc., Peru',
+        4.696900,
+        -74.006311,
+        'Peru'
+    ],
+    [
+        'Phoenix World Trade Inc., Curacao',
+        12.1356696,
+        -68.9569759,
+        'Curacao',
+    ],
+    [
+        'Phoenix World Trade Inc., Panamá',
+        8.981022,
+        -79.509901,
+        'Panamá'
+    ],
+    [
+        'Phoenix World Trade Inc., USA',
+        25.747603,
+        -80.340254,
+        'USA'
+    ],
+    [
+        'Phoenix World Trade Inc., Puerto Rico',
+        18.4219004,
+        -66.1092751,
+        'Puerto Rico'
+    ],
+    [
+        'Phoenix World Trade Inc., República Dominicana',
+        18.4828372,
+        -69.9459407,
+        'Republica Dominicana'
+    ],
+    [
+        'Phoenix World Trade Inc., Chile',
+        -28.275386,
+        -70.925212,
+        'Chile'
     ],
 ];
 
@@ -157,13 +199,8 @@ var infoWindowContent = [
 function initMap() {
     var bounds = new google.maps.LatLngBounds();
     var infoWindow = new google.maps.InfoWindow(), marker, i;
+    
     map = new google.maps.Map(document.getElementById('map'), {
-        // mapTypeId: 'satellite',
-        //center: {lat: -6.9645954, lng: -76.3220646},
-        //center: {lat: 8.6571004, lng: -60.1603678}, 
-        //zoomControl: true,
-        //scaleControl: true,
-        //draggable: false,
         center: {lat: 14.987239, lng: -84.528809}, 
         zoom: 8,
         disableDefaultUI: true,
@@ -173,31 +210,52 @@ function initMap() {
 
     var image = {
         url: "/static/base/images/phx-pin0.png",
-        size: new google.maps.Size(16, 16),
+        size: new google.maps.Size(20, 20),
         origin: new google.maps.Point(0, 0),
-        anchor: new google.maps.Point(5, 10)
+        anchor: new google.maps.Point(0, 0)
     };
 
-    for( i = 0; i < markers.length; i++ ) {
-        var latitude = markers[i][1];
-        var logitude = markers[i][2];
-        var position = new google.maps.LatLng(latitude, logitude);
-        bounds.extend(position);
-        marker = new google.maps.Marker({
-            position: position,
-            map: map,
-            icon: image,
-            title: markers[i][0]
-        });
-           
-        google.maps.event.addListener(marker, 'click', (function(marker, i) {
-            return function() {
-                infoWindow.setContent(infoWindowContent[i][0]);
-                infoWindow.open(map, marker);
-            }
-        })(marker, i));
+    var geocoder = new google.maps.Geocoder();
 
-        // Automatically center the map fitting all markers on the screen
-        map.fitBounds(bounds);
+
+    for( i = 0; i < markers.length; i++ ) {
+        // console.log(i);
+        var _title = markers[i][0];var latitude = markers[i][1];
+        var logitude = markers[i][2];var country = markers[i][3];
+        
+        geocoder.geocode( 
+            { 'address': country },
+            function(results, status) {
+                // console.log(status);
+                // console.log(results);
+                if (status == google.maps.GeocoderStatus.OK) {
+                    marker = new google.maps.Marker({
+                        position: results[0].geometry.location,
+                        map: map,
+                        icon: image,
+                        title: results[0].address_components[0].long_name
+                    });
+                    // console.log(country,latitude,logitude);
+                    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                        // console.log(marker.title,i);
+                        return function() {
+                            
+                        }
+                    })(marker, i));
+                    bounds.extend(results[0].geometry.location);
+                }else if (status == google.maps.GeocoderStatus.OVER_QUERY_LIMIT) { 
+                    marker = new google.maps.Marker({
+                        position: {lat:latitude,lng:logitude},
+                        map: map,
+                        icon: image,
+                        title: country
+                    });
+                    // console.log(country,latitude,logitude);
+                }else {
+                    // console.log("Geocode was not successful for the following reason: " + status);
+                }
+                map.fitBounds(bounds);
+            }
+        );
     }
 }

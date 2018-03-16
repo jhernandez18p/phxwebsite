@@ -7,7 +7,13 @@
 <link rel="stylesheet" href="{% static 'base/css/home.css' %}">
 <style>
     #newsCard .uk-card {margin-left: 5px;margin-right: 5px;}
-    .el-image {height: 100px;width: 100px;padding-bottom: 5px; padding-top: 5px; padding-top: 5px;margin: 3% 45%;}
+    .el-image {
+        height: 200px;
+        width: 200px;
+        padding-bottom: 5px;
+        padding-top: 5px;
+        margin: 3% calc(0% + 7%);
+    }
     @media screen (max-width:639){
         .uk-grid {margin-left: unset;}
     }
@@ -29,53 +35,60 @@
     {% if full_banners %}
         <div class="full-screen uk-visible@m">
             <div class="swiper-container">
-                <div class="scroll uk-visible@m uk-position-bottom-center">
-                    <span id="scroll">
-                        <svg version="1.1" id="icn" fill="#fff" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                            y="0px" width="40px" height="50px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
-                            <polygon opacity="0" points="19.9,21 0,1.3 1.4,0 19.9,18.3 38.6,0 40,1.3 ">
-                                <animate id="first" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite" begin="0"
-                                />
-                            </polygon>
-                            <polygon id="arrow-two" opacity="0" points="19.9,30.9 0,11.2 1.4,9.9 19.9,28.2 38.6,9.8 40,11.2 ">
-                                <animate id="second" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite" begin="1s"
-                                />
-                            </polygon>
-                            <polygon id="arrow-three" opacity="0" points="19.9,40 0,20.3 1.4,19 19.9,37.3 38.6,19 40,20.3 ">
-                                <animate id="third" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite" begin="2s"
-                                />
-                            </polygon>
-                        </svg>
-                    </span>
-                </div>
-                <div class="swiper-wrapper" uk-height-match="target: > div > img">
+                <div class="swiper-wrapper">
                     {% for banner in full_banners %}
                         <div class="swiper-slide">
-                            <div class="uk-child-width-1-1@">
-                                <img class="uk-background-cover" {% if banner.image %} src="{{banner.image.url}}" {% else %} src="{% static 'base/images/base.png' %}"
-                                    {% endif %} alt="{% if lang_code != 'English' %}{{banner.es_name}}{% else %}{{banner.en_name}}{% endif %}" uk-height-viewport uk-scrollspy="cls: uk-animation-kenburns; repeat: true;">
-                            </div>
+                            <img class="uk-background-cover uk-animation-kenburns" 
+                                {% if banner.image %} 
+                                src="{{banner.image.url}}" 
+                                {% else %} 
+                                src="{% static 'base/images/base.png' %}"
+                                {% endif %} {% if lang_code != 'English' %}
+                                alt="{{banner.es_name}}"
+                                {% else %}
+                                alt="{{banner.en_name}}"{% endif %} uk-height-viewport 
+                            ></img>
                         </div>
                     {% endfor %}
                 </div>
                 <div class="swiper-button-next swiper-button-white"></div>
                 <div class="swiper-button-prev swiper-button-white"></div>
-                <div class="top-logo uk-visible@m uk-position-center">
-                    <img class="logo-menu" src="{% static 'base/images/logo.png' %}" alt="{{site.name}}" uk-parallax="target: #test-easing; y: 200; easing: 1">
-                </div>
+            </div>
+            <div class="top-logo uk-visible@m uk-position-center">
+                <img class="logo-menu" src="{% static 'base/images/logo.png' %}" alt="{{site.name}}" uk-parallax="target: #test-easing; y: 200; easing: 1">
+            </div>
+            <div class="scroll uk-visible@m uk-position-bottom-center">
+                <span id="scroll">
+                    <svg version="1.1" id="icn" fill="#fff" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                        y="0px" width="40px" height="50px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+                        <polygon opacity="0" points="19.9,21 0,1.3 1.4,0 19.9,18.3 38.6,0 40,1.3 ">
+                            <animate id="first" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite" begin="0"
+                            />
+                        </polygon>
+                        <polygon id="arrow-two" opacity="0" points="19.9,30.9 0,11.2 1.4,9.9 19.9,28.2 38.6,9.8 40,11.2 ">
+                            <animate id="second" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite" begin="1s"
+                            />
+                        </polygon>
+                        <polygon id="arrow-three" opacity="0" points="19.9,40 0,20.3 1.4,19 19.9,37.3 38.6,19 40,20.3 ">
+                            <animate id="third" attributeName="opacity" attributeType="XML" dur="3s" from="1" to="0" repeatCount="indefinite" begin="2s"
+                            />
+                        </polygon>
+                    </svg>
+                </span>
             </div>
         </div>
     {% endif %}
 {% endblock %}
 
 {% block content %}
+
     {# Informacion del sitio #}
     {% if site %}
         <div class="uk-section-muted">
             <div class="uk-cover-container">
                 <canvas width="100%" height="800"></canvas>
-                <div class="My-box" uk-scrollspy="cls: uk-animation-slide-top-small; target: > .uk-card; delay: 200;">
-                    <div class="uk-card uk-card-default  uk-card-body ">
+                <div class="My-box uk-position-center" uk-scrollspy="cls: uk-animation-slide-top-small; target: > .uk-card; delay: 200;">
+                    <div class="uk-card uk-card-body ">
                         {% if lang_code == 'English' %}
                             <h2>{{site.en_name}}</h2>
                             {{site.en_description|safe}}
@@ -175,53 +188,76 @@
                 </h3>
             </div>
         </div>
-        <div id="brandsSlide">
-            <div class="swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="uk-section-default uk-section uk-section-large">
-                            <div class="uk-container">
-                                <div class=" uk-margin-remove-vertical uk-grid" uk-grid>
-                                    {% for object in home_brands %}
-                                        <div class="uk-width-expand@s uk-text-center" id="collumns">
-                                            <div class="uk-margin ">
-                                                {% if lang_code == 'English' %}
-                                                <a href="{{object.get_absolute_url_en}}">
-                                                    <img src="{{object.short_logo.url}}" class="el-image uk-align-center" alt="{{object.en_name}}" onmouseover="this.src='{{object.large_logo.url}}'" onmouseout="this.src='{{object.short_logo.url}}'">
-                                                </a>
-                                                {% else %}
-                                                <a href="{{object.get_absolute_url_es}}" >
-                                                    <img src="{{object.short_logo.url}}" class="el-image uk-align-center" alt="{{object.es_name}}" onmouseover="this.src='{{object.large_logo.url}}'" onmouseout="this.src='{{object.short_logo.url}}'">
-                                                </a>
-                                                {% endif %}
-                                            </div>
-                                        </div>
-                                        {% if forloop.revcounter0 == 4 or forloop.revcounter0 == 12 or forloop.revcounter0 == 20 or forloop.revcounter0 == 28 or forloop.revcounter0 == 36 or forloop.revcounter0 == 44 or forloop.revcounter0 == 52 %}
-                                            </div>
-                                                <div class="uk-grid-collapse uk-margin-remove-vertical uk-grid uk-grid-stack">
-                                                    <div class="uk-width-1-1@s">
-                                                        <div class="uk-hr"></div>
-                                                    </div>
+        <div class="uk-section uk-background-cover uk-background-center-center uk-background-fixed uk-section" style="background-image: url('/static/base/images/mall.jpg');" id="OdometerFather">
+            <div id="brandsSlide" class="uk-visible@m">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="uk-section uk-section-large">
+                                <div class="uk-container">
+                                    <div class=" uk-margin-remove-vertical uk-grid" uk-grid>
+                                        {% for object in home_brands %}
+                                            <div class="uk-width-expand@s uk-text-center" id="collumns">
+                                                <div class="uk-margin ">
+                                                    {% if lang_code == 'English' %}
+                                                    <a href="{{object.get_absolute_url_en}}">
+                                                        <img src="{{object.short_logo.url}}" class="el-image uk-align-center" alt="{{object.en_name}}" onmouseover="this.src='{{object.large_logo.url}}'" onmouseout="this.src='{{object.short_logo.url}}'">
+                                                    </a>
+                                                    {% else %}
+                                                    <a href="{{object.get_absolute_url_es}}" >
+                                                        <img src="{{object.short_logo.url}}" class="el-image uk-align-center" alt="{{object.es_name}}" onmouseover="this.src='{{object.large_logo.url}}'" onmouseout="this.src='{{object.short_logo.url}}'">
+                                                    </a>
+                                                    {% endif %}
                                                 </div>
-                                            <div class=" uk-margin-remove-vertical uk-grid" uk-grid atr="loop-4">
-                                        {% elif forloop.revcounter0 == 8 or forloop.revcounter0 == 16 or forloop.revcounter0 == 24 or forloop.revcounter0 == 32 or forloop.revcounter0 == 40 or forloop.revcounter0 == 48 %}
-                                                </div alt="close1">
+                                            </div>
+                                            {% if forloop.revcounter0 == 4 or forloop.revcounter0 == 12 or forloop.revcounter0 == 20 or forloop.revcounter0 == 28 or forloop.revcounter0 == 36 or forloop.revcounter0 == 44 or forloop.revcounter0 == 52 %}
+                                                </div>
+                                                    <div class="uk-grid-collapse uk-margin-remove-vertical uk-grid uk-grid-stack">
+                                                        <div class="uk-width-1-1@s">
+                                                            <div class="uk-hr"></div>
+                                                        </div>
+                                                    </div>
+                                                <div class=" uk-margin-remove-vertical uk-grid" uk-grid atr="loop-4">
+                                            {% elif forloop.revcounter0 == 8 or forloop.revcounter0 == 16 or forloop.revcounter0 == 24 or forloop.revcounter0 == 32 or forloop.revcounter0 == 40 or forloop.revcounter0 == 48 %}
+                                                    </div alt="close1">
+                                                </div alt="close2">
                                             </div alt="close2">
-                                        </div alt="close2">
-                                    </div alt="close3">
-                                    <div class="swiper-slide">
-                                        <div class="uk-section-default uk-section uk-section-large">
-                                            <div class="uk-container">
-                                                <div class=" uk-margin-remove-vertical uk-grid" uk-grid atr="loop-8">
-                                        {% endif %}
-                                    {% endfor %}
+                                        </div alt="close3">
+                                        <div class="swiper-slide">
+                                            <div class=" uk-section uk-section-large">
+                                                <div class="uk-container">
+                                                    <div class=" uk-margin-remove-vertical uk-grid" uk-grid atr="loop-8">
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>     
+                        </div>     
+                    </div>
+                    <div class="swiper-button-next swiper-button-white"></div>
+                    <div class="swiper-button-prev swiper-button-white"></div>
                 </div>
-                <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
+            </div>
+        </div>
+        <div id="bradslidermov" class="uk-hidden@m">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    {% for object in home_brands %}
+                        <div class="swiper-slide">
+                            {% if lang_code == 'English' %}
+                                <a href="{{object.get_absolute_url_en}}">
+                                    <img src="{{object.short_logo.url}}" alt="{{object.en_name}}">
+                                </a>
+                            {% else %}
+                                <a href="{{object.get_absolute_url_es}}" >
+                                    <img src="{{object.short_logo.url}}" alt="{{object.es_name}}">
+                                </a>
+                            {% endif %}
+                        </div>     
+                    {% endfor %}
+                </div>
+                <div class="swiper-button-next swiper-button-white movnext"></div>
+                <div class="swiper-button-prev swiper-button-white movprev"></div>
             </div>
         </div>
     {% endif %}
@@ -256,7 +292,7 @@
                 </h3>
             </div>
         </div>
-        <div class="uk-section-default uk-section uk-section-xlarge uk-background-cover uk-background-center-center uk-background-fixed uk-section" style="background-image: url('/static/base/images/parallax.png');">
+        <div class="uk-section uk-section-xlarge uk-background-cover uk-background-center-center uk-background-fixed uk-section" style="background-image: url('/static/base/images/parallax.png');" id="OdometerFather">
             <div class="">
                 <div class="uk-container">
                     <div class="uk-grid-divider uk-margin-remove-vertical uk-grid" uk-grid uk-height-match="target: > div > #collumns"> 
@@ -422,41 +458,32 @@
             </div>
         </div>
     {% endif %}
+
 {% endblock %}
     
 {% block js %}
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_uf0M6P9N8ZUTm3vsKlm-li2auJ9-guU" async defer></script>
 <script src="{% static 'base/js/odometer.min.js' %}"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_uf0M6P9N8ZUTm3vsKlm-li2auJ9-guU" async defer></script>
 <script src="{% static 'base/js/map.js' %}"></script>
 <script>
 
     $(document).ready(function(){
         // UIkit.slider('#brandSlider').startAutoplay();
-        $( "#map" ).delay(5000).fadeIn(initMap);
+        $( "#map" ).delay(1000).fadeIn(initMap);
 
         var swiper = new Swiper('.full-screen .swiper-container', {
-            pagination: '.full-screen .swiper-pagination',
-            paginationClickable: true,
+            lazy: true,
             navigation: {
                 nextEl: '.full-screen .swiper-button-next',
                 prevEl: '.full-screen .swiper-button-prev',
             },
-            loop: true,
+            speed: 2000,
             autoplay: {
                 delay: 5000,
-                disableOnInteraction: false,
-            },
-        });
-        var swiperBiz = new Swiper('.banners-biz .swiper-container', {
-            pagination: '.banners-biz .swiper-pagination',
-            paginationClickable: true,
-            navigation: {
-                nextEl: '.banners-biz .swiper-button-next',
-                prevEl: '.banners-biz .swiper-button-prev',
             },
             loop: true,
-            autoplay: 8000,
         });
+        
         var swiperBrands = new Swiper('#brandsSlide .swiper-container', {
             pagination: '#brandsSlide .swiper-pagination',
             paginationClickable: true,
@@ -470,6 +497,21 @@
                 disableOnInteraction: false,
             },
         });
+
+        var swiperBrandsMov = new Swiper('#bradslidermov .swiper-container', {
+            pagination: '#bradslidermov .swiper-pagination',
+            paginationClickable: true,
+            navigation: {
+                nextEl: '#bradslidermov .movnext',
+                prevEl: '#bradslidermov .movprev',
+            },
+            loop: true,
+            autoplay: {
+                delay: 6000,
+                disableOnInteraction: false,
+            },
+        });
+
         var swiperNews = new Swiper('#slideNews .swiper-container', {
             pagination: '#slideNews .swiper-pagination',
             paginationClickable: true,
@@ -483,20 +525,47 @@
                 disableOnInteraction: false,
             },
         });
+        
         $('.biz-cards:odd').find('.child').addClass('uk-flex-last@m uk-card-media-right@m uk-cover-container');
         $('.biz-cards:even').find('.child').addClass('uk-card-media-left@m uk-cover-container card-shadow uk-first-column@m');
-        setTimeout(function(){
-            $('#odoStores').html(700);
-        }, 7000);
-        setTimeout(function(){
-            $('#odoStaff').html(7000);
-        }, 7000);
-        setTimeout(function(){
-            $('#odoBrand').html(50);
-        }, 7000);
-        setTimeout(function(){
-            $('#odoExp').html(40);
-        }, 7000);
+        
+        $(document).scroll(function () {
+            var bodyRect = document.body.getBoundingClientRect(),
+                elemRect = document.getElementById("OdometerFather").getBoundingClientRect(),
+                offset = elemRect.top - bodyRect.top - window.innerHeight;
+            var y = $(this).scrollTop();
+            if (y > 1 && y < offset) {
+                setTimeout(function(){
+                    $('#odoStores').html(0);
+                }, 200);
+                setTimeout(function(){
+                    $('#odoStaff').html(0);
+                }, 200);
+                setTimeout(function(){
+                    $('#odoBrand').html(0);
+                }, 200);
+                setTimeout(function(){
+                    $('#odoExp').html(0);
+                    // console.log(true);
+                }, 200);
+            } else {
+                
+                setTimeout(function(){
+                    // console.log(false);
+                    $('#odoStores').html(700);
+                }, 2000);
+                setTimeout(function(){
+                    $('#odoStaff').html(7000);
+                }, 2000);
+                setTimeout(function(){
+                    $('#odoBrand').html(50);
+                }, 2000);
+                setTimeout(function(){
+                    $('#odoExp').html(40);
+                }, 2000);
+            }
+    
+        });
 
     });
 

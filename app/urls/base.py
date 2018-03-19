@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
+from django.conf.urls import handler404,handler500,handler403,handler400
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.flatpages import views
@@ -22,10 +23,6 @@ sitemaps = {
     'flatpages': FlatPageSitemap,
 }
 
-handler400 = 'app.urls.errors.bad_request_view'
-handler403 = 'app.urls.errors.permission_denied_view'
-handler404 = 'app.urls.errors.page_not_found_view'
-handler500 = 'app.urls.errors.error_view'
 
 app_name = 'base'
 urlpatterns = [
@@ -45,18 +42,26 @@ urlpatterns = [
     # Admin
     path('adminsite/', admin.site.urls),
     path('api', include(router.urls)),
+    re_path(r'^media/(?P<path>.*)$', serve, {
+        'document_root': settings.MEDIA_ROOT,
+    }),
     path('api/auth', include('rest_framework.urls', 
         namespace='rest_framework')),
     path('sitemap.xml', sitemap,{'sitemaps': sitemaps},name='django.contrib.sitemaps.views.sitemap'),
     path('<path:url>/', views.flatpage),
 ] 
 
-if settings.DEBUG:
-    urlpatterns += [
-        re_path('^media/(?P<path>.*)$', serve, {
-            'document_root': settings.MEDIA_ROOT,
-        }),
-    ]
+# if settings.DEBUG:
+#     urlpatterns += [
+#         re_path('^media/(?P<path>.*)$', serve, {
+#             'document_root': settings.MEDIA_ROOT,
+#         }),
+#     ]
 
-admin.site.site_header = 'CMS PHOENIX WORLD TRADE'
-admin.site.site_title = 'CMS Phoenix World Trade'
+admin.site.site_header = 'CMS Grupo PHX'
+admin.site.site_title = 'CMS Grupo PHX'
+
+handler400 = 'app.urls.errors.bad_request_view'
+handler403 = 'app.urls.errors.permission_denied_view'
+handler404 = 'app.urls.errors.page_not_found_view'
+handler500 = 'app.urls.errors.error_view'

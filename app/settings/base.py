@@ -14,7 +14,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-if str(config('DEBUG')) == 'True':
+if config('DEBUG', cast=bool) == True:
     DEBUG = True
     ALLOWED_HOSTS = ['*']
     WSGI_APPLICATION = 'app.wsgi_base.application'
@@ -34,6 +34,7 @@ DATABASES = {
         'NAME':  os.path.join(os.path.join(BASE_DIR, 'dbs'), 'db.sqlite3'),
     }
 }
+
 FIXTURE_DIRS = (
     os.path.join(BASE_DIR, 'dbs'),
 )
@@ -140,6 +141,7 @@ STATICFILES_DIRS = (
 #     os.path.join(os.path.join(BASE_DIR,os.pardir),'staticfiles'))
 
 MEDIA_ROOT = os.path.join(os.path.join(BASE_DIR,os.pardir), 'media')
+
 
 # Django Rest Framework Setup
 REST_FRAMEWORK = {

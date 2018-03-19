@@ -3,13 +3,13 @@ import os
 import sys
 from decouple import config
 
-DEBUG = config('DEBUG')
+DEBUG = config('DEBUG',cast=bool)
 
 if __name__ == "__main__":
 
-    if str(DEBUG) == 'True':
+    if DEBUG == True:
        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings.base")
-    elif str(DEBUG) == 'False':
+    else:
        os.environ.setdefault("DJANGO_SETTINGS_MODULE", "app.settings.prod")
     
     try:
@@ -24,4 +24,5 @@ if __name__ == "__main__":
                 "forget to activate a virtual environment?"
             )
         raise
+        
     execute_from_command_line(sys.argv)

@@ -174,6 +174,7 @@ class Brand(models.Model):
 
     class Meta:
         """# Class Meta"""
+        ordering = ['es_name']
         verbose_name = _('Marca')
         verbose_name_plural = ('Marcas')
 

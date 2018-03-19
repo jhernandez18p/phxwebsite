@@ -279,7 +279,7 @@ class Timeline(models.Model):
         blank=True
     )
     place = models.CharField(max_length=144,blank=True)
-    Company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True)
+    Company = models.ForeignKey(Company, on_delete=models.CASCADE, null=True, default=1)
 
 
     def __str__(self):
@@ -287,5 +287,5 @@ class Timeline(models.Model):
 
     class Meta:
         """# Class Meta"""
-        verbose_name = _('Imágen del carrusel')
-        verbose_name_plural = _('Imagenes del carrusel')
+        verbose_name = _('Linea de tiempo')
+        verbose_name_plural = _('Linea de tiempo')

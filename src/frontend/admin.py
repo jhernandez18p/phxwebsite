@@ -60,7 +60,7 @@ class CarouselImageInline(admin.StackedInline):
 
 
 class CompanyAdmin(admin.ModelAdmin):
-    inlines = [CompanySocialInline,CompanyCountrylInline,CompanyValueInline]
+    inlines = [CompanySocialInline,CompanyCountrylInline,CompanyValueInline,CompanyTimelineInline]
 
 
 class PagesAdmin(admin.ModelAdmin):
@@ -75,7 +75,7 @@ admin.site.register(Company,CompanyAdmin)
 admin.site.register(Carousel, CarouselAdmin)
 # admin.site.register(Pages, PagesAdmin)
 # admin.site.register(Position)
-admin.site.register(Timeline)
+# admin.site.register(Timeline)
 # admin.site.register(Country)
 # admin.site.register(Value)
 # admin.site.register(Menu)

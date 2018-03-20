@@ -12,8 +12,15 @@ from src.brands.models import (
     BrandImage,
 )
 
+class BrandAdmin(admin.ModelAdmin):
+    list_display = [ "es_slug","es_name","en_name","es_title","en_title"]
+    list_display_links = ["es_slug",]
+    list_editable = ["es_name"]
+    list_filter = ["department"]
+    search_fields = ["es_name","en_name","es_title","en_title"]
+
 admin.site.register(BusinessModel)
-admin.site.register(Brand)
+admin.site.register(Brand, BrandAdmin)
 admin.site.register(Department)
 admin.site.register(Category)
 admin.site.register(Location)

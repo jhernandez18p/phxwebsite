@@ -150,7 +150,8 @@ class Brand(models.Model):
     def es_get_unique_slug(self):
         slug = slugify(self.es_title)
         unique_slug = slug
-        num = int(self.id)
+        print(self.id)
+        num = 1
         while Brand.objects.filter(es_slug=unique_slug).exists():
             unique_slug = '{}-{}'.format(slug, int(num))
             num += 1
@@ -159,7 +160,8 @@ class Brand(models.Model):
     def en_get_unique_slug(self):
         slug = slugify(self.en_title)
         unique_slug = slug
-        num = int(self.id)
+        print(self.id)
+        num = 1
         while Brand.objects.filter(en_slug=unique_slug).exists():
             unique_slug = '{}-{}'.format(slug, int(num))
             num += 1
@@ -174,7 +176,7 @@ class Brand(models.Model):
 
     class Meta:
         """# Class Meta"""
-        ordering = ['es_name']
+        ordering = ['-es_name',"-en_name"]
         verbose_name = _('Marca')
         verbose_name_plural = ('Marcas')
 

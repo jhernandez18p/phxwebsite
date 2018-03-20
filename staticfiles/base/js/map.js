@@ -228,7 +228,9 @@ function initMap() {
             function(results, status) {
                 // console.log(status);
                 // console.log(results);
+                console.log(results[0].geometry.location);
                 if (status == google.maps.GeocoderStatus.OK) {
+                    
                     marker = new google.maps.Marker({
                         position: results[0].geometry.location,
                         map: map,
